@@ -15,6 +15,7 @@ const connectDB = async () => {
 
 const COLLECTION_USERS = "Users";
 const COLLECTION_MESSAGES = "Messages";
+const COLLECTION_FILES = "Files";
 const COLLECTION_ROOMS = "Rooms";
 const COLLECTION_FRIENDS = "Friends";
 const COLLECTION_NOTIFICATIONS = "Notifications";
@@ -23,6 +24,7 @@ module.exports = {
   connectDB,
   COLLECTION_USERS,
   COLLECTION_MESSAGES,
+  COLLECTION_FILES,
   COLLECTION_ROOMS,
   COLLECTION_FRIENDS,
   COLLECTION_NOTIFICATIONS

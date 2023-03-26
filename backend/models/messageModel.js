@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const { COLLECTION_MESSAGES } = require("../config/db");
 
-const FILE = "file";
-
 const messageSchema = mongoose.Schema(
   {
     roomId: { type: mongoose.Schema.Types.ObjectId, ref: "Rooms" },
@@ -10,9 +8,7 @@ const messageSchema = mongoose.Schema(
     msg: { type: String, trim: true, default: "" },
     files: [
       {
-        url: String,
-        name: String,
-        type: { type: String, default: FILE },
+        fileId: { type: mongoose.Schema.Types.ObjectId, ref: "Files" },
       },
     ],
     unSend: { type: Boolean, default: false },
