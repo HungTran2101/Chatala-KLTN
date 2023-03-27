@@ -42,7 +42,6 @@ const SearchModal = ({
     notificationId: string,
     uid: string,
     nickname: string,
-    avatar: string
   ) => {
     try {
       const res = await FriendApi.friendAccept(notificationId);
@@ -52,7 +51,6 @@ const SearchModal = ({
         {
           uid,
           nickname,
-          avatar,
         },
       ];
       const createdRoom = await RoomApi.createRoom(userToRoom);
@@ -106,7 +104,6 @@ const SearchModal = ({
                         data.notificationId,
                         data._id,
                         data.name,
-                        data.avatar
                       )
                     }
                   >

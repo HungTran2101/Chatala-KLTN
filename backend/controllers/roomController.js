@@ -13,7 +13,6 @@ const createRoom = asyncHandler(async (req, res, next) => {
       uid: req.user._id,
       role: true,
       nickname: req.user.name,
-      avatar: req.user.avatar,
     });
   } else {
     return next(new ErrorHandler("Group member cannot include creator!", 400));
@@ -57,25 +56,48 @@ const createRoom = asyncHandler(async (req, res, next) => {
   res.status(200).json(createdRoom);
 });
 
+const addAvatarForUserInRoom = (room, userInfos) => {
+  let editedUsers = [];
+  room.users.map((user) => {
+    const avatar = userInfos.find(
+      (it) => it._id.toString() === user.uid.toString()
+    ).avatar;
+    editedUsers.push({ ...user.toObject(), avatar });
+  });
+
+  return editedUsers;
+};
 const getRoomList = asyncHandler(async (req, res, next) => {
   const rooms = await Rooms.find({ "users.uid": req.user._id });
 
-  let result = [];
+  //get all uid have in all rooms
+  let uids = [];
   rooms.forEach((room) => {
-    if (!room.isGroup) {
-      let roomName;
-      let roomAvatar;
+    room.users.forEach((user) => uids.push(user.uid));
+  });
+
+  //get user info of each uid in uids above
+  const userInfos = await Users.find({ _id: { $in: uids } });
+
+  //add avatar property to each user in each room
+  let editedRooms = [];
+  rooms.map((room) => {
+    let editedUsers = addAvatarForUserInRoom(room, userInfos);
+    editedRooms.push({ ...room.toObject(), users: editedUsers });
+  });
+
+  let result = [];
+  editedRooms.forEach((room) => {
+    if (room.isGroup) {
+      result.push({ roomName: room.groupName, roomAvatar: "", roomInfo: room });
+    } else {
+      let roomName = room.users[0].nickname;
+      let roomAvatar = room.users[0].avatar;
       if (room.users[0].uid.toString() === req.user._id.toString()) {
         roomName = room.users[1].nickname;
         roomAvatar = room.users[1].avatar;
-      } else {
-        roomName = room.users[0].nickname;
-        roomAvatar = room.users[0].avatar;
       }
       result.push({ roomName, roomAvatar, roomInfo: room });
-    }
-    else{
-      result.push({ roomName: room.groupName, roomAvatar: "", roomInfo: room });
     }
   });
 
@@ -89,26 +111,32 @@ const getRoomInfo = asyncHandler(async (req, res, next) => {
   const roomInfo = await Rooms.findById(roomId);
   const messages = await Messages.find({
     roomId: roomId,
-  })
-    .sort({ createdAt: -1 })
-    .limit(50);
+  }).sort({ createdAt: -1 });
 
-  let roomAvatar = roomInfo.users[0].avatar;
-  let roomName = roomInfo.users[0].nickname;
+  //add avatar for each user in room
+  let uids = []
+  roomInfo.users.forEach(user => uids.push(user.uid))
+  const userInfos = await Users.find({_id: {$in: uids}})
+  const editedUsers = addAvatarForUserInRoom(roomInfo, userInfos)
+  const editedRoomInfo = {...roomInfo.toObject(), users: editedUsers}
 
-  if (roomInfo.isGroup) {
+  //setup response value
+  let roomAvatar = editedRoomInfo.users[0].avatar;
+  let roomName = editedRoomInfo.users[0].nickname;
+
+  if (editedRoomInfo.isGroup) {
     roomAvatar = "";
     roomName = "";
-  } else if (roomInfo.users[1].uid.toString() !== req.user._id.toString()) {
-    roomAvatar = roomInfo.users[1].avatar;
-    roomName = roomInfo.users[1].nickname;
+  } else if (editedRoomInfo.users[1].uid.toString() !== req.user._id.toString()) {
+    roomAvatar = editedRoomInfo.users[1].avatar;
+    roomName = editedRoomInfo.users[1].nickname;
   }
 
-  if (roomInfo) {
+  if (editedRoomInfo) {
     res.status(200).json({
       roomAvatar,
       roomName,
-      roomInfo,
+      roomInfo: editedRoomInfo,
       messages,
     });
   } else {
@@ -175,7 +203,6 @@ const addMember = asyncHandler(async (req, res, next) => {
             uid: uid,
             role: false,
             nickname: getMember.name,
-            avatar: getMember.avatar,
           },
         },
       },

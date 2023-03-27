@@ -41,6 +41,7 @@ const registerUser = asyncHandler(async (req, res, next) => {
   }
 });
 
+const cookieSameSite = process.env.NODE_ENV === "DEVELOPMENT" ? "Lax" : "None";
 const loginUser = asyncHandler(async (req, res, next) => {
   const { phone, password } = req.body;
 
@@ -52,7 +53,7 @@ const loginUser = asyncHandler(async (req, res, next) => {
         signed: true,
         httpOnly: true,
         secure: process.env.NODE_ENV === "DEVELOPMENT" ? false : true,
-        sameSite: "none",
+        sameSite: cookieSameSite,
       });
       res.status(200).json({
         user,
@@ -201,7 +202,7 @@ const editUserInfo = asyncHandler(async (req, res, next) => {
       }
     );
 
-    await Rooms.find({ "users.id": id, "users.nickname": username }).updateMany(
+    await Rooms.find({ "users.uid": id, "users.nickname": username }).updateMany(
       { $set: { "users.$.nickname": name } }
     );
 

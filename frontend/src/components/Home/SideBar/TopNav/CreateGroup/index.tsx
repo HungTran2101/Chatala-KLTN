@@ -16,7 +16,6 @@ interface ICreateGroup {
 type userToAdd = {
   uid: string;
   nickname: string;
-  avatar: string;
 };
 
 const CreateGroup = ({ setToggleCreateGroup }: ICreateGroup) => {
@@ -52,12 +51,11 @@ const CreateGroup = ({ setToggleCreateGroup }: ICreateGroup) => {
         users.push({
           uid: user._id,
           nickname: user.name,
-          avatar: user.avatar,
         });
       });
 
       try {
-        const createdRoom = await RoomApi.createRoom(users);
+        const createdRoom = await RoomApi.createRoom(users, true);
         if (createdRoom) {
           const rooms = await RoomApi.getRoomList();
           dispatch(roomListActions.setRoomList(rooms.result));
@@ -66,7 +64,7 @@ const CreateGroup = ({ setToggleCreateGroup }: ICreateGroup) => {
       } catch (err: any) {
         console.log(err);
         if (err?.error.statusCode === 400) {
-          alert(err.errors.message);
+          alert(err?.message);
         }
       }
     } else {

@@ -32,7 +32,7 @@ app.use(cors(corsOptions));
 app.use(express.json()); //allow accept json data
 app.use(express.urlencoded({ extended: true }));
 app.use(
-  cookieParser(process.env.COOKIE_SECRET, { secure: true, samesite: "none" })
+  cookieParser(process.env.COOKIE_SECRET)
 );
 
 //connect DB

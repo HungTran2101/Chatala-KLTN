@@ -33,7 +33,6 @@ const NotiModal = ({
     id: string,
     uid: string,
     nickname: string,
-    avatar: string
   ) => {
     try {
       await FriendApi.friendAccept(id);
@@ -42,7 +41,6 @@ const NotiModal = ({
         {
           uid,
           nickname,
-          avatar,
         },
       ];
       const createdRoom = await RoomApi.createRoom(userToRoom);
@@ -88,7 +86,7 @@ const NotiModal = ({
               </S.NotiInfo>
               <S.NotiAccept
                 onClick={() =>
-                  friendAccept(data._id, data.uid, data.name, data.avatar)
+                  friendAccept(data._id, data.uid, data.name)
                 }
               >
                 Accept
