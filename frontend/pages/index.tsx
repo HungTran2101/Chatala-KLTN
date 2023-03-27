@@ -82,18 +82,6 @@ const Home = () => {
           <SideBar />
           {roomInfo.info ? <ChatArea /> : <Welcome />}
         </S.Wrapper>
-        <div
-          id="rasa-chat-widget"
-          data-websocket-url="https://rasa-bot-api-xwnzyf6ivq-ue.a.run.app"
-          style={{
-            bottom: "50px",
-            right: "50px",
-          }}
-        ></div>
-        <Script
-          src="https://unpkg.com/@rasahq/rasa-chat"
-          type="application/javascript"
-        ></Script>
       </S.HomeContainer>
     </>
   );
