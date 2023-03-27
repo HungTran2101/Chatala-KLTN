@@ -141,7 +141,7 @@ export const ChatAreaMainInputFile = styled.label`
 `;
 
 export const ChatAreaMainInputMsg = styled.div`
-  ${tw`flex flex-grow shadow items-center p-1.5 bg-[#DFE2E2] ml-2.5 rounded-[20px] relative mr-[60px]`}
+  ${tw`flex flex-grow shadow items-center p-1.5 bg-[#DFE2E2] ml-2.5 rounded-[20px] relative`}
 `;
 
 export const ChatAreaMainInputEmoji = styled(BsEmojiLaughingFill)`
