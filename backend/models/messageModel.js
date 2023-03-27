@@ -6,11 +6,7 @@ const messageSchema = mongoose.Schema(
     roomId: { type: mongoose.Schema.Types.ObjectId, ref: "Rooms" },
     senderId: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
     msg: { type: String, trim: true, default: "" },
-    files: [
-      {
-        fileId: { type: mongoose.Schema.Types.ObjectId, ref: "Files" },
-      },
-    ],
+    fileIds: [{ type: mongoose.Schema.Types.ObjectId, ref: "Files" }],
     unSend: { type: Boolean, default: false },
     deleted: { type: Boolean, default: false },
   },
