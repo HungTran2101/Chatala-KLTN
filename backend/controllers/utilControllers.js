@@ -1,13 +1,14 @@
 const asyncHandler = require("express-async-handler");
 const cloudinary = require("../utils/cloudinary");
 
+const UPLOAD_PRESET = "chatala_preset";
 
 const signedKey = asyncHandler(async (req, res, next) => {
-  const timestamp = Math.round(new Date().getTime() / 1000);
+  const timestamp = new Date().getTime();
   const signature = cloudinary.utils.api_sign_request(
     {
       timestamp: timestamp,
-      public_id: req.body.public_id
+      upload_preset: UPLOAD_PRESET,
     },
     process.env.CLOUDINARY_API_SECRET
   );

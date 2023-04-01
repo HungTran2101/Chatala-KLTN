@@ -5,6 +5,7 @@ import { roomInfoSlice } from "./slices/roomInfoSlice";
 import { createWrapper } from "next-redux-wrapper";
 import { messageSlice } from "./slices/messageSlice";
 import { friendListSlice } from "./slices/friendListSlice";
+import { fileSlice } from "./slices/fileSlice";
 
 const makeStore = () =>
   configureStore({
@@ -14,6 +15,7 @@ const makeStore = () =>
       [roomListSlice.name]: roomListSlice.reducer,
       [roomInfoSlice.name]: roomInfoSlice.reducer,
       [messageSlice.name]: messageSlice.reducer,
+      [fileSlice.name]: fileSlice.reducer,
     },
     devTools: true,
   });

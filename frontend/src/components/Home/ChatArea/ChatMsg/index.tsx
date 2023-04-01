@@ -1,13 +1,11 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { selectFileState } from "../../../../features/redux/slices/fileSlice";
 import { selectRoomInfoState } from "../../../../features/redux/slices/roomInfoSlice";
 import { selectUserState } from "../../../../features/redux/slices/userSlice";
-import { messageType } from "../../../../utils/types";
-import {
-  formatDate,
-  getFileIcon,
-} from "../../../Global/ProcessFunctions";
+import { fileType, messageType } from "../../../../utils/types";
+import { formatDate, getFileIcon } from "../../../Global/ProcessFunctions";
 import * as S from "./ChatMsg.styled";
 import ChatMsgOption from "./ChatMsgOption";
 
@@ -27,19 +25,23 @@ const ChatMsg = ({
   setImageZoomList,
 }: IChatMsg) => {
   const [toggleOption, setToggleOption] = useState(false);
-  const [images, setImages] = useState<
-    Array<{ name: string; url: string; type: string }>
-  >([]);
+  const [images, setImages] = useState<fileType[]>([]);
+  const [files, setFiles] = useState<fileType[]>([]);
+  const roomFiles = useSelector(selectFileState);
 
   const roomInfo = useSelector(selectRoomInfoState);
   const user = useSelector(selectUserState);
 
-  const getImageList = () => {
-    const _images: Array<{ name: string; url: string; type: string }> = [];
-    data.files.forEach((file) => {
+  const getFileAndImageList = () => {
+    const _images: fileType[] = [];
+    const _files: fileType[] = [];
+    data.fileIds.forEach((id) => {
+      const file = roomFiles.list.find((it) => it._id.toString() === id.toString());
       if (file.type === "image") _images.push(file);
+      else _files.push(file);
     });
     setImages(_images);
+    setFiles(_files);
   };
 
   const imageZoomClick = () => {
@@ -69,8 +71,8 @@ const ChatMsg = ({
   };
 
   useEffect(() => {
-    getImageList();
-  }, [data]);
+    getFileAndImageList();
+  }, [data.fileIds]);
 
   return (
     <>
@@ -80,9 +82,9 @@ const ChatMsg = ({
             <S.ChatMsgWrapper>
               {!data.unSend ? (
                 <>
-                  {data.files.length === 0 && <S.ChatMsgTextTail />}
+                  {files.length === 0 && images.length === 0 && <S.ChatMsgTextTail />}
                   {data.msg !== "" && <S.ChatMsgText>{data.msg}</S.ChatMsgText>}
-                  {images?.length > 0 && (
+                  {images.length > 0 && (
                     <S.ChatMsgFileImages
                       imgNum={images?.length}
                       onClick={() => imageZoomClick()}
@@ -101,9 +103,9 @@ const ChatMsg = ({
                       ))}
                     </S.ChatMsgFileImages>
                   )}
-                  {data.files.length > 0 && (
+                  {files.length > 0 && (
                     <S.ChatMsgFiles>
-                      {data.files.map(
+                      {files.map(
                         (file, index) =>
                           file.type === "file" && (
                             <S.ChatMsgFile
@@ -115,9 +117,7 @@ const ChatMsg = ({
                               <S.ChatMsgFileIcon>
                                 {getFileIcon(file)}
                               </S.ChatMsgFileIcon>
-                              <S.ChatMsgFileName>
-                                {file.name}
-                              </S.ChatMsgFileName>
+                              <S.ChatMsgFileName>{file.name}</S.ChatMsgFileName>
                             </S.ChatMsgFile>
                           )
                       )}
@@ -154,7 +154,7 @@ const ChatMsg = ({
               />
             </S.ChatMsgAvatar>
             <S.ChatMsgWrapper>
-              {!data.unSend && data.files.length === 0 && <S.ChatMsgTextTail />}
+              {!data.unSend && files.length === 0 && <S.ChatMsgTextTail />}
               {data.unSend ? (
                 <S.ChatMsgUnSend>Message has been unsend</S.ChatMsgUnSend>
               ) : (
@@ -178,9 +178,9 @@ const ChatMsg = ({
                       ))}
                     </S.ChatMsgFileImages>
                   )}
-                  {data.files.length > 0 && (
+                  {files.length > 0 && (
                     <S.ChatMsgFiles>
-                      {data.files.map(
+                      {files.map(
                         (file, index) =>
                           file.type === "file" && (
                             <S.ChatMsgFile
@@ -192,9 +192,7 @@ const ChatMsg = ({
                               <S.ChatMsgFileIcon>
                                 {getFileIcon(file)}
                               </S.ChatMsgFileIcon>
-                              <S.ChatMsgFileName>
-                                {file.name}
-                              </S.ChatMsgFileName>
+                              <S.ChatMsgFileName>{file.name}</S.ChatMsgFileName>
                             </S.ChatMsgFile>
                           )
                       )}

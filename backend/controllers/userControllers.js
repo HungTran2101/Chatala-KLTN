@@ -266,7 +266,6 @@ const changePassword = asyncHandler(async (req, res, next) => {
         },
         { new: true }
       );
-      console.log(result);
       res.status(200).json({
         message: "Update Password Successfully!",
       });

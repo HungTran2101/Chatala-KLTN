@@ -8,6 +8,7 @@ const fileSchema = mongoose.Schema(
     url: String,
     type: { type: String, default: FILE },
     name: String,
+    roomId: mongoose.Schema.Types.ObjectId,
   },
   { timestamps: true }
 );

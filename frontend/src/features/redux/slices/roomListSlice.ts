@@ -75,7 +75,7 @@ export const roomListSlice = createSlice({
       state.list[roomIndex].roomInfo.lastMsg =
         message.lastMsg !== ""
           ? message.lastMsg
-          : message.files[message.files.length - 1].name;
+          : "File";
     },
 
     clearRoomList(state, action) {

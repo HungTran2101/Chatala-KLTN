@@ -12,7 +12,12 @@ import * as Yup from "yup";
 import { Formik } from "formik";
 import FilePreview from "./FilePreview";
 import DropZone from "react-dropzone";
-import { messageSendType, messageType } from "../../../utils/types";
+import {
+  fileType,
+  messageRawType,
+  messageSendType,
+  messageType,
+} from "../../../utils/types";
 import ChatImageZoom from "./ChatMsgImageZoom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -24,6 +29,8 @@ import {
   API_KEY,
   MessageApi,
   CLOUD_NAME,
+  CLOUD_FOLDER_NAME,
+  UPLOAD_PRESET,
 } from "../../../services/api/messages";
 import { debounce } from "lodash";
 import { selectRoomListState } from "../../../features/redux/slices/roomListSlice";
@@ -31,6 +38,7 @@ import { selectUserState } from "../../../features/redux/slices/userSlice";
 import { FiChevronsDown } from "react-icons/fi";
 import { API_URL } from "../../../services/api/urls";
 import { useSocketContext } from "../../../contexts/socket";
+import { fileActions } from "../../../features/redux/slices/fileSlice";
 
 const ChatArea = () => {
   const dispatch = useDispatch();
@@ -56,7 +64,7 @@ const ChatArea = () => {
   const [newMsgNoti, setNewMsgNoti] = useState(false);
   const [chatScrollBottom, setChatScrollBottom] = useState(false);
   const [status, setStatus] = useState(1);
-  const [formValues, setFormValues] = useState<messageSendType>({
+  const [formValues, setFormValues] = useState<messageRawType>({
     roomId: roomInfo.info?.roomInfo._id || "",
     msg: "",
     files: [],
@@ -211,7 +219,7 @@ const ChatArea = () => {
   //File
   const fileChoosen = (
     e: FormEvent<HTMLInputElement>,
-    values: messageSendType,
+    values: messageRawType,
     setFieldValue: any
   ) => {
     if (e.currentTarget.files) {
@@ -230,7 +238,7 @@ const ChatArea = () => {
 
   const fileDropped = (
     newFiles: File[],
-    values: messageSendType,
+    values: messageRawType,
     setFieldValue: any
   ) => {
     const files = values.files;
@@ -252,6 +260,7 @@ const ChatArea = () => {
     const form = new FormData();
     form.append("file", file);
     form.append("api_key", API_KEY);
+    form.append("upload_preset", UPLOAD_PRESET)
     form.append("timestamp", signedKey.timestamp.toString());
     form.append("signature", signedKey.signature);
 
@@ -268,8 +277,14 @@ const ChatArea = () => {
     });
 
     // const uploadedFile = await MessageApi.uploadFile(form);
-
-    return { name, url: response.secure_url, type };
+    if (response.secure_url)
+      return {
+        name,
+        url: response.secure_url,
+        type,
+        roomId: roomInfo.info.roomInfo._id,
+      };
+    else return undefined;
   };
 
   //Upload files
@@ -281,22 +296,45 @@ const ChatArea = () => {
     // This for loop won't run if no files are selected
     for (let i = 0; i < files.length; i++) {
       const uploadedFile = await uploadFile(files[i], signedKey);
-      uploadedFiles.push(uploadedFile);
+      uploadedFile && uploadedFiles.push(uploadedFile);
     }
 
     return uploadedFiles;
   };
 
   //Submit
-  const onSubmit = async (values: messageSendType, { setFieldValue }: any) => {
+  const onSubmit = async (values: messageRawType, { setFieldValue }: any) => {
     if (chatInput.current.innerText.trim() !== "" || values.files.length > 0) {
       setToggleEmoji(false);
       values.msg = chatInput.current.innerText;
 
       try {
-        const uploadedFiles = await uploadFiles(values.files);
-        values.files = uploadedFiles as unknown as File[];
-        const res = await MessageApi.send(values);
+        const uploadedFiles: fileType[] = await uploadFiles(values.files);
+
+        if (uploadedFiles.length <= 0 && values.files.length > 0) {
+          alert("Upload files failed! Try again later.");
+          return;
+        }
+
+        let fileIds = [];
+        if (uploadedFiles.length > 0) {
+          const res = await MessageApi.saveFile(uploadedFiles);
+
+          fileIds = res.fileIds
+
+          const _res = await MessageApi.getFile(roomInfo.info.roomInfo._id)
+          dispatch(fileActions.setFilesData(_res.files))
+        }
+
+        //setup message to save to DB
+        const messageToSend: messageSendType = {
+          roomId: roomInfo.info.roomInfo._id,
+          msg: values.msg,
+          fileIds,
+        };
+
+        // values.files = uploadedFiles as unknown as File[];
+        const res = await MessageApi.send(messageToSend);
 
         dispatch(messageActions.newMessage(res.result));
         chatInput.current!.innerText = "";

@@ -9,6 +9,7 @@ import { selectRoomListState } from "../../../../features/redux/slices/roomListS
 import { roomInfoActions } from "../../../../features/redux/slices/roomInfoSlice";
 import { messageActions } from "../../../../features/redux/slices/messageSlice";
 import { useSocketContext } from "../../../../contexts/socket";
+import { fileActions } from "../../../../features/redux/slices/fileSlice";
 
 const ChatList = () => {
   const [roomSelected, setRoomSelected] = useState(-1);
@@ -33,6 +34,7 @@ const ChatList = () => {
         })
       );
       dispatch(messageActions.setMessage(result.messages));
+      dispatch(fileActions.setFilesData(result.files))
 
       //@ts-ignore
       socket.emit("room leave", roomList.list[roomSelected]?.roomInfo._id);

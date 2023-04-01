@@ -27,16 +27,33 @@ export type updateUserInfo = {
 export type messageSendType = {
   roomId: string;
   msg: string;
-  files: File[];
+  fileIds: string[];
 };
+
+export type messageRawType ={
+  roomId: string;
+  msg: string;
+  files: File[];
+}
 
 export type messageType = {
   roomId: string;
   senderId: string;
   msg: string;
-  files: { name: string; url: string; type: string }[];
+  fileIds: string[];
   unSend: boolean;
   deleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  _id: string;
+};
+
+export type fileType = {
+  name: string;
+  url: string;
+  type: string;
+  roomId: string;
   createdAt: string;
   updatedAt: string;
   __v: number;

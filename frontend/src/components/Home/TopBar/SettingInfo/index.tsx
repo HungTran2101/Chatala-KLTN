@@ -20,6 +20,7 @@ import {
   API_KEY,
   MessageApi,
   CLOUD_NAME,
+  UPLOAD_PRESET,
 } from "../../../../services/api/messages";
 import { API_URL } from "../../../../services/api/urls";
 import CropImage from "./CropImage";
@@ -90,6 +91,7 @@ const SettingInfo = ({
     form.append("file", file);
     form.append("public_id", id);
     form.append("api_key", API_KEY);
+    form.append("upload_preset", UPLOAD_PRESET)
     form.append("timestamp", signedKey.timestamp.toString());
     form.append("signature", signedKey.signature);
     
@@ -103,9 +105,6 @@ const SettingInfo = ({
     ).then((response) => {
       return response.json();
     });
-
-    console.log(response.secure_url);
-    
 
     return { url: response.secure_url };
     

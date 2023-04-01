@@ -45,7 +45,6 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.pre("findOneAndUpdate", async function (next) {
-  console.log("sweet");
   const password = this.getUpdate().$set.password;
   if (!password) return next();
 
