@@ -1,6 +1,6 @@
-import styled, { keyframes } from 'styled-components';
-import tw from 'twin.macro';
-import { fadeIn, zoomIn } from 'react-animations';
+import styled, { keyframes } from "styled-components";
+import tw from "twin.macro";
+import { fadeIn, zoomIn } from "react-animations";
 const fadeInAnimate = keyframes`${fadeIn}`;
 const zoomInAnimate = keyframes`${zoomIn}`;
 
@@ -27,6 +27,6 @@ export const SettingTabWrap = styled.div`
 `;
 
 export const TabLink = styled.div<{ active: boolean }>`
-  ${tw`shadow text-center text-darker bg-primary rounded-xl text-base font-semibold cursor-pointer hover:bg-darker hover:text-white hover:opacity-70 px-5 py-[10px] mb-[10px] duration-100`}
-  ${({ active }) => active && tw`bg-darker text-white`}
+  ${tw`shadow text-center text-quaternary bg-primary rounded-xl text-base font-semibold cursor-pointer hover:bg-quaternary hover:text-white hover:opacity-70 px-5 py-[10px] mb-[10px] duration-100`}
+  ${({ active }) => active && tw`bg-quaternary text-white`}
 `;

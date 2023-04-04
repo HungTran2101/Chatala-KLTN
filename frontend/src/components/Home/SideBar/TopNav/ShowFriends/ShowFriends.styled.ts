@@ -14,7 +14,7 @@ export const ShowFriendsOverlay = styled.div`
 const zoomInAnimate = keyframes`${zoomIn}`;
 
 export const ShowFriendsBody = styled.div`
-  ${tw`m-auto bg-darker py-2.5 px-3.5 rounded-[25px] z-10 min-w-[700px]`}
+  ${tw`m-auto bg-quaternary py-2.5 px-3.5 rounded-[25px] z-10 min-w-[700px]`}
   border: 2px solid #ECF2F7;
   animation: 0.25s ${zoomInAnimate};
 `;
@@ -46,7 +46,7 @@ export const FriendList = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    ${tw`bg-dark rounded-[50px]`}
+    ${tw`bg-tertiary rounded-[50px]`}
   }
 `;
 

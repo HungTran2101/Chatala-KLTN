@@ -1,13 +1,13 @@
-import styled from 'styled-components';
-import tw from 'twin.macro';
-import { BiSearchAlt } from 'react-icons/bi';
-import { RiSettings3Fill } from 'react-icons/ri';
-import { FiLogOut } from 'react-icons/fi';
-import { IoNotificationsCircleSharp } from 'react-icons/io5';
-import { ImExit } from 'react-icons/im'
+import styled from "styled-components";
+import tw from "twin.macro";
+import { BiSearchAlt } from "react-icons/bi";
+import { RiSettings3Fill } from "react-icons/ri";
+import { FiLogOut } from "react-icons/fi";
+import { IoNotificationsCircleSharp } from "react-icons/io5";
+import { ImExit } from "react-icons/im";
 
 export const Avatar = styled.figure`
-  ${tw`w-[60px] h-[60px] rounded-full overflow-hidden absolute shadow-md border-[2px] border-darker`}
+  ${tw`w-[60px] h-[60px] rounded-full overflow-hidden absolute shadow-md border-[2px] border-quaternary`}
 `;
 
 export const Container = styled.div`
@@ -27,7 +27,7 @@ export const RightWrapper = styled.div`
 `;
 
 export const UserName = styled.div`
-  ${tw`self-stretch flex items-center max-w-6xl w-[350px] text-black flex-shrink-0 pl-24 pr-8 text-xl font-semibold py-2 rounded-[50px] bg-gradient-to-r from-secondary to-darker`}
+  ${tw`self-stretch flex items-center max-w-6xl w-[350px] text-black flex-shrink-0 pl-24 pr-8 text-xl font-semibold py-2 rounded-[50px] bg-gradient-to-r from-secondary to-quaternary`}
 `;
 
 export const LogoContainer = styled.div`
@@ -50,7 +50,7 @@ export const SearchIcon = styled(BiSearchAlt)`
 `;
 
 export const Option = styled.div`
-  ${tw`text-[25px] text-darker flex justify-between mr-3 items-center`}
+  ${tw`text-[25px] text-quaternary flex justify-between mr-3 items-center`}
 `;
 
 export const OptionSetting = styled(RiSettings3Fill)`
@@ -77,5 +77,5 @@ export const OptionNotifyNumber = styled.div<{ number: number }>`
   ${tw`flex justify-center items-center absolute text-[12px] text-red-500 top-[-2px] right-[9px] font-semibold text-left`}
   text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
               1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
-  ${({number}) => number >= 100 && tw`right-0`}
+  ${({ number }) => number >= 100 && tw`right-0`}
 `;

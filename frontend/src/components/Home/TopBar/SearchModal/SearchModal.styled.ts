@@ -5,7 +5,7 @@ import { merge, zoomIn, slideInDown } from "react-animations";
 const SearchModalAnimate = keyframes`${merge(zoomIn, slideInDown)}`;
 
 export const SearchModal = styled.div`
-  ${tw`absolute top-[50px] w-full bg-primary flex flex-col py-2.5 px-3.5 rounded-[20px] shadow-md z-10 border-darker border-2`}
+  ${tw`absolute top-[50px] w-full bg-primary flex flex-col py-2.5 px-3.5 rounded-[20px] shadow-md z-10 border-quaternary border-2`}
   animation: 0.3s ${SearchModalAnimate};
 `;
 
@@ -20,7 +20,7 @@ export const SearchModalList = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    ${tw`bg-dark rounded-[50px]`}
+    ${tw`bg-tertiary rounded-[50px]`}
   }
 `;
 
@@ -57,7 +57,7 @@ export const SearchModalMessage = styled(SearchModalOption)`
 `;
 
 export const SearchModalAddFriend = styled(SearchModalOption)`
-  ${tw`bg-darker`}
+  ${tw`bg-quaternary`}
 `;
 
 export const SearchModalPending = styled(SearchModalOption)`

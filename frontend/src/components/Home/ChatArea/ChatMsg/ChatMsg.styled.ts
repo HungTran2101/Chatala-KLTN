@@ -21,7 +21,7 @@ export const ChatMsgSenderName = styled.div<{ position: string }>`
 export const ChatMsgTextTail = styled.div`
   ${tw`absolute w-[30px] h-[30px] rounded-full`}
   &:before {
-    ${tw`bg-dark`}
+    ${tw`bg-tertiary`}
   }
 `;
 
@@ -56,7 +56,7 @@ export const ChatMsgFileImages = styled.div<{ imgNum: number }>`
 `;
 
 export const ChatMsgFileImage = styled.figure<{ imgNum: number }>`
-  ${tw`relative rounded-[5px] w-full mx-0.5 hover:cursor-pointer overflow-hidden shadow-md`}
+  ${tw`relative rounded-[5px] w-full h-full mx-0.5 hover:cursor-pointer overflow-hidden shadow-md`}
   ${({ imgNum }) => imgNum >= 2 && `aspect-ratio: 1`}
 `;
 
@@ -69,7 +69,7 @@ export const ChatMsgFileIcon = styled.div`
 `;
 
 export const ChatMsgFileName = styled.div`
-  ${tw`ml-1.5 overflow-hidden text-[16px] font-semibold text-darker whitespace-nowrap overflow-ellipsis`}
+  ${tw`ml-1.5 overflow-hidden text-[16px] font-semibold text-quaternary whitespace-nowrap overflow-ellipsis`}
 `;
 
 export const ChatMsgFile = styled.a`
@@ -143,7 +143,7 @@ export const ChatMsgRight = styled(ChatMsg)<{ position: string }>`
     ${tw`flex flex-row-reverse`}
   }
   ${ChatMsgText} {
-    ${tw`bg-darker mr-2 rounded-br-[0]`}
+    ${tw`bg-quaternary mr-2 rounded-br-[0]`}
     ${({ position }) =>
       position === "alone"
         ? tw`rounded-2xl rounded-br-none`
@@ -154,7 +154,7 @@ export const ChatMsgRight = styled(ChatMsg)<{ position: string }>`
   ${ChatMsgTextTail} {
     ${({ position }) =>
       position !== "bottom" && position !== "alone" && tw`invisible`}
-    ${tw`bg-darker bottom-[-5px] right-[-8px]`}
+    ${tw`bg-quaternary bottom-[-5px] right-[-8px]`}
     &::before {
       ${tw`rounded-full absolute h-[50px] w-[50px] right-[-28px] bottom-[-3px]`}
       content: '';

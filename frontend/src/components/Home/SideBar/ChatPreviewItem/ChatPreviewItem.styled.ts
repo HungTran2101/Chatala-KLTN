@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import tw from 'twin.macro';
-import { HiUserGroup } from 'react-icons/hi';
+import styled from "styled-components";
+import tw from "twin.macro";
+import { HiUserGroup } from "react-icons/hi";
 
 export const ChatAvatarWrapper = styled.div`
   ${tw`relative`}
@@ -39,6 +39,6 @@ export const Wrapper = styled.div`
 `;
 
 export const ChatPreviewItem = styled.div<{ active?: boolean }>`
-  ${tw`flex items-center my-1 relative hover:cursor-pointer hover:bg-dark rounded-[20px]`}
-  ${({ active }) => active && tw`bg-darker shadow-md`}
+  ${tw`flex items-center my-1 relative hover:cursor-pointer hover:bg-tertiary rounded-[20px]`}
+  ${({ active }) => active && tw`bg-quaternary shadow-md`}
 `;

@@ -14,7 +14,7 @@ export const GroupMembersOverlay = styled.div`
 const zoomInAnimate = keyframes`${zoomIn}`;
 
 export const GroupMembersBody = styled.div`
-  ${tw`m-auto bg-darker py-2.5 px-3.5 rounded-[25px] z-10 min-w-[700px]`}
+  ${tw`m-auto bg-quaternary py-2.5 px-3.5 rounded-[25px] z-10 min-w-[700px]`}
   border: 2px solid #ECF2F7;
   animation: 0.25s ${zoomInAnimate};
 `;
@@ -46,7 +46,7 @@ export const GroupMembersList = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    ${tw`bg-dark rounded-[50px]`}
+    ${tw`bg-tertiary rounded-[50px]`}
   }
 `;
 
@@ -68,5 +68,5 @@ export const GroupMembersName = styled.div`
 `;
 
 export const GroupMembersChangeNickname = styled.div`
-  ${tw`text-primary bg-darker rounded-[50px] font-semibold text-sm px-5 py-2.5 ml-1 hover:opacity-100 hover:cursor-pointer opacity-90`}
+  ${tw`text-primary bg-quaternary rounded-[50px] font-semibold text-sm px-5 py-2.5 ml-1 hover:opacity-100 hover:cursor-pointer opacity-90`}
 `;
