@@ -12,8 +12,8 @@ const MeetingProvider = dynamic(
   }
 );
 
-const MeetingGrid = dynamic(
-  () => import('../src/components/Meeting/MeetingGrid'),
+const MeetingView = dynamic(
+  () => import('../src/components/Meeting/MeetingView'),
   {
     ssr: false,
   }
@@ -69,7 +69,7 @@ function VideoCall() {
       token={token}
       // joinWithoutUserInteraction // Boolean
     >
-      <MeetingGrid meetingId={meetingId} />
+      <MeetingView meetingId={meetingId} />
     </MeetingProvider>
   ) : (
     <JoinScreen
