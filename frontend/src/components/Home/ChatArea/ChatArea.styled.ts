@@ -1,13 +1,15 @@
-import styled, { keyframes } from "styled-components";
-import tw from "twin.macro";
-import { FaCircle } from "react-icons/fa";
-import { IoMenu } from "react-icons/io5";
-import { BsChevronCompactDown, BsEmojiLaughingFill } from "react-icons/bs";
-import { RiSendPlaneFill } from "react-icons/ri";
-import { merge, slideInUp, zoomIn } from "react-animations";
-import { Form } from "formik";
-import { HiOutlineChevronDown, HiUserGroup } from "react-icons/hi";
-import { ClipLoader, PulseLoader } from "react-spinners";
+import styled, { keyframes } from 'styled-components';
+import tw from 'twin.macro';
+import { FaCircle } from 'react-icons/fa';
+import { IoMenu } from 'react-icons/io5';
+import { BsChevronCompactDown, BsEmojiLaughingFill } from 'react-icons/bs';
+import { RiSendPlaneFill } from 'react-icons/ri';
+import { merge, slideInUp, zoomIn } from 'react-animations';
+import { Form } from 'formik';
+import { HiOutlineChevronDown, HiUserGroup } from 'react-icons/hi';
+import { ClipLoader, PulseLoader } from 'react-spinners';
+import { MdVideoCall } from 'react-icons/md';
+
 export const ChatArea = styled.div`
   ${tw`relative bg-secondary shadow-md rounded-[20px] flex-grow flex flex-col overflow-hidden`}
 `;
@@ -48,6 +50,14 @@ export const ChatAreaHeadStatusIcon = styled(FaCircle)<{ status: number }>`
 
 export const ChatAreaHeadOption = styled(IoMenu)`
   ${tw`text-[40px] text-darker hover:cursor-pointer`}
+`;
+
+export const CallIcon = styled(MdVideoCall)`
+  ${tw`text-[40px] text-darker hover:cursor-pointer mr-5`}
+`;
+
+export const FlexWrap = styled.div`
+  ${tw`flex`}
 `;
 
 export const ChatAreaMain = styled.div`
@@ -161,7 +171,7 @@ export const ChatAreaMainInputText = styled.span<{ username: string }>`
   ${tw`flex-grow outline-none bg-transparent text-lg ml-2.5 w-1 overflow-auto max-h-24 whitespace-normal hover:cursor-text`}
 
   &:empty::before {
-    content: "Write something to ${({ username }) => username}...";
+    content: 'Write something to ${({ username }) => username}...';
     ${tw`cursor-text text-gray-400`}
   }
   &::-webkit-scrollbar-track {

@@ -1,47 +1,50 @@
-import Image from "next/image";
-import * as S from "./ChatArea.styled";
-import { FormEvent, useRef, useState, useEffect, useCallback } from "react";
-import ChatMsg from "./ChatMsg";
-import EmojiPicker, { EmojiStyle, EmojiClickData } from "emoji-picker-react";
-import MoreOptions from "./MoreOptions";
+import Image from 'next/image';
+import * as S from './ChatArea.styled';
+import { FormEvent, useRef, useState, useEffect, useCallback } from 'react';
+import ChatMsg from './ChatMsg';
+import EmojiPicker, { EmojiStyle, EmojiClickData } from 'emoji-picker-react';
+import MoreOptions from './MoreOptions';
 import {
   useOutsideClick,
   validImageTypes,
-} from "../../Global/ProcessFunctions";
-import * as Yup from "yup";
-import { Formik } from "formik";
-import FilePreview from "./FilePreview";
-import DropZone from "react-dropzone";
+} from '../../Global/ProcessFunctions';
+import * as Yup from 'yup';
+import { Formik } from 'formik';
+import FilePreview from './FilePreview';
+import DropZone from 'react-dropzone';
 import {
   fileType,
   messageRawType,
   messageSendType,
   messageType,
-} from "../../../utils/types";
-import ChatImageZoom from "./ChatMsgImageZoom";
-import { useDispatch, useSelector } from "react-redux";
+} from '../../../utils/types';
+import ChatImageZoom from './ChatMsgImageZoom';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   messageActions,
   selectMessageState,
-} from "../../../features/redux/slices/messageSlice";
-import { selectRoomInfoState } from "../../../features/redux/slices/roomInfoSlice";
+} from '../../../features/redux/slices/messageSlice';
+import { selectRoomInfoState } from '../../../features/redux/slices/roomInfoSlice';
 import {
   API_KEY,
   MessageApi,
   CLOUD_NAME,
   CLOUD_FOLDER_NAME,
   UPLOAD_PRESET,
-} from "../../../services/api/messages";
-import { debounce } from "lodash";
-import { selectRoomListState } from "../../../features/redux/slices/roomListSlice";
-import { selectUserState } from "../../../features/redux/slices/userSlice";
-import { FiChevronsDown } from "react-icons/fi";
-import { API_URL } from "../../../services/api/urls";
-import { useSocketContext } from "../../../contexts/socket";
-import { fileActions } from "../../../features/redux/slices/fileSlice";
+} from '../../../services/api/messages';
+import { debounce } from 'lodash';
+import { selectRoomListState } from '../../../features/redux/slices/roomListSlice';
+import { selectUserState } from '../../../features/redux/slices/userSlice';
+import { FiChevronsDown } from 'react-icons/fi';
+import { API_URL } from '../../../services/api/urls';
+import { useSocketContext } from '../../../contexts/socket';
+import { fileActions } from '../../../features/redux/slices/fileSlice';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const ChatArea = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const messages = useSelector(selectMessageState);
   const roomInfo = useSelector(selectRoomInfoState);
@@ -65,8 +68,8 @@ const ChatArea = () => {
   const [chatScrollBottom, setChatScrollBottom] = useState(false);
   const [status, setStatus] = useState(1);
   const [formValues, setFormValues] = useState<messageRawType>({
-    roomId: roomInfo.info?.roomInfo._id || "",
-    msg: "",
+    roomId: roomInfo.info?.roomInfo._id || '',
+    msg: '',
     files: [],
   });
 
@@ -84,16 +87,16 @@ const ChatArea = () => {
   //Handle Typing and Receive new messages
   useEffect(() => {
     //@ts-ignore
-    socket.on("typing", () => {
-      console.log("typing");
+    socket.on('typing', () => {
+      console.log('typing');
       setToggleTyping(true);
     });
-    socket.on("stop typing", () => {
-      console.log("stop typing");
+    socket.on('stop typing', () => {
+      console.log('stop typing');
       setToggleTyping(false);
     });
     // @ts-ignore
-    socket.on("receiveMessage", (result) => {
+    socket.on('receiveMessage', (result) => {
       //add new message if not sender
       if (result.senderId !== user.info._id) {
         if (chatMainMsg.current.scrollTop < 0) {
@@ -106,7 +109,7 @@ const ChatArea = () => {
   const debounceTyping = useCallback(
     debounce(() => {
       //@ts-ignore
-      socket.emit("stop typing", roomInfo.info?.roomInfo._id);
+      socket.emit('stop typing', roomInfo.info?.roomInfo._id);
       setSendTyping(false);
     }, 1500),
     []
@@ -117,7 +120,7 @@ const ChatArea = () => {
     if (!sendTyping) {
       setSendTyping(true);
       //@ts-ignore
-      socket.emit("typing", roomInfo.info?.roomInfo._id);
+      socket.emit('typing', roomInfo.info?.roomInfo._id);
     }
     debounceTyping();
   };
@@ -125,7 +128,7 @@ const ChatArea = () => {
   //Handle scroll to new msg
   const scrollToNewMsg = () => {
     if (bottomDiv.current)
-      bottomDiv.current.scrollIntoView({ behavior: "smooth" });
+      bottomDiv.current.scrollIntoView({ behavior: 'smooth' });
   };
   const newMsgNotiClick = () => {
     scrollToNewMsg();
@@ -163,7 +166,7 @@ const ChatArea = () => {
   const emojiRef = useOutsideClick(handleEmojiOutsideClick);
   const emojiClicked = (emoData: EmojiClickData, setFieldValue: any) => {
     chatInput.current!.innerText = chatInput.current!.innerText + emoData.emoji;
-    setFieldValue("msg", chatInput.current?.innerText);
+    setFieldValue('msg', chatInput.current?.innerText);
   };
 
   //Message
@@ -192,20 +195,20 @@ const ChatArea = () => {
         list[index + skipDeletedMessage(index, true)]?.senderId &&
       data.senderId === list[index - skipDeletedMessage(index, false)]?.senderId
     )
-      return "top";
+      return 'top';
     else if (
       data.senderId ===
         list[index - skipDeletedMessage(index, false)]?.senderId &&
       data.senderId === list[index + skipDeletedMessage(index, true)]?.senderId
     )
-      return "middle";
+      return 'middle';
     else if (
       data.senderId !==
         list[index - skipDeletedMessage(index, false)]?.senderId &&
       data.senderId !== list[index + skipDeletedMessage(index, true)]?.senderId
     )
-      return "alone";
-    else return "bottom";
+      return 'alone';
+    else return 'bottom';
   };
 
   //Form
@@ -230,9 +233,9 @@ const ChatArea = () => {
         files.push(newFiles[i]);
       }
 
-      setFieldValue("files", files);
+      setFieldValue('files', files);
       setFormValues(values);
-      e.currentTarget.value = "";
+      e.currentTarget.value = '';
     }
   };
 
@@ -246,7 +249,7 @@ const ChatArea = () => {
       files.push(newFiles[i]);
     }
 
-    setFieldValue("files", files);
+    setFieldValue('files', files);
     setFormValues(values);
   };
 
@@ -254,22 +257,22 @@ const ChatArea = () => {
     file: File,
     signedKey: { signature: string; timestamp: number }
   ) => {
-    const name = validImageTypes.includes(file.type) ? "Image" : file.name;
-    const type = validImageTypes.includes(file.type) ? "image" : "file";
+    const name = validImageTypes.includes(file.type) ? 'Image' : file.name;
+    const type = validImageTypes.includes(file.type) ? 'image' : 'file';
 
     const form = new FormData();
-    form.append("file", file);
-    form.append("api_key", API_KEY);
-    form.append("upload_preset", UPLOAD_PRESET)
-    form.append("timestamp", signedKey.timestamp.toString());
-    form.append("signature", signedKey.signature);
+    form.append('file', file);
+    form.append('api_key', API_KEY);
+    form.append('upload_preset', UPLOAD_PRESET);
+    form.append('timestamp', signedKey.timestamp.toString());
+    form.append('signature', signedKey.signature);
 
     // let uploadedFile: any = undefined;
 
     const response = await fetch(
       `${API_URL.uploadFile}/${CLOUD_NAME}/auto/upload`,
       {
-        method: "POST",
+        method: 'POST',
         body: form,
       }
     ).then((response) => {
@@ -304,7 +307,7 @@ const ChatArea = () => {
 
   //Submit
   const onSubmit = async (values: messageRawType, { setFieldValue }: any) => {
-    if (chatInput.current.innerText.trim() !== "" || values.files.length > 0) {
+    if (chatInput.current.innerText.trim() !== '' || values.files.length > 0) {
       setToggleEmoji(false);
       values.msg = chatInput.current.innerText;
 
@@ -312,7 +315,7 @@ const ChatArea = () => {
         const uploadedFiles: fileType[] = await uploadFiles(values.files);
 
         if (uploadedFiles.length <= 0 && values.files.length > 0) {
-          alert("Upload files failed! Try again later.");
+          alert('Upload files failed! Try again later.');
           return;
         }
 
@@ -320,10 +323,10 @@ const ChatArea = () => {
         if (uploadedFiles.length > 0) {
           const res = await MessageApi.saveFile(uploadedFiles);
 
-          fileIds = res.fileIds
+          fileIds = res.fileIds;
 
-          const _res = await MessageApi.getFile(roomInfo.info.roomInfo._id)
-          dispatch(fileActions.setFilesData(_res.files))
+          const _res = await MessageApi.getFile(roomInfo.info.roomInfo._id);
+          dispatch(fileActions.setFilesData(_res.files));
         }
 
         //setup message to save to DB
@@ -337,8 +340,8 @@ const ChatArea = () => {
         const res = await MessageApi.send(messageToSend);
 
         dispatch(messageActions.newMessage(res.result));
-        chatInput.current!.innerText = "";
-        setFieldValue("files", []);
+        chatInput.current!.innerText = '';
+        setFieldValue('files', []);
         scrollToNewMsg();
       } catch (err) {
         console.log(err);
@@ -356,9 +359,9 @@ const ChatArea = () => {
             <S.ChatAreaHeadAvatar>
               <Image
                 src={roomInfo.info!.roomAvatar}
-                alt="avatar"
-                layout="fill"
-                objectFit="cover"
+                alt='avatar'
+                layout='fill'
+                objectFit='cover'
               />
             </S.ChatAreaHeadAvatar>
           )}
@@ -370,13 +373,20 @@ const ChatArea = () => {
             </S.ChatAreaHeadName>
             {!roomInfo.info?.roomInfo.isGroup && (
               <S.ChatAreaHeadStatus>
-                {status ? "Online" : "Offline"}
+                {status ? 'Online' : 'Offline'}
                 <S.ChatAreaHeadStatusIcon status={status} />
               </S.ChatAreaHeadStatus>
             )}
           </S.ChatAreaHeadNameWrapper>
         </S.ChatAreaHeadInfo>
-        <S.ChatAreaHeadOption onClick={() => setToggleOption(true)} />
+        <S.FlexWrap>
+          <Link href='/video-call' download>
+            <a target='_blank'>
+              <S.CallIcon />
+            </a>
+          </Link>
+          <S.ChatAreaHeadOption onClick={() => setToggleOption(true)} />
+        </S.FlexWrap>
       </S.ChatAreaHead>
       {toggleOption && (
         <MoreOptions
@@ -430,7 +440,7 @@ const ChatArea = () => {
                   <S.ChatAreaMainMsgLoading
                     size={20}
                     speedMultiplier={0.5}
-                    color="#769FCD"
+                    color='#769FCD'
                   ></S.ChatAreaMainMsgLoading>
                 )}
                 {chatScrollBottom && (
@@ -440,7 +450,7 @@ const ChatArea = () => {
                   <S.ChatAreaMainTyping
                     speedMultiplier={0.5}
                     size={7}
-                    color="#769FCD"
+                    color='#769FCD'
                     margin={2}
                   ></S.ChatAreaMainTyping>
                 )}
@@ -479,7 +489,7 @@ const ChatArea = () => {
                         />
                       </S.ChatAreaMainInputEmojiPicker>
                     )}
-                    <S.ChatAreaMainInputFile htmlFor="fileInput">
+                    <S.ChatAreaMainInputFile htmlFor='fileInput'>
                       +
                     </S.ChatAreaMainInputFile>
                     <S.ChatAreaMainInputMsg>
@@ -492,21 +502,21 @@ const ChatArea = () => {
                         ref={chatInput}
                         onInput={() => onInputChange()}
                         onKeyDown={(e) => {
-                          if (e.code === "Enter" && !e.shiftKey) {
+                          if (e.code === 'Enter' && !e.shiftKey) {
                             e.preventDefault();
                             submitForm();
                           }
                         }}
                       />
-                      <S.ChatAreaMainInputButtonSend type="submit">
+                      <S.ChatAreaMainInputButtonSend type='submit'>
                         <S.ChatAreaMainInputSendIcon />
                       </S.ChatAreaMainInputButtonSend>
                     </S.ChatAreaMainInputMsg>
                   </S.ChatAreaMainInput>
                   <input
                     {...getInputProps({
-                      type: "file",
-                      id: "fileInput",
+                      type: 'file',
+                      id: 'fileInput',
                       hidden: true,
                       multiple: true,
                       onChange: (e) => fileChoosen(e, values, setFieldValue),

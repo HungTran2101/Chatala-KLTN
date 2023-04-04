@@ -1,7 +1,7 @@
 export const BASEURL =
   process.env.NEXT_PUBLIC_API_ENDPOINT ||
   // "https://chatala-backend.herokuapp.com"; // Staging
-  "http://localhost:5000";
+  'http://localhost:5000';
 
 const API_BASE = `${BASEURL}/api`;
 
@@ -32,4 +32,8 @@ export const API_URL = {
   createRoom: `${API_BASE}/room`,
   changeNickname: `${API_BASE}/room`,
   uploadFile: `https://api.cloudinary.com/v1_1`,
+
+  getCallToken: `${API_BASE}/call/get-token`,
+  createMeeting: `${API_BASE}/call/create-meeting`,
+  validateMeeting: `${API_BASE}/call/validate-meeting`,
 };
