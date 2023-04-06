@@ -10,12 +10,10 @@ import { AiFillCamera } from "react-icons/ai";
 
 import * as Yup from "yup";
 import * as S from "./SettingInfo.styled";
-import {
-  validImageTypes,
-} from "../../../Global/ProcessFunctions";
+import { validImageTypes } from "../../../Global/ProcessFunctions";
 import { Formik, ErrorMessage } from "formik";
 import { UserAvatar } from "../../../../utils/dataConfig";
-import { updateUserInfo, info } from "../../../../utils/types"
+import { updateUserInfo, info } from "../../../../utils/types";
 import {
   API_KEY,
   MessageApi,
@@ -24,7 +22,7 @@ import {
 } from "../../../../services/api/messages";
 import { API_URL } from "../../../../services/api/urls";
 import CropImage from "./CropImage";
-import { UsersApi } from "../../../../services/api/users"
+import { UsersApi } from "../../../../services/api/users";
 import { useDispatch } from "react-redux";
 import { userActions } from "../../../../features/redux/slices/userSlice";
 import { json } from "stream/consumers";
@@ -68,9 +66,9 @@ const SettingInfo = ({
     if (input.files?.length) {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
-        const typeImage = reader.result.slice(0, 10);        
-        if(typeImage !== 'data:image') {
-          alert('Please choose an image file')
+        const typeImage = reader.result.slice(0, 10);
+        if (typeImage !== "data:image") {
+          alert("Please choose an image file");
         } else {
           setModalCrop(true);
           setCropImage(reader.result);
@@ -78,24 +76,20 @@ const SettingInfo = ({
       });
       reader.readAsDataURL(input.files[0]);
     }
-    e.currentTarget.value = null;    
+    e.currentTarget.value = null;
   };
 
-  const uploadFile = async (
-    file: File
-  ) => {
-
+  const uploadFile = async (file: File) => {
     const signedKey = await MessageApi.getSignedKey(id);
 
     const form = new FormData();
     form.append("file", file);
     form.append("public_id", id);
     form.append("api_key", API_KEY);
-    form.append("upload_preset", UPLOAD_PRESET)
+    form.append("upload_preset", UPLOAD_PRESET);
     form.append("timestamp", signedKey.timestamp.toString());
     form.append("signature", signedKey.signature);
-    
-    
+
     const response = await fetch(
       `${API_URL.uploadFile}/${CLOUD_NAME}/auto/upload`,
       {
@@ -106,38 +100,46 @@ const SettingInfo = ({
       return response.json();
     });
 
-    return { url: response.secure_url };
-    
+    return response.secure_url;
   };
 
-  const onSubmit = async (values: info) => {      
+  const onSubmit = async (values: info) => {
     try {
-      let updated = false
-      
-      if(avatar !== values.avatar) {
-        // @ts-ignores 
+      let updated = false;
+
+      if (avatar !== values.avatar) {
+        // @ts-ignores
         const fileAvt = new File([values.avatar], id, { type: values.avatar.type });
         const avatarUrl = await uploadFile(fileAvt);
-        const result = await UsersApi.editAvatar(avatarUrl.url);
-        alert(result.message);
-        updated = true;
+        if (avatarUrl) {
+          const result = await UsersApi.editAvatar(avatarUrl);
+          alert(result.message);
+          updated = true;
+        }
+        else{
+          alert("Update avatar failed! Try again later.");
+        }
       }
-        
-      if(name !== values.name || gender !== values.gender || dob !== values.dob) {
+
+      if (
+        name !== values.name ||
+        gender !== values.gender ||
+        dob !== values.dob
+      ) {
         const newValue: updateUserInfo = {
           name: values.name,
           gender: values.gender,
-          dob: values.dob
-        }
-        const result = await UsersApi.editUserInfo(newValue);        
+          dob: values.dob,
+        };
+        const result = await UsersApi.editUserInfo(newValue);
         alert(result.message);
         updated = true;
       }
-      if(updated) {
+      if (updated) {
         const result = await UsersApi.getLoggedUser();
         dispatch(userActions.setUserInfo(result));
       }
-    } catch(error) {
+    } catch (error) {
       alert(error.message);
     }
   };
@@ -146,10 +148,7 @@ const SettingInfo = ({
     <S.Modal>
       <S.ModalOverlay onClick={() => toggleEvent()} />
       <S.ModalBody>
-        <Formik
-          initialValues={initialValues}
-          onSubmit={onSubmit}
-        >
+        <Formik initialValues={initialValues} onSubmit={onSubmit}>
           {({ setFieldValue, values, errors, touched }) => (
             <>
               {modalCrop && (

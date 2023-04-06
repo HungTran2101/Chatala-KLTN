@@ -157,7 +157,7 @@ const ChatMsg = ({
               />
             </S.ChatMsgAvatar>
             <S.ChatMsgWrapper>
-              {!data.unSend && files.length === 0 && <S.ChatMsgTextTail />}
+              {!data.unSend && files.length === 0 && images.length === 0 && <S.ChatMsgTextTail />}
               {data.unSend ? (
                 <S.ChatMsgUnSend>Message has been unsend</S.ChatMsgUnSend>
               ) : (
