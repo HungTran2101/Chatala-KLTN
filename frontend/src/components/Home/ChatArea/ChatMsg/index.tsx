@@ -13,9 +13,7 @@ interface IChatMsg {
   data: messageType;
   position: string;
   setToggleImageZoom: (toggle: boolean) => void;
-  setImageZoomList: (
-    value: Array<{ name: string; url: string; type: string }>
-  ) => void;
+  setImageZoomList: (value: { index: number; list: fileType[] }) => void;
 }
 
 const ChatMsg = ({
@@ -36,7 +34,9 @@ const ChatMsg = ({
     const _images: fileType[] = [];
     const _files: fileType[] = [];
     data.fileIds.forEach((id) => {
-      const file = roomFiles.list.find((it) => it._id.toString() === id.toString());
+      const file = roomFiles.list.find(
+        (it) => it._id.toString() === id.toString()
+      );
       if (file.type === "image") _images.push(file);
       else _files.push(file);
     });
@@ -44,8 +44,8 @@ const ChatMsg = ({
     setFiles(_files);
   };
 
-  const imageZoomClick = () => {
-    setImageZoomList(images);
+  const imageZoomClick = (index: number) => {
+    setImageZoomList({ index, list: images });
     setToggleImageZoom(true);
   };
 
@@ -82,15 +82,18 @@ const ChatMsg = ({
             <S.ChatMsgWrapper>
               {!data.unSend ? (
                 <>
-                  {files.length === 0 && images.length === 0 && <S.ChatMsgTextTail />}
+                  {files.length === 0 && images.length === 0 && (
+                    <S.ChatMsgTextTail />
+                  )}
                   {data.msg !== "" && <S.ChatMsgText>{data.msg}</S.ChatMsgText>}
                   {images.length > 0 && (
-                    <S.ChatMsgFileImages
-                      imgNum={images?.length}
-                      onClick={() => imageZoomClick()}
-                    >
+                    <S.ChatMsgFileImages imgNum={images?.length}>
                       {images?.map((image, index) => (
-                        <S.ChatMsgFileImage key={index} imgNum={images?.length}>
+                        <S.ChatMsgFileImage
+                          key={index}
+                          imgNum={images?.length}
+                          onClick={() => imageZoomClick(index)}
+                        >
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={image.url}
@@ -154,19 +157,20 @@ const ChatMsg = ({
               />
             </S.ChatMsgAvatar>
             <S.ChatMsgWrapper>
-              {!data.unSend && files.length === 0 && <S.ChatMsgTextTail />}
+              {!data.unSend && files.length === 0 && images.length === 0 && <S.ChatMsgTextTail />}
               {data.unSend ? (
                 <S.ChatMsgUnSend>Message has been unsend</S.ChatMsgUnSend>
               ) : (
                 <>
                   {data.msg !== "" && <S.ChatMsgText>{data.msg}</S.ChatMsgText>}
                   {images?.length > 0 && (
-                    <S.ChatMsgFileImages
-                      imgNum={images?.length}
-                      onClick={() => imageZoomClick()}
-                    >
+                    <S.ChatMsgFileImages imgNum={images?.length}>
                       {images?.map((image, index) => (
-                        <S.ChatMsgFileImage key={index} imgNum={images?.length}>
+                        <S.ChatMsgFileImage
+                          key={index}
+                          imgNum={images?.length}
+                          onClick={() => imageZoomClick(index)}
+                        >
                           <img
                             src={image.url}
                             alt="image"

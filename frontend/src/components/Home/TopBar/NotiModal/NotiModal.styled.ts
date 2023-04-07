@@ -6,12 +6,12 @@ const cbAnimate1 = merge(slideInRight, slideInDown);
 const NotiAnimate = keyframes`${merge(zoomIn, cbAnimate1)}`;
 
 export const Noti = styled.div`
-  ${tw`bg-secondary flex flex-col py-2.5 px-3.5 rounded-[20px] absolute shadow-md right-[140px] top-[55px] z-10 border-darker border-2`}
+  ${tw`bg-secondary flex flex-col py-2.5 px-3.5 rounded-[20px] absolute shadow-md right-[140px] top-[55px] z-10 border-quaternary border-2`}
   animation: 0.2s ${NotiAnimate};
 `;
 
 export const NotiTitles = styled.div`
-  ${tw`rounded-[20px] text-primary text-lg font-semibold bg-dark px-8 py-1.5 mb-1.5`}
+  ${tw`rounded-[20px] text-primary text-lg font-semibold bg-tertiary px-8 py-1.5 mb-1.5`}
   text-shadow: 0 0 5px #AAC4FF;
   width: fit-content;
 `;
@@ -27,7 +27,7 @@ export const NotiList = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    ${tw`bg-dark rounded-[50px]`}
+    ${tw`bg-tertiary rounded-[50px]`}
   }
 `;
 
@@ -36,7 +36,7 @@ export const NotiText = styled.div`
 `;
 
 export const NotiItem = styled.div`
-  ${tw`flex p-2 rounded-[20px] my-1.5 items-center relative w-full bg-dark`}
+  ${tw`flex p-2 rounded-[20px] my-1.5 items-center relative w-full bg-tertiary`}
 `;
 
 export const NotiInfo = styled.div`

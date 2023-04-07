@@ -115,7 +115,7 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: tertiary) {
   .card,
   .footer {
     border-color: #222;

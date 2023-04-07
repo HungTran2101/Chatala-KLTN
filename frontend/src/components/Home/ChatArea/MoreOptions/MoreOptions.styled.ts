@@ -1,8 +1,8 @@
-import styled, { keyframes } from 'styled-components';
-import tw from 'twin.macro';
-import { merge, zoomIn, slideInRight, slideInDown } from 'react-animations';
-import { AiOutlineEdit } from 'react-icons/ai';
-import { HiUserGroup } from 'react-icons/hi';
+import styled, { keyframes } from "styled-components";
+import tw from "twin.macro";
+import { merge, zoomIn, slideInRight, slideInDown } from "react-animations";
+import { AiOutlineEdit } from "react-icons/ai";
+import { HiUserGroup } from "react-icons/hi";
 
 const cbAnimate1 = merge(slideInRight, slideInDown);
 const MoreOptionAnimate = keyframes`${slideInRight}`;
@@ -18,11 +18,11 @@ export const RoomInfo = styled.div`
 `;
 
 export const RoomInfoTitle = styled.div`
-  ${tw`font-semibold py-3 text-[22px] border-b-[1px] w-full text-center border-b-darker`}
+  ${tw`font-semibold py-3 text-[22px] border-b-[1px] w-full text-center border-b-quaternary`}
 `;
 
 export const RoomInfoAvatar = styled.figure`
-  ${tw`relative w-[60px] h-[60px] rounded-full overflow-hidden mt-4 mb-2 border-2 border-darker`}
+  ${tw`relative w-[60px] h-[60px] rounded-full overflow-hidden mt-4 mb-2 border-2 border-quaternary`}
 `;
 
 export const RoomInfoGroupAvatar = styled(HiUserGroup)`
@@ -34,11 +34,11 @@ export const RoomInfoNameWrap = styled.div`
 `;
 
 export const RoomInfoName = styled.div`
-${tw`w-[200px] text-center whitespace-nowrap overflow-ellipsis overflow-hidden`}
-`
+  ${tw`w-[200px] text-center whitespace-nowrap overflow-ellipsis overflow-hidden`}
+`;
 
 export const RoomInfoNameEditIcon = styled(AiOutlineEdit)`
-  ${tw`absolute right[-30px] bg-dark rounded-full p-[2px] text-[23px] hover:cursor-pointer hover:opacity-80`}
+  ${tw`absolute right[-30px] bg-tertiary rounded-full p-[2px] text-[23px] hover:cursor-pointer hover:opacity-80`}
 `;
 
 export const OptionItem = styled.div<{ color?: string }>`
@@ -46,7 +46,7 @@ export const OptionItem = styled.div<{ color?: string }>`
 `;
 
 export const NormalItem = styled(OptionItem)`
-  ${tw`hover:bg-dark flex`}
+  ${tw`hover:bg-tertiary flex`}
 `;
 
 export const DeleteItem = styled(OptionItem)`
@@ -60,15 +60,22 @@ export const WhiteBox = styled.div`
 `;
 
 export const Title = styled.p`
-  ${tw`font-semibold text-base flex justify-between items-center`}
+  ${tw`font-semibold text-base flex justify-between items-center cursor-pointer my-0.5`}
 `;
 
-export const PhotoWrap = styled.div`
-  ${tw`flex justify-center -mx-1 my-2`}
+export const ExtendContent = styled.div`
+  ${tw`relative flex flex-col justify-between overflow-hidden`}
+`;
+
+export const FileWrap = styled.div<{ wraptype?: string, visible: boolean }>`
+  ${({ wraptype }) =>
+    wraptype === "file" ? tw`flex flex-col` : tw`grid grid-cols-3`}
+  ${({visible}) => visible ? tw`h-full` : tw`h-0`}
+  ${tw`gap-1`}
 `;
 
 export const UploadedMedia = styled.figure`
-  ${tw`relative w-full mx-1 rounded-[5px] overflow-hidden`}
+  ${tw`relative mx-1 rounded-[5px] cursor-pointer overflow-hidden`}
   aspect-ratio: 1;
 `;
 
@@ -76,7 +83,14 @@ export const MoreButton = styled.button`
   ${tw`text-sm px-3 py-2 w-full rounded-[5px] cursor-pointer duration-200 bg-secondary font-semibold my-2`}
 `;
 
-export const ExtendContent = styled.div<{ visible: boolean }>`
-  ${tw`overflow-hidden duration-300`}
-  ${({ visible }) => (visible ? tw`h-[156px]` : tw`h-0`)}
+export const FilePreview = styled.a`
+  ${tw`relative flex items-center h-[50px] pl-1.5 pr-3.5 py-1 bg-primary rounded-[5px] shadow-md`}
+`;
+
+export const FilePreviewIcon = styled.div`
+  ${tw`flex items-center justify-center p-1.5 bg-secondary rounded-full`}
+`;
+
+export const FilePreviewName = styled.div`
+  ${tw`ml-1.5 w-full text-[16px] font-semibold text-quaternary whitespace-nowrap overflow-ellipsis overflow-hidden`}
 `;

@@ -18,7 +18,7 @@ import {
   messageSendType,
   messageType,
 } from "../../../utils/types";
-import ChatImageZoom from "./ChatMsgImageZoom";
+import ChatImageZoom from "./ChatImageZoom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   messageActions,
@@ -56,9 +56,10 @@ const ChatArea = () => {
   const [toggleEmoji, setToggleEmoji] = useState(false);
   const [toggleOption, setToggleOption] = useState(false);
   const [toggleImageZoom, setToggleImageZoom] = useState(false);
-  const [imageZoomList, setImageZoomList] = useState<
-    Array<{ name: string; url: string; type: string }>
-  >([]);
+  const [imageZoomList, setImageZoomList] = useState<{
+    index: number;
+    list: fileType[];
+  }>({ index: 0, list: [] });
   const [toggleTyping, setToggleTyping] = useState(false);
   const [sendTyping, setSendTyping] = useState(false);
   const [newMsgNoti, setNewMsgNoti] = useState(false);
@@ -260,7 +261,7 @@ const ChatArea = () => {
     const form = new FormData();
     form.append("file", file);
     form.append("api_key", API_KEY);
-    form.append("upload_preset", UPLOAD_PRESET)
+    form.append("upload_preset", UPLOAD_PRESET);
     form.append("timestamp", signedKey.timestamp.toString());
     form.append("signature", signedKey.signature);
 
@@ -320,10 +321,10 @@ const ChatArea = () => {
         if (uploadedFiles.length > 0) {
           const res = await MessageApi.saveFile(uploadedFiles);
 
-          fileIds = res.fileIds
+          fileIds = res.fileIds;
 
-          const _res = await MessageApi.getFile(roomInfo.info.roomInfo._id)
-          dispatch(fileActions.setFilesData(_res.files))
+          const _res = await MessageApi.getFile(roomInfo.info.roomInfo._id);
+          dispatch(fileActions.setFilesData(_res.files));
         }
 
         //setup message to save to DB
@@ -383,6 +384,15 @@ const ChatArea = () => {
           roomInfo={roomInfo.info!}
           setToggleOption={setToggleOption}
           toggleOption={toggleOption}
+          setToggleImageZoom={setToggleImageZoom}
+          setImageZoomList={setImageZoomList}
+        />
+      )}
+      {toggleImageZoom && (
+        <ChatImageZoom
+          imageZoomList={imageZoomList.list}
+          setToggleImageZoom={setToggleImageZoom}
+          currentIndex={imageZoomList.index}
         />
       )}
       <Formik
@@ -401,12 +411,6 @@ const ChatArea = () => {
           >
             {({ getRootProps, getInputProps, isDragActive }) => (
               <S.ChatAreaMain {...getRootProps()}>
-                {toggleImageZoom && (
-                  <ChatImageZoom
-                    imageZoomList={imageZoomList}
-                    setToggleImageZoom={setToggleImageZoom}
-                  />
-                )}
                 <S.ChatAreaMainMsg
                   ref={chatMainMsg}
                   onScroll={checkChatScrollBottom}

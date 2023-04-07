@@ -12,7 +12,7 @@ export const ChatList = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    ${tw`bg-dark rounded-[50px]`}
+    ${tw`bg-tertiary rounded-[50px]`}
   }
 `;
 

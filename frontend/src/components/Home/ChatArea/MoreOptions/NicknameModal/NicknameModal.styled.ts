@@ -13,7 +13,7 @@ export const NicknameOverlay = styled.div`
 const zoomInAnimate = keyframes`${zoomIn}`;
 
 export const NicknameBody = styled.div`
-  ${tw`flex flex-col m-auto bg-darker py-2.5 px-3.5 rounded-[15px] z-10 min-w-[500px]`}
+  ${tw`flex flex-col m-auto bg-quaternary py-2.5 px-3.5 rounded-[15px] z-10 min-w-[500px]`}
   border: 2px solid #ECF2F7;
   animation: 0.25s ${zoomInAnimate};
 `;

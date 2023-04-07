@@ -227,14 +227,6 @@ const editAvatar = asyncHandler(async (req, res, next) => {
     }
   );
 
-  await Rooms.findOneAndUpdate(
-    { "users.uid": id },
-    { $set: { "users.$.avatar": avatar } },
-    {
-      new: true,
-    }
-  );
-
   res.status(200).json({
     user,
     message: "Update Avatar Successfully!",

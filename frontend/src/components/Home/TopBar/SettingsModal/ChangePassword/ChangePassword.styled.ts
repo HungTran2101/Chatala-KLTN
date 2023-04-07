@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import tw from 'twin.macro';
+import styled from "styled-components";
+import tw from "twin.macro";
 
 export const ChangePassword = styled.div`
   ${tw`px-[30px] py-5`}
@@ -14,7 +14,7 @@ export const Title = styled.p`
 `;
 
 export const Input = styled.input`
-  ${tw`border-b-[1px] border-b-darker outline-none text-base px-[10px] py-[5px] w-full text-gray-500 relative z-10 bg-transparent`}
+  ${tw`border-b-[1px] border-b-quaternary outline-none text-base px-[10px] py-[5px] w-full text-gray-500 relative z-10 bg-transparent`}
 `;
 
 export const InputWrap = styled.div`
@@ -22,7 +22,7 @@ export const InputWrap = styled.div`
 `;
 
 export const Label = styled.label<{ active: boolean }>`
-  ${tw`text-base text-dark absolute top-[10px] left-[10px] opacity-50 duration-300`}
+  ${tw`text-base text-tertiary absolute top-[10px] left-[10px] opacity-50 duration-300`}
   ${({ active }) => active && tw`top-[-10px] left-0 opacity-100 text-xs z-0`}
 `;
 
@@ -31,7 +31,7 @@ export const ErrorMsg = styled.div`
 `;
 
 export const Button = styled.button`
-  ${tw`shadow text-center text-white bg-dark rounded-xl text-base font-semibold cursor-pointer hover:bg-darker hover:text-white px-5 py-[10px] mb-[10px] duration-100`}
+  ${tw`shadow text-center text-white bg-tertiary rounded-xl text-base font-semibold cursor-pointer hover:bg-quaternary hover:text-white px-5 py-[10px] mb-[10px] duration-100`}
 `;
 
 export const ButtonWrap = styled.div`
