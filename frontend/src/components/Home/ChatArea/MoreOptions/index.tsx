@@ -1,16 +1,17 @@
-import * as S from "./MoreOptions.styled";
-import { useOutsideClick } from "../../../Global/ProcessFunctions";
-import { roomInfo, userInfo } from "../../../../utils/types";
-import Image from "next/image";
-import { UserAvatar } from "../../../../utils/dataConfig";
-import { IoMdArrowDropdown } from "react-icons/io";
-import { useState } from "react";
-import NicknameModal from "./NicknameModal";
-import UserInfo from "../../TopBar/UserInfo";
-import { selectUserState } from "../../../../features/redux/slices/userSlice";
-import { useSelector } from "react-redux";
-import { UsersApi } from "../../../../services/api/users";
-import GroupMembers from "./GroupMembers";
+import * as S from './MoreOptions.styled';
+import { useOutsideClick } from '../../../Global/ProcessFunctions';
+import { roomInfo, userInfo } from '../../../../utils/types';
+import Image from 'next/image';
+import { UserAvatar } from '../../../../utils/dataConfig';
+import { IoMdArrowDropdown } from 'react-icons/io';
+import { useState } from 'react';
+import NicknameModal from './NicknameModal';
+import UserInfo from '../../TopBar/UserInfo';
+import { selectUserState } from '../../../../features/redux/slices/userSlice';
+import { useSelector } from 'react-redux';
+import { UsersApi } from '../../../../services/api/users';
+import GroupMembers from './GroupMembers';
+import { FriendApi } from '../../../../services/api/friend';
 
 interface IMoreOptions {
   setToggleOption: (toggle: boolean) => void;
@@ -58,7 +59,7 @@ const MoreOptions = ({
           <S.RoomInfoGroupAvatar />
         ) : (
           <S.RoomInfoAvatar>
-            <Image src={roomInfo.roomAvatar} alt="avatar" layout="fill" />
+            <Image src={roomInfo.roomAvatar} alt='avatar' layout='fill' />
           </S.RoomInfoAvatar>
         )}
         <S.RoomInfoNameWrap>
@@ -87,7 +88,11 @@ const MoreOptions = ({
               Group Members
             </S.NormalItem>
           )}
-          {!roomInfo.roomInfo.isGroup && <S.DeleteItem>Block</S.DeleteItem>}
+          {!roomInfo.roomInfo.isGroup && (
+            <S.DeleteItem onClick={() => console.log(userNeedChange.uid)}>
+              Block
+            </S.DeleteItem>
+          )}
           <S.DeleteItem>Delete this chat</S.DeleteItem>
         </S.WhiteBox>
         <S.WhiteBox>
@@ -95,10 +100,10 @@ const MoreOptions = ({
             Photos/Videos
             <IoMdArrowDropdown
               style={{
-                fontSize: "24px",
-                transition: "300ms",
-                cursor: "pointer",
-                transform: !mediaExtend ? "rotate(-90deg)" : "none",
+                fontSize: '24px',
+                transition: '300ms',
+                cursor: 'pointer',
+                transform: !mediaExtend ? 'rotate(-90deg)' : 'none',
               }}
               onClick={() => setMediaExtend(!mediaExtend)}
             />
@@ -108,25 +113,25 @@ const MoreOptions = ({
               <S.UploadedMedia>
                 <Image
                   src={roomInfo.roomInfo.users[0].avatar}
-                  alt="avatar"
-                  layout="fill"
-                  objectFit="cover"
+                  alt='avatar'
+                  layout='fill'
+                  objectFit='cover'
                 />
               </S.UploadedMedia>
               <S.UploadedMedia>
                 <Image
                   src={roomInfo.roomInfo.users[0].avatar}
-                  alt="avatar"
-                  layout="fill"
-                  objectFit="cover"
+                  alt='avatar'
+                  layout='fill'
+                  objectFit='cover'
                 />
               </S.UploadedMedia>
               <S.UploadedMedia>
                 <Image
                   src={roomInfo.roomInfo.users[0].avatar}
-                  alt="avatar"
-                  layout="fill"
-                  objectFit="cover"
+                  alt='avatar'
+                  layout='fill'
+                  objectFit='cover'
                 />
               </S.UploadedMedia>
             </S.PhotoWrap>
