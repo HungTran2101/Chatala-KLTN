@@ -1,53 +1,12 @@
 import styled, { keyframes } from "styled-components";
 import tw from "twin.macro";
-import { FaCircle } from "react-icons/fa";
-import { IoMenu } from "react-icons/io5";
 import { BsChevronCompactDown, BsEmojiLaughingFill } from "react-icons/bs";
 import { RiSendPlaneFill } from "react-icons/ri";
-import { merge, slideInUp, zoomIn } from "react-animations";
+import { zoomIn } from "react-animations";
 import { Form } from "formik";
-import { HiOutlineChevronDown, HiUserGroup } from "react-icons/hi";
 import { ClipLoader, PulseLoader } from "react-spinners";
 export const ChatArea = styled.div`
   ${tw`relative bg-secondary shadow-md rounded-[20px] flex-grow flex flex-col overflow-hidden`}
-`;
-
-export const ChatAreaHead = styled.div`
-  ${tw`relative flex justify-between items-center py-1.5 px-7`}
-`;
-
-export const ChatAreaHeadInfo = styled.div`
-  ${tw`flex items-center cursor-default`}
-`;
-
-export const ChatGroupAvatar = styled(HiUserGroup)`
-  ${tw`text-gray-600 text-[50px] rounded-full`}
-`;
-
-export const ChatAreaHeadAvatar = styled.figure`
-  ${tw`relative w-[50px] h-[50px] rounded-full overflow-hidden flex-shrink-0`}
-  border: 1px solid gray;
-`;
-
-export const ChatAreaHeadNameWrapper = styled.div`
-  ${tw`ml-3.5`}
-`;
-
-export const ChatAreaHeadName = styled.div`
-  ${tw`font-semibold text-black text-[18px]`}
-`;
-
-export const ChatAreaHeadStatus = styled.div`
-  ${tw`text-quaternary text-[16px] flex items-center gap-1.5`}
-`;
-
-export const ChatAreaHeadStatusIcon = styled(FaCircle)<{ status: number }>`
-  ${tw`mt-[-2px] text-[12px]`}
-  ${({ status }) => (status === 1 ? tw`text-green-400` : tw`text-gray-400`)}
-`;
-
-export const ChatAreaHeadOption = styled(IoMenu)`
-  ${tw`text-[40px] text-quaternary hover:cursor-pointer`}
 `;
 
 export const ChatAreaMain = styled.div`
@@ -55,6 +14,11 @@ export const ChatAreaMain = styled.div`
 `;
 
 export const ChatAreaMainMsg = styled.div`
+  ${tw`relative flex-grow w-full flex flex-col items-center`}
+  }
+`;
+
+export const ChatAreaMainMsgOuter = styled.div`
   ${tw`relative flex-grow w-full overflow-y-auto overflow-x-hidden h-0 mb-3 pt-5 pr-1.5 flex flex-col-reverse`}
 
   &::-webkit-scrollbar-track {
@@ -69,6 +33,12 @@ export const ChatAreaMainMsg = styled.div`
     ${tw`rounded-[50px] bg-quaternary`}
   }
 `;
+
+export const ChatAreaMainMsgInner = styled.div`
+  ${tw`flex flex-col-reverse pb-2`}
+`;
+
+export const ChatAreaMainMsgInnerBottom = styled.div``;
 
 const msgNewNotiAnimation = keyframes`
   0% {
@@ -87,18 +57,12 @@ export const ChatAreaMainNewNoti = styled.div`
   animation: ${msgNewNotiAnimation} 1.5s linear infinite alternate;
 `;
 
-export const ChatAreaMainMsgInner = styled.div`
-  ${tw`flex flex-col-reverse pb-2`}
-`;
-
-export const ChatAreaMainMsgInnerBottom = styled.div``;
-
 export const ChatAreaMainTyping = styled(PulseLoader)`
-  ${tw`absolute bg-primary px-1 ml-0.5 py-1 mb-[-10px] rounded-[10px] bottom-[85px] shadow-md z-20`}
+  ${tw`absolute bg-primary p-1 bottom-0 mb-[5px] rounded-[10px] shadow-md z-20`}
 `;
 
 export const ChatAreaMainMsgLoading = styled(ClipLoader)`
-  ${tw`absolute bottom-[80px] right-[40px]`}
+  ${tw`absolute bottom-2 right-[10px]`}
 `;
 
 export const ChatAreaMainScrollBottom = styled(BsChevronCompactDown)`

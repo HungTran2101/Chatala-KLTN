@@ -62,11 +62,11 @@ const RenewPassword = () => {
         )}
       </Formik>
       <S.SignUp>
-        <Link href='/register'>
+        <Link href='/login'>
           <span>
             <p>Remembered your password?</p>
             {/* eslint-disable-next-line react/no-unescaped-entities */}
-            <p>Let's Sign Up!</p>
+            <p>Let's Login!</p>
           </span>
         </Link>
       </S.SignUp>

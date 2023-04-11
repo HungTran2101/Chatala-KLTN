@@ -4,7 +4,7 @@ import tw from "twin.macro";
 import React from "react";
 
 export const Suggest = styled.span`
-  ${tw`text-lg mt-6`}
+  ${tw`text-[26px] font-bold my-6`}
 `;
 
 export const NewForm = styled(Form)`

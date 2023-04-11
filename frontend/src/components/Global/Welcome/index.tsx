@@ -3,12 +3,16 @@ import logo from "../../../assets/imgs/LogoFullLong.png";
 import chatbot from "../../../assets/imgs/chatbot.png";
 import * as S from "./Welcome.styled";
 
-const Welcome = () => {
+interface IWelcome {
+  home?: boolean;
+}
+
+const Welcome = ({ home = false }: IWelcome) => {
   return (
-    <S.Welcome>
+    <S.Welcome home={home}>
       <S.WelcomeContent>
         <S.WelcomeText>
-          Chào mừng đến với
+          Welcome to
           <S.WelcomeLogo>
             <Image src={logo} alt="WelcomeLogo" />
           </S.WelcomeLogo>
@@ -18,11 +22,11 @@ const Welcome = () => {
             <Image src={chatbot} alt="chatbot feature" />
           </S.WelcomeFeatureImage>
           <S.WelcomeFeatureDescription>
-            Trải nghiệm tính năng ChatBot tuyệt vời!
+            Great socializing experience with friends
           </S.WelcomeFeatureDescription>
-          <S.WelcomeFeatureDetail>
-            Giờ đây bạn có thể chat với ChatBot về những thắc mắc của bạn một cách nhanh chóng
-          </S.WelcomeFeatureDetail>
+          {/* <S.WelcomeFeatureDetail>
+          Now you can chat with friends, video call, find new friends quickly on the website
+          </S.WelcomeFeatureDetail> */}
         </S.WelcomeFeature>
       </S.WelcomeContent>
     </S.Welcome>

@@ -24,7 +24,7 @@ const RenewPassword = () => {
         </span>
       </Link>
       <S.Suggest>
-        {`Enter your account's phone number to renew your password!`}
+        Enter your account's phone number to renew your password!
       </S.Suggest>
       <Formik
         initialValues={initialValues}
@@ -42,7 +42,7 @@ const RenewPassword = () => {
                 error={errors.phoneNumber && touched.phoneNumber ? 1 : 0}
               />
               <ErrorMessage name='phoneNumber' component={S.ErrorMsg} />
-              <S.Button type='submit'>Sign up</S.Button>
+              <S.Button type='submit'>Continue</S.Button>
             </S.SetWidth>
           </S.NewForm>
         )}
@@ -51,7 +51,7 @@ const RenewPassword = () => {
         <Link href='/login'>
           <span>
             <p>Remembered your password?</p>
-            <p>`Let&apos;s Sign In!`</p>
+            <p>Let&apos;s Login!</p>
           </span>
         </Link>
       </S.SignUp>

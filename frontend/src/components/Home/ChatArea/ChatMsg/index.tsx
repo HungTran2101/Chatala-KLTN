@@ -25,8 +25,8 @@ const ChatMsg = ({
   const [toggleOption, setToggleOption] = useState(false);
   const [images, setImages] = useState<fileType[]>([]);
   const [files, setFiles] = useState<fileType[]>([]);
+  
   const roomFiles = useSelector(selectFileState);
-
   const roomInfo = useSelector(selectRoomInfoState);
   const user = useSelector(selectUserState);
 
@@ -37,12 +37,18 @@ const ChatMsg = ({
       const file = roomFiles.list.find(
         (it) => it._id.toString() === id.toString()
       );
-      if (file.type === "image") _images.push(file);
-      else _files.push(file);
+      if (file) {
+        if (file.type === "image") _images.push(file);
+        else _files.push(file);
+      }
     });
     setImages(_images);
     setFiles(_files);
   };
+
+  useEffect(() => {
+    getFileAndImageList();
+  }, [data.fileIds]);
 
   const imageZoomClick = (index: number) => {
     setImageZoomList({ index, list: images });
@@ -69,10 +75,6 @@ const ChatMsg = ({
     }
     return formatDate(data.updatedAt, ".", true);
   };
-
-  useEffect(() => {
-    getFileAndImageList();
-  }, [data.fileIds]);
 
   return (
     <>
@@ -157,7 +159,9 @@ const ChatMsg = ({
               />
             </S.ChatMsgAvatar>
             <S.ChatMsgWrapper>
-              {!data.unSend && files.length === 0 && images.length === 0 && <S.ChatMsgTextTail />}
+              {!data.unSend && files.length === 0 && images.length === 0 && (
+                <S.ChatMsgTextTail />
+              )}
               {data.unSend ? (
                 <S.ChatMsgUnSend>Message has been unsend</S.ChatMsgUnSend>
               ) : (
@@ -208,6 +212,21 @@ const ChatMsg = ({
                 </>
               )}
             </S.ChatMsgWrapper>
+            {!data.unSend && (
+              <S.ChatMsgMoreIconWrapper>
+                <S.ChatMsgMoreIcon
+                  onClick={() => setToggleOption(true)}
+                  isleft={1}
+                />
+                {toggleOption && (
+                  <ChatMsgOption
+                    msgId={data._id}
+                    setToggleOption={setToggleOption}
+                    isleft={1}
+                  />
+                )}
+              </S.ChatMsgMoreIconWrapper>
+            )}
           </S.ChatMsgLeft>
         ))}
     </>

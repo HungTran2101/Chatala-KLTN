@@ -182,7 +182,7 @@ const Register = () => {
         <Link href="/login">
           <span>
             <p>Already have one?</p>
-            <p>Let&apos;s Sign In!</p>
+            <p>Let&apos;s Login!</p>
           </span>
         </Link>
       </S.Login>

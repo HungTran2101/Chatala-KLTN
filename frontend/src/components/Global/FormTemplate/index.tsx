@@ -1,21 +1,18 @@
 import * as S from "./FormTemplate.styled";
-import Image from "next/image";
-import LogoFullLong from "../../../assets/imgs/LogoFullLong.png";
+import Welcome from "../Welcome";
 
 interface childrenProps {
-    children: React.ReactNode
+  children: React.ReactNode;
 }
-const FormTemplate = ({children}: childrenProps) => {
-    return (
-        <S.Content>
-            <S.Wrapper>
-                <S.Logo>
-                    <Image src={LogoFullLong}/>
-                </S.Logo>
-                {children}
-            </S.Wrapper>
-        </S.Content>
-    );
-}
+const FormTemplate = ({ children }: childrenProps) => {
+  return (
+    <S.Content>
+      <S.Wrapper>
+        {children}
+      </S.Wrapper>
+      <Welcome />
+    </S.Content>
+  );
+};
 
 export default FormTemplate;
