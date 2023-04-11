@@ -71,12 +71,9 @@ io.on("connection", (socket) => {
     io.emit("getUsers", users);
   });
 
-  socket.on("room join", (roomId) => {
-    socket.join(roomId);
-  });
-
-  socket.on("room leave", (roomId) => {
-    socket.leave(roomId);
+  socket.on("join new room", (oldRoomId, newRoomId) => {
+    socket.leave(oldRoomId);
+    socket.join(newRoomId);
   });
 
   socket.on("logout", (roomId) => {

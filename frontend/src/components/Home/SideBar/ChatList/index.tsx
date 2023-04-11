@@ -37,8 +37,7 @@ const ChatList = () => {
       dispatch(fileActions.setFilesData(result.files))
 
       //@ts-ignore
-      socket.emit("room leave", roomList.list[roomSelected]?.roomInfo._id);
-      socket.emit("room join", roomList.list[index].roomInfo._id);
+      socket.emit("join new room", roomList.list[roomSelected]?.roomInfo._id, roomList.list[index].roomInfo._id)
 
       setRoomSelected(index);
     }

@@ -86,7 +86,6 @@ const TopBar = () => {
     if (user.loading === false && user.info._id !== "") {
       // @ts-ignore
       socket.emit("logged", user.info._id);
-      // @ts-ignore
       socket.on("getUsers", (users) => {
         console.log(users);
         dispatch(
