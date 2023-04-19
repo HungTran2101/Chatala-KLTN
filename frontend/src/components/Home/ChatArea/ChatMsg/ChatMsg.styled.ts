@@ -1,10 +1,29 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import tw from "twin.macro";
 import { FiMoreHorizontal } from "react-icons/fi";
-import { merge, slideInUp, zoomIn } from "react-animations";
 
 export const ChatMsg = styled.div`
-  ${tw`flex items-end mb-1`}
+  ${tw`flex items-end mb-1.5`}
+`;
+
+export const ChatMsgReply = styled.div`
+  ${tw`relative cursor-pointer`}
+`;
+
+export const ChatReplyLabel = styled.div`
+  ${tw`text-[14px] flex items-center gap-1 mt-2`}
+`
+
+export const ChatMsgReplyText = styled.div`
+  ${tw`flex items-center gap-2 bg-tertiary rounded-2xl px-3 pt-2 pb-5 mb-[-15px] shadow-md`}
+  filter: contrast(0.8);
+`;
+export const ChatMsgReplyImage = styled.figure`
+  ${tw`relative pt-1 px-1 pb-5 max-w-[300px] mb-[-15px] rounded-[5px] bg-tertiary shadow-md`}
+  filter: contrast(0.8);
+`;
+export const ChatMsgReplyFileIcon = styled.span`
+  ${tw`flex items-center justify-center p-1.5 bg-secondary rounded-full`}
 `;
 
 export const ChatMsgText = styled.div`
@@ -26,19 +45,19 @@ export const ChatMsgTextTail = styled.div`
 `;
 
 export const ChatMsgAvatar = styled.figure<{ position: string }>`
-  ${tw`relative w-[40px] h-[40px] rounded-full shadow-md overflow-hidden flex-shrink-0 mb-[-5px] z-10 invisible`}
+  ${tw`relative w-[40px] h-[40px] rounded-full shadow-md overflow-hidden flex-shrink-0 mb-[-5px] z-10 invisible self-end`}
   ${({ position }) =>
     (position === "bottom" || position === "alone") && tw`visible`}
   border: 1px solid gray;
 `;
 
-export const ChatMsgMoreIcon = styled(FiMoreHorizontal)<{ nomsg?: number }>`
-  ${tw`relative mr-3.5 text-[20px] text-gray-600 cursor-pointer invisible`}
+export const ChatMsgMoreIcon = styled(FiMoreHorizontal)<{ isleft?: number }>`
+  ${tw`relative text-[20px] text-gray-600 cursor-pointer invisible`}
+  ${({ isleft }) => (isleft === 1 ? tw`ml-3.5` : tw`mr-3.5`)}
 `;
 
-export const ChatMsgMoreIconWrapper = styled.div<{ nomsg?: number }>`
+export const ChatMsgMoreIconWrapper = styled.div`
   ${tw`relative`}
-  ${({ nomsg }) => nomsg && tw`absolute right-[410px]`}
 `;
 
 export const ChatMsgTextWrapper = styled.div`
@@ -81,18 +100,21 @@ export const ChatMsgUnSend = styled.div`
   width: fit-content;
 `;
 
-const MsgAnimate = keyframes`${merge(zoomIn, slideInUp)}`;
-
 export const ChatMsgWrapper = styled.div`
   ${tw`relative flex flex-col max-w-[70%]`}
   width: fit-content;
-  animation: 0.2s ${MsgAnimate};
 `;
 
 export const ChatMsgLeft = styled(ChatMsg)<{ position: string }>`
-  ${tw`relative`}
+  ${tw`relative items-center`}
   ${({ position }) =>
     (position === "bottom" || position === "alone") && tw`mb-7`}
+
+  &:hover {
+    ${ChatMsgMoreIcon} {
+      visibility: visible;
+    }
+  }
 
   ${ChatMsgUnSend} {
     ${tw`ml-2`}
@@ -111,6 +133,15 @@ export const ChatMsgLeft = styled(ChatMsg)<{ position: string }>`
         : position === "top"
         ? tw`rounded-2xl rounded-bl-none`
         : tw`rounded-r-2xl`}
+  }
+  ${ChatReplyLabel}{
+    ${tw`ml-2`}
+  }
+  ${ChatMsgReplyText} {
+    ${tw`ml-2`}
+  }
+  ${ChatMsgReplyImage}{
+    ${tw`ml-2`}
   }
   ${ChatMsgFileImages} {
     ${tw`ml-1.5`}
@@ -141,6 +172,15 @@ export const ChatMsgRight = styled(ChatMsg)<{ position: string }>`
   }
   ${ChatMsgTextWrapper} {
     ${tw`flex flex-row-reverse`}
+  }
+  ${ChatReplyLabel}{
+    ${tw`mr-2 justify-end`}
+  }
+  ${ChatMsgReplyText} {
+    ${tw`mr-2`}
+  }
+  ${ChatMsgReplyImage}{
+    ${tw`mr-2`}
   }
   ${ChatMsgText} {
     ${tw`bg-quaternary mr-2 rounded-br-[0]`}

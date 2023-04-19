@@ -33,12 +33,17 @@ import { fileActions } from "../../../features/redux/slices/fileSlice";
 import ChatAreaHead from "./ChatAreaHead";
 import ChatAreaMainMsg from "./ChatAreaMainMsg";
 import ChatAreaMainForm from "./ChatAreaMainForm";
+import {
+  selectUtilState,
+  utilActions,
+} from "../../../features/redux/slices/utilSlice";
 
 const ChatArea = () => {
   const dispatch = useDispatch();
 
   const roomInfo = useSelector(selectRoomInfoState);
   const user = useSelector(selectUserState);
+  const util = useSelector(selectUtilState);
   const socket = useSocketContext();
 
   const chatInput = useRef<HTMLSpanElement>(null);
@@ -60,7 +65,15 @@ const ChatArea = () => {
     roomId: roomInfo.info?.roomInfo._id || "",
     msg: "",
     files: [],
+    replyId: null,
   });
+
+  //handle reply
+  useEffect(() => {
+    if (util.replyId) {
+      setFormValues({ ...formValues, replyId: util.replyId });
+    }
+  }, [util.replyId]);
 
   //Handle Typing and Receive new messages
   useEffect(() => {
@@ -77,7 +90,7 @@ const ChatArea = () => {
     socket.on("receiveMessage", (result) => {
       //add new message if not sender
       if (result.senderId !== user.info._id) {
-        if (chatMainMsgOuter.current.scrollTop < 0) {
+        if (chatMainMsgOuter && chatMainMsgOuter.current.scrollTop < 0) {
           setNewMsgNoti(true);
         }
         dispatch(messageActions.newMessage(result));
@@ -104,6 +117,11 @@ const ChatArea = () => {
     }
     debounceTyping();
   };
+
+  //handle room change
+  useEffect(() => {
+    chatInput.current.innerText = "";
+  }, [roomInfo.info]);
 
   //Handle scroll to new msg
   const scrollToNewMsg = () => {
@@ -253,11 +271,13 @@ const ChatArea = () => {
         const messageToSend: messageSendType = {
           roomId: roomInfo.info.roomInfo._id,
           msg: values.msg,
+          replyId: values.replyId,
           fileIds,
         };
 
         const res = await MessageApi.send(messageToSend);
         dispatch(messageActions.newMessage(res.result));
+        dispatch(utilActions.clearReplyId());
         chatInput.current!.innerText = "";
         setFieldValue("files", []);
         scrollToNewMsg();
@@ -334,16 +354,16 @@ const ChatArea = () => {
                   chatInput={chatInput}
                   emojiClicked={emojiClicked}
                   emojiRef={emojiRef}
+                  isDragActive={isDragActive}
+                  toggleEmoji={toggleEmoji}
+                  values={values}
+                  isSubmitting={isSubmitting}
                   fileChoosen={fileChoosen}
                   getInputProps={getInputProps}
-                  isDragActive={isDragActive}
                   onInputChange={onInputChange}
                   setFieldValue={setFieldValue}
                   setToggleEmoji={setToggleEmoji}
                   submitForm={submitForm}
-                  toggleEmoji={toggleEmoji}
-                  values={values}
-                  isSubmitting={isSubmitting}
                 />
               </S.ChatAreaMain>
             )}

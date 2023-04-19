@@ -6,13 +6,19 @@ import { messageActions } from "../../../../../features/redux/slices/messageSlic
 import { selectRoomInfoState } from "../../../../../features/redux/slices/roomInfoSlice";
 import { selectUserState } from "../../../../../features/redux/slices/userSlice";
 import { useSocketContext } from "../../../../../contexts/socket";
+import { utilActions } from "../../../../../features/redux/slices/utilSlice";
 
 interface IChatMsgOption {
   msgId: string;
+  isleft?: number; //mean this component will be in msg for other user
   setToggleOption: (toogle: boolean) => void;
 }
 
-const ChatMsgOption = ({ msgId, setToggleOption }: IChatMsgOption) => {
+const ChatMsgOption = ({
+  msgId,
+  isleft = 0,
+  setToggleOption,
+}: IChatMsgOption) => {
   const dispatch = useDispatch();
 
   const handleOutsideClick = () => {
@@ -46,10 +52,20 @@ const ChatMsgOption = ({ msgId, setToggleOption }: IChatMsgOption) => {
     setToggleOption(false);
   };
 
+  const replyMsg = async () => {
+    dispatch(utilActions.setReplyId(msgId));
+    setToggleOption(false);
+  };
+
   return (
-    <S.ChatMsgOption ref={chatMsgOptionRef}>
-      <S.NormalItem onClick={() => unsendMsg()}>Unsend</S.NormalItem>
-      <S.DeteleItem onClick={() => deleteMsg()}>Delete</S.DeteleItem>
+    <S.ChatMsgOption ref={chatMsgOptionRef} isleft={isleft}>
+      <S.NormalItem onClick={() => replyMsg()}>Reply</S.NormalItem>
+      {!isleft && (
+        <>
+          <S.NormalItem onClick={() => unsendMsg()}>Unsend</S.NormalItem>
+          <S.DeteleItem onClick={() => deleteMsg()}>Delete</S.DeteleItem>
+        </>
+      )}
     </S.ChatMsgOption>
   );
 };

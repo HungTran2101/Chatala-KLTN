@@ -8,7 +8,7 @@ export const ChatAreaMainMsg = styled.div`
 `;
 
 export const ChatAreaMainMsgOuter = styled.div`
-  ${tw`relative flex-grow w-full overflow-y-auto overflow-x-hidden h-0 mb-3 pt-5 pr-1.5 flex flex-col-reverse`}
+  ${tw`relative flex-grow w-full overflow-y-auto overflow-x-hidden h-0 mb-3.5 pt-5 pr-1.5 flex flex-col-reverse`}
 
   &::-webkit-scrollbar-track {
     ${tw`rounded-[10px] bg-transparent`}

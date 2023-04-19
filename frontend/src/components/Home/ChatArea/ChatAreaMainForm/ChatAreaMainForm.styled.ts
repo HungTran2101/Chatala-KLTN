@@ -1,6 +1,7 @@
 import { Form } from "formik";
 import { zoomIn } from "react-animations";
 import { BsEmojiLaughingFill } from "react-icons/bs";
+import { IoCloseSharp } from "react-icons/io5";
 import { RiSendPlaneFill } from "react-icons/ri";
 import styled, { keyframes } from "styled-components";
 import tw from "twin.macro";
@@ -10,32 +11,60 @@ export const ChatAreaMainForm = styled(Form)`
 `;
 
 export const ChatAreaMainInput = styled.div`
-  ${tw`relative flex items-center`}
+  ${tw`relative flex items-center gap-2.5`}
 `;
 
 export const ChatAreaMainInputFile = styled.label`
-  ${tw`flex flex-shrink-0 shadow text-quaternary bg-primary rounded-full w-12 h-12 items-center justify-center text-4xl hover:cursor-pointer hover:opacity-80`}
+  ${tw`flex flex-shrink-0 shadow text-quaternary bg-primary self-end rounded-full w-12 h-12 items-center justify-center text-4xl hover:cursor-pointer hover:opacity-80`}
 `;
 
-export const ChatAreaMainInputMsg = styled.div`
-  ${tw`flex flex-grow shadow items-center p-1.5 bg-[#DFE2E2] ml-2.5 rounded-[20px] relative`}
+export const ChatAreaMainInputMsgOuter = styled.div`
+  ${tw`relative flex-grow`}
+`;
+
+export const ChatAreaMainInputMsg = styled.div<{ isReplying: string }>`
+  ${tw`relative flex flex-grow shadow items-center p-1.5 bg-[#DFE2E2] rounded-[20px]`}
+  ${({ isReplying }) =>
+    isReplying === "true" && tw`border-t-[1px] border-gray-400`}
+`;
+
+export const ChatAreaMainInputReply = styled.div<{ isImg: string }>`
+  ${tw`flex items-center justify-between gap-1.5 max-w-full w-[95%] rounded-[10px] mb-[-8px] ml-3 pb-3 pt-1 px-2.5 z-0 bg-secondary`}
+  ${({ isImg }) => isImg === "true" && tw`top-[-53px]`}
+`;
+
+export const ChatAreaMainInputReplyLabel = styled.span`
+  ${tw`flex-shrink-0`}
+`;
+export const ChatAreaMainInputReplyContent = styled.span`
+  ${tw`text-gray-500 overflow-hidden overflow-ellipsis flex-grow`}
+  width: fit-content;
+`;
+
+export const ChatAreaMainInputReplyImage = styled.figure`
+  ${tw`relative w-[45px] h-[45px] mr-auto`}
+  filter: contrast(0.5);
+`;
+
+export const ChatAreaMainInputReplyCancel = styled(IoCloseSharp)`
+  ${tw`hover:bg-tertiary rounded-full p-0.5 text-[20px] cursor-pointer`}
 `;
 
 export const ChatAreaMainInputEmoji = styled(BsEmojiLaughingFill)`
-  ${tw`text-quaternary text-4xl hover:cursor-pointer hover:text-[#003BD2] transition-colors`}
+  ${tw`text-quaternary text-4xl hover:cursor-pointer hover:text-[#003BD2] transition-colors z-10`}
 `;
 
 const ZoomInAnimation = keyframes`${zoomIn}`;
 
 export const ChatAreaMainInputEmojiPicker = styled.div`
-  ${tw`absolute rounded-[30px] overflow-hidden`}
+  ${tw`absolute rounded-[30px] overflow-hidden z-10`}
   border: 2px solid gray;
   transform: translate(55px, -230px);
   animation: 0.1s ${ZoomInAnimation};
 `;
 
 export const ChatAreaMainInputText = styled.span<{ username: string }>`
-  ${tw`flex-grow outline-none bg-transparent text-lg ml-2.5 w-1 overflow-auto max-h-24 whitespace-normal hover:cursor-text`}
+  ${tw`flex-grow outline-none bg-transparent text-lg ml-2.5 w-1 overflow-auto max-h-24 whitespace-normal hover:cursor-text z-10`}
 
   &:empty::before {
     content: "Write something to ${({ username }) => username}...";
