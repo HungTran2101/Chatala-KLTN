@@ -60,6 +60,7 @@ const TopBar = () => {
   };
 
   const getSearchResult = async () => {
+    setSearchResult([]);
     if (searchInput) {
       try {
         const res = await UsersApi.userFind({ search: searchInput });
@@ -69,7 +70,6 @@ const TopBar = () => {
         console.log(err);
       }
     } else {
-      setSearchResult([]);
       setSearchModal(false);
     }
   };

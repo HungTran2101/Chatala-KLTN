@@ -68,13 +68,6 @@ const ChatArea = () => {
     replyId: null,
   });
 
-  //handle reply
-  useEffect(() => {
-    if (util.replyId) {
-      setFormValues({ ...formValues, replyId: util.replyId });
-    }
-  }, [util.replyId]);
-
   //Handle Typing and Receive new messages
   useEffect(() => {
     //@ts-ignore
@@ -90,7 +83,7 @@ const ChatArea = () => {
     socket.on("receiveMessage", (result) => {
       //add new message if not sender
       if (result.senderId !== user.info._id) {
-        if (chatMainMsgOuter && chatMainMsgOuter.current.scrollTop < 0) {
+        if (chatMainMsgOuter.current && chatMainMsgOuter.current.scrollTop < 0) {
           setNewMsgNoti(true);
         }
         dispatch(messageActions.newMessage(result));
@@ -135,11 +128,11 @@ const ChatArea = () => {
   const checkChatScrollBottom = () => {
     //e.target.scrollTop is bottom when value is 0, scroll up cause value goes negative
     //Check if chat scroll at bottom
-    if (chatMainMsgOuter.current.scrollTop >= 0) {
+    if (chatMainMsgOuter.current && chatMainMsgOuter.current.scrollTop >= 0) {
       setNewMsgNoti(false);
     }
     //Check if chat scroll smaller than -500px then show scroll down button
-    if (chatMainMsgOuter.current.scrollTop > -500) {
+    if (chatMainMsgOuter.current && chatMainMsgOuter.current.scrollTop > -500) {
       setChatScrollBottom(false);
     } else {
       setChatScrollBottom(true);
@@ -251,6 +244,7 @@ const ChatArea = () => {
     if (chatInput.current.innerText.trim() !== "" || values.files.length > 0) {
       setToggleEmoji(false);
       values.msg = chatInput.current.innerText;
+      values.replyId = util.replyId;
 
       try {
         const uploadedFiles: fileType[] = await uploadFiles(values.files);

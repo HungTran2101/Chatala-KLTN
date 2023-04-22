@@ -51,7 +51,7 @@ export const ChatAreaMainInputReplyCancel = styled(IoCloseSharp)`
 `;
 
 export const ChatAreaMainInputEmoji = styled(BsEmojiLaughingFill)`
-  ${tw`text-quaternary text-4xl hover:cursor-pointer hover:text-[#003BD2] transition-colors z-10`}
+  ${tw`text-quaternary text-4xl hover:cursor-pointer hover:text-[#003BD2] transition-colors`}
 `;
 
 const ZoomInAnimation = keyframes`${zoomIn}`;
