@@ -3,6 +3,8 @@ import * as S from './SideBar.styled';
 import TopNav from './TopNav';
 
 const SideBar = () => {
+
+
   return (
     <S.SideBarContainer>
       <TopNav />

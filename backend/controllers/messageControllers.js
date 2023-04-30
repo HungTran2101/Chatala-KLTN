@@ -28,6 +28,7 @@ const sendMessage = asyncHandler(async (req, res, next) => {
   }
 
   io.in(roomId).emit("receiveMessage", result);
+  io.emit("incUnreadMsg", result.senderId, roomId)
 
   res.status(200).json({
     result,

@@ -76,10 +76,11 @@ const ChatAreaMainMsg = ({
   return (
     <S.ChatAreaMainMsg>
       <S.ChatAreaMainMsgOuter
+        id="ChatAreaMainMsgOuter"
         ref={chatMainMsgOuter}
         onScroll={checkChatScrollBottom}
       >
-        <S.ChatAreaMainMsgInner>
+        <S.ChatAreaMainMsgInner id="ChatAreaMainMsgInner">
           <S.ChatAreaMainMsgInnerBottom
             ref={bottomDiv}
           ></S.ChatAreaMainMsgInnerBottom>

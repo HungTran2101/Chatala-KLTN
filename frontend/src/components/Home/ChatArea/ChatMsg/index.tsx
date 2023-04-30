@@ -57,13 +57,6 @@ const ChatMsg = ({
       const replyUser = roomInfo.info.roomInfo.users.find(
         (it) => it.uid === data.senderId
       );
-      // if (data.senderId === user.info._id) {
-      //   return `You replying to ${replyTarget.nickname}`;
-      // } else if (replyTarget.uid === user.info._id) {
-      //   return `${replyUser.nickname} replying to you`;
-      // } else if (replyTarget.uid === replyTarget.uid) {
-      //   return `${replyTarget.nickname} replying to themselves`;
-      // } else return `${replyUser.nickname} replying to ${replyTarget.nickname}`;
       if (data.senderId === user.info._id) {
         //message on the right
         if (replyTarget.uid === data.senderId)

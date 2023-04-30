@@ -116,32 +116,29 @@ const getRoomInfo = asyncHandler(async (req, res, next) => {
   }).sort({ createdAt: -1 });
   const files = await Files.find({ roomId: roomId });
 
-  //add avatar for each user in room
-  let uids = [];
-  roomInfo.users.forEach((user) => uids.push(user.uid));
-  const userInfos = await Users.find({ _id: { $in: uids } });
-  const editedUsers = addAvatarForUserInRoom(roomInfo, userInfos);
-  const editedRoomInfo = { ...roomInfo.toObject(), users: editedUsers };
+  // //add avatar for each user in room
+  // let uids = [];
+  // roomInfo.users.forEach((user) => uids.push(user.uid));
+  // const userInfos = await Users.find({ _id: { $in: uids } });
+  // const editedUsers = addAvatarForUserInRoom(roomInfo, userInfos);
+  // const editedRoomInfo = { ...roomInfo.toObject(), users: editedUsers };
 
-  //setup response value
-  let roomAvatar = editedRoomInfo.users[0].avatar;
-  let roomName = editedRoomInfo.users[0].nickname;
+  // //setup response value
+  // let roomAvatar = editedRoomInfo.users[0].avatar;
+  // let roomName = editedRoomInfo.users[0].nickname;
 
-  if (editedRoomInfo.isGroup) {
-    roomAvatar = "";
-    roomName = "";
-  } else if (
-    editedRoomInfo.users[1].uid.toString() !== req.user._id.toString()
-  ) {
-    roomAvatar = editedRoomInfo.users[1].avatar;
-    roomName = editedRoomInfo.users[1].nickname;
-  }
+  // if (editedRoomInfo.isGroup) {
+  //   roomAvatar = "";
+  //   roomName = "";
+  // } else if (
+  //   editedRoomInfo.users[1].uid.toString() !== req.user._id.toString()
+  // ) {
+  //   roomAvatar = editedRoomInfo.users[1].avatar;
+  //   roomName = editedRoomInfo.users[1].nickname;
+  // }
 
-  if (editedRoomInfo) {
+  if (messages && files) {
     res.status(200).json({
-      roomAvatar,
-      roomName,
-      roomInfo: editedRoomInfo,
       messages,
       files,
     });
@@ -198,7 +195,7 @@ const addMember = asyncHandler(async (req, res, next) => {
 
   if (findUser.length > 0) {
     return next(
-      new ErrorHandler(`${getMember.name} was added to the group!`, 404)
+      new ErrorHandler(`${getMember.name} was added to the group!`, 400)
     );
   } else {
     const newMember = await Rooms.findOneAndUpdate(
@@ -223,6 +220,42 @@ const addMember = asyncHandler(async (req, res, next) => {
   }
 });
 
+const increaseUnreadMsg = asyncHandler(async (req, res, next) => {
+  const { senderId, roomId } = req.body;
+
+  if (!roomId) return next(new ErrorHandler("roomId is required", 400));
+
+  try {
+    await Rooms.findByIdAndUpdate(
+      { _id: roomId },
+      { $inc: { "users.$[user].unReadMsg": 1 } },
+      { arrayFilters: [{ "user.uid": { $ne: senderId } }] }
+    );
+    return res.status(200).json("increase unread successful");
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({ message: "Increase unread message failed" });
+  }
+});
+
+const userSeenRoom = asyncHandler(async (req, res, next) => {
+  const { uid, roomId } = req.body;
+
+  if (!roomId) return next(new ErrorHandler("roomId is required", 400));
+  if (!uid) return next(new ErrorHandler("uid is required", 400));
+
+  try {
+    await Rooms.findOneAndUpdate(
+      { _id: roomId, "users.uid": uid },
+      { $set: { "users.$.unReadMsg": 0 } }
+    );
+    return res.status(200).json("User seen room successful");
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({ message: "User seen room failed" });
+  }
+});
+
 module.exports = {
   createRoom,
   getRoomList,
@@ -230,4 +263,6 @@ module.exports = {
   changeRoomName,
   setNickname,
   addMember,
+  increaseUnreadMsg,
+  userSeenRoom,
 };

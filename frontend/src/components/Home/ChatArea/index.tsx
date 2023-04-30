@@ -37,6 +37,7 @@ import {
   selectUtilState,
   utilActions,
 } from "../../../features/redux/slices/utilSlice";
+import { RoomApi } from "../../../services/api/room";
 
 const ChatArea = () => {
   const dispatch = useDispatch();
@@ -83,7 +84,10 @@ const ChatArea = () => {
     socket.on("receiveMessage", (result) => {
       //add new message if not sender
       if (result.senderId !== user.info._id) {
-        if (chatMainMsgOuter.current && chatMainMsgOuter.current.scrollTop < 0) {
+        if (
+          chatMainMsgOuter.current &&
+          chatMainMsgOuter.current.scrollTop < 0
+        ) {
           setNewMsgNoti(true);
         }
         dispatch(messageActions.newMessage(result));
@@ -270,6 +274,8 @@ const ChatArea = () => {
         };
 
         const res = await MessageApi.send(messageToSend);
+        const res1 = await RoomApi.incUnreadMsg(user.info._id, roomInfo.info.roomInfo._id)
+        console.log(res1);
         dispatch(messageActions.newMessage(res.result));
         dispatch(utilActions.clearReplyId());
         chatInput.current!.innerText = "";

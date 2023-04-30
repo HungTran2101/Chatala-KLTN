@@ -8,8 +8,22 @@ const cbAnimate1 = merge(slideInRight, slideInDown);
 const MoreOptionAnimate = keyframes`${slideInRight}`;
 
 export const MoreOptions = styled.div<{ toggleOption: boolean }>`
-  ${tw`bg-secondary absolute shadow-md z-30 right-[-320px] h-full w-[320px] duration-300`}
+  ${tw`bg-secondary absolute shadow-md z-30 right-[-320px] h-full w-[320px] duration-300 overflow-y-auto`}
   animation: 0.3s ${MoreOptionAnimate};
+  &::-webkit-scrollbar-track {
+    ${tw`rounded-[10px] bg-transparent`}
+  }
+
+  &::-webkit-scrollbar {
+    ${tw`w-[5px]`}
+  }
+
+  &::-webkit-scrollbar-thumb {
+    ${tw`rounded-[50px] bg-tertiary`}
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    ${tw`bg-quaternary`}
+  }
   ${({ toggleOption }) => (toggleOption ? tw`right-0` : tw`right-[-320px]`)}
 `;
 
@@ -53,7 +67,9 @@ export const DeleteItem = styled(OptionItem)`
   ${tw`text-red-500 hover:bg-red-100`}
 `;
 
-export const OptionWrap = styled.div``;
+export const OptionWrap = styled.div`
+  ${tw``}
+`;
 
 export const WhiteBox = styled.div`
   ${tw`p-5 py-2 bg-white mb-3`}

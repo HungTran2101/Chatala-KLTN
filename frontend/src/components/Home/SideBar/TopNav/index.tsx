@@ -13,13 +13,6 @@ const TopNav = () => {
         <S.FriendsOption onClick={() => setToggleShowFriends(true)} />
         <S.AddGroupOption onClick={() => setToggleCreateGroup(true)} />
       </S.Options>
-      {/* <ChatPreviewItem
-        index={-2}
-        active={false}
-        msg='Halo halo niece and nephew, today uncle Roger'
-        setRoomSelected={setRoomSelected}
-        onClick={() => dispatch(roomInfoActions.clearRoomInfo(null))}
-      /> */}
       {toggleCreateGroup && (
         <CreateGroup setToggleCreateGroup={setToggleCreateGroup} />
       )}

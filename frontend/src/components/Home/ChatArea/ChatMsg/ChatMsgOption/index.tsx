@@ -7,6 +7,7 @@ import { selectRoomInfoState } from "../../../../../features/redux/slices/roomIn
 import { selectUserState } from "../../../../../features/redux/slices/userSlice";
 import { useSocketContext } from "../../../../../contexts/socket";
 import { utilActions } from "../../../../../features/redux/slices/utilSlice";
+import { useEffect } from "react";
 
 interface IChatMsgOption {
   msgId: string;
@@ -56,6 +57,20 @@ const ChatMsgOption = ({
     dispatch(utilActions.setReplyId(msgId));
     setToggleOption(false);
   };
+
+  //check option component overflow
+  useEffect(() => {
+    const msg = document.getElementById(msgId);
+    const ChatAreaMainMsgInner = document.getElementById("ChatAreaMainMsgInner")
+    const ChatAreaMainMsgOuter = document.getElementById("ChatAreaMainMsgOuter")
+
+    console.log(msg.offsetTop, "msg");
+    console.log(ChatAreaMainMsgInner.offsetTop, "inner");
+    console.log(ChatAreaMainMsgOuter.offsetHeight, "outer");
+
+    const offset = Math.abs(msg.offsetTop);
+    // console.log(chatMsgOptionRef.current.offsetTop);
+  }, []);
 
   return (
     <S.ChatMsgOption ref={chatMsgOptionRef} isleft={isleft}>

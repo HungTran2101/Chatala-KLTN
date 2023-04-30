@@ -32,4 +32,6 @@ export const API_URL = {
   createRoom: `${API_BASE}/room`,
   changeNickname: `${API_BASE}/room`,
   uploadFile: `https://api.cloudinary.com/v1_1`,
+  incUnreadMsg: `${API_BASE}/room/inc`,
+  seenRoom: `${API_BASE}/room/seen`,
 };

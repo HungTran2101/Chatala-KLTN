@@ -83,6 +83,7 @@ export type roomUser = {
   nickname: string;
   role: boolean;
   uid: string;
+  unReadMsg: number;
   _id: string;
 };
 

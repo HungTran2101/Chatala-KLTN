@@ -29,16 +29,25 @@ export const Name = styled.div`
   ${tw`font-semibold text-black text-[16px] text-left`}
 `;
 
-export const Msg = styled.div`
+export const Msg = styled.div<{ semibold: boolean }>`
   ${tw`text-[14px] w-full text-left overflow-hidden whitespace-nowrap`}
   text-overflow: ellipsis;
+  ${({ semibold }) => semibold && tw`font-semibold italic`}
 `;
 
 export const Wrapper = styled.div`
   ${tw`flex px-3 py-2.5 items-center relative w-full`}
 `;
 
-export const ChatPreviewItem = styled.div<{ active?: boolean }>`
-  ${tw`flex items-center my-1 relative hover:cursor-pointer hover:bg-tertiary rounded-[20px]`}
+export const UnReadMsgNoti = styled.span`
+  ${tw`rounded-full bg-red-500 px-1.5 text-white font-bold text-[14px] mr-3`}
+`;
+
+export const ChatPreviewItem = styled.div<{
+  active: boolean;
+  unReadMsg: number;
+}>`
+  ${tw`flex items-center my-2 relative hover:cursor-pointer hover:bg-tertiary rounded-[20px]`}
+  ${({ unReadMsg }) => unReadMsg >= 1 && tw`bg-secondary shadow-sm`}
   ${({ active }) => active && tw`bg-quaternary shadow-md`}
 `;

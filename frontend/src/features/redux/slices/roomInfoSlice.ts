@@ -5,11 +5,11 @@ import { roomInfo } from "../../../utils/types";
 
 // Type for our state
 export interface roomInfoState {
-  info: roomInfo | null;
+  info: roomInfo | undefined;
   loading: boolean;
 }
 
-const roomInfoInitialState = null;
+const roomInfoInitialState = undefined;
 
 // Initial state
 const initialState: roomInfoState = {

@@ -15,7 +15,7 @@ export const ChatReplyLabel = styled.div`
 `
 
 export const ChatMsgReplyText = styled.div`
-  ${tw`flex items-center gap-2 bg-tertiary rounded-2xl px-3 pt-2 pb-5 mb-[-15px] ml-auto shadow-md`}
+  ${tw`flex items-center gap-2 bg-primary rounded-2xl px-3 pt-2 pb-5 mb-[-15px] ml-auto shadow-md`}
   filter: contrast(0.7);
   width: fit-content;
 `;
@@ -46,7 +46,7 @@ export const ChatMsgTextTail = styled.div`
 `;
 
 export const ChatMsgAvatar = styled.figure<{ position: string }>`
-  ${tw`relative w-[40px] h-[40px] rounded-full shadow-md overflow-hidden flex-shrink-0 mb-[-5px] invisible self-end`}
+  ${tw`relative w-[40px] h-[40px] rounded-full shadow-md overflow-hidden flex-shrink-0 mb-[-5px] invisible self-end z-10`}
   ${({ position }) =>
     (position === "bottom" || position === "alone") && tw`visible`}
   border: 1px solid gray;
@@ -191,6 +191,7 @@ export const ChatMsgRight = styled(ChatMsg)<{ position: string }>`
         : position === "top"
         ? tw`rounded-2xl rounded-br-none`
         : tw`rounded-l-2xl`}
+    text-shadow: 0 0 0.5px black;
   }
   ${ChatMsgTextTail} {
     ${({ position }) =>

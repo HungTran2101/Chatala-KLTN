@@ -1,54 +1,60 @@
 import Image from "next/image";
-import { useSelector } from "react-redux";
-import { selectRoomListState } from "../../../../features/redux/slices/roomListSlice";
 import * as S from "./ChatPreviewItem.styled";
+import { roomInfo } from "../../../../utils/types";
+import { useSelector } from "react-redux";
+import { selectUserState } from "../../../../features/redux/slices/userSlice";
 
 interface IChatPreviewItem {
-  avatar?: string;
   active: boolean;
-  msg: string;
-  name?: string;
-  index: number;
+  roomInfo: roomInfo;
+  status: number;
   onClick: () => void;
 }
 
 const ChatPreviewItem = ({
-  avatar,
-  msg,
-  name = "Chat Bot",
   active,
-  index,
+  roomInfo,
+  status,
   onClick,
 }: IChatPreviewItem) => {
-  const roomList = useSelector(selectRoomListState);
+  const loggeduser = useSelector(selectUserState);
+
+  const unReadMsgNumber = roomInfo.roomInfo.users.find(
+    (user) => user.uid === loggeduser.info._id
+  ).unReadMsg;
 
   return (
-    <S.ChatPreviewItem active={active} onClick={onClick}>
+    <S.ChatPreviewItem
+      active={active}
+      unReadMsg={unReadMsgNumber}
+      onClick={onClick}
+    >
       <S.Wrapper>
         <S.ChatAvatarWrapper>
-          {avatar ? (
+          {roomInfo.roomAvatar ? (
             <>
               <S.ChatAvatar>
                 <Image
-                  src={avatar}
+                  src={roomInfo.roomAvatar}
                   alt="avatar"
                   layout="fill"
                   objectFit="cover"
                 />
               </S.ChatAvatar>
-              {!roomList.list[index].roomInfo.isGroup && (
-                <S.ChatStatus status={roomList.activeList[index]} />
-              )}
+              {!roomInfo.roomInfo.isGroup && <S.ChatStatus status={status} />}
             </>
           ) : (
             <S.ChatGroupAvatar />
           )}
         </S.ChatAvatarWrapper>
         <S.Content>
-          <S.Name>{name}</S.Name>
-          <S.Msg>{msg}</S.Msg>
+          <S.Name>{roomInfo.roomName}</S.Name>
+          <S.Msg semibold={unReadMsgNumber >= 1}>{roomInfo.roomInfo.lastMsg}</S.Msg>
         </S.Content>
       </S.Wrapper>
+      {unReadMsgNumber >= 1 && (
+        <S.UnReadMsgNoti>{unReadMsgNumber < 100 ? unReadMsgNumber : "99+"}</S.UnReadMsgNoti>
+      )}
     </S.ChatPreviewItem>
   );
 };

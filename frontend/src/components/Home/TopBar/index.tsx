@@ -83,7 +83,7 @@ const TopBar = () => {
   }, []);
 
   useEffect(() => {
-    if (user.loading === false && user.info._id !== "") {
+    if (user.loading === false && user.info) {
       // @ts-ignore
       socket.emit("logged", user.info._id);
       socket.on("getUsers", (users) => {
@@ -114,16 +114,16 @@ const TopBar = () => {
       <S.Wrapper>
         <S.LeftWrapper onClick={() => setUserInfoModal(true)}>
           <S.Avatar>
-            {user.info.avatar !== "" && (
+            {user.info && (
               <Image
-                src={user.info.avatar}
+                src={user.info?.avatar}
                 alt="avatar"
                 layout="fill"
                 objectFit="cover"
               />
             )}
           </S.Avatar>
-          <S.UserName>{user.info.name}</S.UserName>
+          <S.UserName>{user.info?.name}</S.UserName>
         </S.LeftWrapper>
         <S.RightWrapper>
           <S.LogoContainer>

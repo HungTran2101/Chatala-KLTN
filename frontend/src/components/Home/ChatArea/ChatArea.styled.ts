@@ -1,10 +1,6 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import tw from "twin.macro";
-import { BsChevronCompactDown, BsEmojiLaughingFill } from "react-icons/bs";
-import { RiSendPlaneFill } from "react-icons/ri";
-import { zoomIn } from "react-animations";
-import { Form } from "formik";
-import { ClipLoader, PulseLoader } from "react-spinners";
+import { BsChevronCompactDown } from "react-icons/bs";
 import { IoCloseSharp } from "react-icons/io5";
 export const ChatArea = styled.div`
   ${tw`relative bg-secondary shadow-md rounded-[20px] flex-grow flex flex-col overflow-hidden`}
