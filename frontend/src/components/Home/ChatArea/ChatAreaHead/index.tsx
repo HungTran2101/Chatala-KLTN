@@ -29,7 +29,16 @@ const ChatAreaHead = ({ setToggleOption }: IChatAreaHead) => {
     <S.ChatAreaHead>
       <S.ChatAreaHeadInfo>
         {roomInfo.info?.roomInfo.isGroup ? (
-          <S.ChatGroupAvatar />
+          <S.ChatAreaHeadAvatar isGroup={1}>
+            {roomInfo.info.roomInfo.users.map(
+              (user, index) =>
+                index <= 3 && (
+                  <S.ChatAvatarGroup>
+                    <Image src={user.avatar} alt="avatar" layout="fill" />
+                  </S.ChatAvatarGroup>
+                )
+            )}
+          </S.ChatAreaHeadAvatar>
         ) : (
           <S.ChatAreaHeadAvatar>
             <Image

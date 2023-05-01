@@ -12,13 +12,13 @@ export const ChatAreaHeadInfo = styled.div`
   ${tw`flex items-center cursor-default`}
 `;
 
-export const ChatGroupAvatar = styled(HiUserGroup)`
-  ${tw`text-gray-600 text-[50px] rounded-full`}
-`;
+export const ChatAvatarGroup = styled.figure`
+  ${tw`relative w-[20px] h-[20px] rounded-full overflow-hidden`}
+`
 
-export const ChatAreaHeadAvatar = styled.figure`
-  ${tw`relative w-[50px] h-[50px] rounded-full overflow-hidden flex-shrink-0`}
-  border: 1px solid gray;
+export const ChatAreaHeadAvatar = styled.figure<{isGroup?: number}>`
+  ${tw`relative flex flex-wrap justify-center items-center w-[50px] h-[50px] rounded-full overflow-hidden border border-gray-500`}
+  ${({isGroup}) => isGroup === 1 && tw`p-1 bg-tertiary`}
 `;
 
 export const ChatAreaHeadNameWrapper = styled.div`

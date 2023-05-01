@@ -19,6 +19,24 @@ const ChatPreviewItem = ({
 }: IChatPreviewItem) => {
   const loggeduser = useSelector(selectUserState);
 
+  let users = [];
+  roomInfo.roomInfo.users.forEach(user =>   users.push({
+    avatar: user.avatar,
+    nickname: user.nickname,
+    uid: user.uid,
+    role: user.role,
+    unReadMsg: user.unReadMsg,
+    _id: user._id,
+  }))
+  users.push({
+    avatar: roomInfo.roomInfo.users[0].avatar,
+    nickname: roomInfo.roomInfo.users[0].nickname,
+    uid: roomInfo.roomInfo.users[0].uid,
+    role: roomInfo.roomInfo.users[0].role,
+    unReadMsg: roomInfo.roomInfo.users[0].unReadMsg,
+    _id: roomInfo.roomInfo.users[0]._id,
+  });
+
   const unReadMsgNumber = roomInfo.roomInfo.users.find(
     (user) => user.uid === loggeduser.info._id
   ).unReadMsg;
@@ -44,16 +62,29 @@ const ChatPreviewItem = ({
               {!roomInfo.roomInfo.isGroup && <S.ChatStatus status={status} />}
             </>
           ) : (
-            <S.ChatGroupAvatar />
+            <S.ChatAvatar isGroup={1}>
+              {roomInfo.roomInfo.users.map(
+                (user, index) =>
+                  index <= 3 && (
+                    <S.ChatAvatarGroup>
+                      <Image src={user.avatar} alt="avatar" layout="fill" />
+                    </S.ChatAvatarGroup>
+                  )
+              )}
+            </S.ChatAvatar>
           )}
         </S.ChatAvatarWrapper>
         <S.Content>
           <S.Name>{roomInfo.roomName}</S.Name>
-          <S.Msg semibold={unReadMsgNumber >= 1}>{roomInfo.roomInfo.lastMsg}</S.Msg>
+          <S.Msg semibold={unReadMsgNumber >= 1}>
+            {roomInfo.roomInfo.lastMsg}
+          </S.Msg>
         </S.Content>
       </S.Wrapper>
       {unReadMsgNumber >= 1 && (
-        <S.UnReadMsgNoti>{unReadMsgNumber < 100 ? unReadMsgNumber : "99+"}</S.UnReadMsgNoti>
+        <S.UnReadMsgNoti>
+          {unReadMsgNumber < 100 ? unReadMsgNumber : "99+"}
+        </S.UnReadMsgNoti>
       )}
     </S.ChatPreviewItem>
   );
