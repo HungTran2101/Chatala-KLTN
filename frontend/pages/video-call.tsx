@@ -48,13 +48,14 @@ function VideoCall() {
   };
 
   const getToken = async () => {
-    const token = await CallApi.getToken();
+    const token = await sessionStorage.getItem('callToken');
     console.log('token', token);
     setToken(token);
   };
 
   useEffect(() => {
     getToken();
+    createMeeting();
     console.log(meetingId);
   }, []);
 
@@ -72,12 +73,13 @@ function VideoCall() {
       <MeetingView meetingId={meetingId} />
     </MeetingProvider>
   ) : (
-    <JoinScreen
-      setMeetingId={setMeetingId}
-      // getMeetingAndToken={getMeetingAndToken}
-      createMeeting={createMeeting}
-      joinMeeting={joinMeeting}
-    />
+    // <JoinScreen
+    //   setMeetingId={setMeetingId}
+    //   // getMeetingAndToken={getMeetingAndToken}
+    //   createMeeting={createMeeting}
+    //   joinMeeting={joinMeeting}
+    // />
+    <div>Loading...</div>
   );
 }
 

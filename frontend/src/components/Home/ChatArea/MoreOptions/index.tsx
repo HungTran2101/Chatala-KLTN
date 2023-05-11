@@ -89,7 +89,7 @@ const MoreOptions = ({
             </S.NormalItem>
           )}
           {!roomInfo.roomInfo.isGroup && (
-            <S.DeleteItem onClick={() => console.log(userNeedChange.uid)}>
+            <S.DeleteItem onClick={() => FriendApi.block(userNeedChange.uid)}>
               Block
             </S.DeleteItem>
           )}

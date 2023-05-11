@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chatscope/chat-ui-kit-react": "^1.10.1",
     "@reduxjs/toolkit": "^1.9.0",
     "@types/react-animations": "^1.0.0",
     "@types/yup": "^0.32.0",
     "@videosdk.live/react-sdk": "^0.1.68",
+    "antd": "^5.4.0",
     "axios": "^1.1.2",
     "emoji-picker-react": "^4.0.3",
     "firebase": "^9.12.1",
