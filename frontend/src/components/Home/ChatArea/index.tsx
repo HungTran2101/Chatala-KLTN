@@ -39,8 +39,9 @@ import { FiChevronsDown } from 'react-icons/fi';
 import { API_URL } from '../../../services/api/urls';
 import { useSocketContext } from '../../../contexts/socket';
 import { fileActions } from '../../../features/redux/slices/fileSlice';
-import { useRouter } from 'next/router';
+import { Router, useRouter } from 'next/router';
 import Link from 'next/link';
+import { CallApi } from '../../../services/api/call';
 
 const ChatArea = () => {
   const dispatch = useDispatch();
@@ -349,6 +350,14 @@ const ChatArea = () => {
     }
   };
 
+  const handleCallNavigate = async () => {
+    // const token = await sessionStorage.getItem('callToken');
+    // const meetingId = await CallApi.createMeeting({ token });
+    // await sessionStorage.setItem('meetingId', meetingId);
+    // console.log(meetingId);
+    router.push({ pathname: '/video-call', query: { action: 'create' } });
+  };
+
   return (
     <S.ChatArea>
       <S.ChatAreaHead>
@@ -380,11 +389,11 @@ const ChatArea = () => {
           </S.ChatAreaHeadNameWrapper>
         </S.ChatAreaHeadInfo>
         <S.FlexWrap>
-          <Link href='/video-call' download>
-            <a target='_blank'>
-              <S.CallIcon />
-            </a>
-          </Link>
+          {/* <Link href='/video-call'>
+            <a target='_blank'> */}
+          <S.CallIcon onClick={() => handleCallNavigate()} />
+          {/* </a>
+          </Link> */}
           <S.ChatAreaHeadOption onClick={() => setToggleOption(true)} />
         </S.FlexWrap>
       </S.ChatAreaHead>

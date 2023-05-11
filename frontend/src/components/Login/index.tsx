@@ -42,7 +42,7 @@ const Login = () => {
 
       //Get call token
       const callToken = await CallApi.getToken();
-      sessionStorage.setItem('callToken', callToken);
+      await sessionStorage.setItem('callToken', callToken);
       console.log(callToken);
 
       router.push('/');

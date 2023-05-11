@@ -4,6 +4,7 @@ import { CallApi } from '../src/services/api/call';
 import JoinScreen from '../src/components/Meeting/JoinScreen';
 
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
 const MeetingProvider = dynamic(
   () => import('../src/components/Meeting/MeetingProvider'),
@@ -24,6 +25,9 @@ function VideoCall() {
   const [meetingId, setMeetingId] = useState(null);
   const [isValid, setIsValid] = useState(false);
 
+  const router = useRouter();
+  const { action } = router.query;
+
   // const getMeetingAndToken = async () => {
   //   const token = await CallApi.getToken();
   //   const meetingId = await CallApi.createMeeting({ token });
@@ -42,6 +46,7 @@ function VideoCall() {
 
   const createMeeting = async () => {
     const meetingId = await CallApi.createMeeting({ token });
+    // const meetingId = await sessionStorage.getItem('meetingId');
     console.log('meetingId', meetingId);
     setMeetingId(meetingId);
     setIsValid(true);
@@ -55,7 +60,11 @@ function VideoCall() {
 
   useEffect(() => {
     getToken();
-    createMeeting();
+    if (action === 'create') {
+      createMeeting();
+    } else {
+      joinMeeting();
+    }
     console.log(meetingId);
   }, []);
 
