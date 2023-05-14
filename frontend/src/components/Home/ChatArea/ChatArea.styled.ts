@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import tw from "twin.macro";
-import { BsChevronCompactDown } from "react-icons/bs";
-import { IoCloseSharp } from "react-icons/io5";
+import styled from 'styled-components';
+import tw from 'twin.macro';
+import { BsChevronCompactDown } from 'react-icons/bs';
+import { IoCloseSharp } from 'react-icons/io5';
 export const ChatArea = styled.div`
   ${tw`relative bg-secondary shadow-md rounded-[20px] flex-grow flex flex-col overflow-hidden`}
 `;
@@ -39,7 +39,7 @@ export const ChatChatAreaFilePreviewInner = styled.div`
 
 export const ChatAreaReply = styled.div<{ isImg: string }>`
   ${tw`flex items-center justify-between gap-1.5 max-w-full w-full rounded-[10px] mb-1 py-1 px-2.5 z-0 bg-secondary`}
-  ${({ isImg }) => isImg === "true" && tw`top-[-53px]`}
+  ${({ isImg }) => isImg === 'true' && tw`top-[-53px]`}
 `;
 
 export const ChatAreaReplyLabel = styled.span`
