@@ -4,7 +4,7 @@ import { HiChevronLeft } from "react-icons/hi";
 import tw from "twin.macro";
 
 export const Suggest = styled.span`
-  ${tw`text-lg mt-6`}
+  ${tw`text-[24px] my-6 text-center`}
 `;
 
 export const NewForm = styled(Form)`

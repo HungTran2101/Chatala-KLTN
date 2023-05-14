@@ -31,9 +31,7 @@ const app = express();
 app.use(cors(corsOptions));
 app.use(express.json()); //allow accept json data
 app.use(express.urlencoded({ extended: true }));
-app.use(
-  cookieParser(process.env.COOKIE_SECRET)
-);
+app.use(cookieParser(process.env.COOKIE_SECRET));
 
 //connect DB
 connectDB();
@@ -73,12 +71,9 @@ io.on("connection", (socket) => {
     io.emit("getUsers", users);
   });
 
-  socket.on("room join", (roomId) => {
-    socket.join(roomId);
-  });
-
-  socket.on("room leave", (roomId) => {
-    socket.leave(roomId);
+  socket.on("join new room", (oldRoomId, newRoomId) => {
+    socket.leave(oldRoomId);
+    socket.join(newRoomId);
   });
 
   socket.on("logout", (roomId) => {
@@ -124,6 +119,11 @@ io.on("connection", (socket) => {
       (user) => user.uid.toString() === receiveId.toString()
     );
     receiveUser && socket.to(receiveUser.socketId).emit("delete msg", msgId);
+  });
+
+  socket.on("sendFiles", (roomId, files) => {
+    // console.log(receiveId, files);
+    socket.to(roomId).emit("receiveFiles", files);
   });
 
   // socket.on("sendMessage", (message, roomId) => {

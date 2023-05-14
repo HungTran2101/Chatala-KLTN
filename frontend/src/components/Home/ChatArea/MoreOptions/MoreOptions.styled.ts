@@ -8,8 +8,22 @@ const cbAnimate1 = merge(slideInRight, slideInDown);
 const MoreOptionAnimate = keyframes`${slideInRight}`;
 
 export const MoreOptions = styled.div<{ toggleOption: boolean }>`
-  ${tw`bg-secondary absolute shadow-md z-30 right-[-320px] h-full w-[320px] duration-300`}
+  ${tw`bg-secondary absolute shadow-md z-30 right-[-320px] h-full w-[320px] duration-300 overflow-y-auto`}
   animation: 0.3s ${MoreOptionAnimate};
+  &::-webkit-scrollbar-track {
+    ${tw`rounded-[10px] bg-transparent`}
+  }
+
+  &::-webkit-scrollbar {
+    ${tw`w-[5px]`}
+  }
+
+  &::-webkit-scrollbar-thumb {
+    ${tw`rounded-[50px] bg-tertiary`}
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    ${tw`bg-quaternary`}
+  }
   ${({ toggleOption }) => (toggleOption ? tw`right-0` : tw`right-[-320px]`)}
 `;
 
@@ -21,13 +35,14 @@ export const RoomInfoTitle = styled.div`
   ${tw`font-semibold py-3 text-[22px] border-b-[1px] w-full text-center border-b-quaternary`}
 `;
 
-export const RoomInfoAvatar = styled.figure`
-  ${tw`relative w-[60px] h-[60px] rounded-full overflow-hidden mt-4 mb-2 border-2 border-quaternary`}
+export const RoomInfoAvatar = styled.figure<{isGroup?: number}>`
+  ${tw`relative flex flex-wrap justify-center items-center w-[60px] h-[60px] rounded-full overflow-hidden border border-gray-500 mt-4 mb-2`}
+  ${({isGroup}) => isGroup === 1 && tw`p-1 bg-tertiary`}
 `;
 
-export const RoomInfoGroupAvatar = styled(HiUserGroup)`
-  ${tw`text-gray-600 text-[60px] mt-4 mb-2 rounded-full`}
-`;
+export const RoomInfoAvatarGroup = styled.figure`
+  ${tw`relative w-[23px] h-[23px] rounded-full overflow-hidden`}
+`
 
 export const RoomInfoNameWrap = styled.div`
   ${tw`relative flex items-center text-[20px] font-semibold mb-4`}
@@ -53,7 +68,9 @@ export const DeleteItem = styled(OptionItem)`
   ${tw`text-red-500 hover:bg-red-100`}
 `;
 
-export const OptionWrap = styled.div``;
+export const OptionWrap = styled.div`
+  ${tw``}
+`;
 
 export const WhiteBox = styled.div`
   ${tw`p-5 py-2 bg-white mb-3`}

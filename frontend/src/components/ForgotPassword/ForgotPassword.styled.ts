@@ -3,7 +3,7 @@ import { Form, Field } from "formik";
 import { HiChevronLeft } from "react-icons/hi";
 import tw from "twin.macro";
 export const Suggest = styled.span`
-  ${tw`text-lg mt-6 w-[55%] text-center`}
+  ${tw`text-[22px] my-6 w-[70%] text-center`}
 `;
 
 export const NewForm = styled(Form)`

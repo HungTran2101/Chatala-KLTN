@@ -69,7 +69,16 @@ const MoreOptions = ({
     <S.MoreOptions ref={moreOptionsRef} toggleOption={toggleOption}>
       <S.RoomInfo>
         {roomInfo.roomInfo.isGroup ? (
-          <S.RoomInfoGroupAvatar />
+          <S.RoomInfoAvatar isGroup={1}>
+            {roomInfo.roomInfo.users.map(
+              (user, index) =>
+                index <= 3 && (
+                  <S.RoomInfoAvatarGroup key={index}>
+                    <Image src={user.avatar} alt="avatar" layout="fill" />
+                  </S.RoomInfoAvatarGroup>
+                )
+            )}
+          </S.RoomInfoAvatar>
         ) : (
           <S.RoomInfoAvatar>
             <Image src={roomInfo.roomAvatar} alt="avatar" layout="fill" />
@@ -102,7 +111,6 @@ const MoreOptions = ({
             </S.NormalItem>
           )}
           {!roomInfo.roomInfo.isGroup && <S.DeleteItem>Block</S.DeleteItem>}
-          <S.DeleteItem>Delete this chat</S.DeleteItem>
         </S.WhiteBox>
         <S.WhiteBox>
           <S.Title onClick={() => setPhotoExtend(!photoExtend)}>

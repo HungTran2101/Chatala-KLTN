@@ -5,9 +5,15 @@ import { selectFileState } from "../../../../features/redux/slices/fileSlice";
 import { selectRoomInfoState } from "../../../../features/redux/slices/roomInfoSlice";
 import { selectUserState } from "../../../../features/redux/slices/userSlice";
 import { fileType, messageType } from "../../../../utils/types";
-import { formatDate, getFileIcon } from "../../../Global/ProcessFunctions";
+import {
+  formatDate,
+  getFileIcon,
+  getReplyInfo,
+} from "../../../Global/ProcessFunctions";
 import * as S from "./ChatMsg.styled";
 import ChatMsgOption from "./ChatMsgOption";
+import { selectMessageState } from "../../../../features/redux/slices/messageSlice";
+import { MdOutlineReply } from "react-icons/md";
 
 interface IChatMsg {
   data: messageType;
@@ -25,24 +31,68 @@ const ChatMsg = ({
   const [toggleOption, setToggleOption] = useState(false);
   const [images, setImages] = useState<fileType[]>([]);
   const [files, setFiles] = useState<fileType[]>([]);
-  const roomFiles = useSelector(selectFileState);
 
+  const messages = useSelector(selectMessageState);
+  const roomfiles = useSelector(selectFileState);
   const roomInfo = useSelector(selectRoomInfoState);
   const user = useSelector(selectUserState);
+
+  //Reply
+  const replyMsg = getReplyInfo(
+    messages.list,
+    data.replyId,
+    roomfiles.list
+  ).replyMsg;
+  const handleReplyClick = () => {
+    document
+      .getElementById(data.replyId)
+      .scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+  const setReplyLabel = () => {
+    const message = messages.list.find((it) => it._id === data.replyId);
+    if (message) {
+      const replyTarget = roomInfo.info.roomInfo.users.find(
+        (it) => it.uid === message.senderId
+      );
+      const replyUser = roomInfo.info.roomInfo.users.find(
+        (it) => it.uid === data.senderId
+      );
+      if (data.senderId === user.info._id) {
+        //message on the right
+        if (replyTarget.uid === data.senderId)
+          return `You replying to yourself`;
+        else return `You replying to ${replyTarget.nickname}`;
+      } else {
+        //message on the left
+        if (replyTarget.uid === user.info._id)
+          return `${replyUser.nickname} replying to you`;
+        else if (replyTarget.uid === data.senderId)
+          return `${replyUser.nickname} replying to themselves`;
+        else return `${replyUser.nickname} replying to ${replyTarget.nickname}`;
+      }
+    } else return "";
+  };
+  const replyLabel = setReplyLabel();
 
   const getFileAndImageList = () => {
     const _images: fileType[] = [];
     const _files: fileType[] = [];
     data.fileIds.forEach((id) => {
-      const file = roomFiles.list.find(
+      const file = roomfiles.list.find(
         (it) => it._id.toString() === id.toString()
       );
-      if (file.type === "image") _images.push(file);
-      else _files.push(file);
+      if (file) {
+        if (file.type === "image") _images.push(file);
+        else _files.push(file);
+      }
     });
     setImages(_images);
     setFiles(_files);
   };
+
+  useEffect(() => {
+    getFileAndImageList();
+  }, [data.fileIds]);
 
   const imageZoomClick = (index: number) => {
     setImageZoomList({ index, list: images });
@@ -70,20 +120,38 @@ const ChatMsg = ({
     return formatDate(data.updatedAt, ".", true);
   };
 
-  useEffect(() => {
-    getFileAndImageList();
-  }, [data.fileIds]);
-
   return (
     <>
       {!data.deleted &&
         (data.senderId === user.info._id ? (
-          <S.ChatMsgRight position={position}>
+          <S.ChatMsgRight id={data._id} position={position}>
             <S.ChatMsgWrapper>
               {!data.unSend ? (
                 <>
                   {files.length === 0 && images.length === 0 && (
                     <S.ChatMsgTextTail />
+                  )}
+                  {data.replyId && (
+                    <S.ChatMsgReply onClick={handleReplyClick}>
+                      <S.ChatReplyLabel>
+                        {replyLabel}
+                        <MdOutlineReply />
+                      </S.ChatReplyLabel>
+                      {replyMsg.type === "image" ? (
+                        <S.ChatMsgReplyImage>
+                          <img src={replyMsg.msg} alt="reply img" />
+                        </S.ChatMsgReplyImage>
+                      ) : (
+                        <S.ChatMsgReplyText>
+                          {replyMsg.type === "file" && (
+                            <S.ChatMsgReplyFileIcon>
+                              {getFileIcon({ name: replyMsg.msg })}
+                            </S.ChatMsgReplyFileIcon>
+                          )}
+                          {replyMsg.msg}
+                        </S.ChatMsgReplyText>
+                      )}
+                    </S.ChatMsgReply>
                   )}
                   {data.msg !== "" && <S.ChatMsgText>{data.msg}</S.ChatMsgText>}
                   {images.length > 0 && (
@@ -147,7 +215,7 @@ const ChatMsg = ({
             )}
           </S.ChatMsgRight>
         ) : (
-          <S.ChatMsgLeft position={position}>
+          <S.ChatMsgLeft id={data._id} position={position}>
             <S.ChatMsgAvatar position={position}>
               <Image
                 src={getSenderAvatar()}
@@ -157,7 +225,31 @@ const ChatMsg = ({
               />
             </S.ChatMsgAvatar>
             <S.ChatMsgWrapper>
-              {!data.unSend && files.length === 0 && images.length === 0 && <S.ChatMsgTextTail />}
+              {!data.unSend && files.length === 0 && images.length === 0 && (
+                <S.ChatMsgTextTail />
+              )}
+              {data.replyId && (
+                <S.ChatMsgReply onClick={handleReplyClick}>
+                  <S.ChatReplyLabel>
+                    {replyLabel}
+                    <MdOutlineReply />
+                  </S.ChatReplyLabel>
+                  {replyMsg.type === "image" ? (
+                    <S.ChatMsgReplyImage>
+                      <img src={replyMsg.msg} alt="reply img" />
+                    </S.ChatMsgReplyImage>
+                  ) : (
+                    <S.ChatMsgReplyText>
+                      {replyMsg.type === "file" && (
+                        <S.ChatMsgReplyFileIcon>
+                          {getFileIcon({ name: replyMsg.msg })}
+                        </S.ChatMsgReplyFileIcon>
+                      )}
+                      {replyMsg.msg}
+                    </S.ChatMsgReplyText>
+                  )}
+                </S.ChatMsgReply>
+              )}
               {data.unSend ? (
                 <S.ChatMsgUnSend>Message has been unsend</S.ChatMsgUnSend>
               ) : (
@@ -208,6 +300,21 @@ const ChatMsg = ({
                 </>
               )}
             </S.ChatMsgWrapper>
+            {!data.unSend && (
+              <S.ChatMsgMoreIconWrapper>
+                <S.ChatMsgMoreIcon
+                  onClick={() => setToggleOption(true)}
+                  isleft={1}
+                />
+                {toggleOption && (
+                  <ChatMsgOption
+                    msgId={data._id}
+                    setToggleOption={setToggleOption}
+                    isleft={1}
+                  />
+                )}
+              </S.ChatMsgMoreIconWrapper>
+            )}
           </S.ChatMsgLeft>
         ))}
     </>

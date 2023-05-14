@@ -1,13 +1,19 @@
 import * as S from "./SearchModal.styled";
-import * as React from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { useOutsideClick } from "../../../Global/ProcessFunctions";
-import { SearchResult } from "../../../../utils/types";
+import { SearchResult, userInfo } from "../../../../utils/types";
 import { FriendApi } from "../../../../services/api/friend";
 import { useSocketContext } from "../../../../contexts/socket";
 import { RoomApi } from "../../../../services/api/room";
 import { roomListActions } from "../../../../features/redux/slices/roomListSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectRoomListState } from "../../../../features/redux/slices/roomListSlice";
+import { selectUserState } from "../../../../features/redux/slices/userSlice";
+import { roomInfoActions } from "../../../../features/redux/slices/roomInfoSlice";
+import { messageActions } from "../../../../features/redux/slices/messageSlice";
+import { fileActions } from "../../../../features/redux/slices/fileSlice";
+import UserInfo from "../UserInfo";
 interface ISearchModalModal {
   setSearchModal: (isActive: boolean) => void;
   searchResult: SearchResult[];
@@ -28,6 +34,12 @@ const SearchModal = ({
 
   const SearchModalRef = useOutsideClick(handleOutsideClick);
 
+  const roomlist = useSelector(selectRoomListState);
+  const user = useSelector(selectUserState);
+
+  const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
+  const [friendProfile, setFriendProfile] = useState<userInfo>();
+
   const friendRequest = async (id: string) => {
     try {
       const res = await FriendApi.friendRequest(id);
@@ -41,7 +53,7 @@ const SearchModal = ({
   const friendAccept = async (
     notificationId: string,
     uid: string,
-    nickname: string,
+    nickname: string
   ) => {
     try {
       const res = await FriendApi.friendAccept(notificationId);
@@ -65,8 +77,6 @@ const SearchModal = ({
   };
 
   const friendDecline = async (id: string) => {
-    console.log(id);
-
     try {
       const res = await FriendApi.friendDecline(id);
       setAction(true);
@@ -75,13 +85,41 @@ const SearchModal = ({
     }
   };
 
+  const messagesClick = async (uid: string) => {
+    const roomInfoTemp = roomlist.list.find((it) => {
+      const users = it.roomInfo.users;
+      if (
+        (users[0].uid === uid && users[1].uid === user.info._id) ||
+        (users[1].uid === uid && users[0].uid === user.info._id)
+      )
+        return it.roomInfo._id;
+    });
+
+    const result = await await RoomApi.getRoomInfo(roomInfoTemp.roomInfo._id);
+    dispatch(
+      roomInfoActions.setRoomInfo({
+        roomName: result.roomName,
+        roomInfo: result.roomInfo,
+        roomAvatar: result.roomAvatar,
+      })
+    );
+    dispatch(messageActions.setMessage(result.messages));
+    dispatch(fileActions.setFilesData(result.files));
+    handleOutsideClick()
+  };
+
+  const infoClick = async (data: userInfo) => {
+    setToggleFriendProfile(true);
+    setFriendProfile(data);
+  };
+
   return (
     <S.SearchModal ref={SearchModalRef}>
       <S.SearchModalList>
         {searchResult.length ? (
           searchResult.map((data, index) => (
             <S.SearchModalItem key={index}>
-              <S.SearchModalInfo>
+              <S.SearchModalInfo onClick={() => infoClick(data)}>
                 <S.SearchModalAvatar>
                   <Image
                     src={data.avatar}
@@ -95,16 +133,14 @@ const SearchModal = ({
                 </S.SearchModalNameWrapper>
               </S.SearchModalInfo>
               {data.status === "available" ? (
-                <S.SearchModalMessage>Message</S.SearchModalMessage>
+                <S.SearchModalMessage onClick={() => messagesClick(data._id)}>
+                  Message
+                </S.SearchModalMessage>
               ) : data.status === "receive" ? (
                 <S.FlexWrap>
                   <S.SearchModalAccept
                     onClick={() =>
-                      friendAccept(
-                        data.notificationId,
-                        data._id,
-                        data.name,
-                      )
+                      friendAccept(data.notificationId, data._id, data.name)
                     }
                   >
                     Accept
@@ -128,6 +164,12 @@ const SearchModal = ({
           <div>Loading...</div>
         )}
       </S.SearchModalList>
+      {toggleFriendProfile && (
+        <UserInfo
+          friendProfile={friendProfile}
+          setUserInfoModal={setToggleFriendProfile}
+        />
+      )}
     </S.SearchModal>
   );
 };

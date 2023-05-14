@@ -2,7 +2,7 @@ import ChatArea from "../src/components/Home/ChatArea";
 import * as S from "../src/components/Home/Home.styled";
 import SideBar from "../src/components/Home/SideBar";
 import TopBar from "../src/components/Home/TopBar";
-import Welcome from "../src/components/Home/Welcome";
+import Welcome from "../src/components/Global/Welcome";
 import { withRouter, useRouter } from "next/router";
 import { useEffect } from "react";
 import { RoomApi } from "../src/services/api/room";
@@ -13,7 +13,6 @@ import { messageActions } from "../src/features/redux/slices/messageSlice";
 import { friendListActions } from "../src/features/redux/slices/friendListSlice";
 import { FriendApi } from "../src/services/api/friend";
 import { useSocketContext } from "../src/contexts/socket";
-import Script from "next/script";
 
 const Home = () => {
   const router = useRouter();
@@ -22,7 +21,6 @@ const Home = () => {
   const roomInfo = useSelector(selectRoomInfoState);
 
   //socket client
-  // const socket = useRef<Socket<ServerToClientEvents, ClientToServerEvents>>();
   const socket = useSocketContext();
 
   useEffect(() => {
@@ -80,7 +78,7 @@ const Home = () => {
         <TopBar />
         <S.Wrapper>
           <SideBar />
-          {roomInfo.info ? <ChatArea /> : <Welcome />}
+          {roomInfo.info ? <ChatArea /> : <Welcome home={true} />}
         </S.Wrapper>
       </S.HomeContainer>
     </>

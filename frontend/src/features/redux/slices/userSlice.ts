@@ -9,18 +9,7 @@ export interface UserState {
   loading: boolean;
 }
 
-const userInfoInitialState = {
-  _id: "",
-  avatar: "",
-  banner: "",
-  name: "",
-  phone: "",
-  gender: "",
-  dob: "",
-  createdAt: "",
-  updatedAt: "",
-  __v: 0,
-};
+const userInfoInitialState = undefined
 
 // Initial state
 const initialState: UserState = {

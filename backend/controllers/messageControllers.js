@@ -8,12 +8,13 @@ const ErrorHandler = require("../utils/errorHandler");
 const sendMessage = asyncHandler(async (req, res, next) => {
   const io = req.io;
   const id = req.user._id;
-  const { roomId, msg, fileIds } = req.body;
+  const { roomId, msg, fileIds, replyId } = req.body;
 
   const result = await Messages.create({
     roomId,
     senderId: id,
     msg,
+    replyId,
     fileIds,
   });
 
@@ -27,6 +28,7 @@ const sendMessage = asyncHandler(async (req, res, next) => {
   }
 
   io.in(roomId).emit("receiveMessage", result);
+  io.emit("incUnreadMsg", result.senderId, roomId)
 
   res.status(200).json({
     result,
@@ -91,4 +93,10 @@ const deleteMessage = asyncHandler(async (req, res, next) => {
   });
 });
 
-module.exports = { sendMessage, saveFile, getFile, unSendMessage, deleteMessage };
+module.exports = {
+  sendMessage,
+  saveFile,
+  getFile,
+  unSendMessage,
+  deleteMessage,
+};

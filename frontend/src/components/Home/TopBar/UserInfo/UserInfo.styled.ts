@@ -30,11 +30,11 @@ export const Modal = styled.div`
 `;
 
 export const ModalOverlay = styled.div`
-  ${tw`w-full h-full absolute bg-[rgba(0, 0, 0, 0.25)] z-0`}
+  ${tw`w-full h-full absolute bg-[rgba(0, 0, 0, 0.25)] z-20`}
 `;
 
 export const ModalBody = styled.div`
-  ${tw`w-[400px] rounded-[20px] bg-[#ecf2f7] z-[1] overflow-hidden`}
+  ${tw`w-[400px] rounded-[20px] bg-[#ecf2f7] overflow-hidden z-20`}
   box-shadow: 2px 2px 16px rgb(0 0 0 / 15%);
   animation: ${growth} linear 0.15s;
 `;

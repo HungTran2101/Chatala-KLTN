@@ -10,9 +10,10 @@ const roomSchema = mongoose.Schema(
         uid: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
         role: { type: Boolean, default: false },
         nickname: { type: String, trim: true },
+        unReadMsg: { type: Number, default: 0 },
       },
     ],
-    lastMsg: { type: String, trim: true, default: ""},
+    lastMsg: { type: String, trim: true, default: "" },
   },
   { timestamps: true }
 );

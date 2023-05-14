@@ -51,7 +51,7 @@ const Login = () => {
   };
   return (
     <FormTemplate>
-      <S.Suggest>Signin to this fancy webchat!</S.Suggest>
+      <S.Suggest>Login</S.Suggest>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -87,7 +87,7 @@ const Login = () => {
                 {isSubmitting ? (
                   <ClipLoader color="#fff" size={25} />
                 ) : (
-                  "Sign in"
+                  "Login"
                 )}
               </S.Button>
             </S.SetWidth>

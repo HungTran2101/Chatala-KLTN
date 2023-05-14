@@ -73,9 +73,7 @@ export const roomListSlice = createSlice({
       );
 
       state.list[roomIndex].roomInfo.lastMsg =
-        message.lastMsg !== ""
-          ? message.lastMsg
-          : "File";
+        message.lastMsg !== "" ? message.lastMsg : "File";
     },
 
     clearRoomList(state, action) {
@@ -88,6 +86,26 @@ export const roomListSlice = createSlice({
         (room) => room.roomInfo._id === action.payload.roomId
       );
       state.list[index].roomName = action.payload.nickname;
+    },
+
+    incUnreadMsg(state, action) {
+      const { senderId, roomId } = action.payload;
+      const roomIndex = state.list.findIndex(
+        (it) => it.roomInfo._id === roomId
+      );
+      state.list[roomIndex].roomInfo.users.map(
+        (user) => user.uid !== senderId && user.unReadMsg++
+      );
+    },
+
+    seenRoom(state, action) {
+      const { uid, roomId } = action.payload;
+      const roomIndex = state.list.findIndex(
+        (it) => it.roomInfo._id === roomId
+      );
+      state.list[roomIndex].roomInfo.users.map((user) => {
+        if (user.uid === uid) return (user.unReadMsg = 0);
+      });
     },
 
     // Special reducer for hydrating the state. Special case for next-redux-wrapper
