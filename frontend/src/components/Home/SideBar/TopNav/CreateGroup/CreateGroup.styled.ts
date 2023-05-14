@@ -1,8 +1,8 @@
-import styled, { keyframes } from "styled-components";
-import tw from "twin.macro";
-import { zoomIn } from "react-animations";
-import { BiSearchAlt } from "react-icons/bi";
-import { MdCancel } from "react-icons/md";
+import styled, { keyframes } from 'styled-components';
+import tw from 'twin.macro';
+import { zoomIn } from 'react-animations';
+import { BiSearchAlt } from 'react-icons/bi';
+import { MdCancel } from 'react-icons/md';
 
 export const CreateGroupModal = styled.div`
   ${tw`flex fixed top-0 left-0 bottom-0 right-0 z-30`}
@@ -15,7 +15,7 @@ export const CreateGroupOverlay = styled.div`
 const zoomInAnimate = keyframes`${zoomIn}`;
 
 export const CreateGroupBody = styled.div`
-  ${tw`m-auto bg-quaternary py-2.5 px-3.5 rounded-[25px] z-10 min-w-[700px]`}
+  ${tw`m-auto bg-quaternary py-2.5 px-3.5 rounded-[25px] z-10 max-w-[700px] w-full`}
   border: 2px solid #ECF2F7;
   animation: 0.25s ${zoomInAnimate};
 `;

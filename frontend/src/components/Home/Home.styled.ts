@@ -1,10 +1,13 @@
-import styled from "styled-components";
-import tw from "twin.macro"
+import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const HomeContainer = styled.div`
-  ${tw`p-7 pt-4 flex flex-col h-[100vh] justify-between` }
-`
+  ${tw`p-2 pt-4 flex flex-col h-[100vh] justify-between`}
+`;
 
 export const Wrapper = styled.div`
-  ${tw`flex h-full gap-5`}
-`
+  ${tw`flex h-full`}
+  @media only screen and (max-width: 1024px) {
+    ${tw`flex-col`}
+  }
+`;

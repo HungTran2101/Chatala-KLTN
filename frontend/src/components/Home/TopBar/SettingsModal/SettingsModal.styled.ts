@@ -1,6 +1,6 @@
-import styled, { keyframes } from "styled-components";
-import tw from "twin.macro";
-import { fadeIn, zoomIn } from "react-animations";
+import styled, { keyframes } from 'styled-components';
+import tw from 'twin.macro';
+import { fadeIn, zoomIn } from 'react-animations';
 const fadeInAnimate = keyframes`${fadeIn}`;
 const zoomInAnimate = keyframes`${zoomIn}`;
 
@@ -15,7 +15,10 @@ export const Overlay = styled.div`
 
 export const SettingsModalInner = styled.div`
   animation: 0.25s ${zoomInAnimate};
-  ${tw`relative z-[9999] max-w-[1024px] w-full min-h-[768px] bg-[#C9D9E5] rounded-[20px] shadow-sm overflow-hidden flex`}
+  ${tw`relative z-[9999] max-w-[768px] w-full min-h-[500px] bg-[#C9D9E5] rounded-[20px] shadow-sm overflow-hidden flex`}
+  @media only screen and (max-width: 1024px) {
+    ${tw`flex-col`}
+  }
 `;
 
 export const SettingContentWrap = styled.div`
@@ -24,9 +27,16 @@ export const SettingContentWrap = styled.div`
 
 export const SettingTabWrap = styled.div`
   ${tw`max-w-[240px] w-full p-5`}
+  @media only screen and (max-width: 1024px) {
+    ${tw`flex`}
+  }
 `;
 
 export const TabLink = styled.div<{ active: boolean }>`
-  ${tw`shadow text-center text-quaternary bg-primary rounded-xl text-base font-semibold cursor-pointer hover:bg-quaternary hover:text-white hover:opacity-70 px-5 py-[10px] mb-[10px] duration-100`}
+  ${tw`shadow text-center text-quaternary bg-primary rounded-xl text-base font-semibold cursor-pointer hover:bg-quaternary hover:text-white hover:opacity-70 px-5 py-[10px] mb-[10px] duration-100 whitespace-nowrap`}
   ${({ active }) => active && tw`bg-quaternary text-white`}
+
+  @media only screen and (max-width: 1024px) {
+    ${tw`mr-2 mb-0`}
+  }
 `;

@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import tw from "twin.macro";
-import { BiSearchAlt } from "react-icons/bi";
-import { RiSettings3Fill } from "react-icons/ri";
-import { FiLogOut } from "react-icons/fi";
-import { IoNotificationsCircleSharp } from "react-icons/io5";
-import { ImExit } from "react-icons/im";
+import styled from 'styled-components';
+import tw from 'twin.macro';
+import { BiSearchAlt } from 'react-icons/bi';
+import { RiSettings3Fill } from 'react-icons/ri';
+import { FiLogOut } from 'react-icons/fi';
+import { IoNotificationsCircleSharp } from 'react-icons/io5';
+import { ImExit } from 'react-icons/im';
 
 export const Avatar = styled.figure`
   ${tw`w-[60px] h-[60px] rounded-full overflow-hidden absolute shadow-md border-[2px] border-quaternary`}
@@ -28,10 +28,16 @@ export const RightWrapper = styled.div`
 
 export const UserName = styled.div`
   ${tw`self-stretch flex items-center max-w-6xl w-[350px] text-black flex-shrink-0 pl-24 pr-8 text-xl font-semibold py-2 rounded-[50px] bg-gradient-to-r from-secondary to-quaternary`}
+  @media only screen and (max-width: 1024px) {
+    ${tw`hidden`}
+  }
 `;
 
 export const LogoContainer = styled.div`
   ${tw`flex items-center justify-center ml-5`}
+  @media only screen and (max-width: 1024px) {
+    ${tw`hidden`}
+  }
 `;
 
 export const Logo = styled.figure`
@@ -40,6 +46,9 @@ export const Logo = styled.figure`
 
 export const Search = styled.div`
   ${tw`relative max-w-[550px] w-full flex items-center py-1`}
+  @media only screen and (max-width: 1024px) {
+    ${tw`ml-[80px] max-w-full mr-2`}
+  }
 `;
 export const SearchInput = styled.input`
   ${tw`text-lg rounded-[50px] pr-10 pl-5 py-1 w-full outline-none`}

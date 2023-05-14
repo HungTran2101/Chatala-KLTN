@@ -9,16 +9,22 @@ const TopNav = () => {
 
   return (
     <S.Wrapper>
-      <S.Options>
-        <S.FriendsOption onClick={() => setToggleShowFriends(true)} />
-        <S.AddGroupOption onClick={() => setToggleCreateGroup(true)} />
-      </S.Options>
-      {toggleCreateGroup && (
-        <CreateGroup setToggleCreateGroup={setToggleCreateGroup} />
-      )}
-      {toggleShowFriends && (
-        <ShowFriends setToggleShowFriends={setToggleShowFriends} />
-      )}
+      <S.Button>
+        <S.Options>
+          <S.AddGroupOption onClick={() => setToggleCreateGroup(true)} />
+        </S.Options>
+        {toggleCreateGroup && (
+          <CreateGroup setToggleCreateGroup={setToggleCreateGroup} />
+        )}
+      </S.Button>
+      <S.Button>
+        <S.Options>
+          <S.FriendsOption onClick={() => setToggleShowFriends(true)} />
+        </S.Options>
+        {toggleShowFriends && (
+          <ShowFriends setToggleShowFriends={setToggleShowFriends} />
+        )}
+      </S.Button>
     </S.Wrapper>
   );
 };

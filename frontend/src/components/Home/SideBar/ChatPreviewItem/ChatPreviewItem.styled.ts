@@ -1,18 +1,18 @@
-import styled from "styled-components";
-import tw from "twin.macro";
+import styled from 'styled-components';
+import tw from 'twin.macro';
 
 export const ChatAvatarWrapper = styled.div`
   ${tw`relative`}
 `;
 
-export const ChatAvatar = styled.figure<{isGroup?: number}>`
+export const ChatAvatar = styled.figure<{ isGroup?: number }>`
   ${tw`relative flex flex-wrap justify-center items-center w-[50px] h-[50px] rounded-full overflow-hidden border border-gray-500`}
-  ${({isGroup}) => isGroup === 1 && tw`p-1 bg-tertiary`}
+  ${({ isGroup }) => isGroup === 1 && tw`p-1 bg-tertiary`}
 `;
 
 export const ChatAvatarGroup = styled.figure`
   ${tw`relative w-[20px] h-[20px] rounded-full overflow-hidden`}
-`
+`;
 
 export const ChatStatus = styled.span<{ status: number }>`
   ${tw`absolute w-[13px] h-[13px] rounded-full right-[1px] bottom-[1px]`}
@@ -22,6 +22,9 @@ export const ChatStatus = styled.span<{ status: number }>`
 
 export const Content = styled.div`
   ${tw`flex-grow ml-3.5 overflow-hidden`}
+  @media only screen and (max-width: 1024px) {
+    ${tw`hidden`}
+  }
 `;
 
 export const Name = styled.div`

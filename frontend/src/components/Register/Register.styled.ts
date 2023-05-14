@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { Form, Field } from "formik";
-import tw from "twin.macro";
-import React from "react";
+import styled from 'styled-components';
+import { Form, Field } from 'formik';
+import tw from 'twin.macro';
+import React from 'react';
 
 export const Suggest = styled.span`
   ${tw`text-[26px] font-bold my-6`}
@@ -24,20 +24,19 @@ export const ShortInput = styled(Field)<{ error: boolean }>`
   ${tw`w-full h-full outline-none py-2 px-4 border-b border-[#0154b1]`}
   ${({ error }) =>
     error === 1
-      ? tw`border border-red-500`
+      ? tw`border-b border-red-500`
       : tw`border-b border-solid border-[#0154b1]`};
 `;
 
-
 export const InputPassword = styled.div`
-  ${tw`w-full mt-6 flex items-center justify-between`}
+  ${tw`w-full mt-6 flex items-center justify-between relative`}
 `;
 
 export const Password = styled(Field)<{ error: boolean }>`
-  ${tw`w-[95%] py-2 px-4 h-12 outline-none`}
+  ${tw`w-full py-2 px-4 h-12 outline-none`}
   ${({ error }) =>
     error === 1
-      ? tw`border border-red-500`
+      ? tw`border-b border-red-500`
       : tw`border-b border-solid border-[#0154b1]`};
   ::-ms-reveal,
   ::-ms-clear {
@@ -46,15 +45,14 @@ export const Password = styled(Field)<{ error: boolean }>`
 `;
 
 export const ButtonEye = styled.div`
-  ${tw`text-xl py-2 pl-2 cursor-pointer`}
+  ${tw`text-xl py-2 pl-2 cursor-pointer right-0 absolute`}
 `;
-
 
 export const Input = styled(Field)<{ error: boolean }>`
   ${tw`w-full h-12 outline-none mt-6 py-2 px-4`}
   ${({ error }) =>
     error === 1
-      ? tw`border border-red-500`
+      ? tw`border-b border-red-500`
       : tw`border-b border-solid border-[#0154b1]`};
 `;
 
