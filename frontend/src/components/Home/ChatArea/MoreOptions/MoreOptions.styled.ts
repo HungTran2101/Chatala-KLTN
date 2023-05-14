@@ -35,13 +35,14 @@ export const RoomInfoTitle = styled.div`
   ${tw`font-semibold py-3 text-[22px] border-b-[1px] w-full text-center border-b-quaternary`}
 `;
 
-export const RoomInfoAvatar = styled.figure`
-  ${tw`relative w-[60px] h-[60px] rounded-full overflow-hidden mt-4 mb-2 border-2 border-quaternary`}
+export const RoomInfoAvatar = styled.figure<{isGroup?: number}>`
+  ${tw`relative flex flex-wrap justify-center items-center w-[60px] h-[60px] rounded-full overflow-hidden border border-gray-500 mt-4 mb-2`}
+  ${({isGroup}) => isGroup === 1 && tw`p-1 bg-tertiary`}
 `;
 
-export const RoomInfoGroupAvatar = styled(HiUserGroup)`
-  ${tw`text-gray-600 text-[60px] mt-4 mb-2 rounded-full`}
-`;
+export const RoomInfoAvatarGroup = styled.figure`
+  ${tw`relative w-[23px] h-[23px] rounded-full overflow-hidden`}
+`
 
 export const RoomInfoNameWrap = styled.div`
   ${tw`relative flex items-center text-[20px] font-semibold mb-4`}

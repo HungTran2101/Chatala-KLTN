@@ -63,13 +63,9 @@ export const ChatAreaMainInputEmojiPicker = styled.div`
   animation: 0.1s ${ZoomInAnimation};
 `;
 
-export const ChatAreaMainInputText = styled.span<{ username: string }>`
+export const ChatAreaMainInputText = styled.div`
   ${tw`flex-grow outline-none bg-transparent text-lg ml-2.5 w-1 overflow-auto max-h-24 whitespace-normal hover:cursor-text z-10`}
 
-  &:empty::before {
-    content: "Write something to ${({ username }) => username}...";
-    ${tw`cursor-text text-gray-400`}
-  }
   &::-webkit-scrollbar-track {
     ${tw`rounded-[10px] bg-transparent`}
   }

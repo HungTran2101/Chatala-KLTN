@@ -66,7 +66,7 @@ const ChatPreviewItem = ({
               {roomInfo.roomInfo.users.map(
                 (user, index) =>
                   index <= 3 && (
-                    <S.ChatAvatarGroup>
+                    <S.ChatAvatarGroup key={index}>
                       <Image src={user.avatar} alt="avatar" layout="fill" />
                     </S.ChatAvatarGroup>
                   )

@@ -12,6 +12,12 @@ const messageSchema = mongoose.Schema(
       ref: "Messages",
       default: null,
     },
+    mentions: [
+      {
+        uid: { type: mongoose.Schema.Types.ObjectId, ref: "Users" },
+        name: { type: String },
+      },
+    ],
     unSend: { type: Boolean, default: false },
     deleted: { type: Boolean, default: false },
   },

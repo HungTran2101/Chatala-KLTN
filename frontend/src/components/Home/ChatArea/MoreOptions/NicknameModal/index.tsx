@@ -57,7 +57,7 @@ const NicknameModal = ({
       <S.NicknameOverlay onClick={() => setToggleNickname(false)} />
       <S.NicknameBody>
         <S.NicknameTitle>
-          Change nickname for {roomInfo.roomName}
+          Change nickname for {userNeedChange.nickname}
         </S.NicknameTitle>
         <S.NicknameInput maxLength={50} ref={input} />
         <S.NicknameSave onClick={saveNickname}>Save</S.NicknameSave>

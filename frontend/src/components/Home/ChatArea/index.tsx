@@ -1,20 +1,12 @@
 import * as S from "./ChatArea.styled";
 import { FormEvent, useRef, useState, useEffect, useCallback } from "react";
-import { EmojiClickData } from "emoji-picker-react";
 import MoreOptions from "./MoreOptions";
-import {
-  useOutsideClick,
-  validImageTypes,
-} from "../../Global/ProcessFunctions";
+import { validImageTypes } from "../../Global/ProcessFunctions";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import FilePreview from "./FilePreview";
 import DropZone from "react-dropzone";
-import {
-  fileType,
-  messageRawType,
-  messageSendType,
-} from "../../../utils/types";
+import { fileType, messageRawType } from "../../../utils/types";
 import ChatImageZoom from "./ChatImageZoom";
 import { useDispatch, useSelector } from "react-redux";
 import { messageActions } from "../../../features/redux/slices/messageSlice";
@@ -33,25 +25,17 @@ import { fileActions } from "../../../features/redux/slices/fileSlice";
 import ChatAreaHead from "./ChatAreaHead";
 import ChatAreaMainMsg from "./ChatAreaMainMsg";
 import ChatAreaMainForm from "./ChatAreaMainForm";
-import {
-  selectUtilState,
-  utilActions,
-} from "../../../features/redux/slices/utilSlice";
-import { RoomApi } from "../../../services/api/room";
 
 const ChatArea = () => {
   const dispatch = useDispatch();
 
   const roomInfo = useSelector(selectRoomInfoState);
   const user = useSelector(selectUserState);
-  const util = useSelector(selectUtilState);
   const socket = useSocketContext();
 
-  const chatInput = useRef<HTMLSpanElement>(null);
   const bottomDiv = useRef<HTMLDivElement>(null);
   const chatMainMsgOuter = useRef<HTMLDivElement>(null);
 
-  const [toggleEmoji, setToggleEmoji] = useState(false);
   const [toggleOption, setToggleOption] = useState(false);
   const [toggleImageZoom, setToggleImageZoom] = useState(false);
   const [imageZoomList, setImageZoomList] = useState<{
@@ -115,11 +99,6 @@ const ChatArea = () => {
     debounceTyping();
   };
 
-  //handle room change
-  useEffect(() => {
-    chatInput.current.innerText = "";
-  }, [roomInfo.info]);
-
   //Handle scroll to new msg
   const scrollToNewMsg = () => {
     if (bottomDiv.current)
@@ -141,16 +120,6 @@ const ChatArea = () => {
     } else {
       setChatScrollBottom(true);
     }
-  };
-
-  //Emoji
-  const handleEmojiOutsideClick = () => {
-    setToggleEmoji(false);
-  };
-  const emojiRef = useOutsideClick(handleEmojiOutsideClick);
-  const emojiClicked = (emoData: EmojiClickData, setFieldValue: any) => {
-    chatInput.current!.innerText = chatInput.current!.innerText + emoData.emoji;
-    setFieldValue("msg", chatInput.current?.innerText);
   };
 
   //Form
@@ -245,46 +214,46 @@ const ChatArea = () => {
 
   //Submit
   const onSubmit = async (values: messageRawType, { setFieldValue }: any) => {
-    if (chatInput.current.innerText.trim() !== "" || values.files.length > 0) {
-      setToggleEmoji(false);
-      values.msg = chatInput.current.innerText;
-      values.replyId = util.replyId;
+    console.log(values);
+    // if (chatInput.current.innerText.trim() !== "" || values.files.length > 0) {
+    //   setToggleEmoji(false);
+    //   values.msg = chatInput.current.innerText;
+    //   values.replyId = util.replyId;
 
-      try {
-        const uploadedFiles: fileType[] = await uploadFiles(values.files);
-        if (uploadedFiles.length <= 0 && values.files.length > 0) {
-          alert("Upload files failed! Try again later.");
-          return;
-        }
-        let fileIds = [];
-        if (uploadedFiles.length > 0) {
-          const res = await MessageApi.saveFile(uploadedFiles);
-          fileIds = res.fileIds;
-          const _res = await MessageApi.getFile(roomInfo.info.roomInfo._id);
-          dispatch(fileActions.setFilesData(_res.files));
-          socket.emit("sendFiles", roomInfo.info.roomInfo._id, _res.files);
-        }
+    //   try {
+    //     const uploadedFiles: fileType[] = await uploadFiles(values.files);
+    //     if (uploadedFiles.length <= 0 && values.files.length > 0) {
+    //       alert("Upload files failed! Try again later.");
+    //       return;
+    //     }
+    //     let fileIds = [];
+    //     if (uploadedFiles.length > 0) {
+    //       const res = await MessageApi.saveFile(uploadedFiles);
+    //       fileIds = res.fileIds;
+    //       const _res = await MessageApi.getFile(roomInfo.info.roomInfo._id);
+    //       dispatch(fileActions.setFilesData(_res.files));
+    //       socket.emit("sendFiles", roomInfo.info.roomInfo._id, _res.files);
+    //     }
 
-        //setup message to save to DB
-        const messageToSend: messageSendType = {
-          roomId: roomInfo.info.roomInfo._id,
-          msg: values.msg,
-          replyId: values.replyId,
-          fileIds,
-        };
+    //     //setup message to save to DB
+    //     const messageToSend: messageSendType = {
+    //       roomId: roomInfo.info.roomInfo._id,
+    //       msg: values.msg,
+    //       replyId: values.replyId,
+    //       fileIds,
+    //     };
 
-        const res = await MessageApi.send(messageToSend);
-        const res1 = await RoomApi.incUnreadMsg(user.info._id, roomInfo.info.roomInfo._id)
-        console.log(res1);
-        dispatch(messageActions.newMessage(res.result));
-        dispatch(utilActions.clearReplyId());
-        chatInput.current!.innerText = "";
-        setFieldValue("files", []);
-        scrollToNewMsg();
-      } catch (err) {
-        console.log(err);
-      }
-    }
+    //     const res = await MessageApi.send(messageToSend);
+    //     const res1 = await RoomApi.incUnreadMsg(user.info._id, roomInfo.info.roomInfo._id)
+    //     dispatch(messageActions.newMessage(res.result));
+    //     dispatch(utilActions.clearReplyId());
+    //     chatInput.current!.innerText = "";
+    //     setFieldValue("files", []);
+    //     scrollToNewMsg();
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // }
   };
 
   return (
@@ -351,18 +320,13 @@ const ChatArea = () => {
                   </S.ChatChatAreaFilePreview>
                 )}
                 <ChatAreaMainForm
-                  chatInput={chatInput}
-                  emojiClicked={emojiClicked}
-                  emojiRef={emojiRef}
                   isDragActive={isDragActive}
-                  toggleEmoji={toggleEmoji}
                   values={values}
                   isSubmitting={isSubmitting}
                   fileChoosen={fileChoosen}
                   getInputProps={getInputProps}
                   onInputChange={onInputChange}
                   setFieldValue={setFieldValue}
-                  setToggleEmoji={setToggleEmoji}
                   submitForm={submitForm}
                 />
               </S.ChatAreaMain>

@@ -130,3 +130,11 @@ export interface ServerToClientEvents {
 export interface ClientToServerEvents {
   hello: () => void;
 }
+
+export type Mention = {
+  name: string;
+  avatar: string;
+  _id: string;
+}
+
+export type MentionList = Mention[]

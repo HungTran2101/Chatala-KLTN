@@ -16,9 +16,7 @@ import {
 import { messageActions } from "../../../../features/redux/slices/messageSlice";
 import { useSocketContext } from "../../../../contexts/socket";
 import { fileActions } from "../../../../features/redux/slices/fileSlice";
-import { utilActions } from "../../../../features/redux/slices/utilSlice";
 import { selectUserState } from "../../../../features/redux/slices/userSlice";
-import { roomInfo, userInfo } from "../../../../utils/types";
 
 const ChatList = () => {
   const [roomSelected, setRoomSelected] = useState<number>(-1);
@@ -68,7 +66,6 @@ const ChatList = () => {
       );
       dispatch(messageActions.setMessage(result.messages));
       dispatch(fileActions.setFilesData(result.files));
-      dispatch(utilActions.clearReplyId());
 
       //@ts-ignore
       socket.emit(

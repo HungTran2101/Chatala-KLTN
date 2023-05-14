@@ -189,8 +189,8 @@ const addMember = asyncHandler(async (req, res, next) => {
 
   const getRoom = await Rooms.findById({ _id: roomId });
 
-  const findUser = getRoom.users.filter((value) => {
-    return value.uid == uid;
+  const findUser = getRoom.users.find((value) => {
+    return value.uid === uid;
   });
 
   if (findUser.length > 0) {
@@ -204,7 +204,6 @@ const addMember = asyncHandler(async (req, res, next) => {
         $push: {
           users: {
             uid: uid,
-            role: false,
             nickname: getMember.name,
           },
         },
