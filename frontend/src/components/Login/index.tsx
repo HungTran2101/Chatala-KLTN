@@ -40,11 +40,6 @@ const Login = () => {
     try {
       await UsersApi.login(values);
 
-      //Get call token
-      const callToken = await CallApi.getToken();
-      await sessionStorage.setItem('callToken', callToken);
-      console.log(callToken);
-
       router.push('/');
     } catch (error: any) {
       if (error?.error?.statusCode === 404) {

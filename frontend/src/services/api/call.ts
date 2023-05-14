@@ -14,7 +14,7 @@ export const CallApi = {
   },
 
   // API call to create meeting
-  createMeeting: async ({ token }) => {
+  createMeeting: async (token: string) => {
     const res = await fetch(API_URL.createMeeting, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

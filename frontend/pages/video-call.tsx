@@ -28,16 +28,6 @@ function VideoCall() {
   const router = useRouter();
   const { action } = router.query;
 
-  // const getMeetingAndToken = async () => {
-  //   const token = await CallApi.getToken();
-  //   const meetingId = await CallApi.createMeeting({ token });
-
-  //   console.log('token', token);
-  //   console.log('meetingId', meetingId);
-
-  //   setToken(token);
-  //   setMeetingId(meetingId);
-  // };
   const joinMeeting = async () => {
     const res = await CallApi.validateMeeting(meetingId, token);
     if (res) setIsValid(true);
@@ -45,28 +35,31 @@ function VideoCall() {
   };
 
   const createMeeting = async () => {
-    const meetingId = await CallApi.createMeeting({ token });
-    // const meetingId = await sessionStorage.getItem('meetingId');
+    const meetingId = await CallApi.createMeeting(token);
     console.log('meetingId', meetingId);
     setMeetingId(meetingId);
     setIsValid(true);
   };
 
   const getToken = async () => {
-    const token = await sessionStorage.getItem('callToken');
+    const callToken = await CallApi.getToken();
     console.log('token', token);
-    setToken(token);
+    setToken(callToken);
+    return callToken;
   };
 
   useEffect(() => {
     getToken();
-    if (action === 'create') {
-      createMeeting();
-    } else {
-      joinMeeting();
-    }
+    const validate = async () => {
+      if (token && action === 'create') {
+        createMeeting();
+      } else {
+        joinMeeting();
+      }
+    };
+    validate();
     console.log(meetingId);
-  }, []);
+  }, [token]);
 
   return token && meetingId && isValid ? (
     <MeetingProvider

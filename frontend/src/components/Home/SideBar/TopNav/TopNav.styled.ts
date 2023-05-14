@@ -14,10 +14,10 @@ export const Options = styled.div`
   ${tw`flex justify-around text-quaternary text-[35px] py-1`}
 `;
 
-export const AddGroupOption = styled(MdGroup)`
+export const AddGroupOption = styled(MdGroupAdd)`
   ${tw`hover:cursor-pointer hover:opacity-80 mx-2`}
 `;
 
-export const FriendsOption = styled(MdGroupAdd)`
+export const FriendsOption = styled(MdGroup)`
   ${tw`hover:cursor-pointer hover:opacity-80 mx-2 text-[30px]`}
 `;
