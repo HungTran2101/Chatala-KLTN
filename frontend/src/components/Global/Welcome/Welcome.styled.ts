@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import tw from "twin.macro";
+import styled from 'styled-components';
+import tw from 'twin.macro';
 
-export const Welcome = styled.div<{home?: boolean}>`
+export const Welcome = styled.div<{ home?: boolean }>`
   ${tw`flex justify-center`}
-  ${({home}) => home && tw`mx-auto`}
+  ${({ home }) => home && tw`mx-auto`}
 `;
 
 export const WelcomeContent = styled.div`
@@ -20,10 +20,16 @@ export const WelcomeLogo = styled.figure`
 
 export const WelcomeFeature = styled.div`
   ${tw`flex flex-col items-center mt-[25px]`}
+  @media only screen and (max-width: 1024px) {
+    ${tw`mt-0 mb-4`}
+  }
 `;
 
 export const WelcomeFeatureImage = styled.figure`
   ${tw`w-[400px] mb-5`}
+  @media only screen and (max-width: 1024px) {
+    ${tw`hidden`}
+  }
 `;
 
 export const WelcomeFeatureDescription = styled.div`
