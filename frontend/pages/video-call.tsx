@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { MeetingConsumer } from '@videosdk.live/react-sdk';
 import { CallApi } from '../src/services/api/call';
 import JoinScreen from '../src/components/Meeting/JoinScreen';
 
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
+import { useSocketContext } from '../src/contexts/socket';
 
 const MeetingProvider = dynamic(
   () => import('../src/components/Meeting/MeetingProvider'),
@@ -21,24 +21,26 @@ const MeetingView = dynamic(
 );
 
 function VideoCall() {
+  const router = useRouter();
+
   const [token, setToken] = useState(null);
   const [meetingId, setMeetingId] = useState(null);
+  const [name, setName] = useState("Default name");
   const [isValid, setIsValid] = useState(false);
 
-  const router = useRouter();
-  const { action } = router.query;
+  const socket = useSocketContext();
 
   const joinMeeting = async () => {
+    console.log('join', meetingId);
     const res = await CallApi.validateMeeting(meetingId, token);
     if (res) setIsValid(true);
-    console.log(res);
   };
 
   const createMeeting = async () => {
     const meetingId = await CallApi.createMeeting(token);
-    console.log('meetingId', meetingId);
     setMeetingId(meetingId);
     setIsValid(true);
+    return meetingId;
   };
 
   const getToken = async () => {
@@ -51,15 +53,28 @@ function VideoCall() {
   useEffect(() => {
     getToken();
     const validate = async () => {
-      if (token && action === 'create') {
-        createMeeting();
-      } else {
-        joinMeeting();
+      if (token) {
+        if (!meetingId) {
+          const _meetingId = await createMeeting();
+          socket.emit('calling', {
+            meetingId: _meetingId,
+            callerId: router.query.callerId,
+            receiverIds: router.query.receiverIds,
+          });
+        } else joinMeeting();
       }
     };
     validate();
-    console.log(meetingId);
   }, [token]);
+
+  useEffect(() => {
+    if (router.query.meetingId) {
+      setMeetingId(router.query.meetingId as string);
+    }
+    if (router.query.name) {
+      setName(router.query.name as string);
+    }
+  }, [router.query]);
 
   return token && meetingId && isValid ? (
     <MeetingProvider
@@ -67,7 +82,7 @@ function VideoCall() {
         meetingId,
         micEnabled: true,
         webcamEnabled: true,
-        name: 'Participant Name',
+        name: name,
       }}
       token={token}
       // joinWithoutUserInteraction // Boolean

@@ -56,6 +56,11 @@ const io = require('socket.io')(server, {
 // all connected user
 let users = [];
 
+// {
+//   uid,
+//   socketid,
+// }
+
 const addUser = (uid, socketId) => {
   !users.some((user) => user.uid === uid) && users.push({ uid, socketId });
 };
@@ -125,6 +130,21 @@ io.on('connection', (socket) => {
   socket.on('sendFiles', (roomId, files) => {
     // console.log(receiveId, files);
     socket.to(roomId).emit('receiveFiles', files);
+  });
+
+  socket.on('calling', (callInfo) => {
+    console.log('callInfo', callInfo);
+    const { meetingId, callerId, receiverIds } = callInfo;
+    const receiverArr = receiverIds.split(',');
+
+    receiverArr.forEach((it) => {
+      const receiverId = users.find((u) => u.uid === it);
+      console.log('receiverId', receiverId);
+      receiverId &&
+        socket
+          .to(receiverId.socketId)
+          .emit('receiveCall', { meetingId, callerId });
+    });
   });
 
   // socket.on("sendMessage", (message, roomId) => {

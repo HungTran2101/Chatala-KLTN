@@ -14,7 +14,8 @@ const MeetingView = (props) => {
     },
     //callback for when meeting is left
     onMeetingLeft: () => {
-      props.onMeetingLeave();
+      // props.onMeetingLeave();
+      window.close()
     },
   });
   const joinMeeting = () => {
