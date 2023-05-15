@@ -8,7 +8,7 @@ const ErrorHandler = require("../utils/errorHandler");
 const sendMessage = asyncHandler(async (req, res, next) => {
   const io = req.io;
   const id = req.user._id;
-  const { roomId, msg, fileIds, replyId } = req.body;
+  const { roomId, msg, fileIds, replyId, mentions } = req.body;
 
   const result = await Messages.create({
     roomId,
@@ -16,6 +16,7 @@ const sendMessage = asyncHandler(async (req, res, next) => {
     msg,
     replyId,
     fileIds,
+    mentions
   });
 
   if (result) {

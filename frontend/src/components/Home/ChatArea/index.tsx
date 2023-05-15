@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { Formik } from "formik";
 import FilePreview from "./FilePreview";
 import DropZone from "react-dropzone";
-import { fileType, messageRawType } from "../../../utils/types";
+import { fileType, messageRawType, messageSendType } from "../../../utils/types";
 import ChatImageZoom from "./ChatImageZoom";
 import { useDispatch, useSelector } from "react-redux";
 import { messageActions } from "../../../features/redux/slices/messageSlice";
@@ -25,12 +25,15 @@ import { fileActions } from "../../../features/redux/slices/fileSlice";
 import ChatAreaHead from "./ChatAreaHead";
 import ChatAreaMainMsg from "./ChatAreaMainMsg";
 import ChatAreaMainForm from "./ChatAreaMainForm";
+import { RoomApi } from "../../../services/api/room";
+import { selectUtilState, utilActions } from "../../../features/redux/slices/utilSlice";
 
 const ChatArea = () => {
   const dispatch = useDispatch();
 
   const roomInfo = useSelector(selectRoomInfoState);
   const user = useSelector(selectUserState);
+  const util = useSelector(selectUtilState);
   const socket = useSocketContext();
 
   const bottomDiv = useRef<HTMLDivElement>(null);
@@ -46,12 +49,6 @@ const ChatArea = () => {
   const [sendTyping, setSendTyping] = useState(false);
   const [newMsgNoti, setNewMsgNoti] = useState(false);
   const [chatScrollBottom, setChatScrollBottom] = useState(false);
-  const [formValues, setFormValues] = useState<messageRawType>({
-    roomId: roomInfo.info?.roomInfo._id || "",
-    msg: "",
-    files: [],
-    replyId: null,
-  });
 
   //Handle Typing and Receive new messages
   useEffect(() => {
@@ -123,7 +120,13 @@ const ChatArea = () => {
   };
 
   //Form
-  const initialValues = formValues;
+  const initialValues: messageRawType = {
+    roomId: roomInfo?.info.roomInfo._id || "",
+    msg: "",
+    files: [],
+    replyId: null,
+    mentions: []
+  };
   const validationSchema = Yup.object().shape({
     msg: Yup.string(),
     files: Yup.mixed(),
@@ -144,7 +147,6 @@ const ChatArea = () => {
       }
 
       setFieldValue("files", files);
-      setFormValues(values);
       e.currentTarget.value = "";
     }
   };
@@ -159,7 +161,6 @@ const ChatArea = () => {
       files.push(newFiles[i]);
     }
     setFieldValue("files", files);
-    setFormValues(values);
   };
 
   const uploadFile = async (
@@ -214,46 +215,44 @@ const ChatArea = () => {
 
   //Submit
   const onSubmit = async (values: messageRawType, { setFieldValue }: any) => {
-    console.log(values);
-    // if (chatInput.current.innerText.trim() !== "" || values.files.length > 0) {
-    //   setToggleEmoji(false);
-    //   values.msg = chatInput.current.innerText;
-    //   values.replyId = util.replyId;
+    if (values.msg.trim() !== "" || values.files.length > 0) {
+      values.replyId = util.replyId;
+      console.log(values);
 
-    //   try {
-    //     const uploadedFiles: fileType[] = await uploadFiles(values.files);
-    //     if (uploadedFiles.length <= 0 && values.files.length > 0) {
-    //       alert("Upload files failed! Try again later.");
-    //       return;
-    //     }
-    //     let fileIds = [];
-    //     if (uploadedFiles.length > 0) {
-    //       const res = await MessageApi.saveFile(uploadedFiles);
-    //       fileIds = res.fileIds;
-    //       const _res = await MessageApi.getFile(roomInfo.info.roomInfo._id);
-    //       dispatch(fileActions.setFilesData(_res.files));
-    //       socket.emit("sendFiles", roomInfo.info.roomInfo._id, _res.files);
-    //     }
+      try {
+        const uploadedFiles: fileType[] = await uploadFiles(values.files);
+        if (uploadedFiles.length <= 0 && values.files.length > 0) {
+          alert("Upload files failed! Try again later.");
+          return;
+        }
+        let fileIds = [];
+        if (uploadedFiles.length > 0) {
+          const res = await MessageApi.saveFile(uploadedFiles);
+          fileIds = res.fileIds;
+          const _res = await MessageApi.getFile(roomInfo.info.roomInfo._id);
+          dispatch(fileActions.setFilesData(_res.files));
+          socket.emit("sendFiles", roomInfo.info.roomInfo._id, _res.files);
+        }
 
-    //     //setup message to save to DB
-    //     const messageToSend: messageSendType = {
-    //       roomId: roomInfo.info.roomInfo._id,
-    //       msg: values.msg,
-    //       replyId: values.replyId,
-    //       fileIds,
-    //     };
+        //setup message to save to DB
+        const messageToSend: messageSendType = {
+          roomId: roomInfo.info.roomInfo._id,
+          msg: values.msg,
+          replyId: values.replyId,
+          fileIds,
+          mentions: values.mentions
+        };
 
-    //     const res = await MessageApi.send(messageToSend);
-    //     const res1 = await RoomApi.incUnreadMsg(user.info._id, roomInfo.info.roomInfo._id)
-    //     dispatch(messageActions.newMessage(res.result));
-    //     dispatch(utilActions.clearReplyId());
-    //     chatInput.current!.innerText = "";
-    //     setFieldValue("files", []);
-    //     scrollToNewMsg();
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // }
+        const res = await MessageApi.send(messageToSend);
+        const res1 = await RoomApi.incUnreadMsg(user.info._id, roomInfo.info.roomInfo._id)
+        dispatch(messageActions.newMessage(res.result));
+        dispatch(utilActions.clearReplyId());
+        setFieldValue("files", []);
+        scrollToNewMsg();
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   return (

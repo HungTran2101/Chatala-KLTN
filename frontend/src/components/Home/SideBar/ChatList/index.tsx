@@ -33,7 +33,6 @@ const ChatList = () => {
       user.info._id,
       roomId
     );
-    console.log(res);
   }
 
   const roomSelect = async (index: number) => {
@@ -50,13 +49,6 @@ const ChatList = () => {
       if (unReadMsgNumber >= 1) {
         seenRoom(roomList.list[index].roomInfo._id)
       }
-      // dispatch(
-      //   roomInfoActions.setRoomInfo({
-      //     roomName: result.roomName,
-      //     roomInfo: result.roomInfo,
-      //     roomAvatar: result.roomAvatar,
-      //   })
-      // );
       dispatch(roomInfoActions.setRoomInfo(roomList.list[index]));
       dispatch(
         roomListActions.seenRoom({
@@ -98,6 +90,11 @@ const ChatList = () => {
       socket.off("incUnreadMsg");
     };
   }, [roomInfo, user]);
+
+  useEffect(() => {
+    const index = roomList.list.findIndex(it=> it.roomInfo._id === roomInfo.info.roomInfo._id)
+    setRoomSelected(index);
+  },[roomInfo])
 
   return (
     <S.ChatList>

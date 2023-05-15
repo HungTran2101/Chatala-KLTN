@@ -35,14 +35,14 @@ export const RoomInfoTitle = styled.div`
   ${tw`font-semibold py-3 text-[22px] border-b-[1px] w-full text-center border-b-quaternary`}
 `;
 
-export const RoomInfoAvatar = styled.figure<{isGroup?: number}>`
+export const RoomInfoAvatar = styled.figure<{ isGroup?: number }>`
   ${tw`relative flex flex-wrap justify-center items-center w-[60px] h-[60px] rounded-full overflow-hidden border border-gray-500 mt-4 mb-2`}
-  ${({isGroup}) => isGroup === 1 && tw`p-1 bg-tertiary`}
+  ${({ isGroup }) => isGroup === 1 && tw`p-1 bg-tertiary`}
 `;
 
 export const RoomInfoAvatarGroup = styled.figure`
   ${tw`relative w-[23px] h-[23px] rounded-full overflow-hidden`}
-`
+`;
 
 export const RoomInfoNameWrap = styled.div`
   ${tw`relative flex items-center text-[20px] font-semibold mb-4`}
@@ -84,10 +84,10 @@ export const ExtendContent = styled.div`
   ${tw`relative flex flex-col justify-between overflow-hidden`}
 `;
 
-export const FileWrap = styled.div<{ wraptype?: string, visible: boolean }>`
+export const FileWrap = styled.div<{ wraptype?: string; visible: boolean }>`
   ${({ wraptype }) =>
     wraptype === "file" ? tw`flex flex-col` : tw`grid grid-cols-3`}
-  ${({visible}) => visible ? tw`h-full` : tw`h-0`}
+  ${({ visible }) => (visible ? tw`h-full` : tw`h-0`)}
   ${tw`gap-1`}
 `;
 

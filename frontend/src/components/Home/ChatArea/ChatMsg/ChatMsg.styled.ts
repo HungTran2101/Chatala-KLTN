@@ -191,7 +191,6 @@ export const ChatMsgRight = styled(ChatMsg)<{ position: string }>`
         : position === "top"
         ? tw`rounded-2xl rounded-br-none`
         : tw`rounded-l-2xl`}
-    text-shadow: 0 0 0.5px black;
   }
   ${ChatMsgTextTail} {
     ${({ position }) =>

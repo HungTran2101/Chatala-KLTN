@@ -120,6 +120,24 @@ const ChatMsg = ({
     return formatDate(data.updatedAt, ".", true);
   };
 
+  const boldString = (str: string, substr: string) => {
+    str = str.replace(
+      RegExp(substr, "g"),
+      `<b>${substr}</b>`
+    );
+    return str;
+  };
+
+  const preProcessMsg = () => {
+    let msg = data.msg;
+    if (data.mentions.length > 0) {
+      data.mentions.map((it) => {
+        msg = boldString(msg, it.name);
+      });
+    }
+    return msg;
+  };
+
   return (
     <>
       {!data.deleted &&
@@ -153,7 +171,11 @@ const ChatMsg = ({
                       )}
                     </S.ChatMsgReply>
                   )}
-                  {data.msg !== "" && <S.ChatMsgText>{data.msg}</S.ChatMsgText>}
+                  {data.msg !== "" && (
+                    <S.ChatMsgText
+                      dangerouslySetInnerHTML={{ __html: preProcessMsg() }}
+                    ></S.ChatMsgText>
+                  )}
                   {images.length > 0 && (
                     <S.ChatMsgFileImages imgNum={images?.length}>
                       {images?.map((image, index) => (

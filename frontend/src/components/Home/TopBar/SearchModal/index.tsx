@@ -95,12 +95,12 @@ const SearchModal = ({
         return it.roomInfo._id;
     });
 
-    const result = await await RoomApi.getRoomInfo(roomInfoTemp.roomInfo._id);
+    const result = await RoomApi.getRoomInfo(roomInfoTemp.roomInfo._id);
     dispatch(
       roomInfoActions.setRoomInfo({
-        roomName: result.roomName,
-        roomInfo: result.roomInfo,
-        roomAvatar: result.roomAvatar,
+        roomName: roomInfoTemp.roomName,
+        roomInfo: roomInfoTemp.roomInfo,
+        roomAvatar: roomInfoTemp.roomAvatar,
       })
     );
     dispatch(messageActions.setMessage(result.messages));

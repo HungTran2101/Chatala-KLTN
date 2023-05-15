@@ -24,25 +24,33 @@ export type updateUserInfo = {
   dob: string | Date;
 };
 
+type MentionMsg = {
+  uid: string;
+  name: string;
+};
+
 export type messageSendType = {
   roomId: string;
   msg: string;
   replyId: string;
   fileIds: string[];
+  mentions: MentionMsg[];
 };
 
-export type messageRawType ={
+export type messageRawType = {
   roomId: string;
   msg: string;
   files: File[];
   replyId: string;
-}
+  mentions: MentionMsg[];
+};
 
 export type messageType = {
   roomId: string;
   senderId: string;
   msg: string;
   fileIds: string[];
+  mentions: MentionMsg[];
   replyId: string;
   unSend: boolean;
   deleted: boolean;
@@ -134,7 +142,7 @@ export interface ClientToServerEvents {
 export type Mention = {
   name: string;
   avatar: string;
-  _id: string;
-}
+  uid: string;
+};
 
-export type MentionList = Mention[]
+export type MentionList = Mention[];

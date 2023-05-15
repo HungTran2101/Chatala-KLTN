@@ -17,7 +17,7 @@ import {
   useOutsideClick,
 } from "../../../Global/ProcessFunctions";
 import { selectUserState } from "../../../../features/redux/slices/userSlice";
-import { ContentState, EditorState, Modifier } from "draft-js";
+import { ContentState, EditorState, Modifier, convertToRaw } from "draft-js";
 import Editor from "@draft-js-plugins/editor";
 import createMentionPlugin from "@draft-js-plugins/mention";
 
@@ -71,8 +71,10 @@ const ChatAreaMainForm = ({
 
   const getMentionList = (): MentionList => {
     const list: MentionList = [];
-    roomInfo.info.roomInfo.users.forEach((user) =>
-      list.push({ name: user.nickname, avatar: user.avatar, _id: user._id })
+    roomInfo.info.roomInfo.users.forEach(
+      (urs) =>
+        urs.uid !== user.info._id &&
+        list.push({ name: urs.nickname, avatar: urs.avatar, uid: urs._id })
     );
     return list;
   };
@@ -118,7 +120,6 @@ const ChatAreaMainForm = ({
 
   const editorChange = (editorState: EditorState) => {
     setEditorState(editorState);
-    setFieldValue("msg", editorState.getCurrentContent().getPlainText());
     onInputChange();
   };
   const insertText = (text: string) => {
@@ -191,6 +192,24 @@ const ChatAreaMainForm = ({
     setReplyTarget(undefined);
   };
 
+  const preprocessSubmit = () => {
+    setFieldValue("msg", editorState.getCurrentContent().getPlainText());
+
+    const contentState = editorState.getCurrentContent();
+    const raw = convertToRaw(contentState);
+    const mentionedUsers = [];
+    for (let key in raw.entityMap) {
+      const ent = raw.entityMap[key];
+      if (ent.type === "mention") {
+        mentionedUsers.push({
+          name: ent.data.mention.name,
+          uid: ent.data.mention.uid,
+        });
+      }
+    }
+    setFieldValue("mentions", mentionedUsers);
+  };
+
   return (
     <S.ChatAreaMainForm>
       <S.ChatAreaMainInput>
@@ -242,18 +261,21 @@ const ChatAreaMainForm = ({
                 placeholder={`Write something to ${roomInfo.info.roomName}...`}
                 ref={refEditor}
               />
-              <MentionSuggestions
-                open={open}
-                onOpenChange={onOpenChange}
-                suggestions={suggestions}
-                onSearchChange={onSearchChange}
-                onAddMention={onAddMention}
-              />
+              {roomInfo.info.roomInfo.isGroup && (
+                <MentionSuggestions
+                  open={open}
+                  onOpenChange={onOpenChange}
+                  suggestions={suggestions}
+                  onSearchChange={onSearchChange}
+                  onAddMention={onAddMention}
+                />
+              )}
             </S.ChatAreaMainInputText>
             <S.ChatAreaMainInputButtonSend
               type="button"
               onClick={() => {
                 if (!isSubmitting) {
+                  preprocessSubmit();
                   submitForm();
                   clearChatInput();
                 }
