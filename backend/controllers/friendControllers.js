@@ -1,8 +1,8 @@
-const asyncHandler = require("express-async-handler");
-const Notifications = require("../models/notificationModel");
-const Friends = require("../models/friendModel");
-const ErrorHandler = require("../utils/errorHandler");
-const Users = require("../models/userModel");
+const asyncHandler = require('express-async-handler');
+const Notifications = require('../models/notificationModel');
+const Friends = require('../models/friendModel');
+const ErrorHandler = require('../utils/errorHandler');
+const Users = require('../models/userModel');
 
 const getFriendRequestList = asyncHandler(async (req, res, next) => {
   const id = req.user._id;
@@ -10,7 +10,7 @@ const getFriendRequestList = asyncHandler(async (req, res, next) => {
 
   const listPending = await Notifications.find({
     receiveId: id,
-    status: "Pending",
+    status: 'Pending',
   });
 
   for (const pending of listPending) {
@@ -59,7 +59,7 @@ const friendReq = asyncHandler(async (req, res, next) => {
       receiveId,
     });
   } else {
-    return next(new ErrorHandler("Already friend!", 400));
+    return next(new ErrorHandler('Already friend!', 400));
   }
 });
 
@@ -78,10 +78,10 @@ const friendAccept = asyncHandler(async (req, res, next) => {
       },
     ],
   });
-  if (notification && notification.status == "Pending" && !inRelationship) {
+  if (notification && notification.status == 'Pending' && !inRelationship) {
     await Notifications.findByIdAndUpdate(notificationId, {
       $set: {
-        status: "Accepted",
+        status: 'Accepted',
       },
     });
     await Friends.create({
@@ -90,10 +90,10 @@ const friendAccept = asyncHandler(async (req, res, next) => {
     });
 
     return res.status(200).json({
-      message: "Accept successfully",
+      message: 'Accept successfully',
     });
   } else {
-    return next(new ErrorHandler("Unhandled error!", 500));
+    return next(new ErrorHandler('Unhandled error!', 500));
   }
 });
 
@@ -102,18 +102,21 @@ const friendDecline = asyncHandler(async (req, res, next) => {
 
   await Notifications.findByIdAndUpdate(id, {
     $set: {
-      status: "Denied",
+      status: 'Denied',
     },
   });
 
   return res.status(200).json({
-    message: "Decline successfully",
+    message: 'Decline successfully',
   });
 });
 
 const block = asyncHandler(async (req, res, next) => {
   const id = req.user._id;
   const targetId = req.params.id;
+
+  console.log(targetId);
+  console.log(id);
 
   const friend = await Friends.findOne({
     $or: [
@@ -127,43 +130,25 @@ const block = asyncHandler(async (req, res, next) => {
       },
     ],
   });
+  console.log(friend);
 
   if (!friend) {
     await Friends.create({
       uid1: id,
       uid2: targetId,
       status: {
-        type: "oneWayBlock",
+        type: 'oneWayBlock',
         blockedId: targetId,
       },
     });
     return res.status(200).json({
-      message: "Block successfully",
+      message: 'Block successfully',
     });
   } else {
-    if (
-      friend.status &&
-      friend.status.type === "oneWayBlock" &&
-      friend.status.blockedId.toString() === id
-    ) {
-      await Friends.findByIdAndUpdate(friend.id, {
-        $set: {
-          status: { type: "twoWayBlock", blockedId: undefined },
-        },
-      });
-    }
-    if (friend.status && friend.status.type === "available") {
-      await Friends.findByIdAndUpdate(friend.id, {
-        $set: {
-          status: { type: "oneWayBlock", blockedId: targetId },
-        },
-      });
-    }
+    return res.status(500).json({
+      message: 'Not friend',
+    });
   }
-
-  return res.status(200).json({
-    message: "Block successfully",
-  });
 });
 
 const unblock = asyncHandler(async (req, res, next) => {
@@ -186,22 +171,15 @@ const unblock = asyncHandler(async (req, res, next) => {
   if (friend) {
     if (
       friend.status &&
-      friend.status.type === "oneWayBlock" &&
+      friend.status.type === 'oneWayBlock' &&
       friend.status.blockedId.toString() === targetId
     ) {
       await Friends.findByIdAndDelete(friend.id);
     }
-    if (friend.status && friend.status.type === "twoWayBlock") {
-      await Friends.findByIdAndUpdate(friend.id, {
-        $set: {
-          status: { type: "oneWayBlock", blockedId: id },
-        },
-      });
-    }
   }
 
   return res.status(200).json({
-    message: "Unblock successfully",
+    message: 'Unblock successfully',
   });
 });
 

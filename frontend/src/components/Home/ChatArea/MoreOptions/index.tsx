@@ -1,16 +1,18 @@
-import * as S from "./MoreOptions.styled";
-import { getFileIcon, useOutsideClick } from "../../../Global/ProcessFunctions";
-import { fileType, roomInfo, userInfo } from "../../../../utils/types";
-import Image from "next/image";
-import { IoMdArrowDropdown } from "react-icons/io";
-import { useState } from "react";
-import NicknameModal from "./NicknameModal";
-import UserInfo from "../../TopBar/UserInfo";
-import { selectUserState } from "../../../../features/redux/slices/userSlice";
-import { useSelector } from "react-redux";
-import { UsersApi } from "../../../../services/api/users";
-import GroupMembers from "./GroupMembers";
-import { selectFileState } from "../../../../features/redux/slices/fileSlice";
+import * as S from './MoreOptions.styled';
+import { getFileIcon, useOutsideClick } from '../../../Global/ProcessFunctions';
+import { fileType, roomInfo, userInfo } from '../../../../utils/types';
+import Image from 'next/image';
+import { UserAvatar } from '../../../../utils/dataConfig';
+import { IoMdArrowDropdown } from 'react-icons/io';
+import { useState } from 'react';
+import NicknameModal from './NicknameModal';
+import UserInfo from '../../TopBar/UserInfo';
+import { selectUserState } from '../../../../features/redux/slices/userSlice';
+import { useSelector } from 'react-redux';
+import { UsersApi } from '../../../../services/api/users';
+import GroupMembers from './GroupMembers';
+import { FriendApi } from '../../../../services/api/friend';
+import { selectFileState } from '../../../../features/redux/slices/fileSlice';
 
 interface IMoreOptions {
   setToggleOption: (toggle: boolean) => void;
@@ -43,8 +45,8 @@ const MoreOptions = ({
   const user = useSelector(selectUserState);
   const roomfiles = useSelector(selectFileState);
 
-  const photos = roomfiles.list.filter((file) => file.type === "image");
-  const files = roomfiles.list.filter((file) => file.type === "file");
+  const photos = roomfiles.list.filter((file) => file.type === 'image');
+  const files = roomfiles.list.filter((file) => file.type === 'file');
 
   // in case change nickname event happend
   const userNeedChange = roomInfo.roomInfo.users.find(
@@ -74,14 +76,14 @@ const MoreOptions = ({
               (user, index) =>
                 index <= 3 && (
                   <S.RoomInfoAvatarGroup key={index}>
-                    <Image src={user.avatar} alt="avatar" layout="fill" />
+                    <Image src={user.avatar} alt='avatar' layout='fill' />
                   </S.RoomInfoAvatarGroup>
                 )
             )}
           </S.RoomInfoAvatar>
         ) : (
           <S.RoomInfoAvatar>
-            <Image src={roomInfo.roomAvatar} alt="avatar" layout="fill" />
+            <Image src={roomInfo.roomAvatar} alt='avatar' layout='fill' />
           </S.RoomInfoAvatar>
         )}
         <S.RoomInfoNameWrap>
@@ -110,16 +112,21 @@ const MoreOptions = ({
               Group Members
             </S.NormalItem>
           )}
-          {!roomInfo.roomInfo.isGroup && <S.DeleteItem>Block</S.DeleteItem>}
+          {!roomInfo.roomInfo.isGroup && (
+            <S.DeleteItem onClick={() => FriendApi.block(userNeedChange.uid)}>
+              Block
+            </S.DeleteItem>
+          )}
+          <S.DeleteItem>Delete this chat</S.DeleteItem>
         </S.WhiteBox>
         <S.WhiteBox>
           <S.Title onClick={() => setPhotoExtend(!photoExtend)}>
             Photos
             <IoMdArrowDropdown
               style={{
-                fontSize: "24px",
-                transition: "300ms",
-                transform: !photoExtend ? "rotate(-90deg)" : "none",
+                fontSize: '24px',
+                transition: '300ms',
+                transform: !photoExtend ? 'rotate(-90deg)' : 'none',
               }}
             />
           </S.Title>
@@ -133,8 +140,8 @@ const MoreOptions = ({
                   <Image
                     src={file.url}
                     alt="room's file"
-                    layout="fill"
-                    objectFit="cover"
+                    layout='fill'
+                    objectFit='cover'
                   />
                 </S.UploadedMedia>
               ))}
@@ -147,18 +154,18 @@ const MoreOptions = ({
             Files
             <IoMdArrowDropdown
               style={{
-                fontSize: "24px",
-                transition: "300ms",
-                transform: !fileExtend ? "rotate(-90deg)" : "none",
+                fontSize: '24px',
+                transition: '300ms',
+                transform: !fileExtend ? 'rotate(-90deg)' : 'none',
               }}
             />
           </S.Title>
           <S.ExtendContent>
-            <S.FileWrap wraptype={"file"} visible={fileExtend}>
+            <S.FileWrap wraptype={'file'} visible={fileExtend}>
               {files.map((file, index) => (
                 <S.FilePreview
                   key={index}
-                  target="_blank"
+                  target='_blank'
                   download
                   href={file.url}
                 >
