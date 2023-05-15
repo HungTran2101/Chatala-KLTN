@@ -1,6 +1,7 @@
 import { useParticipant } from '@videosdk.live/react-sdk';
 import { useEffect, useMemo, useRef } from 'react';
 import ReactPlayer from 'react-player';
+import * as S from './ParticipantView.styled';
 
 const ParticipantView = (props) => {
   const { webcamStream, micStream, webcamOn, micOn, isLocal, displayName } =
@@ -35,32 +36,28 @@ const ParticipantView = (props) => {
   }, [micStream, micOn]);
 
   return (
-    <div>
-      <p>
-        Participant: {displayName} | Webcam: {webcamOn ? 'ON' : 'OFF'} | Mic:{' '}
+    <S.Container>
+      <S.Name>
+        {displayName} | Webcam: {webcamOn ? 'ON' : 'OFF'} | Mic:{' '}
         {micOn ? 'ON' : 'OFF'}
-      </p>
+      </S.Name>
       <audio ref={micRef} autoPlay playsInline muted={isLocal} />
-      {webcamOn && (
-        <ReactPlayer
-          //
-          playsinline // very very imp prop
-          pip={false}
-          light={false}
-          controls={false}
-          muted={true}
-          playing={true}
-          //
-          url={videoStream}
-          //
-          height={'300px'}
-          width={'300px'}
-          onError={(err) => {
-            console.log(err, 'participant video error');
-          }}
-        />
-      )}
-    </div>
+      <S.Video
+        //
+        playsinline // very very imp prop
+        pip={false}
+        light={false}
+        controls={false}
+        muted={true}
+        playing={true}
+        url={videoStream}
+        onError={(err) => {
+          console.log(err, 'participant video error');
+        }}
+        height={(400 * 9) / 16}
+        width={400}
+      />
+    </S.Container>
   );
 };
 

@@ -2,6 +2,7 @@ import { useMeeting } from '@videosdk.live/react-sdk';
 import { useEffect, useState } from 'react';
 import Controls from './Controls';
 import ParticipantView from './ParticipantView';
+import * as S from './MeetingView.styled';
 
 const MeetingView = (props) => {
   const [joined, setJoined] = useState(null);
@@ -15,7 +16,7 @@ const MeetingView = (props) => {
     //callback for when meeting is left
     onMeetingLeft: () => {
       // props.onMeetingLeave();
-      window.close()
+      window.close();
     },
   });
   const joinMeeting = () => {
@@ -24,29 +25,32 @@ const MeetingView = (props) => {
   };
 
   useEffect(() => {
-    console.log(participants);
-  }, [participants]);
+    joinMeeting();
+  }, []);
 
   return (
-    <div className='container'>
-      <h3>Meeting Id: {props.meetingId}</h3>
+    <S.Container>
+      {/* <h3>Meeting Id: {props.meetingId}</h3> */}
       {joined && joined == 'JOINED' ? (
         <div>
+          <S.ParticipantWrap>
+            {/* @ts-ignore */}
+            {[...participants.keys()].map((participantId) => (
+              <ParticipantView
+                participantId={participantId}
+                key={participantId}
+              />
+            ))}
+          </S.ParticipantWrap>
           <Controls />
-          {/* @ts-ignore */}
-          {[...participants.keys()].map((participantId) => (
-            <ParticipantView
-              participantId={participantId}
-              key={participantId}
-            />
-          ))}
         </div>
       ) : joined && joined == 'JOINING' ? (
         <p>Joining the meeting...</p>
       ) : (
-        <button onClick={joinMeeting}>Join</button>
+        // <button onClick={joinMeeting}>Join</button>
+        <p>Loading...</p>
       )}
-    </div>
+    </S.Container>
   );
 };
 
