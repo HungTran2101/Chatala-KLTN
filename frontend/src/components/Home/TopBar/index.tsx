@@ -94,12 +94,16 @@ const TopBar = () => {
       // @ts-ignore
       socket.emit('logged', user.info._id);
       socket.on('getUsers', (users) => {
-        console.log(users);
+        console.log('users', users);
         dispatch(
           roomListActions.setActiveRoom({ users, loggedUid: user.info._id })
         );
       });
     }
+
+    return () => {
+      socket.off('getUsers');
+    };
   }, [user]);
 
   useEffect(() => {
@@ -126,9 +130,9 @@ const TopBar = () => {
             {user.info?.avatar && user.info.avatar !== '' && (
               <Image
                 src={user.info.avatar}
-                alt='avatar'
-                layout='fill'
-                objectFit='cover'
+                alt="avatar"
+                layout="fill"
+                objectFit="cover"
               />
             )}
           </S.Avatar>
@@ -137,13 +141,13 @@ const TopBar = () => {
         <S.RightWrapper>
           <S.LogoContainer>
             <S.Logo>
-              <Image src={Logo} alt='logo' />
+              <Image src={Logo} alt="logo" />
             </S.Logo>
           </S.LogoContainer>
           <S.Search>
             <S.SearchIcon />
             <S.SearchInput
-              placeholder='Search...'
+              placeholder="Search..."
               onChange={(e) => setSearchInput(e.target.value)}
               value={searchInput}
               onFocus={() => setSearchModal(true)}

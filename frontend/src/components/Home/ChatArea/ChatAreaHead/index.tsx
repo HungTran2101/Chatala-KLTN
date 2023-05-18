@@ -26,7 +26,7 @@ const ChatAreaHead = ({ setToggleOption }: IChatAreaHead) => {
   };
   useEffect(() => {
     handleStatus();
-  }, [roomList.activeList]);
+  }, [roomList.activeList, roomInfo.info]);
 
   const getReceiverId = () => {
     const users = roomInfo.info.roomInfo.users.filter(

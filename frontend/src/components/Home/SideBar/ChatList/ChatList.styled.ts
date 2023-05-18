@@ -8,7 +8,7 @@ export const ChatList = styled.div`
   }
 
   &::-webkit-scrollbar {
-    ${tw`w-[5px]`}
+    ${tw`w-[5px] h-[5px]`}
   }
 
   &::-webkit-scrollbar-thumb {

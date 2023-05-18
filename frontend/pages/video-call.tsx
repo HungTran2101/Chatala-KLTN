@@ -80,8 +80,8 @@ function VideoCall() {
     <MeetingProvider
       config={{
         meetingId,
-        micEnabled: true,
-        webcamEnabled: true,
+        micEnabled: false,
+        webcamEnabled: false,
         name: name,
       }}
       token={token}

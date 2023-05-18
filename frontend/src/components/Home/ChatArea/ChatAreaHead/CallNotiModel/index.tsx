@@ -22,8 +22,9 @@ const CallNotiModel = ({ setReceiveCall, callInfo }: ICallNoti) => {
 
   return (
     <S.CallNotiModal>
-      <S.CallNotiOverlay onClick={() => setReceiveCall(false)} />
+      <S.CallNotiOverlay />
       <S.CallNotiBody>
+        <audio src="/ringtone.mp3" loop autoPlay />
         <S.CallNotiInfo>
           <S.CallNotiLabel>You receiving a call from</S.CallNotiLabel>
           <S.CallNotiAvatar>

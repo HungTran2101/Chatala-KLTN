@@ -82,9 +82,9 @@ const Login = () => {
               </S.InputPassword>
               <ErrorMessage name='password' component={S.ErrorMsg} />
 
-              <S.Forgot>
+              {/* <S.Forgot>
                 <Link href='/forgot-password'>Forgot Password?</Link>
-              </S.Forgot>
+              </S.Forgot> */}
               <S.Button type='submit'>
                 {isSubmitting ? <ClipLoader color='#fff' size={25} /> : 'Login'}
               </S.Button>

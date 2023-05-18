@@ -133,13 +133,11 @@ io.on('connection', (socket) => {
   });
 
   socket.on('calling', (callInfo) => {
-    console.log('callInfo', callInfo);
     const { meetingId, callerId, receiverIds } = callInfo;
     const receiverArr = receiverIds.split(',');
 
     receiverArr.forEach((it) => {
       const receiverId = users.find((u) => u.uid === it);
-      console.log('receiverId', receiverId);
       receiverId &&
         socket
           .to(receiverId.socketId)

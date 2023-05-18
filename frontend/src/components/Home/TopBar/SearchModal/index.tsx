@@ -125,7 +125,7 @@ const SearchModal = ({
           searchResult.length ? (
             searchResult.map((data, index) => (
               <S.SearchModalItem key={index}>
-                <S.SearchModalInfo>
+                <S.SearchModalInfo onClick={() => infoClick(data)}>
                   <S.SearchModalAvatar>
                     <Image
                       src={data.avatar}
@@ -139,7 +139,7 @@ const SearchModal = ({
                   </S.SearchModalNameWrapper>
                 </S.SearchModalInfo>
                 {data.status === 'available' ? (
-                  <S.SearchModalMessage>Message</S.SearchModalMessage>
+                  <S.SearchModalMessage onClick={() => messagesClick(data._id)}>Message</S.SearchModalMessage>
                 ) : data.status === 'receive' ? (
                   <S.FlexWrap>
                     <S.SearchModalAccept

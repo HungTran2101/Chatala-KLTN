@@ -18,7 +18,7 @@ const Welcome = ({ home = false }: IWelcome) => {
           </S.WelcomeLogo>
         </S.WelcomeText>
         <S.WelcomeFeature>
-          <S.WelcomeFeatureImage>
+          <S.WelcomeFeatureImage home={home}>
             <Image src={chatbot} alt="chatbot feature" />
           </S.WelcomeFeatureImage>
           <S.WelcomeFeatureDescription>

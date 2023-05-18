@@ -3,7 +3,7 @@ import tw from 'twin.macro';
 
 export const Welcome = styled.div<{ home?: boolean }>`
   ${tw`flex justify-center`}
-  ${({ home }) => home && tw`mx-auto`}
+  ${({ home }) => home && tw`m-auto`}
 `;
 
 export const WelcomeContent = styled.div`
@@ -25,10 +25,10 @@ export const WelcomeFeature = styled.div`
   }
 `;
 
-export const WelcomeFeatureImage = styled.figure`
+export const WelcomeFeatureImage = styled.figure<{ home?: boolean }>`
   ${tw`w-[400px] mb-5`}
   @media only screen and (max-width: 1024px) {
-    ${tw`hidden`}
+    ${({ home }) => !home && tw`hidden`}
   }
 `;
 
