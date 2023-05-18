@@ -1,5 +1,5 @@
-import http from "../http";
-import { API_URL } from "./urls";
+import http from '../http';
+import { API_URL } from './urls';
 
 export const RoomApi = {
   createRoom: async function (
@@ -32,5 +32,10 @@ export const RoomApi = {
   },
   seenRoom: async function (uid: string, roomId: string): Promise<any> {
     return await http.post(API_URL.seenRoom, { uid, roomId });
+  },
+  changeGroupName: async function (roomId: string, groupName: string): Promise<any> {
+    return await http.put(`${API_URL.changeGroupName}/${roomId}/change-name`, {
+      groupName,
+    });
   },
 };

@@ -145,6 +145,15 @@ io.on('connection', (socket) => {
     });
   });
 
+  socket.on('groupname', (roomId, roomUserIds, groupName) => {
+    const _users = users.filter((u) => roomUserIds.includes(u.uid));
+    if (_users.length > 0) {
+      _users.forEach((u) => {
+        socket.to(u.socketId).emit('receivegroupname', { roomId, groupName });
+      });
+    }
+  });
+
   // socket.on("sendMessage", (message, roomId) => {
   //   console.log("new message: ", message);
   //   console.log("roomId: ", roomId);

@@ -13,6 +13,7 @@ import { UsersApi } from '../../../../services/api/users';
 import GroupMembers from './GroupMembers';
 import { FriendApi } from '../../../../services/api/friend';
 import { selectFileState } from '../../../../features/redux/slices/fileSlice';
+import GroupNameModal from './GroupNameModel';
 
 interface IMoreOptions {
   setToggleOption: (toggle: boolean) => void;
@@ -40,6 +41,7 @@ const MoreOptions = ({
   const [toggleNickname, setToggleNickname] = useState(false);
   const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
   const [toggleGroupMembers, setToggleGroupMembers] = useState(false);
+  const [toggleGroupName, setToggleGroupName] = useState(false);
   const [friendProfile, setFriendProfile] = useState<userInfo>();
 
   const user = useSelector(selectUserState);
@@ -62,7 +64,7 @@ const MoreOptions = ({
     setToggleFriendProfile(true);
   };
 
-  const photosClickHandler = (index) => {
+  const photosClickHandler = (index: number) => {
     setToggleImageZoom(true);
     setImageZoomList({ index, list: photos });
   };
@@ -76,14 +78,14 @@ const MoreOptions = ({
               (user, index) =>
                 index <= 3 && (
                   <S.RoomInfoAvatarGroup key={index}>
-                    <Image src={user.avatar} alt='avatar' layout='fill' />
+                    <Image src={user.avatar} alt="avatar" layout="fill" />
                   </S.RoomInfoAvatarGroup>
                 )
             )}
           </S.RoomInfoAvatar>
         ) : (
           <S.RoomInfoAvatar>
-            <Image src={roomInfo.roomAvatar} alt='avatar' layout='fill' />
+            <Image src={roomInfo.roomAvatar} alt="avatar" layout="fill" />
           </S.RoomInfoAvatar>
         )}
         <S.RoomInfoNameWrap>
@@ -92,7 +94,9 @@ const MoreOptions = ({
               ? roomInfo.roomInfo.groupName
               : roomInfo.roomName}
           </S.RoomInfoName>
-          {roomInfo.roomInfo.isGroup && <S.RoomInfoNameEditIcon />}
+          {roomInfo.roomInfo.isGroup && (
+            <S.RoomInfoNameEditIcon onClick={() => setToggleGroupName(true)} />
+          )}
         </S.RoomInfoNameWrap>
       </S.RoomInfo>
       <S.OptionWrap>
@@ -117,7 +121,7 @@ const MoreOptions = ({
               Block
             </S.DeleteItem>
           )}
-          <S.DeleteItem>Delete this chat</S.DeleteItem>
+          {/* <S.DeleteItem>Delete this chat</S.DeleteItem> */}
         </S.WhiteBox>
         <S.WhiteBox>
           <S.Title onClick={() => setPhotoExtend(!photoExtend)}>
@@ -140,8 +144,8 @@ const MoreOptions = ({
                   <Image
                     src={file.url}
                     alt="room's file"
-                    layout='fill'
-                    objectFit='cover'
+                    layout="fill"
+                    objectFit="cover"
                   />
                 </S.UploadedMedia>
               ))}
@@ -165,7 +169,7 @@ const MoreOptions = ({
               {files.map((file, index) => (
                 <S.FilePreview
                   key={index}
-                  target='_blank'
+                  target="_blank"
                   download
                   href={file.url}
                 >
@@ -193,6 +197,12 @@ const MoreOptions = ({
       )}
       {toggleGroupMembers && (
         <GroupMembers setToggleGroupMembers={setToggleGroupMembers} />
+      )}
+      {toggleGroupName && (
+        <GroupNameModal
+          setToggleGroupName={setToggleGroupName}
+          roomInfo={roomInfo}
+        />
       )}
     </S.MoreOptions>
   );

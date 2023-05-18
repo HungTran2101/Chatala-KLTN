@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { AppState } from "../store";
-import { HYDRATE } from "next-redux-wrapper";
-import { roomInfo } from "../../../utils/types";
+import { createSlice } from '@reduxjs/toolkit';
+import { AppState } from '../store';
+import { HYDRATE } from 'next-redux-wrapper';
+import { roomInfo } from '../../../utils/types';
 
 // Type for our state
 export interface roomListState {
@@ -21,7 +21,7 @@ const initialState: roomListState = {
 
 // Actual Slice
 export const roomListSlice = createSlice({
-  name: "roomList",
+  name: 'roomList',
   initialState,
   reducers: {
     requestRoomList(state, action) {
@@ -44,7 +44,7 @@ export const roomListSlice = createSlice({
       const activeUser: Array<{ socketId: string; uid: string }> =
         action.payload.users;
       const loggedUid = action.payload.loggedUid;
-      if (loggedUid !== "") {
+      if (loggedUid !== '') {
         state.list.forEach((room, index) => {
           if (!room.roomInfo.isGroup) {
             if (
@@ -73,7 +73,7 @@ export const roomListSlice = createSlice({
       );
 
       state.list[roomIndex].roomInfo.lastMsg =
-        message.lastMsg !== "" ? message.lastMsg : "File";
+        message.lastMsg !== '' ? message.lastMsg : 'File';
     },
 
     clearRoomList(state, action) {
@@ -106,6 +106,15 @@ export const roomListSlice = createSlice({
       state.list[roomIndex].roomInfo.users.map((user) => {
         if (user.uid === uid) return (user.unReadMsg = 0);
       });
+    },
+    changeGroupName(state, action) {
+      const index = state.list.findIndex(
+        (room) => room.roomInfo._id === action.payload.roomId
+      );
+      if (index >= 0) {
+        state.list[index].roomName = action.payload.groupName;
+        state.list[index].roomInfo.groupName = action.payload.groupName;
+      }
     },
 
     // Special reducer for hydrating the state. Special case for next-redux-wrapper
