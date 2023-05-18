@@ -1,9 +1,13 @@
-import styled from "styled-components";
-import tw from "twin.macro";
-import { FiMoreHorizontal } from "react-icons/fi";
+import styled from 'styled-components';
+import tw from 'twin.macro';
+import { FiMoreHorizontal } from 'react-icons/fi';
 
 export const ChatMsg = styled.div`
-  ${tw`flex items-end mb-1.5`}
+  ${tw`relative flex items-end mb-1.5`}
+`;
+
+export const ChatTooltip = styled.div`
+  ${tw`absolute text-[12px] text-gray-200 px-2 py-1 rounded-[5px] right-full z-30 bg-gray-600 whitespace-nowrap top-0`}
 `;
 
 export const ChatMsgReply = styled.div`
@@ -12,7 +16,7 @@ export const ChatMsgReply = styled.div`
 
 export const ChatReplyLabel = styled.div`
   ${tw`text-[14px] flex items-center gap-1 mt-2`}
-`
+`;
 
 export const ChatMsgReplyText = styled.div`
   ${tw`flex items-center gap-2 bg-primary rounded-2xl px-3 pt-2 pb-5 mb-[-15px] ml-auto shadow-md`}
@@ -35,7 +39,7 @@ export const ChatMsgText = styled.div`
 export const ChatMsgSenderName = styled.div<{ position: string }>`
   ${tw`absolute bottom-[-20px] left-[14px] text-[12px] text-gray-500 whitespace-nowrap invisible`}
   ${({ position }) =>
-    (position === "bottom" || position === "alone") && tw`visible`}
+    (position === 'bottom' || position === 'alone') && tw`visible`}
 `;
 
 export const ChatMsgTextTail = styled.div`
@@ -48,7 +52,7 @@ export const ChatMsgTextTail = styled.div`
 export const ChatMsgAvatar = styled.figure<{ position: string }>`
   ${tw`relative w-[40px] h-[40px] rounded-full shadow-md overflow-hidden flex-shrink-0 mb-[-5px] invisible self-end z-10`}
   ${({ position }) =>
-    (position === "bottom" || position === "alone") && tw`visible`}
+    (position === 'bottom' || position === 'alone') && tw`visible`}
   border: 1px solid gray;
 `;
 
@@ -109,29 +113,31 @@ export const ChatMsgWrapper = styled.div`
 export const ChatMsgLeft = styled(ChatMsg)<{ position: string }>`
   ${tw`relative items-center`}
   ${({ position }) =>
-    (position === "bottom" || position === "alone") && tw`mb-7`}
+    (position === 'bottom' || position === 'alone') && tw`mb-7`}
 
   &:hover {
     ${ChatMsgMoreIcon} {
       visibility: visible;
     }
   }
-
+  ${ChatTooltip}{
+    ${tw`right-auto left-full`}
+  }
   ${ChatMsgUnSend} {
     ${tw`ml-2`}
     ${({ position }) =>
-      position === "alone"
+      position === 'alone'
         ? tw`rounded-2xl rounded-bl-none`
-        : position === "top"
+        : position === 'top'
         ? tw`rounded-2xl rounded-bl-none`
         : tw`rounded-r-2xl`}
   }
   ${ChatMsgText} {
     ${tw`bg-primary ml-2`}
     ${({ position }) =>
-      position === "alone"
+      position === 'alone'
         ? tw`rounded-2xl rounded-bl-none`
-        : position === "top"
+        : position === 'top'
         ? tw`rounded-2xl rounded-bl-none`
         : tw`rounded-r-2xl`}
   }
@@ -149,52 +155,53 @@ export const ChatMsgLeft = styled(ChatMsg)<{ position: string }>`
   }
   ${ChatMsgTextTail} {
     ${({ position }) =>
-      position !== "bottom" && position !== "alone" && tw`invisible`}
+      position !== 'bottom' && position !== 'alone' && tw`invisible`}
     ${tw`bg-primary bottom-[-5px] left-[-13px]`}
     &::before {
       ${tw`rounded-full absolute h-[50px] w-[50px] left-[-28px] bottom-[-3px]`}
       content: '';
   }
+
 `;
 
 export const ChatMsgRight = styled(ChatMsg)<{ position: string }>`
   ${tw`relative flex-row-reverse items-center`}
   ${({ position }) =>
-    (position === "bottom" || position === "alone") && tw`mb-7`}
+    (position === 'bottom' || position === 'alone') && tw`mb-7`}
 
   ${ChatMsgUnSend} {
     ${tw`mr-2`}
     ${({ position }) =>
-      position === "alone"
+      position === 'alone'
         ? tw`rounded-2xl rounded-br-none`
-        : position === "top"
+        : position === 'top'
         ? tw`rounded-2xl rounded-br-none`
         : tw`rounded-l-2xl`}
   }
   ${ChatMsgTextWrapper} {
     ${tw`flex flex-row-reverse`}
   }
-  ${ChatReplyLabel}{
+  ${ChatReplyLabel} {
     ${tw`mr-2 justify-end`}
   }
   ${ChatMsgReplyText} {
     ${tw`mr-2`}
   }
-  ${ChatMsgReplyImage}{
+  ${ChatMsgReplyImage} {
     ${tw`mr-2`}
   }
   ${ChatMsgText} {
     ${tw`bg-quaternary mr-2 rounded-br-[0]`}
     ${({ position }) =>
-      position === "alone"
+      position === 'alone'
         ? tw`rounded-2xl rounded-br-none`
-        : position === "top"
+        : position === 'top'
         ? tw`rounded-2xl rounded-br-none`
         : tw`rounded-l-2xl`}
   }
   ${ChatMsgTextTail} {
     ${({ position }) =>
-      position !== "bottom" && position !== "alone" && tw`invisible`}
+      position !== 'bottom' && position !== 'alone' && tw`invisible`}
     ${tw`bg-quaternary bottom-[-5px] right-[-8px]`}
     &::before {
       ${tw`rounded-full absolute h-[50px] w-[50px] right-[-28px] bottom-[-3px]`}
