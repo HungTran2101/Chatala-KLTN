@@ -18,6 +18,7 @@ import { MdOutlineReply } from "react-icons/md";
 interface IChatMsg {
   data: messageType;
   position: string;
+  isLastMsg: boolean;
   setToggleImageZoom: (toggle: boolean) => void;
   setImageZoomList: (value: { index: number; list: fileType[] }) => void;
 }
@@ -25,6 +26,7 @@ interface IChatMsg {
 const ChatMsg = ({
   data,
   position,
+  isLastMsg,
   setToggleImageZoom,
   setImageZoomList,
 }: IChatMsg) => {
@@ -231,6 +233,7 @@ const ChatMsg = ({
                   <ChatMsgOption
                     msgId={data._id}
                     setToggleOption={setToggleOption}
+                    isLastMsg={isLastMsg}
                   />
                 )}
               </S.ChatMsgMoreIconWrapper>
@@ -333,6 +336,7 @@ const ChatMsg = ({
                     msgId={data._id}
                     setToggleOption={setToggleOption}
                     isleft={1}
+                    isLastMsg={isLastMsg}
                   />
                 )}
               </S.ChatMsgMoreIconWrapper>

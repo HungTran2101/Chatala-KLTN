@@ -89,6 +89,7 @@ const ChatAreaMainMsg = ({
               data={data}
               position={setMessagePosition(data, index)}
               key={index}
+              isLastMsg={index === 0 ? true : false}
               setToggleImageZoom={setToggleImageZoom}
               setImageZoomList={setImageZoomList}
             />
