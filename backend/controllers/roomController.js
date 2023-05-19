@@ -1,13 +1,13 @@
-const asyncHandler = require("express-async-handler");
-const Rooms = require("../models/roomModel");
-const Messages = require("../models/messageModel");
-const ErrorHandler = require("../utils/errorHandler");
-const Users = require("../models/userModel");
-const mongoose = require("mongoose");
-const Files = require("../models/fileModel");
+const asyncHandler = require('express-async-handler');
+const Rooms = require('../models/roomModel');
+const Messages = require('../models/messageModel');
+const ErrorHandler = require('../utils/errorHandler');
+const Users = require('../models/userModel');
+const mongoose = require('mongoose');
+const Files = require('../models/fileModel');
 
 const createRoom = asyncHandler(async (req, res, next) => {
-  const { isGroup, users } = req.body;
+  const { isGroup, users, friendRelateId } = req.body;
 
   if (users.every((user) => user.uid.toString() !== req.user._id.toString())) {
     users.push({
@@ -16,17 +16,18 @@ const createRoom = asyncHandler(async (req, res, next) => {
       nickname: req.user.name,
     });
   } else {
-    return next(new ErrorHandler("Group member cannot include creator!", 400));
+    return next(new ErrorHandler('Group member cannot include creator!', 400));
   }
 
   let roomToCreate = {};
   roomToCreate.users = users;
+  roomToCreate.friendRelateId = friendRelateId || null;
 
   if (isGroup) {
     if (users.length < 3) {
       return next(
         new ErrorHandler(
-          "Create group chat but receive less than 2 members!",
+          'Create group chat but receive less than 2 members!',
           400
         )
       );
@@ -35,18 +36,18 @@ const createRoom = asyncHandler(async (req, res, next) => {
     let groupName = users[0].nickname;
     for (let i = 1; i < users.length; i++) {
       if (i < 3) {
-        groupName = groupName + ", " + users[i].nickname;
+        groupName = groupName + ', ' + users[i].nickname;
       }
     }
     if (users.length > 3) {
-      groupName += "...";
+      groupName += '...';
     }
     roomToCreate.groupName = groupName;
     roomToCreate.isGroup = true;
   } else if (users.length > 2) {
     return next(
       new ErrorHandler(
-        "Create non-group chat but receive more than 1 member!",
+        'Create non-group chat but receive more than 1 member!',
         400
       )
     );
@@ -69,7 +70,9 @@ const addAvatarForUserInRoom = (room, userInfos) => {
   return editedUsers;
 };
 const getRoomList = asyncHandler(async (req, res, next) => {
-  const rooms = await Rooms.find({ "users.uid": req.user._id });
+  const rooms = await Rooms.find({
+    'users.uid': req.user._id,
+  });
 
   //get all uid have in all rooms
   let uids = [];
@@ -83,14 +86,19 @@ const getRoomList = asyncHandler(async (req, res, next) => {
   //add avatar property to each user in each room
   let editedRooms = [];
   rooms.map((room) => {
-    let editedUsers = addAvatarForUserInRoom(room, userInfos);
-    editedRooms.push({ ...room.toObject(), users: editedUsers });
+    const uindex = room.users.findIndex(
+      (u) => u.uid.toString() === req.user._id.toString()
+    );
+    if (!room.isGroup || (room.isGroup && !room.users[uindex].isLeave)) {
+      let editedUsers = addAvatarForUserInRoom(room, userInfos);
+      editedRooms.push({ ...room.toObject(), users: editedUsers });
+    }
   });
 
   let result = [];
   editedRooms.forEach((room) => {
     if (room.isGroup) {
-      result.push({ roomName: room.groupName, roomAvatar: "", roomInfo: room });
+      result.push({ roomName: room.groupName, roomAvatar: '', roomInfo: room });
     } else {
       let roomName = room.users[0].nickname;
       let roomAvatar = room.users[0].avatar;
@@ -143,7 +151,7 @@ const getRoomInfo = asyncHandler(async (req, res, next) => {
       files,
     });
   } else {
-    return next(new ErrorHandler("Room not found!", 404));
+    return next(new ErrorHandler('Room not found!', 404));
   }
 });
 
@@ -169,8 +177,8 @@ const setNickname = asyncHandler(async (req, res, next) => {
   const { uid, nickname } = req.body;
 
   const room = await Rooms.findOneAndUpdate(
-    { _id: roomId, "users.uid": uid },
-    { $set: { "users.$.nickname": nickname } },
+    { _id: roomId, 'users.uid': uid },
+    { $set: { 'users.$.nickname': nickname } },
     {
       new: true,
     }
@@ -189,69 +197,68 @@ const addMember = asyncHandler(async (req, res, next) => {
 
   const getRoom = await Rooms.findById({ _id: roomId });
 
-  const findUser = getRoom.users.find((value) => {
-    return value.uid === uid;
-  });
+  const findUser = getRoom.users.find((value) => value.uid === uid);
 
-  if (findUser.length > 0) {
-    return next(
-      new ErrorHandler(`${getMember.name} was added to the group!`, 400)
-    );
-  } else {
-    const newMember = await Rooms.findOneAndUpdate(
-      { _id: roomId },
-      {
-        $push: {
-          users: {
-            uid: uid,
-            nickname: getMember.name,
-          },
-        },
-      },
-      {
-        new: true,
-        upsert: true,
-      }
-    );
-    res.status(200).json({
-      newMember,
-    });
-  }
+  res.status(200).json(findUser);
+
+  // if (findUser) {
+  //   return next(
+  //     new ErrorHandler(`${getMember.name} was added to the group!`, 400)
+  //   );
+  // } else {
+  //   const newRoomMember = await Rooms.findOneAndUpdate(
+  //     { _id: roomId },
+  //     {
+  //       $push: {
+  //         users: {
+  //           uid: uid,
+  //           nickname: getMember.name,
+  //         },
+  //       },
+  //     },
+  //     {
+  //       new: true,
+  //     }
+  //   );
+  //   res.status(200).json({
+  //     newRoomMember,
+  //   });
+  // }
 });
 
 const increaseUnreadMsg = asyncHandler(async (req, res, next) => {
   const { senderId, roomId } = req.body;
 
-  if (!roomId) return next(new ErrorHandler("roomId is required", 400));
+  if (!roomId) return next(new ErrorHandler('roomId is required', 400));
 
   try {
     await Rooms.findByIdAndUpdate(
       { _id: roomId },
-      { $inc: { "users.$[user].unReadMsg": 1 } },
-      { arrayFilters: [{ "user.uid": { $ne: senderId } }] }
+      { $inc: { 'users.$[user].unReadMsg': 1 } },
+      { arrayFilters: [{ 'user.uid': { $ne: senderId } }] }
     );
-    return res.status(200).json("increase unread successful");
+    return res.status(200).json('increase unread successful');
   } catch (err) {
     console.log(err);
-    return res.status(400).json({ message: "Increase unread message failed" });
+    return res.status(400).json({ message: 'Increase unread message failed' });
   }
 });
 
 const userSeenRoom = asyncHandler(async (req, res, next) => {
   const { uid, roomId } = req.body;
 
-  if (!roomId) return next(new ErrorHandler("roomId is required", 400));
-  if (!uid) return next(new ErrorHandler("uid is required", 400));
+  if (!roomId) return next(new ErrorHandler('roomId is required', 400));
+  if (!uid) return next(new ErrorHandler('uid is required', 400));
 
   try {
     await Rooms.findOneAndUpdate(
-      { _id: roomId, "users.uid": uid },
-      { $set: { "users.$.unReadMsg": 0 } }
+      { _id: roomId, 'users.uid': uid },
+      { $set: { 'users.$.unReadMsg': 0 } }
     );
-    return res.status(200).json("User seen room successful");
+    return res.status(200).json('User seen room successful');
   } catch (err) {
     console.log(err);
-    return res.status(400).json({ message: "User seen room failed" });
+    return res.status(400).json({ message: 'User seen room failed' });
   }
 });
 

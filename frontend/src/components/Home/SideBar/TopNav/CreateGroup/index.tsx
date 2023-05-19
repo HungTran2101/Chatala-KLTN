@@ -1,13 +1,13 @@
-import Image from "next/image";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { selectFriendListState } from "../../../../../features/redux/slices/friendListSlice";
-import { roomListActions } from "../../../../../features/redux/slices/roomListSlice";
-import { RoomApi } from "../../../../../services/api/room";
-import { CreateGroupArray } from "../../../../../utils/dataConfig";
-import { userInfo } from "../../../../../utils/types";
-import UserInfo from "../../../TopBar/UserInfo";
-import * as S from "./CreateGroup.styled";
+import Image from 'next/image';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFriendListState } from '../../../../../features/redux/slices/friendListSlice';
+import { roomListActions } from '../../../../../features/redux/slices/roomListSlice';
+import { RoomApi } from '../../../../../services/api/room';
+import { CreateGroupArray } from '../../../../../utils/dataConfig';
+import { userInfo } from '../../../../../utils/types';
+import UserInfo from '../../../TopBar/UserInfo';
+import * as S from './CreateGroup.styled';
 
 interface ICreateGroup {
   setToggleCreateGroup: (toggle: boolean) => void;
@@ -55,7 +55,7 @@ const CreateGroup = ({ setToggleCreateGroup }: ICreateGroup) => {
       });
 
       try {
-        const createdRoom = await RoomApi.createRoom(users, true);
+        const createdRoom = await RoomApi.createRoom({ users, isGroup: true });
         if (createdRoom) {
           const rooms = await RoomApi.getRoomList();
           dispatch(roomListActions.setRoomList(rooms.result));
@@ -68,7 +68,7 @@ const CreateGroup = ({ setToggleCreateGroup }: ICreateGroup) => {
         }
       }
     } else {
-      alert("Cannot create group with 2 member!");
+      alert('Cannot create group with 2 member!');
     }
   };
 

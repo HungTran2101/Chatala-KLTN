@@ -70,7 +70,10 @@ const SearchModal = ({
           nickname,
         },
       ];
-      const createdRoom = await RoomApi.createRoom(userToRoom);
+      const createdRoom = await RoomApi.createRoom({
+        users: userToRoom,
+        friendRelateId: res.friendRelate._id,
+      });
       if (createdRoom) {
         const rooms = await RoomApi.getRoomList();
         dispatch(roomListActions.setRoomList(rooms.result));
@@ -129,9 +132,9 @@ const SearchModal = ({
                   <S.SearchModalAvatar>
                     <Image
                       src={data.avatar}
-                      alt='avatar'
-                      layout='fill'
-                      objectFit='cover'
+                      alt="avatar"
+                      layout="fill"
+                      objectFit="cover"
                     />
                   </S.SearchModalAvatar>
                   <S.SearchModalNameWrapper>
@@ -139,7 +142,9 @@ const SearchModal = ({
                   </S.SearchModalNameWrapper>
                 </S.SearchModalInfo>
                 {data.status === 'available' ? (
-                  <S.SearchModalMessage onClick={() => messagesClick(data._id)}>Message</S.SearchModalMessage>
+                  <S.SearchModalMessage onClick={() => messagesClick(data._id)}>
+                    Message
+                  </S.SearchModalMessage>
                 ) : data.status === 'receive' ? (
                   <S.FlexWrap>
                     <S.SearchModalAccept

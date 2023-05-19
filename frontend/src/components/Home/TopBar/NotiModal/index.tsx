@@ -1,13 +1,13 @@
-import * as S from "./NotiModal.styled";
-import * as React from "react";
-import { useOutsideClick } from "../../../Global/ProcessFunctions";
-import { FriendApi } from "../../../../services/api/friend";
-import { RoomApi } from "../../../../services/api/room";
-import { useDispatch, useSelector } from "react-redux";
-import { roomListActions } from "../../../../features/redux/slices/roomListSlice";
+import * as S from './NotiModal.styled';
+import * as React from 'react';
+import { useOutsideClick } from '../../../Global/ProcessFunctions';
+import { FriendApi } from '../../../../services/api/friend';
+import { RoomApi } from '../../../../services/api/room';
+import { useDispatch, useSelector } from 'react-redux';
+import { roomListActions } from '../../../../features/redux/slices/roomListSlice';
 
-import Image from "next/image";
-import { useSocketContext } from "../../../../contexts/socket";
+import Image from 'next/image';
+import { useSocketContext } from '../../../../contexts/socket';
 
 interface INotiModal {
   listNoti: any;
@@ -29,13 +29,9 @@ const NotiModal = ({
 
   const NotiRef = useOutsideClick(handleOutsideClick);
 
-  const friendAccept = async (
-    id: string,
-    uid: string,
-    nickname: string,
-  ) => {
+  const friendAccept = async (id: string, uid: string, nickname: string) => {
     try {
-      await FriendApi.friendAccept(id);
+      const res = await FriendApi.friendAccept(id);
       getListNotify();
       const userToRoom = [
         {
@@ -43,11 +39,14 @@ const NotiModal = ({
           nickname,
         },
       ];
-      const createdRoom = await RoomApi.createRoom(userToRoom);
+      const createdRoom = await RoomApi.createRoom({
+        users: userToRoom,
+        friendRelateId: res.friendRelate._id,
+      });
       if (createdRoom) {
         const rooms = await RoomApi.getRoomList();
         dispatch(roomListActions.setRoomList(rooms.result));
-        socket.emit("new room", uid);
+        socket.emit('new room', uid);
       }
     } catch (err) {
       console.log(err);
@@ -85,9 +84,7 @@ const NotiModal = ({
                 </S.NotiNameWrapper>
               </S.NotiInfo>
               <S.NotiAccept
-                onClick={() =>
-                  friendAccept(data._id, data.uid, data.name)
-                }
+                onClick={() => friendAccept(data._id, data.uid, data.name)}
               >
                 Accept
               </S.NotiAccept>

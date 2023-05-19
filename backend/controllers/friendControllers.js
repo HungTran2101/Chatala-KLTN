@@ -84,13 +84,14 @@ const friendAccept = asyncHandler(async (req, res, next) => {
         status: 'Accepted',
       },
     });
-    await Friends.create({
+    const friendRelate = await Friends.create({
       uid1: notification.requestId,
       uid2: notification.receiveId,
     });
 
     return res.status(200).json({
       message: 'Accept successfully',
+      friendRelate,
     });
   } else {
     return next(new ErrorHandler('Unhandled error!', 500));
