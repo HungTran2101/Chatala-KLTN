@@ -24,7 +24,7 @@ const RenewPassword = () => {
         </span>
       </Link>
       <S.Suggest>
-        Enter your account's phone number to renew your password!
+        Enter your account&apos;s phone number to renew your password!
       </S.Suggest>
       <Formik
         initialValues={initialValues}
