@@ -363,7 +363,7 @@ const ChatArea = () => {
                   </S.ChatChatAreaFilePreview>
                 )}
 
-                {!blockInput ? (
+                {!blockInput || roomInfo.info.roomInfo.isGroup ? (
                   <ChatAreaMainForm
                     isDragActive={isDragActive}
                     values={values}
