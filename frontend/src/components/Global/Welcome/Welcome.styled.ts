@@ -26,14 +26,14 @@ export const WelcomeFeature = styled.div`
 `;
 
 export const WelcomeFeatureImage = styled.figure<{ home?: boolean }>`
-  ${tw`w-[400px] mb-5`}
+  ${tw`max-w-[400px] w-full mb-5`}
   @media only screen and (max-width: 1024px) {
     ${({ home }) => !home && tw`hidden`}
   }
 `;
 
 export const WelcomeFeatureDescription = styled.div`
-  ${tw`mb-3.5 text-[#0154B3] text-xl font-semibold`}
+  ${tw`mb-3.5 text-[#0154B3] text-xl font-semibold text-center`}
 `;
 
 export const WelcomeFeatureDetail = styled.div``;

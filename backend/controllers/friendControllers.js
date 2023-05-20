@@ -3,6 +3,7 @@ const Notifications = require('../models/notificationModel');
 const Friends = require('../models/friendModel');
 const ErrorHandler = require('../utils/errorHandler');
 const Users = require('../models/userModel');
+const Rooms = require('../models/roomModel');
 
 const getFriendRequestList = asyncHandler(async (req, res, next) => {
   const id = req.user._id;
@@ -211,6 +212,42 @@ const friendList = asyncHandler(async (req, res, next) => {
   return res.status(200).json(result);
 });
 
+const unfriend = asyncHandler(async (req, res, next) => {
+  const friendId = req.params.id;
+
+  const friend = await Friends.findByIdAndUpdate(
+    friendId,
+    { 'status.type': 'disable' },
+    { new: true }
+  );
+
+  if (friend) {
+    console.log('Unfriend successfully');
+  } else {
+    console.log('Unfriend false');
+  }
+
+  return res.status(200).json({
+    message: 'Unfriend successfully',
+  });
+});
+
+const checkFriend = asyncHandler(async (req, res, next) => {
+  const { id } = req.body;
+
+  const friend = await Friends.findOne({ _id: id, 'status.type': 'available' });
+  console.log(friend);
+
+  if (friend) {
+    return res.status(200).json({
+      message: 'Check successfully',
+    });
+  } else {
+    return res.status(408).json({
+      message: 'Not found',
+    });
+  }
+});
 module.exports = {
   getFriendRequestList,
   friendReq,
@@ -219,4 +256,6 @@ module.exports = {
   block,
   unblock,
   friendList,
+  unfriend,
+  checkFriend,
 };

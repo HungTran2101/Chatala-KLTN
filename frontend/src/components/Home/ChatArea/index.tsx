@@ -1,16 +1,20 @@
-import * as S from "./ChatArea.styled";
-import { FormEvent, useRef, useState, useEffect, useCallback } from "react";
-import MoreOptions from "./MoreOptions";
-import { validImageTypes } from "../../Global/ProcessFunctions";
-import * as Yup from "yup";
-import { Formik } from "formik";
-import FilePreview from "./FilePreview";
-import DropZone from "react-dropzone";
-import { fileType, messageRawType, messageSendType } from "../../../utils/types";
-import ChatImageZoom from "./ChatImageZoom";
-import { useDispatch, useSelector } from "react-redux";
-import { messageActions } from "../../../features/redux/slices/messageSlice";
-import { selectRoomInfoState } from "../../../features/redux/slices/roomInfoSlice";
+import * as S from './ChatArea.styled';
+import { FormEvent, useRef, useState, useEffect, useCallback } from 'react';
+import MoreOptions from './MoreOptions';
+import { validImageTypes } from '../../Global/ProcessFunctions';
+import * as Yup from 'yup';
+import { Formik } from 'formik';
+import FilePreview from './FilePreview';
+import DropZone from 'react-dropzone';
+import {
+  fileType,
+  messageRawType,
+  messageSendType,
+} from '../../../utils/types';
+import ChatImageZoom from './ChatImageZoom';
+import { useDispatch, useSelector } from 'react-redux';
+import { messageActions } from '../../../features/redux/slices/messageSlice';
+import { selectRoomInfoState } from '../../../features/redux/slices/roomInfoSlice';
 import {
   API_KEY,
   MessageApi,
@@ -26,14 +30,20 @@ import ChatAreaHead from './ChatAreaHead';
 import ChatAreaMainMsg from './ChatAreaMainMsg';
 import ChatAreaMainForm from './ChatAreaMainForm';
 import { useRouter } from 'next/router';
-import { selectUtilState, utilActions } from "../../../features/redux/slices/utilSlice";
-import { RoomApi } from "../../../services/api/room";
+import {
+  selectUtilState,
+  utilActions,
+} from '../../../features/redux/slices/utilSlice';
+import { RoomApi } from '../../../services/api/room';
+import { selectFriendListState } from '../../../features/redux/slices/friendListSlice';
+import { FriendApi } from '../../../services/api/friend';
 
 const ChatArea = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
   const roomInfo = useSelector(selectRoomInfoState);
+  const friendList = useSelector(selectFriendListState);
   const user = useSelector(selectUserState);
   const util = useSelector(selectUtilState);
   const socket = useSocketContext();
@@ -123,11 +133,11 @@ const ChatArea = () => {
 
   //Form
   const initialValues: messageRawType = {
-    roomId: roomInfo?.info.roomInfo._id || "",
-    msg: "",
+    roomId: roomInfo?.info.roomInfo._id || '',
+    msg: '',
     files: [],
     replyId: null,
-    mentions: []
+    mentions: [],
   };
   const validationSchema = Yup.object().shape({
     msg: Yup.string(),
@@ -148,8 +158,8 @@ const ChatArea = () => {
         files.push(newFiles[i]);
       }
 
-      setFieldValue("files", files);
-      e.currentTarget.value = "";
+      setFieldValue('files', files);
+      e.currentTarget.value = '';
     }
   };
 
@@ -162,7 +172,7 @@ const ChatArea = () => {
     for (let i = 0; i < newFiles.length; i++) {
       files.push(newFiles[i]);
     }
-    setFieldValue("files", files);
+    setFieldValue('files', files);
   };
 
   const uploadFile = async (
@@ -217,14 +227,14 @@ const ChatArea = () => {
 
   //Submit
   const onSubmit = async (values: messageRawType, { setFieldValue }: any) => {
-    if (values.msg.trim() !== "" || values.files.length > 0) {
+    if (values.msg.trim() !== '' || values.files.length > 0) {
       values.replyId = util.replyId;
       console.log(values);
 
       try {
         const uploadedFiles: fileType[] = await uploadFiles(values.files);
         if (uploadedFiles.length <= 0 && values.files.length > 0) {
-          alert("Upload files failed! Try again later.");
+          alert('Upload files failed! Try again later.');
           return;
         }
         let fileIds = [];
@@ -233,7 +243,7 @@ const ChatArea = () => {
           fileIds = res.fileIds;
           const _res = await MessageApi.getFile(roomInfo.info.roomInfo._id);
           dispatch(fileActions.setFilesData(_res.files));
-          socket.emit("sendFiles", roomInfo.info.roomInfo._id, _res.files);
+          socket.emit('sendFiles', roomInfo.info.roomInfo._id, _res.files);
         }
 
         //setup message to save to DB
@@ -242,14 +252,17 @@ const ChatArea = () => {
           msg: values.msg,
           replyId: values.replyId,
           fileIds,
-          mentions: values.mentions
+          mentions: values.mentions,
         };
 
         const res = await MessageApi.send(messageToSend);
-        const res1 = await RoomApi.incUnreadMsg(user.info._id, roomInfo.info.roomInfo._id)
+        const res1 = await RoomApi.incUnreadMsg(
+          user.info._id,
+          roomInfo.info.roomInfo._id
+        );
         dispatch(messageActions.newMessage(res.result));
         dispatch(utilActions.clearReplyId());
-        setFieldValue("files", []);
+        setFieldValue('files', []);
         scrollToNewMsg();
       } catch (err) {
         console.log(err);
@@ -264,6 +277,27 @@ const ChatArea = () => {
     // console.log(meetingId);
     router.push({ pathname: '/video-call', query: { action: 'create' } });
   };
+
+  const [blockInput, setBlockInput] = useState(false);
+  useEffect(() => {
+    console.log(friendList);
+    console.log(roomInfo.info.roomInfo.friendRelateId);
+
+    const checker = async () => {
+      try {
+        const res = await FriendApi.checkFriend(
+          roomInfo.info.roomInfo.friendRelateId
+        );
+        if (res) {
+          setBlockInput(false);
+        }
+      } catch (error) {
+        setBlockInput(true);
+        console.log(error);
+      }
+    };
+    checker();
+  }, [roomInfo]);
 
   return (
     <S.ChatArea>
@@ -328,16 +362,21 @@ const ChatArea = () => {
                     </S.ChatChatAreaFilePreviewInner>
                   </S.ChatChatAreaFilePreview>
                 )}
-                <ChatAreaMainForm
-                  isDragActive={isDragActive}
-                  values={values}
-                  isSubmitting={isSubmitting}
-                  fileChoosen={fileChoosen}
-                  getInputProps={getInputProps}
-                  onInputChange={onInputChange}
-                  setFieldValue={setFieldValue}
-                  submitForm={submitForm}
-                />
+
+                {!blockInput ? (
+                  <ChatAreaMainForm
+                    isDragActive={isDragActive}
+                    values={values}
+                    isSubmitting={isSubmitting}
+                    fileChoosen={fileChoosen}
+                    getInputProps={getInputProps}
+                    onInputChange={onInputChange}
+                    setFieldValue={setFieldValue}
+                    submitForm={submitForm}
+                  />
+                ) : (
+                  <i>You cant reply to this conversation </i>
+                )}
               </S.ChatAreaMain>
             )}
           </DropZone>

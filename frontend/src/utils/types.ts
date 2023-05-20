@@ -80,6 +80,7 @@ export type roomInfo = {
     isGroup: boolean;
     lastMsg: string;
     updatedAt: string;
+    friendRelateId: string;
     users: roomUser[];
     __v: number;
     _id: string;
