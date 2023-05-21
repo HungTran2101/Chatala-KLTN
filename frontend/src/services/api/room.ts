@@ -7,7 +7,11 @@ export const RoomApi = {
     friendRelateId = '',
     isGroup = false,
   }): Promise<any> {
-    return await http.post(API_URL.createRoom, { isGroup, users, friendRelateId });
+    return await http.post(API_URL.createRoom, {
+      isGroup,
+      users,
+      friendRelateId,
+    });
   },
   changeNickname: async function (
     roomId: string,
@@ -40,6 +44,16 @@ export const RoomApi = {
   ): Promise<any> {
     return await http.put(`${API_URL.changeGroupName}/${roomId}/change-name`, {
       groupName,
+    });
+  },
+  addMember: async function (roomId: string, uid: string): Promise<any> {
+    return await http.put(`${API_URL.addMember}/${roomId}/add-member`, {
+      uid,
+    });
+  },
+  kickMember: async function (roomId: string, uid: string): Promise<any> {
+    return await http.put(`${API_URL.kickMember}/${roomId}/kick-member`, {
+      uid,
     });
   },
 };

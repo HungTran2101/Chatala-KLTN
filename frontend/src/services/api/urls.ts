@@ -39,5 +39,7 @@ export const API_URL = {
   getCallToken: `${API_BASE}/call/get-token`,
   createMeeting: `${API_BASE}/call/create-meeting`,
   validateMeeting: `${API_BASE}/call/validate-meeting`,
-  changeGroupName: `${API_BASE}/room`
+  changeGroupName: `${API_BASE}/room`,
+  addMember: `${API_BASE}/room`,
+  kickMember: `${API_BASE}/room`,
 };

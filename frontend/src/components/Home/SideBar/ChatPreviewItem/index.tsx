@@ -1,8 +1,8 @@
-import Image from "next/image";
-import * as S from "./ChatPreviewItem.styled";
-import { roomInfo } from "../../../../utils/types";
-import { useSelector } from "react-redux";
-import { selectUserState } from "../../../../features/redux/slices/userSlice";
+import Image from 'next/image';
+import * as S from './ChatPreviewItem.styled';
+import { roomInfo } from '../../../../utils/types';
+import { useSelector } from 'react-redux';
+import { selectUserState } from '../../../../features/redux/slices/userSlice';
 
 interface IChatPreviewItem {
   active: boolean;
@@ -19,22 +19,9 @@ const ChatPreviewItem = ({
 }: IChatPreviewItem) => {
   const loggeduser = useSelector(selectUserState);
 
-  let users = [];
-  roomInfo.roomInfo.users.forEach(user =>   users.push({
-    avatar: user.avatar,
-    nickname: user.nickname,
-    uid: user.uid,
-    role: user.role,
-    unReadMsg: user.unReadMsg,
-    _id: user._id,
-  }))
-  users.push({
-    avatar: roomInfo.roomInfo.users[0].avatar,
-    nickname: roomInfo.roomInfo.users[0].nickname,
-    uid: roomInfo.roomInfo.users[0].uid,
-    role: roomInfo.roomInfo.users[0].role,
-    unReadMsg: roomInfo.roomInfo.users[0].unReadMsg,
-    _id: roomInfo.roomInfo.users[0]._id,
+  const activeAvatar = [];
+  roomInfo.roomInfo.users.forEach((u) => {
+    if (!u.isLeave) activeAvatar.push(u.avatar);
   });
 
   const unReadMsgNumber = roomInfo.roomInfo.users.find(
@@ -63,11 +50,11 @@ const ChatPreviewItem = ({
             </>
           ) : (
             <S.ChatAvatar isGroup={1}>
-              {roomInfo.roomInfo.users.map(
-                (user, index) =>
+              {activeAvatar.map(
+                (data, index) =>
                   index <= 3 && (
                     <S.ChatAvatarGroup key={index}>
-                      <Image src={user.avatar} alt="avatar" layout="fill" />
+                      <Image src={data} alt="avatar" layout="fill" />
                     </S.ChatAvatarGroup>
                   )
               )}
@@ -83,7 +70,7 @@ const ChatPreviewItem = ({
       </S.Wrapper>
       {unReadMsgNumber >= 1 && (
         <S.UnReadMsgNoti>
-          {unReadMsgNumber < 100 ? unReadMsgNumber : "99+"}
+          {unReadMsgNumber < 100 ? unReadMsgNumber : '99+'}
         </S.UnReadMsgNoti>
       )}
     </S.ChatPreviewItem>

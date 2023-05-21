@@ -14,6 +14,8 @@ import GroupMembers from './GroupMembers';
 import { FriendApi } from '../../../../services/api/friend';
 import { selectFileState } from '../../../../features/redux/slices/fileSlice';
 import GroupNameModal from './GroupNameModel';
+import AddMemberModal from './AddMemberModal';
+import KickMemberModal from './KickMemberModal';
 
 interface IMoreOptions {
   setToggleOption: (toggle: boolean) => void;
@@ -42,6 +44,8 @@ const MoreOptions = ({
   const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
   const [toggleGroupMembers, setToggleGroupMembers] = useState(false);
   const [toggleGroupName, setToggleGroupName] = useState(false);
+  const [toggleAddMember, setToggleAddMember] = useState(false);
+  const [toggleKickMember, setToggleKickMember] = useState(false);
   const [friendProfile, setFriendProfile] = useState<userInfo>();
 
   const user = useSelector(selectUserState);
@@ -115,6 +119,16 @@ const MoreOptions = ({
             <S.NormalItem onClick={() => setToggleGroupMembers(true)}>
               Group Members
             </S.NormalItem>
+          )}
+          {roomInfo.roomInfo.isGroup && (
+            <S.NormalItem onClick={() => setToggleAddMember(true)}>
+              Add Members
+            </S.NormalItem>
+          )}
+          {roomInfo.roomInfo.isGroup && (
+            <S.DeleteItem onClick={() => setToggleKickMember(true)}>
+              Kick Members
+            </S.DeleteItem>
           )}
           {!roomInfo.roomInfo.isGroup && (
             <S.DeleteItem onClick={() => FriendApi.block(userNeedChange.uid)}>
@@ -196,7 +210,23 @@ const MoreOptions = ({
         />
       )}
       {toggleGroupMembers && (
-        <GroupMembers setToggleGroupMembers={setToggleGroupMembers} />
+        <GroupMembers
+          setToggleGroupMembers={setToggleGroupMembers}
+          roomInfo={roomInfo}
+        />
+      )}
+      {toggleAddMember && (
+        <AddMemberModal
+          setToggleAddMember={setToggleAddMember}
+          roomInfo={roomInfo}
+        />
+      )}
+      {toggleKickMember && (
+        <KickMemberModal
+          setToggleKickMember={setToggleKickMember}
+          roomInfo={roomInfo}
+          user={user.info}
+        />
       )}
       {toggleGroupName && (
         <GroupNameModal

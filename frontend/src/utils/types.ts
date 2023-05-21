@@ -93,6 +93,7 @@ export type roomUser = {
   uid: string;
   unReadMsg: number;
   _id: string;
+  isLeave: boolean;
 };
 
 export type FormValue = {

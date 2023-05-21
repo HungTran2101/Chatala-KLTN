@@ -112,6 +112,22 @@ const ChatList = () => {
     };
   }, [roomList, roomInfo]);
 
+  useEffect(() => {
+    socket.on('addmember', async () => {
+      const res = await RoomApi.getRoomList();
+      dispatch(roomListActions.setRoomList(res.result));
+    });
+    socket.on('kickmember', async () => {
+      const res = await RoomApi.getRoomList();
+      dispatch(roomListActions.setRoomList(res.result));
+    });
+
+    return () => {
+      socket.off('addmember')
+      socket.off('kickmember')
+    }
+  }, []);
+
   return (
     <S.ChatList>
       <S.Wrapper>

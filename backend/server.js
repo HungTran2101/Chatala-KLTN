@@ -154,6 +154,16 @@ io.on('connection', (socket) => {
     }
   });
 
+  socket.on('addmember', (uid) => {
+    const user =  users.find(u => u.uid === uid)
+    socket.to(user.socketId).emit("addmember")
+  });
+
+  socket.on('kickmember', (uid) => {
+    const user =  users.find(u => u.uid === uid)
+    socket.to(user.socketId).emit("kickmember")
+  });
+
   // socket.on("sendMessage", (message, roomId) => {
   //   console.log("new message: ", message);
   //   console.log("roomId: ", roomId);
