@@ -82,14 +82,14 @@ const MoreOptions = ({
               (user, index) =>
                 index <= 3 && (
                   <S.RoomInfoAvatarGroup key={index}>
-                    <Image src={user.avatar} alt="avatar" layout="fill" />
+                    <Image src={user.avatar} alt='avatar' layout='fill' />
                   </S.RoomInfoAvatarGroup>
                 )
             )}
           </S.RoomInfoAvatar>
         ) : (
           <S.RoomInfoAvatar>
-            <Image src={roomInfo.roomAvatar} alt="avatar" layout="fill" />
+            <Image src={roomInfo.roomAvatar} alt='avatar' layout='fill' />
           </S.RoomInfoAvatar>
         )}
         <S.RoomInfoNameWrap>
@@ -131,8 +131,12 @@ const MoreOptions = ({
             </S.DeleteItem>
           )}
           {!roomInfo.roomInfo.isGroup && (
-            <S.DeleteItem onClick={() => FriendApi.block(userNeedChange.uid)}>
-              Block
+            <S.DeleteItem
+              onClick={() =>
+                FriendApi.unfriend(roomInfo.roomInfo.friendRelateId)
+              }
+            >
+              Unfriend
             </S.DeleteItem>
           )}
           {/* <S.DeleteItem>Delete this chat</S.DeleteItem> */}
@@ -158,8 +162,8 @@ const MoreOptions = ({
                   <Image
                     src={file.url}
                     alt="room's file"
-                    layout="fill"
-                    objectFit="cover"
+                    layout='fill'
+                    objectFit='cover'
                   />
                 </S.UploadedMedia>
               ))}
@@ -183,7 +187,7 @@ const MoreOptions = ({
               {files.map((file, index) => (
                 <S.FilePreview
                   key={index}
-                  target="_blank"
+                  target='_blank'
                   download
                   href={file.url}
                 >

@@ -25,6 +25,8 @@ export const API_URL = {
   friendDecline: `${API_BASE}/friend/decline`,
   block: `${API_BASE}/friend/block`,
   unblock: `${API_BASE}/friend/unblock`,
+  unfriend: `${API_BASE}/friend/unfriend`,
+  checkFriend: `${API_BASE}/friend/check-friend`,
   sendMessage: `${API_BASE}/message`,
   saveFile: `${API_BASE}/message/savefile`,
   getFile: `${API_BASE}/message/getfile`,

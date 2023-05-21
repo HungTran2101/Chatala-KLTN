@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import tw from 'twin.macro';
 import { MdGroup, MdGroupAdd } from 'react-icons/md';
+import { HiUserGroup } from 'react-icons/hi';
 
 export const Wrapper = styled.div`
   ${tw`flex flex-row -mx-1`}
@@ -18,6 +19,6 @@ export const AddGroupOption = styled(MdGroupAdd)`
   ${tw`hover:cursor-pointer hover:opacity-80 mx-2`}
 `;
 
-export const FriendsOption = styled(MdGroup)`
-  ${tw`hover:cursor-pointer hover:opacity-80 mx-2 text-[30px]`}
+export const FriendsOption = styled(HiUserGroup)`
+  ${tw`hover:cursor-pointer hover:opacity-80 mx-2`}
 `;
