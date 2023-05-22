@@ -1,8 +1,8 @@
-import styled, { keyframes } from "styled-components";
-import tw from "twin.macro";
-import { merge, zoomIn, slideInRight, slideInDown } from "react-animations";
-import { AiOutlineEdit } from "react-icons/ai";
-import { HiUserGroup } from "react-icons/hi";
+import styled, { keyframes } from 'styled-components';
+import tw from 'twin.macro';
+import { merge, zoomIn, slideInRight, slideInDown } from 'react-animations';
+import { AiOutlineEdit } from 'react-icons/ai';
+import { HiUserGroup } from 'react-icons/hi';
 
 const cbAnimate1 = merge(slideInRight, slideInDown);
 const MoreOptionAnimate = keyframes`${slideInRight}`;
@@ -73,7 +73,7 @@ export const OptionWrap = styled.div`
 `;
 
 export const WhiteBox = styled.div`
-  ${tw`p-5 py-2 bg-white mb-3`}
+  ${tw`bg-white mb-3`}
 `;
 
 export const Title = styled.p`
@@ -86,7 +86,7 @@ export const ExtendContent = styled.div`
 
 export const FileWrap = styled.div<{ wraptype?: string; visible: boolean }>`
   ${({ wraptype }) =>
-    wraptype === "file" ? tw`flex flex-col` : tw`grid grid-cols-3`}
+    wraptype === 'file' ? tw`flex flex-col` : tw`grid grid-cols-3`}
   ${({ visible }) => (visible ? tw`h-full` : tw`h-0`)}
   ${tw`gap-1`}
 `;

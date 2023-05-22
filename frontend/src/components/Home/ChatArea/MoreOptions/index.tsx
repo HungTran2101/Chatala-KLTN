@@ -16,9 +16,10 @@ import { selectFileState } from '../../../../features/redux/slices/fileSlice';
 import GroupNameModal from './GroupNameModel';
 import AddMemberModal from './AddMemberModal';
 import KickMemberModal from './KickMemberModal';
+import { Drawer, Popconfirm } from 'antd';
 
 interface IMoreOptions {
-  setToggleOption: (toggle: boolean) => void;
+  setToggleOption: () => void;
   setToggleImageZoom: (toggle: boolean) => void;
   setImageZoomList: (value: { index: number; list: fileType[] }) => void;
   toggleOption: boolean;
@@ -32,11 +33,11 @@ const MoreOptions = ({
   roomInfo,
   toggleOption,
 }: IMoreOptions) => {
-  const handleOutsideClick = () => {
-    setToggleOption(false);
-  };
+  // const handleOutsideClick = () => {
+  //   setToggleOption(false);
+  // };
 
-  const moreOptionsRef = useOutsideClick(handleOutsideClick);
+  // const moreOptionsRef = useOutsideClick(handleOutsideClick);
 
   const [photoExtend, setPhotoExtend] = useState(false);
   const [fileExtend, setFileExtend] = useState(false);
@@ -73,8 +74,39 @@ const MoreOptions = ({
     setImageZoomList({ index, list: photos });
   };
 
+  const [open, setOpen] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+
+  const showPopconfirm = () => {
+    setOpen(true);
+  };
+  const handleCancel = () => {
+    console.log('Clicked cancel button');
+    setOpen(false);
+  };
+  const handleOk = async (friendRelateId: string) => {
+    setConfirmLoading(true);
+
+    await FriendApi.unfriend(friendRelateId);
+
+    setTimeout(() => {
+      setOpen(false);
+      setConfirmLoading(false);
+    }, 2000);
+  };
+
   return (
-    <S.MoreOptions ref={moreOptionsRef} toggleOption={toggleOption}>
+    <Drawer
+      title='Room detail'
+      placement='right'
+      onClose={() => {
+        setToggleOption();
+        handleCancel();
+      }}
+      open={toggleOption}
+      getContainer={false}
+    >
+      {/* <S.MoreOptions ref={moreOptionsRef} toggleOption={toggleOption}> */}
       <S.RoomInfo>
         {roomInfo.roomInfo.isGroup ? (
           <S.RoomInfoAvatar isGroup={1}>
@@ -131,15 +163,18 @@ const MoreOptions = ({
             </S.DeleteItem>
           )}
           {!roomInfo.roomInfo.isGroup && (
-            <S.DeleteItem
-              onClick={() =>
-                FriendApi.unfriend(roomInfo.roomInfo.friendRelateId)
-              }
+            <Popconfirm
+              title='Title'
+              description='Open Popconfirm with async logic'
+              open={open}
+              onConfirm={() => handleOk(roomInfo.roomInfo.friendRelateId)}
+              okButtonProps={{ loading: confirmLoading }}
+              onCancel={handleCancel}
+              okType={'danger'}
             >
-              Unfriend
-            </S.DeleteItem>
+              <S.DeleteItem onClick={showPopconfirm}>Unfriend</S.DeleteItem>
+            </Popconfirm>
           )}
-          {/* <S.DeleteItem>Delete this chat</S.DeleteItem> */}
         </S.WhiteBox>
         <S.WhiteBox>
           <S.Title onClick={() => setPhotoExtend(!photoExtend)}>
@@ -238,7 +273,7 @@ const MoreOptions = ({
           roomInfo={roomInfo}
         />
       )}
-    </S.MoreOptions>
+    </Drawer>
   );
 };
 

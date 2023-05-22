@@ -51,7 +51,6 @@ const ChatArea = () => {
   const bottomDiv = useRef<HTMLDivElement>(null);
   const chatMainMsgOuter = useRef<HTMLDivElement>(null);
 
-  const [toggleOption, setToggleOption] = useState(false);
   const [toggleImageZoom, setToggleImageZoom] = useState(false);
   const [imageZoomList, setImageZoomList] = useState<{
     index: number;
@@ -298,18 +297,30 @@ const ChatArea = () => {
     checker();
   }, [roomInfo]);
 
+  const [openMoreOption, setOpenMoreOption] = useState(false);
+
+  const showDrawer = () => {
+    setOpenMoreOption(true);
+  };
+
+  const onCloseDrawer = () => {
+    setOpenMoreOption(false);
+  };
+
+  useEffect(() => {
+    console.log(openMoreOption);
+  }, [openMoreOption]);
+
   return (
     <S.ChatArea>
-      <ChatAreaHead setToggleOption={setToggleOption} />
-      {toggleOption && (
-        <MoreOptions
-          roomInfo={roomInfo.info!}
-          setToggleOption={setToggleOption}
-          toggleOption={toggleOption}
-          setToggleImageZoom={setToggleImageZoom}
-          setImageZoomList={setImageZoomList}
-        />
-      )}
+      <ChatAreaHead setToggleOption={showDrawer} />
+      <MoreOptions
+        roomInfo={roomInfo.info!}
+        setToggleOption={onCloseDrawer}
+        toggleOption={openMoreOption}
+        setToggleImageZoom={setToggleImageZoom}
+        setImageZoomList={setImageZoomList}
+      />
       {toggleImageZoom && (
         <ChatImageZoom
           imageZoomList={imageZoomList.list}
