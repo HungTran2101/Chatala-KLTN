@@ -160,7 +160,7 @@ const findUser = asyncHandler(async (req, res, next) => {
     let status = undefined;
     let notificationId = undefined;
     listRelatedId.forEach((childIt) => {
-      if (it.id === childIt.id) {
+      if (it.id === childIt.id && childIt.status !== 'disable') {
         status = childIt.status;
         notificationId = childIt.notificationId;
       }
