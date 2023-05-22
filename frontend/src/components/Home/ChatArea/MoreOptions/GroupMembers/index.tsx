@@ -14,18 +14,25 @@ import { Button, Modal } from 'antd';
 import { RoomApi } from '../../../../../services/api/room';
 import { roomListActions } from '../../../../../features/redux/slices/roomListSlice';
 import { socket } from '../../../../../contexts/socket';
+import { GrUserAdmin } from 'react-icons/gr';
 
 interface IGroupMembers {
   open: boolean;
   closeModal: () => void;
   roomInfo: roomInfo;
+  user: userInfo;
 }
 
-const GroupMembers = ({ open, closeModal, roomInfo }: IGroupMembers) => {
+const GroupMembers = ({ open, closeModal, roomInfo, user }: IGroupMembers) => {
   const [friendProfile, setFriendProfile] = useState<userInfo>();
   // const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
   // const [toggleNickname, setToggleNickname] = useState(false);
   const [userNeedChange, setUserNeedChange] = useState<roomUser>();
+
+  const activeUsers: roomUser[] = [];
+  roomInfo.roomInfo.users.forEach((u) => !u.isLeave && activeUsers.push(u));
+
+  const isLeader = roomInfo.roomInfo.users.find(u => u.uid === user._id).role
 
   const seeFriendProfile = async (uid: string) => {
     const friend = await UsersApi.userFindById(uid);
@@ -69,30 +76,38 @@ const GroupMembers = ({ open, closeModal, roomInfo }: IGroupMembers) => {
       onOk={closeModal}
       onCancel={closeModal}
       cancelButtonProps={{ style: { display: 'none' } }}
-      okType='link'
+      okType="link"
       destroyOnClose
     >
       <S.GroupMembersSearch>
         <S.GroupMembersSearchIcon />
-        <S.GroupMembersSearchInput placeholder='Search with name or phone number...' />
+        <S.GroupMembersSearchInput placeholder="Search with name or phone number..." />
       </S.GroupMembersSearch>
       <S.GroupMembersList>
-        {roomInfo.roomInfo.users.map((data, index) => (
+        {activeUsers.map((data, index) => (
           <S.GroupMembersItem key={index}>
             <S.GroupMembersInfo onClick={() => seeFriendProfile(data.uid)}>
               <S.LeftWrap>
                 <S.GroupMembersAvatar>
                   <Image
                     src={data.avatar}
-                    alt='avatar'
-                    layout='fill'
-                    objectFit='cover'
+                    alt="avatar"
+                    layout="fill"
+                    objectFit="cover"
                   />
                 </S.GroupMembersAvatar>
                 <div>
-                  <S.GroupMembersName>{data.nickname}</S.GroupMembersName>
+                  <S.GroupMembersName>
+                    {data.nickname}{' '}
+                    {data.role && (
+                      <GrUserAdmin
+                        style={{ display: 'inline-block' }}
+                        size={14}
+                      />
+                    )}
+                  </S.GroupMembersName>
                   <Button
-                    type='link'
+                    type="link"
                     onClick={() => changeNicknameClicked(data)}
                     style={{ fontStyle: 'italic', marginTop: '-10px' }}
                   >
@@ -101,9 +116,11 @@ const GroupMembers = ({ open, closeModal, roomInfo }: IGroupMembers) => {
                 </div>
               </S.LeftWrap>
 
-              <S.KickMemberButton onClick={() => kickMember(data)}>
-                Kick member
-              </S.KickMemberButton>
+              {isLeader && data.uid !== user._id && (
+                <S.KickMemberButton onClick={() => kickMember(data)}>
+                  Kick member
+                </S.KickMemberButton>
+              )}
               {/* <Button>Kick member</Button> */}
             </S.GroupMembersInfo>
             {/* <S.GroupMembersChangeNickname

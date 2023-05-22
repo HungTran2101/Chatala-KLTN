@@ -45,7 +45,7 @@ const MoreOptions = ({
   // const [toggleGroupMembers, setToggleGroupMembers] = useState(false);
   // const [toggleGroupName, setToggleGroupName] = useState(false);
   // const [toggleAddMember, setToggleAddMember] = useState(false);
-  const [toggleKickMember, setToggleKickMember] = useState(false);
+  // const [toggleKickMember, setToggleKickMember] = useState(false);
   const [friendProfile, setFriendProfile] = useState<userInfo>();
 
   const user = useSelector(selectUserState);
@@ -152,9 +152,9 @@ const MoreOptions = ({
               <S.NormalItem onClick={() => setModalGroupAdd(true)}>
                 Add Members
               </S.NormalItem>
-              <S.DeleteItem onClick={() => setToggleKickMember(true)}>
+              {/* <S.DeleteItem onClick={() => setToggleKickMember(true)}>
                 Kick Members
-              </S.DeleteItem>
+              </S.DeleteItem> */}
             </>
           )}
           {!roomInfo.roomInfo.isGroup && (
@@ -253,19 +253,20 @@ const MoreOptions = ({
         open={modalGroupMembers}
         closeModal={() => setModalGroupMembers(false)}
         roomInfo={roomInfo}
+        user={user.info}
       />
       <AddMemberModal
         open={modalGroupAdd}
         closeModal={() => setModalGroupAdd(false)}
         roomInfo={roomInfo}
       />
-      {toggleKickMember && (
+      {/* {toggleKickMember && (
         <KickMemberModal
           setToggleKickMember={setToggleKickMember}
           roomInfo={roomInfo}
           user={user.info}
         />
-      )}
+      )} */}
       <GroupNameModal
         open={modalGroupName}
         closeModal={() => setModalGroupName(false)}
