@@ -153,9 +153,9 @@ const MoreOptions = ({
               <S.NormalItem onClick={() => setModalGroupAdd(true)}>
                 Add Members
               </S.NormalItem>
-              <S.DeleteItem onClick={() => setToggleKickMember(true)}>
+              {/* <S.DeleteItem onClick={() => setToggleKickMember(true)}>
                 Kick Members
-              </S.DeleteItem>
+              </S.DeleteItem> */}
             </>
           )}
           {!roomInfo.roomInfo.isGroup && (

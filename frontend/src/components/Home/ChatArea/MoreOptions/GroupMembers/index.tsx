@@ -10,10 +10,11 @@ import { roomInfo, roomUser, userInfo } from '../../../../../utils/types';
 import UserInfo from '../../../TopBar/UserInfo';
 import NicknameModal from '../NicknameModal';
 import * as S from './GroupMembers.styled';
-import { Button, Modal } from 'antd';
+import { Button as AntButton, Modal } from 'antd';
 import { RoomApi } from '../../../../../services/api/room';
 import { roomListActions } from '../../../../../features/redux/slices/roomListSlice';
 import { socket } from '../../../../../contexts/socket';
+import Button from '../../../../Global/Button';
 
 interface IGroupMembers {
   open: boolean;
@@ -91,20 +92,20 @@ const GroupMembers = ({ open, closeModal, roomInfo }: IGroupMembers) => {
                 </S.GroupMembersAvatar>
                 <div>
                   <S.GroupMembersName>{data.nickname}</S.GroupMembersName>
-                  <Button
+                  <AntButton
                     type='link'
                     onClick={() => changeNicknameClicked(data)}
                     style={{ fontStyle: 'italic', marginTop: '-10px' }}
                   >
                     Change nickname
-                  </Button>
+                  </AntButton>
                 </div>
               </S.LeftWrap>
 
-              <S.KickMemberButton onClick={() => kickMember(data)}>
+              {/* <S.KickMemberButton onClick={() => kickMember(data)}>
                 Kick member
-              </S.KickMemberButton>
-              {/* <Button>Kick member</Button> */}
+              </S.KickMemberButton> */}
+              <Button onClick={() => kickMember(data)}>Kick member</Button>
             </S.GroupMembersInfo>
             {/* <S.GroupMembersChangeNickname
             >

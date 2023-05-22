@@ -11,6 +11,7 @@ import { RoomApi } from '../../../../../services/api/room';
 import { roomListActions } from '../../../../../features/redux/slices/roomListSlice';
 import { useSocketContext } from '../../../../../contexts/socket';
 import { Modal } from 'antd';
+import Button from '../../../../Global/Button';
 
 interface IAddMemberModal {
   closeModal: () => void;
@@ -89,9 +90,9 @@ const AddMemberModal = ({ open, closeModal, roomInfo }: IAddMemberModal) => {
               </S.AddMemberAvatar>
               <S.AddMemberName>{data.name}</S.AddMemberName>
             </S.AddMemberInfo>
-            <S.AddMemberButton onClick={() => addMember(data)}>
+            <Button variant='blue' onClick={() => addMember(data)}>
               + Add member
-            </S.AddMemberButton>
+            </Button>
           </S.AddMemberItem>
         ))}
       </S.AddMemberList>

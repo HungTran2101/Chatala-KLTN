@@ -8,7 +8,8 @@ import { CreateGroupArray } from '../../../../../utils/dataConfig';
 import { userInfo } from '../../../../../utils/types';
 import UserInfo from '../../../TopBar/UserInfo';
 import * as S from './CreateGroup.styled';
-import { Modal } from 'antd';
+import { Modal, Button as AntButton } from 'antd';
+import Button from '../../../../Global/Button';
 
 interface ICreateGroup {
   onClose: () => void;
@@ -137,13 +138,19 @@ const CreateGroup = ({ open, onClose }: ICreateGroup) => {
               </S.CreateGroupAvatar>
               <S.CreateGroupName>{data.name}</S.CreateGroupName>
             </S.CreateGroupInfo>
-            {addedUsers.some((user) => user._id === data._id) ? (
+            {/* {addedUsers.some((user) => user._id === data._id) ? (
               <S.CreateGroupAdded>Added</S.CreateGroupAdded>
-            ) : (
-              <S.CreateGroupAdd onClick={() => addUserToGroup(data)}>
-                Add
-              </S.CreateGroupAdd>
-            )}
+            ) : ( */}
+            <Button
+              variant='blue'
+              disabled={
+                addedUsers.some((user) => user._id === data._id) ? true : false
+              }
+              onClick={() => addUserToGroup(data)}
+            >
+              + Add to group
+            </Button>
+            {/* )} */}
           </S.CreateGroupItem>
         ))}
       </S.GreateGroupList>

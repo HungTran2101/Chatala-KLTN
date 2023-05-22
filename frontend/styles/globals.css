@@ -55,3 +55,8 @@ a {
 .ant-image-preview-img-wrapper img {
   object-fit: contain;
 }
+
+.rc-virtual-list-holder {
+  scroll-behavior: unset;
+  max-height: 500px;
+}

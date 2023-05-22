@@ -61,8 +61,8 @@ export const ShowFriendsInfo = styled.div`
 `;
 
 export const ShowFriendsAvatar = styled.figure`
-  ${tw`relative w-[55px] h-[55px] rounded-lg overflow-hidden flex-shrink-0`}
-  border: 1px solid gray;
+  ${tw`relative w-[60px] h-[60px] rounded-lg overflow-hidden flex-shrink-0`}
+  border: 1px solid #eee;
 `;
 
 export const ShowFriendsName = styled.div`

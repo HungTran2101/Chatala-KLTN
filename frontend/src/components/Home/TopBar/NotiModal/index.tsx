@@ -12,22 +12,11 @@ import { useSocketContext } from '../../../../contexts/socket';
 interface INotiModal {
   listNoti: any;
   getListNotify: () => void;
-  setActiveNotiModal: (isActive: boolean) => void;
 }
 
-const NotiModal = ({
-  listNoti,
-  getListNotify,
-  setActiveNotiModal,
-}: INotiModal) => {
-  const handleOutsideClick = () => {
-    setActiveNotiModal(false);
-  };
-
+const NotiModal = ({ listNoti, getListNotify }: INotiModal) => {
   const dispatch = useDispatch();
   const socket = useSocketContext();
-
-  const NotiRef = useOutsideClick(handleOutsideClick);
 
   const friendAccept = async (id: string, uid: string, nickname: string) => {
     try {

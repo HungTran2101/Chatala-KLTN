@@ -55,7 +55,7 @@ export const SearchInput = styled.input`
 `;
 
 export const SearchIcon = styled(BiSearchAlt)`
-  ${tw`absolute hover:cursor-pointer text-[28px] text-quaternary mr-1.5 right-0`}
+  ${tw`absolute hover:cursor-pointer text-[28px] text-quaternary mr-1.5 right-0 z-50`}
 `;
 
 export const Option = styled.div`
@@ -87,4 +87,57 @@ export const OptionNotifyNumber = styled.div<{ number: number }>`
   text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
               1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
   ${({ number }) => number >= 100 && tw`right-0`}
+`;
+
+// Search
+export const SearchModalItem = styled.div`
+  ${tw`relative flex p-2 rounded-[20px] items-center w-full bg-secondary`}
+`;
+
+export const SearchModalInfo = styled.div`
+  ${tw`relative flex items-center hover:cursor-pointer flex-grow`}
+`;
+
+export const SearchModalAvatar = styled.figure`
+  ${tw`relative w-[55px] h-[55px] rounded-full overflow-hidden flex-shrink-0`}
+  border: 1px solid gray;
+`;
+export const SearchModalNameWrapper = styled.div`
+  ${tw`relative ml-3.5 w-full`}
+`;
+
+export const SearchModalName = styled.div`
+  ${tw`text-blue-700 font-semibold text-[18px]`}
+`;
+
+export const SearchModalNumFriend = styled.div`
+  ${tw`text-[#434343] text-[16px]`}
+`;
+
+export const SearchModalOption = styled.div`
+  ${tw`text-white text-center rounded-[20px] min-w-[115px] font-semibold text-sm px-5 py-2.5 ml-1 hover:cursor-pointer hover:opacity-80`}
+`;
+
+export const SearchModalMessage = styled(SearchModalOption)`
+  ${tw`bg-blue-500`}
+`;
+
+export const SearchModalAddFriend = styled(SearchModalOption)`
+  ${tw`bg-quaternary`}
+`;
+
+export const SearchModalPending = styled(SearchModalOption)`
+  ${tw`bg-gray-500 opacity-50 hover:opacity-50 hover:cursor-default`}
+`;
+
+export const SearchModalAccept = styled(SearchModalOption)`
+  ${tw`bg-green-500 mr-1`}
+`;
+
+export const SearchModalDecline = styled(SearchModalOption)`
+  ${tw`bg-red-500`}
+`;
+
+export const FlexWrap = styled.div`
+  ${tw`flex`}
 `;
