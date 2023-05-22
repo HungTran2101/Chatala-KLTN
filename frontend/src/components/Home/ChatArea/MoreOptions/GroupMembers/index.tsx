@@ -3,22 +3,21 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectRoomInfoState } from "../../../../../features/redux/slices/roomInfoSlice";
 import { UsersApi } from "../../../../../services/api/users";
-import { roomUser, userInfo } from "../../../../../utils/types";
+import { roomInfo, roomUser, userInfo } from "../../../../../utils/types";
 import UserInfo from "../../../TopBar/UserInfo";
 import NicknameModal from "../NicknameModal";
 import * as S from "./GroupMembers.styled";
 
 interface IGroupMembers {
   setToggleGroupMembers: (toggle: boolean) => void;
+  roomInfo: roomInfo;
 }
 
-const GroupMembers = ({ setToggleGroupMembers }: IGroupMembers) => {
+const GroupMembers = ({ setToggleGroupMembers, roomInfo }: IGroupMembers) => {
   const [friendProfile, setFriendProfile] = useState<userInfo>();
   const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
   const [toggleNickname, setToggleNickname] = useState(false);
   const [userNeedChange, setUserNeedChange] = useState<roomUser>();
-
-  const roomInfo = useSelector(selectRoomInfoState);
 
   const seeFriendProfile = async (uid: string) => {
     const friend = await UsersApi.userFindById(uid);
@@ -41,7 +40,7 @@ const GroupMembers = ({ setToggleGroupMembers }: IGroupMembers) => {
           <S.GroupMembersSearchInput placeholder="Search with name or phone number..." />
         </S.GroupMembersSearch>
         <S.GroupMembersList>
-          {roomInfo.info.roomInfo.users.map((data, index) => (
+          {roomInfo.roomInfo.users.map((data, index) => (
             <S.GroupMembersItem key={index}>
               <S.GroupMembersInfo onClick={() => seeFriendProfile(data.uid)}>
                 <S.GroupMembersAvatar>
@@ -71,7 +70,7 @@ const GroupMembers = ({ setToggleGroupMembers }: IGroupMembers) => {
         {toggleNickname && (
           <NicknameModal
             setToggleNickname={setToggleNickname}
-            roomInfo={roomInfo.info}
+            roomInfo={roomInfo}
             userNeedChange={userNeedChange}
           />
         )}

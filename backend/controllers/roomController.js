@@ -197,33 +197,72 @@ const addMember = asyncHandler(async (req, res, next) => {
 
   const getRoom = await Rooms.findById({ _id: roomId });
 
-  const findUser = getRoom.users.find((value) => value.uid === uid);
+  const findUser = getRoom.users.find(
+    (value) => value.uid.toString() === uid.toString()
+  );
 
-  res.status(200).json(findUser);
+  if (findUser) {
+    if (findUser.isLeave) {
+      const newRoomMember = await Rooms.findOneAndUpdate(
+        { _id: roomId, 'users.uid': findUser.uid },
+        {
+          $set: { 'users.$.isLeave': false },
+        },
+        { new: true }
+      );
+      return res.status(200).json({
+        newMember: getMember,
+        existed: true,
+      });
+    } else {
+      return next(
+        new ErrorHandler(`${getMember.name} was added to the group!`, 400)
+      );
+    }
+  } else {
+    const newRoomMember = await Rooms.findOneAndUpdate(
+      { _id: roomId },
+      {
+        $push: {
+          users: {
+            uid: uid,
+            nickname: getMember.name,
+          },
+        },
+      },
+      {
+        new: true,
+      }
+    );
+    return res.status(200).json({
+      newMember: getMember,
+      existed: false,
+    });
+  }
+});
 
-  // if (findUser) {
-  //   return next(
-  //     new ErrorHandler(`${getMember.name} was added to the group!`, 400)
-  //   );
-  // } else {
-  //   const newRoomMember = await Rooms.findOneAndUpdate(
-  //     { _id: roomId },
-  //     {
-  //       $push: {
-  //         users: {
-  //           uid: uid,
-  //           nickname: getMember.name,
-  //         },
-  //       },
-  //     },
-  //     {
-  //       new: true,
-  //     }
-  //   );
-  //   res.status(200).json({
-  //     newRoomMember,
-  //   });
-  // }
+const kickMember = asyncHandler(async (req, res, next) => {
+  const roomId = req.params.roomId;
+  const { uid } = req.body;
+
+  try {
+    if (!mongoose.isValidObjectId(uid)) {
+      return next(new ErrorHandler(`User id is required`, 400));
+    }
+    if (!roomId || !mongoose.isValidObjectId(roomId)) {
+      return next(new ErrorHandler(`Room id is required`, 400));
+    }
+
+    const newRoomMember = await Rooms.findOneAndUpdate(
+      { _id: roomId, 'users.uid': uid },
+      { $set: { 'users.$.isLeave': true } },
+      { new: true }
+    );
+
+    return res.status(200).json({ uid, roomId });
+  } catch (error) {
+    return res.status(400).json(error);
+  }
 });
 
 const increaseUnreadMsg = asyncHandler(async (req, res, next) => {
@@ -269,6 +308,7 @@ module.exports = {
   changeRoomName,
   setNickname,
   addMember,
+  kickMember,
   increaseUnreadMsg,
   userSeenRoom,
 };

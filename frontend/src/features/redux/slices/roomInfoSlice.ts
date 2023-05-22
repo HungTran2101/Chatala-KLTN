@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { AppState } from "../store";
-import { HYDRATE } from "next-redux-wrapper";
-import { roomInfo } from "../../../utils/types";
+import { createSlice } from '@reduxjs/toolkit';
+import { AppState } from '../store';
+import { HYDRATE } from 'next-redux-wrapper';
+import { roomInfo } from '../../../utils/types';
 
 // Type for our state
 export interface roomInfoState {
@@ -19,7 +19,7 @@ const initialState: roomInfoState = {
 
 // Actual Slice
 export const roomInfoSlice = createSlice({
-  name: "roomInfo",
+  name: 'roomInfo',
   initialState,
   reducers: {
     requestRoomInfo(state, action) {
@@ -38,14 +38,44 @@ export const roomInfoSlice = createSlice({
     },
 
     changeNickname(state, action) {
-      const index = state.info.roomInfo.users.findIndex(user => user.uid === action.payload.uid)
-      state.info.roomInfo.users[index].nickname = action.payload.nickname
-      state.info.roomName = action.payload.nickname
+      const index = state.info.roomInfo.users.findIndex(
+        (user) => user.uid === action.payload.uid
+      );
+      state.info.roomInfo.users[index].nickname = action.payload.nickname;
+      state.info.roomName = action.payload.nickname;
     },
+
     changeGroupName(state, action) {
-      state.info.roomName = action.payload
-      state.info.roomInfo.groupName = action.payload
-    }
+      state.info.roomName = action.payload;
+      state.info.roomInfo.groupName = action.payload;
+    },
+
+    addMember(state, action) {
+      const { newMember, existed } = action.payload;
+
+      if (existed) {
+        state.info.roomInfo.users.map((u) => {
+          if (u.uid === newMember._id) u.isLeave = false;
+        });
+      } else {
+        state.info.roomInfo.users.push({
+          _id: '',
+          uid: newMember._id,
+          avatar: newMember.avatar,
+          nickname: newMember.name,
+          unReadMsg: 0,
+          role: false,
+          isLeave: false,
+        });
+      }
+    },
+
+    kickMember(state, action) {
+      const { uid } = action.payload;
+      const uindex = state.info.roomInfo.users.findIndex((u) => u.uid === uid);
+
+      state.info.roomInfo.users[uindex].isLeave = true;
+    },
 
     // Special reducer for hydrating the state. Special case for next-redux-wrapper
     // extraReducers: {

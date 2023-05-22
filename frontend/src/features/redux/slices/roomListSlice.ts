@@ -116,6 +116,34 @@ export const roomListSlice = createSlice({
         state.list[index].roomInfo.groupName = action.payload.groupName;
       }
     },
+    updateRoomForNewMember(state, action) {
+      const { newMember, existed, roomId } = action.payload;
+      const roomIndex = state.list.findIndex((r) => r.roomInfo._id === roomId);
+
+      if (existed) {
+        state.list[roomIndex].roomInfo.users.map((u) => {
+          if (u.uid === newMember._id) u.isLeave = false;
+        });
+      } else {
+        state.list[roomIndex].roomInfo.users.push({
+          _id: '',
+          uid: newMember._id,
+          avatar: newMember.avatar,
+          nickname: newMember.nickname,
+          unReadMsg: 0,
+          role: false,
+          isLeave: false,
+        });
+      }
+    },
+
+    updateRoomForKickMember(state, action) {
+      const { uid, roomId } = action.payload;
+      const roomIndex = state.list.findIndex(r => r.roomInfo._id === roomId);
+      const uIndex = state.list[roomIndex].roomInfo.users.findIndex(u => u.uid === uid);
+
+      state.list[roomIndex].roomInfo.users[uIndex].isLeave = true;
+    },
 
     // Special reducer for hydrating the state. Special case for next-redux-wrapper
     // extraReducers: {

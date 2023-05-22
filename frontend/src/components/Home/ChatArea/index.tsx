@@ -229,7 +229,6 @@ const ChatArea = () => {
   const onSubmit = async (values: messageRawType, { setFieldValue }: any) => {
     if (values.msg.trim() !== '' || values.files.length > 0) {
       values.replyId = util.replyId;
-      console.log(values);
 
       try {
         const uploadedFiles: fileType[] = await uploadFiles(values.files);
