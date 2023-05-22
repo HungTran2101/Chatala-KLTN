@@ -24,12 +24,14 @@ export const CreateGroupTitle = styled.div`
   ${tw`text-2xl font-semibold mb-3 ml-1 text-white`}
 `;
 
-export const CreateGroupSearch = styled.div`
+export const CreateGroupSearch = styled.div<{ noAdded: boolean }>`
   ${tw`relative w-full flex items-center mb-4`}
+  ${({ noAdded }) => !noAdded && tw`mb-0`}
 `;
-export const CreateGroupSearchInput = styled.input`
-  ${tw`bg-[#F8F8F8] text-lg rounded-[50px] pr-2 pl-9 py-2 w-full`}
+export const CreateGroupSearchInput = styled.input<{ noAdded: boolean }>`
+  ${tw`bg-secondary text-lg rounded-[20px] pr-2 pl-9 py-2 w-full`}
   outline: none;
+  ${({ noAdded }) => !noAdded && tw`rounded-b-none`}
 `;
 
 export const CreateGroupSearchIcon = styled(BiSearchAlt)`
@@ -41,7 +43,7 @@ export const CreateGroupAddedUsers = styled.div`
 `;
 
 export const CreateGroupAddedUsersInner = styled.div`
-  ${tw`flex w-0 flex-grow overflow-auto bg-secondary rounded-[20px]`}
+  ${tw`flex w-0 flex-grow overflow-auto bg-secondary rounded-b-[20px]`}
   &::-webkit-scrollbar-track {
     ${tw`bg-transparent rounded-[10px]`}
   }
@@ -92,7 +94,7 @@ export const GreateGroupList = styled.div`
 `;
 
 export const CreateGroupItem = styled.div`
-  ${tw`flex p-2 rounded-[20px] my-1.5 items-center relative w-full bg-secondary justify-between`}
+  ${tw`relative flex flex-grow my-1 p-2 items-center border-b-[2px] justify-between`}
 `;
 
 export const CreateGroupInfo = styled.div`
@@ -100,7 +102,7 @@ export const CreateGroupInfo = styled.div`
 `;
 
 export const CreateGroupAvatar = styled.figure`
-  ${tw`relative w-[55px] h-[55px] rounded-full overflow-hidden flex-shrink-0`}
+  ${tw`relative w-[55px] h-[55px] rounded-lg overflow-hidden flex-shrink-0`}
   border: 1px solid gray;
 `;
 
@@ -109,9 +111,9 @@ export const CreateGroupName = styled.div`
 `;
 
 export const CreateGroupAdd = styled.div`
-  ${tw`text-primary bg-quaternary rounded-[50px] font-semibold text-sm px-5 py-2.5 ml-1 hover:opacity-100 hover:cursor-pointer opacity-90`}
+  ${tw`text-primary bg-quaternary rounded-[10px] font-semibold text-sm px-5 py-2 ml-1 hover:opacity-100 hover:cursor-pointer opacity-90`}
 `;
 
 export const CreateGroupAdded = styled.div`
-  ${tw`text-primary bg-gray-500 rounded-[50px] font-semibold text-sm px-5 py-2.5 ml-1 hover:cursor-default`}
+  ${tw`text-primary bg-gray-500 rounded-[10px] font-semibold text-sm px-5 py-2 ml-1 hover:cursor-default`}
 `;

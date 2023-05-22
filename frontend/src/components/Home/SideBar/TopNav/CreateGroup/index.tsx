@@ -8,9 +8,11 @@ import { CreateGroupArray } from '../../../../../utils/dataConfig';
 import { userInfo } from '../../../../../utils/types';
 import UserInfo from '../../../TopBar/UserInfo';
 import * as S from './CreateGroup.styled';
+import { Modal } from 'antd';
 
 interface ICreateGroup {
-  setToggleCreateGroup: (toggle: boolean) => void;
+  onClose: () => void;
+  open: boolean;
 }
 
 type userToAdd = {
@@ -18,7 +20,7 @@ type userToAdd = {
   nickname: string;
 };
 
-const CreateGroup = ({ setToggleCreateGroup }: ICreateGroup) => {
+const CreateGroup = ({ open, onClose }: ICreateGroup) => {
   const dispatch = useDispatch();
 
   const [addedUsers, setAddedUsers] = useState<userInfo[]>([]);
@@ -59,7 +61,7 @@ const CreateGroup = ({ setToggleCreateGroup }: ICreateGroup) => {
         if (createdRoom) {
           const rooms = await RoomApi.getRoomList();
           dispatch(roomListActions.setRoomList(rooms.result));
-          setToggleCreateGroup(false);
+          onClose();
         }
       } catch (err: any) {
         console.log(err);
@@ -73,68 +75,75 @@ const CreateGroup = ({ setToggleCreateGroup }: ICreateGroup) => {
   };
 
   return (
-    <S.CreateGroupModal>
-      <S.CreateGroupOverlay onClick={() => setToggleCreateGroup(false)} />
-      <S.CreateGroupBody>
-        <S.CreateGroupTitle>Creating Group Chat</S.CreateGroupTitle>
-        <S.CreateGroupSearch>
-          <S.CreateGroupSearchIcon />
-          <S.CreateGroupSearchInput placeholder="Search with name or phone number..." />
-        </S.CreateGroupSearch>
-        {addedUsers.length > 0 && (
-          <S.CreateGroupAddedUsers>
-            <S.CreateGroupAddedUsersInner>
-              {addedUsers.map((data, index) => (
-                <S.CreateGroupAddedUser key={index}>
-                  <S.CreateGroupAddedUserAvatar>
-                    <Image src={data.avatar} layout="fill" />
-                  </S.CreateGroupAddedUserAvatar>
-                  <S.CreateGroupAddedUserName>
-                    {data.name}
-                  </S.CreateGroupAddedUserName>
-                  <S.CreateGroupAddedUserRemove
-                    onClick={() => removeUserToGroup(index)}
-                  />
-                </S.CreateGroupAddedUser>
-              ))}
-            </S.CreateGroupAddedUsersInner>
-            <S.CreateGroupSubmit onClick={createGroup}>
-              Create
-            </S.CreateGroupSubmit>
-          </S.CreateGroupAddedUsers>
-        )}
-        <S.GreateGroupList>
-          {friends.list.map((data, index) => (
-            <S.CreateGroupItem key={index}>
-              <S.CreateGroupInfo onClick={() => showFriendProfile(data)}>
-                <S.CreateGroupAvatar>
-                  <Image
-                    src={data.avatar}
-                    alt="avatar"
-                    layout="fill"
-                    objectFit="cover"
-                  />
-                </S.CreateGroupAvatar>
-                <S.CreateGroupName>{data.name}</S.CreateGroupName>
-              </S.CreateGroupInfo>
-              {addedUsers.some((user) => user._id === data._id) ? (
-                <S.CreateGroupAdded>Added</S.CreateGroupAdded>
-              ) : (
-                <S.CreateGroupAdd onClick={() => addUserToGroup(data)}>
-                  Add
-                </S.CreateGroupAdd>
-              )}
-            </S.CreateGroupItem>
-          ))}
-        </S.GreateGroupList>
-        {toggleFriendProfile && (
-          <UserInfo
-            friendProfile={friendProfile}
-            setUserInfoModal={setToggleFriendProfile}
-          />
-        )}
-      </S.CreateGroupBody>
-    </S.CreateGroupModal>
+    <Modal
+      title='Create group'
+      open={open}
+      onOk={() => {
+        createGroup();
+        onClose();
+      }}
+      onCancel={onClose}
+      okType='default'
+      okText='Create group'
+      okButtonProps={{ disabled: addedUsers.length > 0 ? false : true }}
+    >
+      <S.CreateGroupSearch noAdded={addedUsers.length > 0 ? false : true}>
+        <S.CreateGroupSearchIcon />
+        <S.CreateGroupSearchInput
+          placeholder='Search with name or phone number...'
+          noAdded={addedUsers.length > 0 ? false : true}
+        />
+      </S.CreateGroupSearch>
+      {addedUsers.length > 0 && (
+        <S.CreateGroupAddedUsers>
+          <S.CreateGroupAddedUsersInner>
+            {addedUsers.map((data, index) => (
+              <S.CreateGroupAddedUser key={index}>
+                <S.CreateGroupAddedUserAvatar>
+                  <Image src={data.avatar} layout='fill' />
+                </S.CreateGroupAddedUserAvatar>
+                <S.CreateGroupAddedUserName>
+                  {data.name}
+                </S.CreateGroupAddedUserName>
+                <S.CreateGroupAddedUserRemove
+                  onClick={() => removeUserToGroup(index)}
+                />
+              </S.CreateGroupAddedUser>
+            ))}
+          </S.CreateGroupAddedUsersInner>
+        </S.CreateGroupAddedUsers>
+      )}
+      <S.GreateGroupList>
+        {friends.list.map((data, index) => (
+          <S.CreateGroupItem key={index}>
+            <S.CreateGroupInfo onClick={() => showFriendProfile(data)}>
+              <S.CreateGroupAvatar>
+                <Image
+                  src={data.avatar}
+                  alt='avatar'
+                  layout='fill'
+                  objectFit='cover'
+                />
+              </S.CreateGroupAvatar>
+              <S.CreateGroupName>{data.name}</S.CreateGroupName>
+            </S.CreateGroupInfo>
+            {addedUsers.some((user) => user._id === data._id) ? (
+              <S.CreateGroupAdded>Added</S.CreateGroupAdded>
+            ) : (
+              <S.CreateGroupAdd onClick={() => addUserToGroup(data)}>
+                Add
+              </S.CreateGroupAdd>
+            )}
+          </S.CreateGroupItem>
+        ))}
+      </S.GreateGroupList>
+      {toggleFriendProfile && (
+        <UserInfo
+          friendProfile={friendProfile}
+          setUserInfoModal={setToggleFriendProfile}
+        />
+      )}
+    </Modal>
   );
 };
 

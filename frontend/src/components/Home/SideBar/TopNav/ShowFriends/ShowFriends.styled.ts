@@ -1,5 +1,7 @@
 import { zoomIn } from 'react-animations';
+import { AiOutlineRight } from 'react-icons/ai';
 import { BiSearchAlt } from 'react-icons/bi';
+import { HiChevronRight } from 'react-icons/hi';
 import styled, { keyframes } from 'styled-components';
 import tw from 'twin.macro';
 
@@ -27,7 +29,7 @@ export const ShowFriendsSearch = styled.div`
   ${tw`relative w-full flex items-center mb-4`}
 `;
 export const ShowFriendsSearchInput = styled.input`
-  ${tw`bg-[#F8F8F8] text-lg rounded-[50px] pr-2 pl-9 py-2 w-full`}
+  ${tw`bg-secondary text-lg rounded-[20px] pr-2 pl-9 py-2 w-full`}
   outline: none;
 `;
 
@@ -55,11 +57,11 @@ export const FriendList = styled.div`
 // `;
 
 export const ShowFriendsInfo = styled.div`
-  ${tw`relative flex flex-grow rounded-[20px] my-1 p-2 items-center hover:cursor-pointer bg-secondary`}
+  ${tw`relative flex flex-grow my-1 p-2 items-center hover:cursor-pointer border-b-[2px] justify-between`}
 `;
 
 export const ShowFriendsAvatar = styled.figure`
-  ${tw`relative w-[55px] h-[55px] rounded-full overflow-hidden flex-shrink-0`}
+  ${tw`relative w-[55px] h-[55px] rounded-lg overflow-hidden flex-shrink-0`}
   border: 1px solid gray;
 `;
 
@@ -69,4 +71,12 @@ export const ShowFriendsName = styled.div`
 
 export const ShowFriendsOption = styled.div`
   ${tw`text-blue-300 bg-gray-500 rounded-[50px] font-semibold text-sm px-5 py-2.5 ml-1 hover:opacity-100 hover:cursor-pointer opacity-90`}
+`;
+
+export const LeftWrap = styled.div`
+  ${tw`flex items-center`}
+`;
+
+export const BackIcon = styled(AiOutlineRight)`
+  ${tw`text-xl`}
 `;
