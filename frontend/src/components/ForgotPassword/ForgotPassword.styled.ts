@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { Form, Field } from "formik";
-import { HiChevronLeft } from "react-icons/hi";
-import tw from "twin.macro";
+import styled from 'styled-components';
+import { Form, Field } from 'formik';
+import { HiChevronLeft } from 'react-icons/hi';
+import tw from 'twin.macro';
 export const Suggest = styled.span`
   ${tw`text-[22px] my-6 w-[70%] text-center`}
 `;
@@ -28,6 +28,26 @@ export const ErrorMsg = styled.div`
 
 export const SetWidth = styled.div`
   ${tw`w-full`}
+`;
+
+export const InputGroup = styled.div<{ error: boolean }>`
+  ${tw`w-full h-[50px] mt-6 flex items-center justify-center`}
+  ${({ error }) => (error ? tw`mb-6` : tw`mb-0`)};
+`;
+
+export const Select = styled.select`
+  ${tw`w-[10%] h-full italic outline-none py-2 mr-3 border-b border-[#0154b1] flex-1 cursor-pointer max-h-32`}
+`;
+export const ShortInputDiv = styled.div`
+  ${tw`w-[80%] h-full`}
+`;
+
+export const ShortInput = styled(Field)<{ error: boolean }>`
+  ${tw`w-full h-full outline-none py-2 px-4 border-b border-[#0154b1]`}
+  ${({ error }) =>
+    error === 1
+      ? tw`border-b border-red-500`
+      : tw`border-b border-solid border-[#0154b1]`};
 `;
 
 export const SignUp = styled.div`

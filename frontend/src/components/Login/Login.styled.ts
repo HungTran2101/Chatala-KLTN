@@ -43,7 +43,7 @@ export const Button = styled.button`
 `;
 
 export const Register = styled.div`
-  ${tw`mb-11 text-green-600 italic text-center cursor-pointer`}
+  ${tw`mb-11 text-green-600 italic text-center cursor-pointer flex-col flex`}
 `;
 
 export const ErrorMsg = styled.div`

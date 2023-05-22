@@ -55,7 +55,7 @@ export const SearchInput = styled.input`
 `;
 
 export const SearchIcon = styled(BiSearchAlt)`
-  ${tw`absolute hover:cursor-pointer text-[28px] text-secondary mr-1.5 right-0`}
+  ${tw`absolute hover:cursor-pointer text-[28px] text-quaternary mr-1.5 right-0`}
 `;
 
 export const Option = styled.div`

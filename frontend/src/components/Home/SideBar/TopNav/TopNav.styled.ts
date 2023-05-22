@@ -8,17 +8,17 @@ export const Wrapper = styled.div`
 `;
 
 export const Button = styled.div`
-  ${tw`bg-secondary rounded-[20px] shadow-md w-full mx-1`}
+  ${tw`hover:cursor-pointer bg-secondary rounded-[20px] shadow-md w-full mx-1`}
 `;
 
 export const Options = styled.div`
-  ${tw`flex justify-around text-quaternary text-[35px] py-1`}
+  ${tw`flex justify-center items-center text-quaternary text-[16px] font-semibold py-2`}
 `;
 
 export const AddGroupOption = styled(MdGroupAdd)`
-  ${tw`hover:cursor-pointer hover:opacity-80 mx-2`}
+  ${tw`hover:opacity-80 text-[24px] mx-2`}
 `;
 
 export const FriendsOption = styled(HiUserGroup)`
-  ${tw`hover:cursor-pointer hover:opacity-80 mx-2`}
+  ${tw`hover:opacity-80 text-[24px] mx-2`}
 `;

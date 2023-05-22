@@ -243,7 +243,7 @@ const checkFriend = asyncHandler(async (req, res, next) => {
       message: 'Check successfully',
     });
   } else {
-    return res.status(408).json({
+    return res.status(500).json({
       message: 'Not found',
     });
   }

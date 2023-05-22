@@ -1,7 +1,7 @@
-import http from "../http";
-import { UserRegister, userLogin, updateUserInfo } from "../../utils/types";
+import http from '../http';
+import { UserRegister, userLogin, updateUserInfo } from '../../utils/types';
 
-import { API_URL } from "./urls";
+import { API_URL } from './urls';
 
 export const UsersApi = {
   checkUser: async function (phone: string): Promise<any> {
@@ -9,6 +9,12 @@ export const UsersApi = {
   },
   register: async function (user: UserRegister): Promise<any> {
     return await http.post(API_URL.register, user);
+  },
+  resetPassword: async function (
+    phone: string,
+    password: string
+  ): Promise<any> {
+    return await http.post(API_URL.resetPassword, { phone, password });
   },
   login: async function (user: userLogin): Promise<any> {
     return await http.post(API_URL.login, user);

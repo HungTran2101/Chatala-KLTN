@@ -8,11 +8,11 @@ const API_BASE = `${BASEURL}/api`;
 export const API_URL = {
   checkUser: `${API_BASE}/user/checkUser`,
   register: `${API_BASE}/user/register`,
+  resetPassword: `${API_BASE}/user/reset-password`,
   login: `${API_BASE}/user/login`,
   logout: `${API_BASE}/user/logout`,
   editUserInfo: `${API_BASE}/user/update`,
   editAvatar: `${API_BASE}/user/update/avatar`,
-  resetPassword: `${API_BASE}/auth/password/reset`,
   getRoomList: `${API_BASE}/room`,
   getFriendList: `${API_BASE}/friend`,
   getRoomInfo: `${API_BASE}/room`,
