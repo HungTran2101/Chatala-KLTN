@@ -21,9 +21,10 @@ import {
 import { roomListActions } from '../../../features/redux/slices/roomListSlice';
 import { FriendApi } from '../../../services/api/friend';
 import { useSocketContext } from '../../../contexts/socket';
+import { Popover } from 'antd';
 
 const TopBar = () => {
-  const [userInfoModal, setUserInfoModal] = useState(false);
+  // const [userInfoModal, setUserInfoModal] = useState(false);
   const [activeNotiModal, setActiveNotiModal] = useState(false);
   const [settingVisible, setSettingVisible] = useState(false);
   const [searchResult, setSearchResult] = useState<SearchResult[]>([]);
@@ -122,17 +123,37 @@ const TopBar = () => {
     }
   }, [action]);
 
+  const [settingModal, setSettingModal] = useState(false);
+
+  const showSettingModal = () => {
+    setSettingModal(true);
+  };
+
+  const closeSettingModal = () => {
+    setSettingModal(false);
+  };
+
+  const [modalUser, setModalUser] = useState(false);
+
+  const showModalUser = () => {
+    setModalUser(true);
+  };
+
+  const closeModalUser = () => {
+    setModalUser(false);
+  };
+
   return (
     <S.Container>
       <S.Wrapper>
-        <S.LeftWrapper onClick={() => setUserInfoModal(true)}>
+        <S.LeftWrapper onClick={showModalUser}>
           <S.Avatar>
             {user.info?.avatar && user.info.avatar !== '' && (
               <Image
                 src={user.info.avatar}
-                alt="avatar"
-                layout="fill"
-                objectFit="cover"
+                alt='avatar'
+                layout='fill'
+                objectFit='cover'
               />
             )}
           </S.Avatar>
@@ -141,13 +162,13 @@ const TopBar = () => {
         <S.RightWrapper>
           <S.LogoContainer>
             <S.Logo>
-              <Image src={Logo} alt="logo" />
+              <Image src={Logo} alt='logo' />
             </S.Logo>
           </S.LogoContainer>
           <S.Search>
             <S.SearchIcon />
             <S.SearchInput
-              placeholder="Search..."
+              placeholder='Search...'
               onChange={(e) => setSearchInput(e.target.value)}
               value={searchInput}
               onFocus={() => setSearchModal(true)}
@@ -163,12 +184,25 @@ const TopBar = () => {
           </S.Search>
           <S.Option>
             <S.OptionNotifyWrapper>
-              <S.OptionNotify onClick={() => setActiveNotiModal(true)} />
-              {listNoti.length > 0 && (
-                <S.OptionNotifyNumber number={listNoti.length}>
-                  {listNoti.length < 100 ? listNoti.length : '99+'}
-                </S.OptionNotifyNumber>
-              )}
+              <Popover
+                content={
+                  <NotiModal
+                    listNoti={listNoti}
+                    getListNotify={getListNotify}
+                    setActiveNotiModal={setActiveNotiModal}
+                  />
+                }
+                title='Friend request'
+                trigger='click'
+                placement='bottomRight'
+              >
+                <S.OptionNotify />
+                {listNoti.length > 0 && (
+                  <S.OptionNotifyNumber number={listNoti.length}>
+                    {listNoti.length < 100 ? listNoti.length : '99+'}
+                  </S.OptionNotifyNumber>
+                )}
+              </Popover>
             </S.OptionNotifyWrapper>
             {activeNotiModal && (
               <NotiModal
@@ -177,16 +211,12 @@ const TopBar = () => {
                 setActiveNotiModal={setActiveNotiModal}
               />
             )}
-            <S.OptionSetting onClick={() => setSettingVisible(true)} />
-            {settingVisible && (
-              <SettingsModal
-                setSettingVisible={() => setSettingVisible(false)}
-              />
-            )}
+            <S.OptionSetting onClick={showSettingModal} />
+            <SettingsModal onClose={closeSettingModal} open={settingModal} />
             <S.OptionLogOut onClick={() => logout()} />
           </S.Option>
         </S.RightWrapper>
-        {userInfoModal && <UserInfo setUserInfoModal={setUserInfoModal} />}
+        <UserInfo open={modalUser} closeModal={closeModalUser} />
       </S.Wrapper>
     </S.Container>
   );

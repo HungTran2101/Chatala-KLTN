@@ -14,8 +14,7 @@ export const Overlay = styled.div`
 `;
 
 export const SettingsModalInner = styled.div`
-  animation: 0.25s ${zoomInAnimate};
-  ${tw`relative z-[9999] max-w-[768px] w-full min-h-[500px] bg-[#C9D9E5] rounded-[20px] shadow-sm overflow-hidden flex`}
+  ${tw`flex`}
   @media only screen and (max-width: 1024px) {
     ${tw`flex-col`}
   }

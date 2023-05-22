@@ -1,6 +1,6 @@
-import styled, { keyframes } from "styled-components";
-import tw from "twin.macro";
-import { merge, zoomIn, slideInRight, slideInDown } from "react-animations";
+import styled, { keyframes } from 'styled-components';
+import tw from 'twin.macro';
+import { merge, zoomIn, slideInRight, slideInDown } from 'react-animations';
 
 const cbAnimate1 = merge(slideInRight, slideInDown);
 const NotiAnimate = keyframes`${merge(zoomIn, cbAnimate1)}`;
@@ -32,7 +32,7 @@ export const NotiList = styled.div`
 `;
 
 export const NotiText = styled.div`
-  ${tw`text-base italic p-3 text-center rounded-[50px] bg-[#bedee7] text-black`}
+  ${tw`text-base italic p-3 text-center rounded-[10px] bg-[#bedee7] text-black`}
 `;
 
 export const NotiItem = styled.div`

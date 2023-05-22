@@ -36,20 +36,20 @@ export const RoomInfoTitle = styled.div`
 `;
 
 export const RoomInfoAvatar = styled.figure<{ isGroup?: number }>`
-  ${tw`relative flex flex-wrap justify-center items-center w-[60px] h-[60px] rounded-full overflow-hidden border border-gray-500 mt-4 mb-2`}
+  ${tw`relative flex flex-wrap justify-center items-center w-[100px] h-[100px] rounded-full overflow-hidden border border-gray-500 mt-4 mb-2`}
   ${({ isGroup }) => isGroup === 1 && tw`p-1 bg-tertiary`}
 `;
 
 export const RoomInfoAvatarGroup = styled.figure`
-  ${tw`relative w-[23px] h-[23px] rounded-full overflow-hidden`}
+  ${tw`relative w-[45px] h-[45px] rounded-full overflow-hidden`}
 `;
 
 export const RoomInfoNameWrap = styled.div`
-  ${tw`relative flex items-center text-[20px] font-semibold mb-4`}
+  ${tw`relative flex items-center text-[20px] font-semibold`}
 `;
 
 export const RoomInfoName = styled.div`
-  ${tw`w-[200px] text-center whitespace-nowrap overflow-ellipsis overflow-hidden`}
+  ${tw`whitespace-nowrap overflow-ellipsis overflow-hidden`}
 `;
 
 export const RoomInfoNameEditIcon = styled(AiOutlineEdit)`
@@ -57,7 +57,7 @@ export const RoomInfoNameEditIcon = styled(AiOutlineEdit)`
 `;
 
 export const OptionItem = styled.div<{ color?: string }>`
-  ${tw`text-sm px-3 -mx-3 py-2 rounded-[5px] cursor-pointer duration-200`}
+  ${tw`text-base px-3 -mx-3 py-2 rounded-[5px] cursor-pointer duration-200`}
 `;
 
 export const NormalItem = styled(OptionItem)`
@@ -77,7 +77,7 @@ export const WhiteBox = styled.div`
 `;
 
 export const Title = styled.p`
-  ${tw`font-semibold text-base flex justify-between items-center cursor-pointer my-0.5`}
+  ${tw`font-semibold text-lg flex justify-between items-center cursor-pointer my-0.5`}
 `;
 
 export const ExtendContent = styled.div`

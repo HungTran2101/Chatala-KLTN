@@ -51,3 +51,7 @@ a {
   bottom: 35px;
   right: 35px;
 }
+
+.ant-image-preview-img-wrapper img {
+  object-fit: contain;
+}

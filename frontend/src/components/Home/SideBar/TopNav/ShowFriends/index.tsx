@@ -15,12 +15,20 @@ interface IShowFriends {
 const ShowFriends = ({ onClose, open }: IShowFriends) => {
   const friends = useSelector(selectFriendListState);
 
-  const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
+  // const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
   const [friendProfile, setFriendProfile] = useState<userInfo>();
 
   const showFriendProfile = (data: userInfo) => {
-    setToggleFriendProfile(true);
+    showModalUser();
     setFriendProfile(data);
+  };
+
+  const [modalUser, setModalUser] = useState(false);
+  const showModalUser = () => {
+    setModalUser(true);
+  };
+  const closeModalUser = () => {
+    setModalUser(false);
   };
 
   return (
@@ -57,12 +65,11 @@ const ShowFriends = ({ onClose, open }: IShowFriends) => {
           </S.ShowFriendsInfo>
         ))}
       </S.FriendList>
-      {toggleFriendProfile && (
-        <UserInfo
-          friendProfile={friendProfile}
-          setUserInfoModal={setToggleFriendProfile}
-        />
-      )}
+      <UserInfo
+        friendProfile={friendProfile}
+        open={modalUser}
+        closeModal={closeModalUser}
+      />
     </Modal>
   );
 };

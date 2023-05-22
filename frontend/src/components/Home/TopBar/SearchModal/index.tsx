@@ -42,7 +42,7 @@ const SearchModal = ({
   const roomlist = useSelector(selectRoomListState);
   const user = useSelector(selectUserState);
 
-  const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
+  // const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
   const [friendProfile, setFriendProfile] = useState<userInfo>();
 
   const friendRequest = async (id: string) => {
@@ -117,8 +117,16 @@ const SearchModal = ({
   };
 
   const infoClick = async (data: userInfo) => {
-    setToggleFriendProfile(true);
+    showModalUser();
     setFriendProfile(data);
+  };
+
+  const [modalUser, setModalUser] = useState(false);
+  const showModalUser = () => {
+    setModalUser(true);
+  };
+  const closeModalUser = () => {
+    setModalUser(false);
   };
 
   return (
@@ -132,9 +140,9 @@ const SearchModal = ({
                   <S.SearchModalAvatar>
                     <Image
                       src={data.avatar}
-                      alt="avatar"
-                      layout="fill"
-                      objectFit="cover"
+                      alt='avatar'
+                      layout='fill'
+                      objectFit='cover'
                     />
                   </S.SearchModalAvatar>
                   <S.SearchModalNameWrapper>
@@ -178,12 +186,11 @@ const SearchModal = ({
           <div>Loading...</div>
         )}
       </S.SearchModalList>
-      {toggleFriendProfile && (
-        <UserInfo
-          friendProfile={friendProfile}
-          setUserInfoModal={setToggleFriendProfile}
-        />
-      )}
+      <UserInfo
+        friendProfile={friendProfile}
+        open={modalUser}
+        closeModal={closeModalUser}
+      />
     </S.SearchModal>
   );
 };

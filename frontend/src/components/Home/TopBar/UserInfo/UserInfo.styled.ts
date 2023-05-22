@@ -1,5 +1,5 @@
-import styled, { keyframes } from "styled-components";
-import tw from "twin.macro";
+import styled, { keyframes } from 'styled-components';
+import tw from 'twin.macro';
 
 const fadeIn = keyframes`
     from {
@@ -45,7 +45,7 @@ export const ModalAvatarBody = styled.div`
 `;
 
 export const Header = styled.div`
-  ${tw`relative`}
+  ${tw``}
 `;
 
 export const Title = styled.div`
@@ -56,20 +56,21 @@ export const Title = styled.div`
 `;
 
 export const Figure = styled.figure`
-  ${tw`relative w-[70vw] h-[70vh] grid p-10 rounded-t-[50px]`}
+  ${tw`relative w-full h-full rounded-t-[50px]`}
+  aspect-ratio: 16/9;
 `;
 
 export const Banner = styled.figure`
-  ${tw`relative w-full h-[150px] cursor-pointer rounded-b-[20px] overflow-hidden`}
+  ${tw`relative w-full h-[220px] cursor-pointer overflow-hidden rounded-[10px]`}
 `;
 
 export const Avatar = styled.figure`
-  ${tw`absolute w-[100px] h-[100px] bottom-[0] left-[50%] bg-[#000] border-[5px] border-[#ecf2f7] cursor-pointer rounded-[50%] overflow-hidden`}
+  ${tw`absolute w-[150px] h-[150px] top-[50px] left-[50%] bg-[#000] border-[5px] border-[#ecf2f7] cursor-pointer rounded-[50%] overflow-hidden`}
   transform: translate(-50%, 50%);
 `;
 
 export const Content = styled.div`
-  ${tw`w-[88%] flex bg-tertiary rounded-[20px] mt-[72px] mb-[32px] mx-auto`}
+  ${tw`bg-secondary flex rounded-[20px] mt-[50px] mb-[32px] mx-auto`}
 `;
 
 export const Description = styled.div`

@@ -1,12 +1,12 @@
-import Image from "next/image";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { selectRoomInfoState } from "../../../../../features/redux/slices/roomInfoSlice";
-import { UsersApi } from "../../../../../services/api/users";
-import { roomInfo, roomUser, userInfo } from "../../../../../utils/types";
-import UserInfo from "../../../TopBar/UserInfo";
-import NicknameModal from "../NicknameModal";
-import * as S from "./GroupMembers.styled";
+import Image from 'next/image';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectRoomInfoState } from '../../../../../features/redux/slices/roomInfoSlice';
+import { UsersApi } from '../../../../../services/api/users';
+import { roomInfo, roomUser, userInfo } from '../../../../../utils/types';
+import UserInfo from '../../../TopBar/UserInfo';
+import NicknameModal from '../NicknameModal';
+import * as S from './GroupMembers.styled';
 
 interface IGroupMembers {
   setToggleGroupMembers: (toggle: boolean) => void;
@@ -15,19 +15,27 @@ interface IGroupMembers {
 
 const GroupMembers = ({ setToggleGroupMembers, roomInfo }: IGroupMembers) => {
   const [friendProfile, setFriendProfile] = useState<userInfo>();
-  const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
+  // const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
   const [toggleNickname, setToggleNickname] = useState(false);
   const [userNeedChange, setUserNeedChange] = useState<roomUser>();
 
   const seeFriendProfile = async (uid: string) => {
     const friend = await UsersApi.userFindById(uid);
     setFriendProfile(friend);
-    setToggleFriendProfile(true);
+    showModalUser();
   };
 
   const changeNicknameClicked = (data: roomUser) => {
     setUserNeedChange(data);
     setToggleNickname(true);
+  };
+
+  const [modalUser, setModalUser] = useState(false);
+  const showModalUser = () => {
+    setModalUser(true);
+  };
+  const closeModalUser = () => {
+    setModalUser(false);
   };
 
   return (
@@ -37,7 +45,7 @@ const GroupMembers = ({ setToggleGroupMembers, roomInfo }: IGroupMembers) => {
         <S.GroupMembersTitle>Group Members</S.GroupMembersTitle>
         <S.GroupMembersSearch>
           <S.GroupMembersSearchIcon />
-          <S.GroupMembersSearchInput placeholder="Search with name or phone number..." />
+          <S.GroupMembersSearchInput placeholder='Search with name or phone number...' />
         </S.GroupMembersSearch>
         <S.GroupMembersList>
           {roomInfo.roomInfo.users.map((data, index) => (
@@ -46,9 +54,9 @@ const GroupMembers = ({ setToggleGroupMembers, roomInfo }: IGroupMembers) => {
                 <S.GroupMembersAvatar>
                   <Image
                     src={data.avatar}
-                    alt="avatar"
-                    layout="fill"
-                    objectFit="cover"
+                    alt='avatar'
+                    layout='fill'
+                    objectFit='cover'
                   />
                 </S.GroupMembersAvatar>
                 <S.GroupMembersName>{data.nickname}</S.GroupMembersName>
@@ -61,12 +69,11 @@ const GroupMembers = ({ setToggleGroupMembers, roomInfo }: IGroupMembers) => {
             </S.GroupMembersItem>
           ))}
         </S.GroupMembersList>
-        {toggleFriendProfile && (
-          <UserInfo
-            friendProfile={friendProfile}
-            setUserInfoModal={setToggleFriendProfile}
-          />
-        )}
+        <UserInfo
+          friendProfile={friendProfile}
+          open={modalUser}
+          closeModal={closeModalUser}
+        />
         {toggleNickname && (
           <NicknameModal
             setToggleNickname={setToggleNickname}

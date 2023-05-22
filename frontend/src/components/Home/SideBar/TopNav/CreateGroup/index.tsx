@@ -24,13 +24,13 @@ const CreateGroup = ({ open, onClose }: ICreateGroup) => {
   const dispatch = useDispatch();
 
   const [addedUsers, setAddedUsers] = useState<userInfo[]>([]);
-  const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
+  // const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
   const [friendProfile, setFriendProfile] = useState<userInfo>();
 
   const friends = useSelector(selectFriendListState);
 
   const showFriendProfile = (data: userInfo) => {
-    setToggleFriendProfile(true);
+    showModalUser();
     setFriendProfile(data);
   };
 
@@ -72,6 +72,16 @@ const CreateGroup = ({ open, onClose }: ICreateGroup) => {
     } else {
       alert('Cannot create group with 2 member!');
     }
+  };
+
+  const [modalUser, setModalUser] = useState(false);
+
+  const showModalUser = () => {
+    setModalUser(true);
+  };
+
+  const closeModalUser = () => {
+    setModalUser(false);
   };
 
   return (
@@ -137,12 +147,11 @@ const CreateGroup = ({ open, onClose }: ICreateGroup) => {
           </S.CreateGroupItem>
         ))}
       </S.GreateGroupList>
-      {toggleFriendProfile && (
-        <UserInfo
-          friendProfile={friendProfile}
-          setUserInfoModal={setToggleFriendProfile}
-        />
-      )}
+      <UserInfo
+        friendProfile={friendProfile}
+        open={modalUser}
+        closeModal={closeModalUser}
+      />
     </Modal>
   );
 };

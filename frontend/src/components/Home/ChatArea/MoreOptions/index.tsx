@@ -16,7 +16,7 @@ import { selectFileState } from '../../../../features/redux/slices/fileSlice';
 import GroupNameModal from './GroupNameModel';
 import AddMemberModal from './AddMemberModal';
 import KickMemberModal from './KickMemberModal';
-import { Drawer, Popconfirm } from 'antd';
+import { Drawer, Modal, Popconfirm } from 'antd';
 
 interface IMoreOptions {
   setToggleOption: () => void;
@@ -42,7 +42,7 @@ const MoreOptions = ({
   const [photoExtend, setPhotoExtend] = useState(false);
   const [fileExtend, setFileExtend] = useState(false);
   const [toggleNickname, setToggleNickname] = useState(false);
-  const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
+  // const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
   const [toggleGroupMembers, setToggleGroupMembers] = useState(false);
   const [toggleGroupName, setToggleGroupName] = useState(false);
   const [toggleAddMember, setToggleAddMember] = useState(false);
@@ -65,8 +65,9 @@ const MoreOptions = ({
       (it) => it.uid !== user.info._id
     );
     const _friend = await UsersApi.userFindById(friend.uid);
+
     setFriendProfile(_friend);
-    setToggleFriendProfile(true);
+    showModalUser();
   };
 
   const photosClickHandler = (index: number) => {
@@ -95,9 +96,18 @@ const MoreOptions = ({
     }, 2000);
   };
 
+  const [modalUser, setModalUser] = useState(false);
+  const showModalUser = () => {
+    setModalUser(true);
+  };
+  const closeModalUser = () => {
+    setModalUser(false);
+  };
+
   return (
     <Drawer
-      title='Room detail'
+      // title='Room detail'
+      headerStyle={{ display: 'none' }}
       placement='right'
       onClose={() => {
         setToggleOption();
@@ -242,12 +252,11 @@ const MoreOptions = ({
           userNeedChange={userNeedChange}
         />
       )}
-      {toggleFriendProfile && (
-        <UserInfo
-          friendProfile={friendProfile}
-          setUserInfoModal={setToggleFriendProfile}
-        />
-      )}
+      <UserInfo
+        friendProfile={friendProfile}
+        open={modalUser}
+        closeModal={closeModalUser}
+      />
       {toggleGroupMembers && (
         <GroupMembers
           setToggleGroupMembers={setToggleGroupMembers}
