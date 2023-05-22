@@ -11,7 +11,7 @@ const OTPCode = () => {
   const router = useRouter();
 
   const [checkError, setCheckError] = useState('false');
-  const [countdown, setCountdown] = useState(30);
+  const [countdown, setCountdown] = useState(120);
 
   const initialValues = {
     otpCode: '',
@@ -60,13 +60,7 @@ const OTPCode = () => {
       <span>
         <S.BackIcon
           onClick={() =>
-            router.replace({
-              pathname: '/register',
-              query: {
-                name: router.query.name,
-                phone: router.query.phone
-              },
-            })
+            router.back()
           }
         />
       </span>
@@ -88,7 +82,7 @@ const OTPCode = () => {
               {countdown <= 0 && (
                 <S.CheckPhoneNumber
                   onClick={() =>
-                    router.replace({
+                    router.push({
                       pathname: '/register',
                       query: {
                         name: router.query.name,

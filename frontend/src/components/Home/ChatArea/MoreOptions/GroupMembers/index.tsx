@@ -19,6 +19,9 @@ const GroupMembers = ({ setToggleGroupMembers, roomInfo }: IGroupMembers) => {
   const [toggleNickname, setToggleNickname] = useState(false);
   const [userNeedChange, setUserNeedChange] = useState<roomUser>();
 
+  const activeUsers = []
+  roomInfo.roomInfo.users.forEach(u => !u.isLeave && activeUsers.push(u))
+
   const seeFriendProfile = async (uid: string) => {
     const friend = await UsersApi.userFindById(uid);
     setFriendProfile(friend);
@@ -48,7 +51,7 @@ const GroupMembers = ({ setToggleGroupMembers, roomInfo }: IGroupMembers) => {
           <S.GroupMembersSearchInput placeholder='Search with name or phone number...' />
         </S.GroupMembersSearch>
         <S.GroupMembersList>
-          {roomInfo.roomInfo.users.map((data, index) => (
+          {activeUsers.map((data, index) => (
             <S.GroupMembersItem key={index}>
               <S.GroupMembersInfo onClick={() => seeFriendProfile(data.uid)}>
                 <S.GroupMembersAvatar>

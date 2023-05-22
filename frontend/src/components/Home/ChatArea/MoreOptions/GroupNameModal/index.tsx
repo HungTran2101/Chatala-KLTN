@@ -1,9 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { roomInfoActions } from '../../../../../features/redux/slices/roomInfoSlice';
 import { roomListActions } from '../../../../../features/redux/slices/roomListSlice';
 import { RoomApi } from '../../../../../services/api/room';
-import { roomInfo, roomUser } from '../../../../../utils/types';
+import { roomInfo } from '../../../../../utils/types';
 import * as S from './GroupNameModel.styled';
 import { useSocketContext } from '../../../../../contexts/socket';
 

@@ -9,8 +9,9 @@ export const CallNotiOverlay = styled.div`
   ${tw`absolute bg-[#00000080] h-full w-full z-0`}
 `;
 
-export const CallNotiBody = styled.div`
+export const CallNotiBody = styled.div<{makecall: number}>`
   ${tw`relative flex flex-col bg-white border-2 border-quaternary rounded-[20px]`}
+  ${({makecall}) => makecall && tw`px-10`}
 `;
 
 export const CallNotiInfo = styled.div`
@@ -30,7 +31,7 @@ export const CallNotiCallerName = styled.div`
 `;
 
 export const CallNotiControls = styled.div`
-  ${tw`flex justify-between m-8 mx-14 gap-20`}
+  ${tw`flex justify-between items-center m-8 mx-14 gap-20`}
 `;
 
 export const CallNotiControl = styled.span`

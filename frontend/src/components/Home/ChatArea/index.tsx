@@ -385,7 +385,7 @@ const ChatArea = () => {
                     submitForm={submitForm}
                   />
                 ) : (
-                  <i>You cant reply to this conversation </i>
+                  <i>You can&apos;t chat to this conversation </i>
                 )}
               </S.ChatAreaMain>
             )}

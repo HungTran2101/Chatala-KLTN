@@ -1,20 +1,22 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { AppState } from "../store";
-import { fileType } from "../../../utils/types";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { AppState } from '../store';
+import { fileType } from '../../../utils/types';
 
 // Type for our state
 export interface UtilState {
   replyId: string;
+  onCall: boolean;
 }
 
 // Initial state
 const initialState: UtilState = {
   replyId: null,
+  onCall: false,
 };
 
 // Actual Slice
 export const utilSlice = createSlice({
-  name: "util",
+  name: 'util',
   initialState,
   reducers: {
     setReplyId(state, action) {
@@ -22,6 +24,9 @@ export const utilSlice = createSlice({
     },
     clearReplyId(state, action: PayloadAction<void>) {
       state.replyId = null;
+    },
+    toggleCalling(state, action) {
+      state.onCall = action.payload;
     },
 
     // // Special reducer for hydrating the state. Special case for next-redux-wrapper
