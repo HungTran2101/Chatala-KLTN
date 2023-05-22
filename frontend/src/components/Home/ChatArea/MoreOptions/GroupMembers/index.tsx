@@ -1,59 +1,86 @@
 import Image from 'next/image';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { selectRoomInfoState } from '../../../../../features/redux/slices/roomInfoSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  roomInfoActions,
+  selectRoomInfoState,
+} from '../../../../../features/redux/slices/roomInfoSlice';
 import { UsersApi } from '../../../../../services/api/users';
 import { roomInfo, roomUser, userInfo } from '../../../../../utils/types';
 import UserInfo from '../../../TopBar/UserInfo';
 import NicknameModal from '../NicknameModal';
 import * as S from './GroupMembers.styled';
+import { Button, Modal } from 'antd';
+import { RoomApi } from '../../../../../services/api/room';
+import { roomListActions } from '../../../../../features/redux/slices/roomListSlice';
+import { socket } from '../../../../../contexts/socket';
 
 interface IGroupMembers {
-  setToggleGroupMembers: (toggle: boolean) => void;
+  open: boolean;
+  closeModal: () => void;
   roomInfo: roomInfo;
 }
 
-const GroupMembers = ({ setToggleGroupMembers, roomInfo }: IGroupMembers) => {
+const GroupMembers = ({ open, closeModal, roomInfo }: IGroupMembers) => {
   const [friendProfile, setFriendProfile] = useState<userInfo>();
   // const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
-  const [toggleNickname, setToggleNickname] = useState(false);
+  // const [toggleNickname, setToggleNickname] = useState(false);
   const [userNeedChange, setUserNeedChange] = useState<roomUser>();
-
-  const activeUsers = []
-  roomInfo.roomInfo.users.forEach(u => !u.isLeave && activeUsers.push(u))
 
   const seeFriendProfile = async (uid: string) => {
     const friend = await UsersApi.userFindById(uid);
     setFriendProfile(friend);
-    showModalUser();
+    setModalUser(true);
   };
 
   const changeNicknameClicked = (data: roomUser) => {
     setUserNeedChange(data);
-    setToggleNickname(true);
+    setModalNickName(true);
+  };
+
+  const dispatch = useDispatch();
+  const kickMember = async (data: roomUser) => {
+    try {
+      const res = await RoomApi.kickMember(roomInfo.roomInfo._id, data.uid);
+      dispatch(roomInfoActions.kickMember({ uid: res.uid }));
+      dispatch(
+        roomListActions.updateRoomForKickMember({
+          uid: res.uid,
+          roomId: res.roomId,
+        })
+      );
+
+      socket.emit('kickmember', data.uid);
+
+      alert(`Kick ${data.nickname} succeed!`);
+    } catch (err) {
+      console.log(err);
+      alert(err);
+    }
   };
 
   const [modalUser, setModalUser] = useState(false);
-  const showModalUser = () => {
-    setModalUser(true);
-  };
-  const closeModalUser = () => {
-    setModalUser(false);
-  };
+  const [modalNickName, setModalNickName] = useState(false);
 
   return (
-    <S.GroupMembersModal>
-      <S.GroupMembersOverlay onClick={() => setToggleGroupMembers(false)} />
-      <S.GroupMembersBody>
-        <S.GroupMembersTitle>Group Members</S.GroupMembersTitle>
-        <S.GroupMembersSearch>
-          <S.GroupMembersSearchIcon />
-          <S.GroupMembersSearchInput placeholder='Search with name or phone number...' />
-        </S.GroupMembersSearch>
-        <S.GroupMembersList>
-          {activeUsers.map((data, index) => (
-            <S.GroupMembersItem key={index}>
-              <S.GroupMembersInfo onClick={() => seeFriendProfile(data.uid)}>
+    <Modal
+      title={`Group member`}
+      open={open}
+      onOk={closeModal}
+      onCancel={closeModal}
+      cancelButtonProps={{ style: { display: 'none' } }}
+      okType='link'
+      destroyOnClose
+    >
+      <S.GroupMembersSearch>
+        <S.GroupMembersSearchIcon />
+        <S.GroupMembersSearchInput placeholder='Search with name or phone number...' />
+      </S.GroupMembersSearch>
+      <S.GroupMembersList>
+        {roomInfo.roomInfo.users.map((data, index) => (
+          <S.GroupMembersItem key={index}>
+            <S.GroupMembersInfo onClick={() => seeFriendProfile(data.uid)}>
+              <S.LeftWrap>
                 <S.GroupMembersAvatar>
                   <Image
                     src={data.avatar}
@@ -62,30 +89,42 @@ const GroupMembers = ({ setToggleGroupMembers, roomInfo }: IGroupMembers) => {
                     objectFit='cover'
                   />
                 </S.GroupMembersAvatar>
-                <S.GroupMembersName>{data.nickname}</S.GroupMembersName>
-              </S.GroupMembersInfo>
-              <S.GroupMembersChangeNickname
-                onClick={() => changeNicknameClicked(data)}
-              >
-                Change nickname
-              </S.GroupMembersChangeNickname>
-            </S.GroupMembersItem>
-          ))}
-        </S.GroupMembersList>
-        <UserInfo
-          friendProfile={friendProfile}
-          open={modalUser}
-          closeModal={closeModalUser}
-        />
-        {toggleNickname && (
-          <NicknameModal
-            setToggleNickname={setToggleNickname}
-            roomInfo={roomInfo}
-            userNeedChange={userNeedChange}
-          />
-        )}
-      </S.GroupMembersBody>
-    </S.GroupMembersModal>
+                <div>
+                  <S.GroupMembersName>{data.nickname}</S.GroupMembersName>
+                  <Button
+                    type='link'
+                    onClick={() => changeNicknameClicked(data)}
+                    style={{ fontStyle: 'italic', marginTop: '-10px' }}
+                  >
+                    Change nickname
+                  </Button>
+                </div>
+              </S.LeftWrap>
+
+              <S.KickMemberButton onClick={() => kickMember(data)}>
+                Kick member
+              </S.KickMemberButton>
+              {/* <Button>Kick member</Button> */}
+            </S.GroupMembersInfo>
+            {/* <S.GroupMembersChangeNickname
+            >
+              Change nickname
+            </S.GroupMembersChangeNickname> */}
+          </S.GroupMembersItem>
+        ))}
+      </S.GroupMembersList>
+      <UserInfo
+        friendProfile={friendProfile}
+        open={modalUser}
+        closeModal={() => setModalUser(false)}
+      />
+      <NicknameModal
+        closeModal={() => setModalNickName(false)}
+        open={modalNickName}
+        roomInfo={roomInfo}
+        userNeedChange={userNeedChange}
+      />
+    </Modal>
   );
 };
 

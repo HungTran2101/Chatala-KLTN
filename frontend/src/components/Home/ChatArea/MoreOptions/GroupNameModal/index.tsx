@@ -6,13 +6,15 @@ import { RoomApi } from '../../../../../services/api/room';
 import { roomInfo } from '../../../../../utils/types';
 import * as S from './GroupNameModel.styled';
 import { useSocketContext } from '../../../../../contexts/socket';
+import { Modal } from 'antd';
 
 interface IGroupName {
-  setToggleGroupName: (toggle: boolean) => void;
+  closeModal: () => void;
+  open: boolean;
   roomInfo: roomInfo;
 }
 
-const GroupNameModal = ({ setToggleGroupName, roomInfo }: IGroupName) => {
+const GroupNameModal = ({ closeModal, open, roomInfo }: IGroupName) => {
   const input = useRef<HTMLInputElement>();
 
   const dispatch = useDispatch();
@@ -43,7 +45,7 @@ const GroupNameModal = ({ setToggleGroupName, roomInfo }: IGroupName) => {
         res.room.groupName
       );
 
-      setToggleGroupName(false);
+      closeModal();
     } catch (err) {
       console.log(err);
       alert(err.message);
@@ -51,16 +53,17 @@ const GroupNameModal = ({ setToggleGroupName, roomInfo }: IGroupName) => {
   };
 
   return (
-    <S.GroupNameModal>
-      <S.GroupNameOverlay onClick={() => setToggleGroupName(false)} />
-      <S.GroupNameBody>
-        <S.GroupNameTitle>
-          Change name for group <b>{roomInfo.roomInfo.groupName}</b>
-        </S.GroupNameTitle>
-        <S.GroupNameInput maxLength={50} ref={input} />
-        <S.GroupNameSave onClick={saveGroupName}>Save</S.GroupNameSave>
-      </S.GroupNameBody>
-    </S.GroupNameModal>
+    <Modal
+      title={`Group name`}
+      open={open}
+      onOk={saveGroupName}
+      onCancel={closeModal}
+      okType='link'
+      centered
+      destroyOnClose
+    >
+      <S.GroupNameInput maxLength={50} ref={input} />
+    </Modal>
   );
 };
 

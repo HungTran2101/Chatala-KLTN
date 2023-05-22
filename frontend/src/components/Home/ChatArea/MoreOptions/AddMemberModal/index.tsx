@@ -10,13 +10,15 @@ import { roomInfo, userInfo } from '../../../../../utils/types';
 import { RoomApi } from '../../../../../services/api/room';
 import { roomListActions } from '../../../../../features/redux/slices/roomListSlice';
 import { useSocketContext } from '../../../../../contexts/socket';
+import { Modal } from 'antd';
 
 interface IAddMemberModal {
-  setToggleAddMember: (toogle: boolean) => void;
+  closeModal: () => void;
+  open: boolean;
   roomInfo: roomInfo;
 }
 
-const AddMemberModal = ({ setToggleAddMember, roomInfo }: IAddMemberModal) => {
+const AddMemberModal = ({ open, closeModal, roomInfo }: IAddMemberModal) => {
   const friends = useSelector(selectFriendListState);
 
   const uids = [];
@@ -60,36 +62,40 @@ const AddMemberModal = ({ setToggleAddMember, roomInfo }: IAddMemberModal) => {
   };
 
   return (
-    <S.AddMemberModal>
-      <S.AddMemberOverlay onClick={() => setToggleAddMember(false)} />
-      <S.AddMemberBody>
-        <S.AddMemberTitle>Add Members</S.AddMemberTitle>
-        <S.AddMemberSearch>
-          <S.AddMemberSearchIcon />
-          <S.AddMemberSearchInput placeholder="Search with name or phone number..." />
-        </S.AddMemberSearch>
-        <S.AddMemberList>
-          {unAddMembers.map((data, index) => (
-            <S.AddMemberItem key={index}>
-              <S.AddMemberInfo>
-                <S.AddMemberAvatar>
-                  <Image
-                    src={data.avatar}
-                    alt="avatar"
-                    layout="fill"
-                    objectFit="cover"
-                  />
-                </S.AddMemberAvatar>
-                <S.AddMemberName>{data.name}</S.AddMemberName>
-              </S.AddMemberInfo>
-              <S.AddMemberButton onClick={() => addMember(data)}>
-                Add to group
-              </S.AddMemberButton>
-            </S.AddMemberItem>
-          ))}
-        </S.AddMemberList>
-      </S.AddMemberBody>
-    </S.AddMemberModal>
+    <Modal
+      title={`Group add`}
+      open={open}
+      onOk={closeModal}
+      onCancel={closeModal}
+      cancelButtonProps={{ style: { display: 'none' } }}
+      okType='link'
+      destroyOnClose
+    >
+      <S.AddMemberSearch>
+        <S.AddMemberSearchIcon />
+        <S.AddMemberSearchInput placeholder='Search with name or phone number...' />
+      </S.AddMemberSearch>
+      <S.AddMemberList>
+        {unAddMembers.map((data, index) => (
+          <S.AddMemberItem key={index}>
+            <S.AddMemberInfo>
+              <S.AddMemberAvatar>
+                <Image
+                  src={data.avatar}
+                  alt='avatar'
+                  layout='fill'
+                  objectFit='cover'
+                />
+              </S.AddMemberAvatar>
+              <S.AddMemberName>{data.name}</S.AddMemberName>
+            </S.AddMemberInfo>
+            <S.AddMemberButton onClick={() => addMember(data)}>
+              + Add member
+            </S.AddMemberButton>
+          </S.AddMemberItem>
+        ))}
+      </S.AddMemberList>
+    </Modal>
   );
 };
 

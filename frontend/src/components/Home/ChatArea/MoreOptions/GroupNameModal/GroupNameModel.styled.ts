@@ -1,6 +1,6 @@
-import { zoomIn } from "react-animations";
-import styled, { keyframes } from "styled-components";
-import tw from "twin.macro";
+import { zoomIn } from 'react-animations';
+import styled, { keyframes } from 'styled-components';
+import tw from 'twin.macro';
 
 export const GroupNameModal = styled.div`
   ${tw`flex fixed top-0 left-0 bottom-0 right-0 z-30`}
@@ -23,7 +23,7 @@ export const GroupNameTitle = styled.div`
 `;
 
 export const GroupNameInput = styled.input`
-  ${tw`w-full rounded-[5px] px-2 py-1 outline-none`}
+  ${tw`w-full bg-secondary rounded-[10px] px-2 py-1 outline-none`}
 `;
 
 export const GroupNameSave = styled.div`

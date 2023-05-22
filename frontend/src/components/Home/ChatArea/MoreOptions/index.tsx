@@ -40,11 +40,11 @@ const MoreOptions = ({
 
   const [photoExtend, setPhotoExtend] = useState(false);
   const [fileExtend, setFileExtend] = useState(false);
-  const [toggleNickname, setToggleNickname] = useState(false);
+  // const [toggleNickname, setToggleNickname] = useState(false);
   // const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
-  const [toggleGroupMembers, setToggleGroupMembers] = useState(false);
-  const [toggleGroupName, setToggleGroupName] = useState(false);
-  const [toggleAddMember, setToggleAddMember] = useState(false);
+  // const [toggleGroupMembers, setToggleGroupMembers] = useState(false);
+  // const [toggleGroupName, setToggleGroupName] = useState(false);
+  // const [toggleAddMember, setToggleAddMember] = useState(false);
   const [toggleKickMember, setToggleKickMember] = useState(false);
   const [friendProfile, setFriendProfile] = useState<userInfo>();
 
@@ -66,7 +66,7 @@ const MoreOptions = ({
     const _friend = await UsersApi.userFindById(friend.uid);
 
     setFriendProfile(_friend);
-    showModalUser();
+    setModalUser(true);
   };
 
   const photosClickHandler = (index: number) => {
@@ -96,12 +96,10 @@ const MoreOptions = ({
   };
 
   const [modalUser, setModalUser] = useState(false);
-  const showModalUser = () => {
-    setModalUser(true);
-  };
-  const closeModalUser = () => {
-    setModalUser(false);
-  };
+  const [modalNickName, setModalNickName] = useState(false);
+  const [modalGroupMembers, setModalGroupMembers] = useState(false);
+  const [modalGroupName, setModalGroupName] = useState(false);
+  const [modalGroupAdd, setModalGroupAdd] = useState(false);
 
   return (
     <Drawer
@@ -140,49 +138,45 @@ const MoreOptions = ({
               : roomInfo.roomName}
           </S.RoomInfoName>
           {roomInfo.roomInfo.isGroup && (
-            <S.RoomInfoNameEditIcon onClick={() => setToggleGroupName(true)} />
+            <S.RoomInfoNameEditIcon onClick={() => setModalGroupName(true)} />
           )}
         </S.RoomInfoNameWrap>
       </S.RoomInfo>
       <S.OptionWrap>
         <S.WhiteBox>
-          {!roomInfo.roomInfo.isGroup && (
-            <S.NormalItem onClick={() => seeFriendProfile()}>
-              Friend&apos;s profile
-            </S.NormalItem>
-          )}
-          {!roomInfo.roomInfo.isGroup && (
-            <S.NormalItem onClick={() => setToggleNickname(true)}>
-              Change Nickname
-            </S.NormalItem>
-          )}
           {roomInfo.roomInfo.isGroup && (
-            <S.NormalItem onClick={() => setToggleGroupMembers(true)}>
-              Group Members
-            </S.NormalItem>
-          )}
-          {roomInfo.roomInfo.isGroup && (
-            <S.NormalItem onClick={() => setToggleAddMember(true)}>
-              Add Members
-            </S.NormalItem>
-          )}
-          {roomInfo.roomInfo.isGroup && (
-            <S.DeleteItem onClick={() => setToggleKickMember(true)}>
-              Kick Members
-            </S.DeleteItem>
+            <>
+              <S.NormalItem onClick={() => setModalGroupMembers(true)}>
+                Group Members
+              </S.NormalItem>
+              <S.NormalItem onClick={() => setModalGroupAdd(true)}>
+                Add Members
+              </S.NormalItem>
+              <S.DeleteItem onClick={() => setToggleKickMember(true)}>
+                Kick Members
+              </S.DeleteItem>
+            </>
           )}
           {!roomInfo.roomInfo.isGroup && (
-            <Popconfirm
-              title='Title'
-              description='Open Popconfirm with async logic'
-              open={open}
-              onConfirm={() => handleOk(roomInfo.roomInfo.friendRelateId)}
-              okButtonProps={{ loading: confirmLoading }}
-              onCancel={handleCancel}
-              okType={'danger'}
-            >
-              <S.DeleteItem onClick={showPopconfirm}>Unfriend</S.DeleteItem>
-            </Popconfirm>
+            <>
+              <S.NormalItem onClick={() => seeFriendProfile()}>
+                Friend&apos;s profile
+              </S.NormalItem>
+              <S.NormalItem onClick={() => setModalNickName(true)}>
+                Change Nickname
+              </S.NormalItem>
+              <Popconfirm
+                title='Title'
+                description='Open Popconfirm with async logic'
+                open={open}
+                onConfirm={() => handleOk(roomInfo.roomInfo.friendRelateId)}
+                okButtonProps={{ loading: confirmLoading }}
+                onCancel={handleCancel}
+                okType={'danger'}
+              >
+                <S.DeleteItem onClick={showPopconfirm}>Unfriend</S.DeleteItem>
+              </Popconfirm>
+            </>
           )}
         </S.WhiteBox>
         <S.WhiteBox>
@@ -244,30 +238,27 @@ const MoreOptions = ({
           </S.ExtendContent>
         </S.WhiteBox>
       </S.OptionWrap>
-      {toggleNickname && (
-        <NicknameModal
-          setToggleNickname={setToggleNickname}
-          roomInfo={roomInfo}
-          userNeedChange={userNeedChange}
-        />
-      )}
+      <NicknameModal
+        closeModal={() => setModalNickName(false)}
+        open={modalNickName}
+        roomInfo={roomInfo}
+        userNeedChange={userNeedChange}
+      />
       <UserInfo
         friendProfile={friendProfile}
         open={modalUser}
-        closeModal={closeModalUser}
+        closeModal={() => setModalUser(false)}
       />
-      {toggleGroupMembers && (
-        <GroupMembers
-          setToggleGroupMembers={setToggleGroupMembers}
-          roomInfo={roomInfo}
-        />
-      )}
-      {toggleAddMember && (
-        <AddMemberModal
-          setToggleAddMember={setToggleAddMember}
-          roomInfo={roomInfo}
-        />
-      )}
+      <GroupMembers
+        open={modalGroupMembers}
+        closeModal={() => setModalGroupMembers(false)}
+        roomInfo={roomInfo}
+      />
+      <AddMemberModal
+        open={modalGroupAdd}
+        closeModal={() => setModalGroupAdd(false)}
+        roomInfo={roomInfo}
+      />
       {toggleKickMember && (
         <KickMemberModal
           setToggleKickMember={setToggleKickMember}
@@ -275,12 +266,11 @@ const MoreOptions = ({
           user={user.info}
         />
       )}
-      {toggleGroupName && (
-        <GroupNameModal
-          setToggleGroupName={setToggleGroupName}
-          roomInfo={roomInfo}
-        />
-      )}
+      <GroupNameModal
+        open={modalGroupName}
+        closeModal={() => setModalGroupName(false)}
+        roomInfo={roomInfo}
+      />
     </Drawer>
   );
 };

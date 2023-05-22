@@ -77,6 +77,11 @@ const ChangePassword = () => {
               name='oldPassword'
               onChange={formik.handleChange}
               value={formik.values.oldPassword}
+              status={
+                formik.errors.oldPassword && formik.touched.oldPassword
+                  ? 'error'
+                  : ''
+              }
             />
             {formik.errors.oldPassword && formik.touched.oldPassword && (
               <S.ErrorMsg>{formik.errors.oldPassword}</S.ErrorMsg>
@@ -87,6 +92,9 @@ const ChangePassword = () => {
               name='password'
               onChange={formik.handleChange}
               value={formik.values.password}
+              status={
+                formik.errors.password && formik.touched.password ? 'error' : ''
+              }
             />
             {formik.errors.password && formik.touched.password && (
               <S.ErrorMsg>{formik.errors.password}</S.ErrorMsg>
@@ -97,16 +105,18 @@ const ChangePassword = () => {
               name='confirmPassword'
               onChange={formik.handleChange}
               value={formik.values.confirmPassword}
+              status={
+                formik.errors.confirmPassword && formik.touched.confirmPassword
+                  ? 'error'
+                  : ''
+              }
             />
             {formik.errors.confirmPassword &&
               formik.touched.confirmPassword && (
                 <S.ErrorMsg>{formik.errors.confirmPassword}</S.ErrorMsg>
               )}
             <S.ButtonWrap>
-              <Button type='primary' htmlType='submit'>
-                Success
-              </Button>
-              <S.Button>Update</S.Button>
+              <S.Button type='submit'>Update</S.Button>
             </S.ButtonWrap>
           </Space>
         </S.Form>

@@ -1,7 +1,7 @@
-import styled, { keyframes } from "styled-components";
-import tw from "twin.macro";
-import { zoomIn } from "react-animations";
-import { BiSearchAlt } from "react-icons/bi";
+import styled, { keyframes } from 'styled-components';
+import tw from 'twin.macro';
+import { zoomIn } from 'react-animations';
+import { BiSearchAlt } from 'react-icons/bi';
 
 export const AddMemberModal = styled.div`
   ${tw`flex fixed top-0 left-0 bottom-0 right-0 z-30`}
@@ -27,7 +27,7 @@ export const AddMemberSearch = styled.div`
   ${tw`relative w-full flex items-center mb-4`}
 `;
 export const AddMemberSearchInput = styled.input`
-  ${tw`bg-[#F8F8F8] text-lg rounded-[50px] pr-2 pl-9 py-2 w-full`}
+  ${tw`bg-secondary text-lg rounded-[50px] pr-2 pl-9 py-2 w-full`}
   outline: none;
 `;
 
@@ -51,7 +51,7 @@ export const AddMemberList = styled.div`
 `;
 
 export const AddMemberItem = styled.div`
-  ${tw`flex p-2 rounded-[20px] my-1.5 items-center relative w-full bg-secondary justify-between`}
+  ${tw`relative flex flex-grow my-1 p-2 items-center border-b-[2px] justify-between`}
 `;
 
 export const AddMemberInfo = styled.div`
@@ -59,8 +59,8 @@ export const AddMemberInfo = styled.div`
 `;
 
 export const AddMemberAvatar = styled.figure`
-  ${tw`relative w-[55px] h-[55px] rounded-full overflow-hidden flex-shrink-0`}
-  border: 1px solid gray;
+  ${tw`relative w-[60px] h-[60px] rounded-lg overflow-hidden flex-shrink-0`}
+  border: 1px solid #eee;
 `;
 
 export const AddMemberName = styled.div`
@@ -68,5 +68,5 @@ export const AddMemberName = styled.div`
 `;
 
 export const AddMemberButton = styled.div`
-  ${tw`text-primary bg-quaternary rounded-[50px] font-semibold text-sm px-5 py-2.5 ml-1 hover:opacity-100 hover:cursor-pointer opacity-90`}
+  ${tw`text-primary bg-quaternary rounded-[10px] font-semibold text-sm px-4 py-2 ml-1 hover:opacity-100 hover:cursor-pointer opacity-90`}
 `;
