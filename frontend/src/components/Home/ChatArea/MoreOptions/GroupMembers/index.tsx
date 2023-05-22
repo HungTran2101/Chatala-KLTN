@@ -15,18 +15,25 @@ import { RoomApi } from '../../../../../services/api/room';
 import { roomListActions } from '../../../../../features/redux/slices/roomListSlice';
 import { socket } from '../../../../../contexts/socket';
 import Button from '../../../../Global/Button';
+import { GrUserAdmin } from 'react-icons/gr';
 
 interface IGroupMembers {
   open: boolean;
   closeModal: () => void;
   roomInfo: roomInfo;
+  user: userInfo;
 }
 
-const GroupMembers = ({ open, closeModal, roomInfo }: IGroupMembers) => {
+const GroupMembers = ({ open, closeModal, roomInfo, user }: IGroupMembers) => {
   const [friendProfile, setFriendProfile] = useState<userInfo>();
   // const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
   // const [toggleNickname, setToggleNickname] = useState(false);
   const [userNeedChange, setUserNeedChange] = useState<roomUser>();
+
+  const activeUsers: roomUser[] = [];
+  roomInfo.roomInfo.users.forEach((u) => !u.isLeave && activeUsers.push(u));
+
+  const isLeader = roomInfo.roomInfo.users.find((u) => u.uid === user._id).role;
 
   const seeFriendProfile = async (uid: string) => {
     const friend = await UsersApi.userFindById(uid);
@@ -78,7 +85,7 @@ const GroupMembers = ({ open, closeModal, roomInfo }: IGroupMembers) => {
         <S.GroupMembersSearchInput placeholder='Search with name or phone number...' />
       </S.GroupMembersSearch>
       <S.GroupMembersList>
-        {roomInfo.roomInfo.users.map((data, index) => (
+        {activeUsers.map((data, index) => (
           <S.GroupMembersItem key={index}>
             <S.GroupMembersInfo onClick={() => seeFriendProfile(data.uid)}>
               <S.LeftWrap>
@@ -91,7 +98,15 @@ const GroupMembers = ({ open, closeModal, roomInfo }: IGroupMembers) => {
                   />
                 </S.GroupMembersAvatar>
                 <div>
-                  <S.GroupMembersName>{data.nickname}</S.GroupMembersName>
+                  <S.GroupMembersName>
+                    {data.nickname}{' '}
+                    {data.role && (
+                      <GrUserAdmin
+                        style={{ display: 'inline-block' }}
+                        size={14}
+                      />
+                    )}
+                  </S.GroupMembersName>
                   <AntButton
                     type='link'
                     onClick={() => changeNicknameClicked(data)}
@@ -102,15 +117,10 @@ const GroupMembers = ({ open, closeModal, roomInfo }: IGroupMembers) => {
                 </div>
               </S.LeftWrap>
 
-              {/* <S.KickMemberButton onClick={() => kickMember(data)}>
-                Kick member
-              </S.KickMemberButton> */}
-              <Button onClick={() => kickMember(data)}>Kick member</Button>
+              {isLeader && data.uid !== user._id && (
+                <Button onClick={() => kickMember(data)}>Kick member</Button>
+              )}
             </S.GroupMembersInfo>
-            {/* <S.GroupMembersChangeNickname
-            >
-              Change nickname
-            </S.GroupMembersChangeNickname> */}
           </S.GroupMembersItem>
         ))}
       </S.GroupMembersList>

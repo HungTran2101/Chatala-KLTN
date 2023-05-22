@@ -2,7 +2,6 @@ import * as S from './MoreOptions.styled';
 import { getFileIcon, useOutsideClick } from '../../../Global/ProcessFunctions';
 import { fileType, roomInfo, userInfo } from '../../../../utils/types';
 import Image from 'next/image';
-import { UserAvatar } from '../../../../utils/dataConfig';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { useState } from 'react';
 import NicknameModal from './NicknameModal';
@@ -13,7 +12,7 @@ import { UsersApi } from '../../../../services/api/users';
 import GroupMembers from './GroupMembers';
 import { FriendApi } from '../../../../services/api/friend';
 import { selectFileState } from '../../../../features/redux/slices/fileSlice';
-import GroupNameModal from './GroupNameModel';
+import GroupNameModal from './GroupNameModal';
 import AddMemberModal from './AddMemberModal';
 import KickMemberModal from './KickMemberModal';
 import { Drawer, Modal, Popconfirm } from 'antd';
@@ -46,7 +45,7 @@ const MoreOptions = ({
   // const [toggleGroupMembers, setToggleGroupMembers] = useState(false);
   // const [toggleGroupName, setToggleGroupName] = useState(false);
   // const [toggleAddMember, setToggleAddMember] = useState(false);
-  const [toggleKickMember, setToggleKickMember] = useState(false);
+  // const [toggleKickMember, setToggleKickMember] = useState(false);
   const [friendProfile, setFriendProfile] = useState<userInfo>();
 
   const user = useSelector(selectUserState);
@@ -254,19 +253,20 @@ const MoreOptions = ({
         open={modalGroupMembers}
         closeModal={() => setModalGroupMembers(false)}
         roomInfo={roomInfo}
+        user={user.info}
       />
       <AddMemberModal
         open={modalGroupAdd}
         closeModal={() => setModalGroupAdd(false)}
         roomInfo={roomInfo}
       />
-      {toggleKickMember && (
+      {/* {toggleKickMember && (
         <KickMemberModal
           setToggleKickMember={setToggleKickMember}
           roomInfo={roomInfo}
           user={user.info}
         />
-      )}
+      )} */}
       <GroupNameModal
         open={modalGroupName}
         closeModal={() => setModalGroupName(false)}

@@ -9,7 +9,6 @@ import { UsersApi } from '../../services/api/users';
 import { ClipLoader } from 'react-spinners';
 import { BsEyeSlash, BsEye } from 'react-icons/bs';
 import { useState } from 'react';
-import { CallApi } from '../../services/api/call';
 
 const Login = () => {
   const router = useRouter();

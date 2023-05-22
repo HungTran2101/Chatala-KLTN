@@ -25,69 +25,73 @@ function VideoCall() {
 
   const [token, setToken] = useState(null);
   const [meetingId, setMeetingId] = useState(null);
-  const [name, setName] = useState("Default name");
+  const [name, setName] = useState('Default name');
   const [isValid, setIsValid] = useState(false);
 
   const socket = useSocketContext();
 
-  const joinMeeting = async () => {
-    console.log('join', meetingId);
-    const res = await CallApi.validateMeeting(meetingId, token);
-    if (res) setIsValid(true);
-  };
+  // const joinMeeting = async () => {
+  //   console.log('join', meetingId);
+  //   const res = await CallApi.validateMeeting(meetingId, token);
+  //   if (res) setIsValid(true);
+  // };
 
-  const createMeeting = async () => {
-    const meetingId = await CallApi.createMeeting(token);
-    setMeetingId(meetingId);
-    setIsValid(true);
-    return meetingId;
-  };
+  // const createMeeting = async () => {
+  //   const meetingId = await CallApi.createMeeting(token);
+  //   setMeetingId(meetingId);
+  //   setIsValid(true);
+  //   return meetingId;
+  // };
 
-  const getToken = async () => {
-    const callToken = await CallApi.getToken();
-    console.log('token', token);
-    setToken(callToken);
-    return callToken;
-  };
+  // const getToken = async () => {
+  //   const callToken = await CallApi.getToken();
+  //   console.log('token', token);
+  //   setToken(callToken);
+  //   return callToken;
+  // };
+
+  // useEffect(() => {
+  //   getToken();
+  //   const validate = async () => {
+  //     if (token) {
+  //       if (!meetingId) {
+  //         const _meetingId = await createMeeting();
+  //         socket.emit('calling', {
+  //           meetingId: _meetingId,
+  //           callerId: router.query.callerId,
+  //           receiverIds: router.query.receiverIds,
+  //         });
+  //       } else joinMeeting();
+  //     }
+  //   };
+  //   validate();
+  // }, [token]);
 
   useEffect(() => {
-    getToken();
-    const validate = async () => {
-      if (token) {
-        if (!meetingId) {
-          const _meetingId = await createMeeting();
-          socket.emit('calling', {
-            meetingId: _meetingId,
-            callerId: router.query.callerId,
-            receiverIds: router.query.receiverIds,
-          });
-        } else joinMeeting();
-      }
-    };
-    validate();
-  }, [token]);
-
-  useEffect(() => {
-    if (router.query.meetingId) {
-      setMeetingId(router.query.meetingId as string);
-    }
-    if (router.query.name) {
-      setName(router.query.name as string);
-    }
+    // if (router.query.meetingId) {
+    //   setMeetingId(router.query.meetingId as string);
+    // }
+    // if (router.query.name) {
+    //   setName(router.query.name as string);
+    // }
+    // if (router.query.token) {
+    //   setName(router.query.token as string);
+    // }
+    console.log(router.query);
   }, [router.query]);
 
-  return token && meetingId && isValid ? (
+  return (router.query.meetingId && router.query.token) ? (
     <MeetingProvider
       config={{
-        meetingId,
+        meetingId: router.query.meetingId,
         micEnabled: false,
         webcamEnabled: false,
-        name: name,
+        name: router.query.name,
       }}
-      token={token}
+      token={router.query.token}
       // joinWithoutUserInteraction // Boolean
     >
-      <MeetingView meetingId={meetingId} />
+      <MeetingView meetingId={router.query.meetingId} />
     </MeetingProvider>
   ) : (
     // <JoinScreen

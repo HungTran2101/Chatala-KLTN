@@ -13,7 +13,7 @@ import { messageActions } from '../src/features/redux/slices/messageSlice';
 import { friendListActions } from '../src/features/redux/slices/friendListSlice';
 import { FriendApi } from '../src/services/api/friend';
 import { useSocketContext } from '../src/contexts/socket';
-import CallNotiModel from '../src/components/Home/ChatArea/ChatAreaHead/CallNotiModel';
+import CallNotiModel from '../src/components/Home/ChatArea/ChatAreaHead/CallNotiModal';
 
 const Home = () => {
   const router = useRouter();
@@ -21,10 +21,11 @@ const Home = () => {
   const dispatch = useDispatch();
   const roomInfo = useSelector(selectRoomInfoState);
 
-  const [receiveCall, setReceiveCall] = useState<boolean>(false);
+  const [callNotiShow, setCallNotiShow] = useState<boolean>(false);
   const [callInfo, setCallInfo] = useState<{
     meetingId: string;
     callerId: string;
+    isCaller: boolean;
   }>(undefined);
 
   //socket client
@@ -45,11 +46,13 @@ const Home = () => {
       dispatch(messageActions.delete(msgId));
     });
     socket.on('receiveCall', (callInfo) => {
+      console.log('receiveCall', callInfo);
       setCallInfo({
         meetingId: callInfo.meetingId,
         callerId: callInfo.callerId,
+        isCaller: false,
       });
-      setReceiveCall(true);
+      setCallNotiShow(true);
     });
   }, []);
 
@@ -94,8 +97,11 @@ const Home = () => {
           <SideBar />
           {roomInfo.info ? <ChatArea /> : <Welcome home={true} />}
         </S.Wrapper>
-        {receiveCall && callInfo && (
-          <CallNotiModel setReceiveCall={setReceiveCall} callInfo={callInfo} />
+        {callNotiShow && callInfo && (
+          <CallNotiModel
+            setCallNotiShow={setCallNotiShow}
+            callInfo={callInfo}
+          />
         )}
       </S.HomeContainer>
     </>

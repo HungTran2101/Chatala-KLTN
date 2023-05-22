@@ -1,5 +1,4 @@
 import Login from '../src/components/Login';
-import cookie from 'cookie';
 const login = () => {
   return <Login />;
 };
@@ -8,7 +7,6 @@ export async function getServerSideProps(context) {
   if (typeof headerCookie !== 'string') {
     headerCookie = '';
   }
-  const parsedCookies = cookie.parse(headerCookie);
   console.log(context.headers);
 
   return { props: {} };

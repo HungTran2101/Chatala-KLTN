@@ -9,10 +9,15 @@ import {
 } from 'react-icons/bs';
 import { MdCallEnd } from 'react-icons/md';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { utilActions } from '../../features/redux/slices/utilSlice';
 const Controls = () => {
-  const { leave, toggleMic, toggleWebcam, } = useMeeting();
+  const { leave, toggleMic, toggleWebcam } = useMeeting();
 
   const [controls, setControls] = useState({ cam: false, mic: false });
+
+  const dispatch = useDispatch();
+
   return (
     <S.Container>
       <S.Button
