@@ -31,10 +31,9 @@ const UserInfo = ({ friendProfile, open, closeModal }: IUserInfo) => {
       closeIcon={<></>}
       onOk={closeModal}
       onCancel={closeModal}
-      okButtonProps={{ style: { display: 'none' } }}
-      cancelText='OK'
       footer={<></>}
-      destroyOnClose={true}
+      destroyOnClose
+      centered
     >
       <S.Header>
         {/* <S.Title>Account information</S.Title> */}
