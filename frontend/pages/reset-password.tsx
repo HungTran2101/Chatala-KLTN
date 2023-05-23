@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import FormTemplate from '../src/components/Global/FormTemplate';
 import OTPCode from '../src/components/OTPForm';
 import * as S from '../src/components/OTPForm/OTPForm.styled';
@@ -13,7 +13,7 @@ const ResetPassword = () => {
   const router = useRouter();
 
   const [checkError, setCheckError] = useState<boolean | null>(null);
-  const [countdown, setCountdown] = useState(30);
+  const [countdown, setCountdown] = useState(120);
 
   const initialValues = {
     otpCode: '',
@@ -40,7 +40,6 @@ const ResetPassword = () => {
     try {
       await window.confirmationResult.confirm(values.otpCode);
       setCheckError(false);
-      console.log(router.query);
     } catch {
       setCheckError(true);
       setSubmitting(false);
@@ -102,8 +101,8 @@ const ResetPassword = () => {
               <S.NewForm>
                 <S.SetWidth>
                   <S.Input
-                    placeholder='Verification OTP code'
-                    name='otpCode'
+                    placeholder="Verification OTP code"
+                    name="otpCode"
                     checkerror={checkError}
                   />
                   {checkError === true && (
@@ -127,11 +126,11 @@ const ResetPassword = () => {
                     </S.CheckPhoneNumber>
                   )}
                   <S.Button
-                    type='submit'
+                    type="submit"
                     disabled={isSubmitting ? true : false}
                   >
                     {isSubmitting ? (
-                      <ClipLoader color='#fff' size={25} />
+                      <ClipLoader color="#fff" size={25} />
                     ) : (
                       'Verify'
                     )}
@@ -154,21 +153,21 @@ const ResetPassword = () => {
                 <S.SetWidth>
                   <S.InputPassword>
                     <S.Password
-                      placeholder='Password'
+                      placeholder="Password"
                       type={eye ? 'text' : 'password'}
-                      name='password'
+                      name="password"
                       error={errors.password && touched.password ? 1 : 0}
                     />
                     <S.ButtonEye onClick={() => setEye(!eye)}>
                       {eye ? <BsEyeSlash /> : <BsEye />}
                     </S.ButtonEye>
                   </S.InputPassword>
-                  <ErrorMessage name='password' component={S.ErrorMsg} />
+                  <ErrorMessage name="password" component={S.ErrorMsg} />
                   <S.InputPassword>
                     <S.Password
-                      placeholder='Confirm Password'
+                      placeholder="Confirm Password"
                       type={confirmEye ? 'text' : 'password'}
-                      name='confirmPassword'
+                      name="confirmPassword"
                       error={
                         errors.confirmPassword && touched.confirmPassword
                           ? 1
@@ -179,8 +178,8 @@ const ResetPassword = () => {
                       {confirmEye ? <BsEyeSlash /> : <BsEye />}
                     </S.ButtonEye>
                   </S.InputPassword>
-                  <ErrorMessage name='confirmPassword' component={S.ErrorMsg} />
-                  <S.Button type='submit'>Submit</S.Button>
+                  <ErrorMessage name="confirmPassword" component={S.ErrorMsg} />
+                  <S.Button type="submit">Submit</S.Button>
                 </S.SetWidth>
               </S.NewForm>
             )}
@@ -189,6 +188,28 @@ const ResetPassword = () => {
       )}
     </FormTemplate>
   );
+};
+
+ResetPassword.getInitialProps = async ({ req, res }) => {
+  if (req?.cookies.token) {
+    if (res) {
+      // On the server, we'll use an HTTP response to
+      // redirect with the status code of our choice.
+      // 307 is for temporary redirects.
+      res.writeHead(307, { Location: '/' });
+      res.end();
+    } else {
+      // On the client, we'll use the Router-object
+      // from the 'next/router' module.
+      Router.replace('/');
+    }
+
+    return {};
+  }
+
+  return {
+    data: null,
+  };
 };
 
 export default ResetPassword;
