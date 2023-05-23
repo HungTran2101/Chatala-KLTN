@@ -8,6 +8,7 @@ import { ClipLoader } from 'react-spinners';
 import * as Yup from 'yup';
 import { UsersApi } from '../src/services/api/users';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
+import { message } from 'antd';
 
 const ResetPassword = () => {
   const router = useRouter();
@@ -49,7 +50,7 @@ const ResetPassword = () => {
   const handleResetSubmit = async ({ password }) => {
     try {
       await UsersApi.resetPassword(router.query.phone as string, password);
-      alert('Reset succeed!');
+      message.success('Reset password succeed!');
       router.push('/login');
     } catch (err: any) {
       console.log(err);

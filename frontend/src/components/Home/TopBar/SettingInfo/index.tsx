@@ -26,7 +26,7 @@ import { UsersApi } from '../../../../services/api/users';
 import { useDispatch } from 'react-redux';
 import { userActions } from '../../../../features/redux/slices/userSlice';
 import { json } from 'stream/consumers';
-import { Input, Modal } from 'antd';
+import { Input, Modal, message } from 'antd';
 import moment from 'moment';
 
 interface ISetingInfo {
@@ -72,7 +72,7 @@ const SettingInfo = ({
       reader.addEventListener('load', () => {
         const typeImage = reader.result.slice(0, 10);
         if (typeImage !== 'data:image') {
-          alert('Please choose an image file');
+          message.info('Please choose an image file');
         } else {
           setModalCrop(true);
           setCropImage(reader.result);
@@ -119,10 +119,10 @@ const SettingInfo = ({
         const avatarUrl = await uploadFile(fileAvt);
         if (avatarUrl) {
           const result = await UsersApi.editAvatar(avatarUrl);
-          alert(result.message);
+          message.success(result.message);
           updated = true;
         } else {
-          alert('Update avatar failed! Try again later.');
+          message.error('Update avatar failed! Try again later.');
         }
       }
 
@@ -137,7 +137,7 @@ const SettingInfo = ({
           dob: values.dob,
         };
         const result = await UsersApi.editUserInfo(newValue);
-        alert(result.message);
+        message.success(result.message);
         updated = true;
       }
       if (updated) {
@@ -145,7 +145,7 @@ const SettingInfo = ({
         dispatch(userActions.setUserInfo(result));
       }
     } catch (error) {
-      alert(error.message);
+      message.error(error.message);
     }
   };
 

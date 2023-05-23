@@ -14,6 +14,7 @@ import { friendListActions } from '../src/features/redux/slices/friendListSlice'
 import { FriendApi } from '../src/services/api/friend';
 import { useSocketContext } from '../src/contexts/socket';
 import CallNotiModel from '../src/components/Home/ChatArea/ChatAreaHead/CallNotiModal';
+import { Button, Space, message, notification } from 'antd';
 
 const Home = () => {
   const router = useRouter();
@@ -56,6 +57,27 @@ const Home = () => {
     });
   }, []);
 
+  const closeNoti = () => {
+    notification.destroy();
+    router.replace('/login');
+  };
+
+  const openNoti = () => {
+    const btn = (
+      <Button size="small" type='link' onClick={() => closeNoti()}>
+        Redirect me now
+      </Button>
+    );
+    notification.warning({
+      message: 'Your session is over, please login.',
+      description: `Redirect in 5s...`,
+      btn,
+      duration: 5,
+      placement: 'top',
+      onClose: closeNoti,
+    });
+  };
+
   const getRoomList = async () => {
     try {
       dispatch(roomListActions.requestRoomList(null));
@@ -65,8 +87,7 @@ const Home = () => {
       console.log(err);
       if (err?.error.statusCode === 401) {
         if (err.message === 'Unauthorized!') {
-          alert('Your session is over, redirecting to login page.');
-          router.push('/login');
+          openNoti();
         }
       }
     }
@@ -79,7 +100,7 @@ const Home = () => {
       dispatch(friendListActions.setFriendList(friends));
     } catch (err: any) {
       if (err?.error.statusCode === 400) {
-        alert(err.error.message);
+        message.error(err.error.message);
       }
     }
   };

@@ -12,6 +12,7 @@ import { UsersApi } from '../../services/api/users';
 import { FormValue } from '../../utils/types';
 import { BsEyeSlash, BsEye } from 'react-icons/bs';
 import { ClipLoader } from 'react-spinners';
+import { message } from 'antd';
 
 declare global {
   interface Window {
@@ -96,7 +97,7 @@ const Register = () => {
     } catch (err: any) {
       console.log(err);
       if (err.error.statusCode === 400) {
-        alert('Registration failed, Phone number already exists!');
+        message.error('Registration failed, Phone number already exists!');
       }
     }
   };

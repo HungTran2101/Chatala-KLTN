@@ -10,7 +10,7 @@ import { roomInfo, roomUser, userInfo } from '../../../../../utils/types';
 import UserInfo from '../../../TopBar/UserInfo';
 import NicknameModal from '../NicknameModal';
 import * as S from './GroupMembers.styled';
-import { Button as AntButton, Modal } from 'antd';
+import { Button as AntButton, Modal, message } from 'antd';
 import { RoomApi } from '../../../../../services/api/room';
 import { roomListActions } from '../../../../../features/redux/slices/roomListSlice';
 import { socket } from '../../../../../contexts/socket';
@@ -60,10 +60,10 @@ const GroupMembers = ({ open, closeModal, roomInfo, user }: IGroupMembers) => {
 
       socket.emit('kickmember', data.uid);
 
-      alert(`Kick ${data.nickname} succeed!`);
+      message.open({ content: `Kick ${data.nickname} succeed!` });
     } catch (err) {
       console.log(err);
-      alert(err);
+      message.error(err);
     }
   };
 
@@ -77,12 +77,12 @@ const GroupMembers = ({ open, closeModal, roomInfo, user }: IGroupMembers) => {
       onOk={closeModal}
       onCancel={closeModal}
       cancelButtonProps={{ style: { display: 'none' } }}
-      okType='link'
+      okType="link"
       destroyOnClose
     >
       <S.GroupMembersSearch>
         <S.GroupMembersSearchIcon />
-        <S.GroupMembersSearchInput placeholder='Search with name or phone number...' />
+        <S.GroupMembersSearchInput placeholder="Search with name or phone number..." />
       </S.GroupMembersSearch>
       <S.GroupMembersList>
         {activeUsers.map((data, index) => (
@@ -92,9 +92,9 @@ const GroupMembers = ({ open, closeModal, roomInfo, user }: IGroupMembers) => {
                 <S.GroupMembersAvatar>
                   <Image
                     src={data.avatar}
-                    alt='avatar'
-                    layout='fill'
-                    objectFit='cover'
+                    alt="avatar"
+                    layout="fill"
+                    objectFit="cover"
                   />
                 </S.GroupMembersAvatar>
                 <div>
@@ -108,7 +108,7 @@ const GroupMembers = ({ open, closeModal, roomInfo, user }: IGroupMembers) => {
                     )}
                   </S.GroupMembersName>
                   <AntButton
-                    type='link'
+                    type="link"
                     onClick={() => changeNicknameClicked(data)}
                     style={{ fontStyle: 'italic', marginTop: '-10px' }}
                   >

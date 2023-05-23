@@ -37,6 +37,7 @@ import {
 import { RoomApi } from '../../../services/api/room';
 import { selectFriendListState } from '../../../features/redux/slices/friendListSlice';
 import { FriendApi } from '../../../services/api/friend';
+import { message } from 'antd';
 
 const ChatArea = () => {
   const dispatch = useDispatch();
@@ -229,7 +230,7 @@ const ChatArea = () => {
       try {
         const uploadedFiles: fileType[] = await uploadFiles(values.files);
         if (uploadedFiles.length <= 0 && values.files.length > 0) {
-          alert('Upload files failed! Try again later.');
+          message.error('Upload files failed! Try again later.');
           return;
         }
         let fileIds = [];

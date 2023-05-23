@@ -12,6 +12,7 @@ import { roomListActions } from '../../../../../features/redux/slices/roomListSl
 import { useSocketContext } from '../../../../../contexts/socket';
 import { Modal } from 'antd';
 import Button from '../../../../Global/Button';
+import { message } from 'antd';
 
 interface IAddMemberModal {
   closeModal: () => void;
@@ -55,10 +56,10 @@ const AddMemberModal = ({ open, closeModal, roomInfo }: IAddMemberModal) => {
 
       socket.emit('addmember', data._id);
 
-      alert(`Add ${data.name} to group succeed!`);
+      message.open({ content: `Add ${data.name} to group succeed!` });
     } catch (err) {
       console.log(err);
-      alert(err.message);
+      message.error(err.message);
     }
   };
 
@@ -69,12 +70,12 @@ const AddMemberModal = ({ open, closeModal, roomInfo }: IAddMemberModal) => {
       onOk={closeModal}
       onCancel={closeModal}
       cancelButtonProps={{ style: { display: 'none' } }}
-      okType='link'
+      okType="link"
       destroyOnClose
     >
       <S.AddMemberSearch>
         <S.AddMemberSearchIcon />
-        <S.AddMemberSearchInput placeholder='Search with name or phone number...' />
+        <S.AddMemberSearchInput placeholder="Search with name or phone number..." />
       </S.AddMemberSearch>
       <S.AddMemberList>
         {unAddMembers.map((data, index) => (
@@ -83,14 +84,14 @@ const AddMemberModal = ({ open, closeModal, roomInfo }: IAddMemberModal) => {
               <S.AddMemberAvatar>
                 <Image
                   src={data.avatar}
-                  alt='avatar'
-                  layout='fill'
-                  objectFit='cover'
+                  alt="avatar"
+                  layout="fill"
+                  objectFit="cover"
                 />
               </S.AddMemberAvatar>
               <S.AddMemberName>{data.name}</S.AddMemberName>
             </S.AddMemberInfo>
-            <Button variant='blue' onClick={() => addMember(data)}>
+            <Button variant="blue" onClick={() => addMember(data)}>
               + Add member
             </Button>
           </S.AddMemberItem>

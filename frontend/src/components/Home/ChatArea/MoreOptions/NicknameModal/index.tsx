@@ -5,7 +5,7 @@ import { roomListActions } from '../../../../../features/redux/slices/roomListSl
 import { RoomApi } from '../../../../../services/api/room';
 import { roomInfo, roomUser } from '../../../../../utils/types';
 import * as S from './NicknameModal.styled';
-import { Modal } from 'antd';
+import { Modal, message } from 'antd';
 
 interface INickname {
   closeModal: () => void;
@@ -47,7 +47,7 @@ const NicknameModal = ({
       closeModal();
     } catch (err) {
       console.log(err);
-      alert(err.message);
+      message.error(err.message);
     }
   };
 

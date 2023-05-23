@@ -8,7 +8,7 @@ import { CreateGroupArray } from '../../../../../utils/dataConfig';
 import { userInfo } from '../../../../../utils/types';
 import UserInfo from '../../../TopBar/UserInfo';
 import * as S from './CreateGroup.styled';
-import { Modal, Button as AntButton } from 'antd';
+import { Modal, Button as AntButton, message } from 'antd';
 import Button from '../../../../Global/Button';
 
 interface ICreateGroup {
@@ -67,11 +67,11 @@ const CreateGroup = ({ open, onClose }: ICreateGroup) => {
       } catch (err: any) {
         console.log(err);
         if (err?.error.statusCode === 400) {
-          alert(err?.message);
+          message.error(err?.message);
         }
       }
     } else {
-      alert('Cannot create group with 2 member!');
+      message.error('Cannot create group with 2 member!');
     }
   };
 

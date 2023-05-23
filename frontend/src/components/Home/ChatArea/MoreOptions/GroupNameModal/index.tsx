@@ -6,7 +6,7 @@ import { RoomApi } from '../../../../../services/api/room';
 import { roomInfo } from '../../../../../utils/types';
 import * as S from './GroupNameModel.styled';
 import { useSocketContext } from '../../../../../contexts/socket';
-import { Modal } from 'antd';
+import { Modal, message } from 'antd';
 
 interface IGroupName {
   closeModal: () => void;
@@ -48,7 +48,7 @@ const GroupNameModal = ({ closeModal, open, roomInfo }: IGroupName) => {
       closeModal();
     } catch (err) {
       console.log(err);
-      alert(err.message);
+      message.error(err.message);
     }
   };
 

@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { UsersApi } from '../../services/api/users';
 import { UserRegister } from '../../utils/types';
 import { ClipLoader } from 'react-spinners';
+import { message } from 'antd';
 
 const OTPCode = () => {
   const router = useRouter();
@@ -29,7 +30,7 @@ const OTPCode = () => {
       };
 
       await UsersApi.register(data);
-      alert('Registration succeed!');
+      message.success('Registration succeed!');
       router.push('/login');
     } catch {
       setCheckError('true');

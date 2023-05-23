@@ -14,7 +14,6 @@ import { FriendApi } from '../../../../services/api/friend';
 import { selectFileState } from '../../../../features/redux/slices/fileSlice';
 import GroupNameModal from './GroupNameModal';
 import AddMemberModal from './AddMemberModal';
-import KickMemberModal from './KickMemberModal';
 import { Drawer, Modal, Popconfirm } from 'antd';
 
 interface IMoreOptions {
@@ -260,13 +259,6 @@ const MoreOptions = ({
         closeModal={() => setModalGroupAdd(false)}
         roomInfo={roomInfo}
       />
-      {/* {toggleKickMember && (
-        <KickMemberModal
-          setToggleKickMember={setToggleKickMember}
-          roomInfo={roomInfo}
-          user={user.info}
-        />
-      )} */}
       <GroupNameModal
         open={modalGroupName}
         closeModal={() => setModalGroupName(false)}
