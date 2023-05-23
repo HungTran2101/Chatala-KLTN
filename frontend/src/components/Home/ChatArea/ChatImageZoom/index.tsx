@@ -130,10 +130,18 @@ const ChatImageZoom = ({
         style={{ height: '20%' }}
       >
         {imageZoomList.map((image, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide
+            key={index}
+            style={{ display: 'flex', alignItems: 'center' }}
+          >
             <div
               className='swiper-zoom-container'
-              style={{ cursor: 'pointer' }}
+              style={{
+                cursor: 'pointer',
+                height: 'auto',
+                borderRadius: '10px',
+                overflow: 'hidden',
+              }}
             >
               <img src={image.url} />
             </div>
