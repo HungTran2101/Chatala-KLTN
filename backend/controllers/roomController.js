@@ -72,7 +72,7 @@ const addAvatarForUserInRoom = (room, userInfos) => {
 const getRoomList = asyncHandler(async (req, res, next) => {
   const rooms = await Rooms.find({
     'users.uid': req.user._id,
-  });
+  }).sort({updatedAt: -1});
 
   //get all uid have in all rooms
   let uids = [];
@@ -118,32 +118,10 @@ const getRoomList = asyncHandler(async (req, res, next) => {
 const getRoomInfo = asyncHandler(async (req, res, next) => {
   const roomId = req.params.roomId;
 
-  const roomInfo = await Rooms.findById(roomId);
   const messages = await Messages.find({
     roomId: roomId,
   }).sort({ createdAt: -1 });
   const files = await Files.find({ roomId: roomId });
-
-  // //add avatar for each user in room
-  // let uids = [];
-  // roomInfo.users.forEach((user) => uids.push(user.uid));
-  // const userInfos = await Users.find({ _id: { $in: uids } });
-  // const editedUsers = addAvatarForUserInRoom(roomInfo, userInfos);
-  // const editedRoomInfo = { ...roomInfo.toObject(), users: editedUsers };
-
-  // //setup response value
-  // let roomAvatar = editedRoomInfo.users[0].avatar;
-  // let roomName = editedRoomInfo.users[0].nickname;
-
-  // if (editedRoomInfo.isGroup) {
-  //   roomAvatar = "";
-  //   roomName = "";
-  // } else if (
-  //   editedRoomInfo.users[1].uid.toString() !== req.user._id.toString()
-  // ) {
-  //   roomAvatar = editedRoomInfo.users[1].avatar;
-  //   roomName = editedRoomInfo.users[1].nickname;
-  // }
 
   if (messages && files) {
     res.status(200).json({

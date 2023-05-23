@@ -91,7 +91,7 @@ export const OptionNotifyNumber = styled.div<{ number: number }>`
 
 // Search
 export const SearchModalItem = styled.div`
-  ${tw`relative flex p-2 rounded-[20px] items-center w-full bg-secondary`}
+  ${tw`relative flex p-2 rounded-[5px] items-center w-full bg-secondary`}
 `;
 
 export const SearchModalInfo = styled.div`

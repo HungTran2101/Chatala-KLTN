@@ -140,9 +140,9 @@ const SearchModal = ({
                   <S.SearchModalAvatar>
                     <Image
                       src={data.avatar}
-                      alt='avatar'
-                      layout='fill'
-                      objectFit='cover'
+                      alt="avatar"
+                      layout="fill"
+                      objectFit="cover"
                     />
                   </S.SearchModalAvatar>
                   <S.SearchModalNameWrapper>
