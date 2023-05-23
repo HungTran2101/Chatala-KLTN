@@ -88,7 +88,7 @@ export const Info = styled.div`
 `;
 
 export const Button = styled.button`
-  ${tw`flex justify-center items-center w-[60%] text-white text-lg bg-quaternary rounded-[20px] py-1 px-2 mt-3 mx-auto mb-8 opacity-100 hover:opacity-80`}
+  ${tw`flex justify-center items-center w-[60%] text-white text-lg bg-quaternary rounded-[20px] py-1 px-2 mt-3 mx-auto mb-3 opacity-100 hover:opacity-80`}
   & svg {
     ${tw`mr-1`}
   }

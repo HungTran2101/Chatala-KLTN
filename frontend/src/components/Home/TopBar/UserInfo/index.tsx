@@ -23,7 +23,6 @@ const UserInfo = ({ friendProfile, open, closeModal }: IUserInfo) => {
     friendProfile || user.info || {};
 
   const [editInfo, setEditInfo] = useState(false);
-  const [seeAvatar, setSeeAvatar] = useState(false);
 
   return (
     <Modal
@@ -34,6 +33,8 @@ const UserInfo = ({ friendProfile, open, closeModal }: IUserInfo) => {
       footer={<></>}
       destroyOnClose
       centered
+      style={{ backgroundColor: 'transparent' }}
+      bodyStyle={{ backgroundColor: 'transparent' }}
     >
       <S.Header>
         {/* <S.Title>Account information</S.Title> */}
@@ -69,16 +70,15 @@ const UserInfo = ({ friendProfile, open, closeModal }: IUserInfo) => {
           <span onClick={() => setEditInfo(true)}>Update information</span>
         </S.Button>
       )}
-      {editInfo && (
-        <SettingInfo
-          id={user.info._id}
-          name={name}
-          gender={gender}
-          dob={dob}
-          avatar={avatar}
-          setEditInfo={setEditInfo}
-        />
-      )}
+      <SettingInfo
+        id={user.info?._id}
+        name={name}
+        gender={gender}
+        dob={dob}
+        avatar={avatar}
+        closeModal={() => setEditInfo(false)}
+        open={editInfo}
+      />
     </Modal>
   );
 };

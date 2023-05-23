@@ -26,6 +26,7 @@
     "formik": "^2.2.9",
     "fs": "^0.0.1-security",
     "lodash": "^4.17.21",
+    "moment": "^2.29.4",
     "next": "12.3.0",
     "next-redux-wrapper": "^8.0.0",
     "react": "18.2.0",
@@ -41,6 +42,7 @@
     "react-spinners": "^0.13.6",
     "socket.io-client": "^4.5.3",
     "styled-components": "^5.3.5",
+    "swiper": "^9.3.2",
     "twin.macro": "^2.8.2"
   },
   "devDependencies": {

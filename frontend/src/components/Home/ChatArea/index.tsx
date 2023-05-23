@@ -312,15 +312,7 @@ const ChatArea = () => {
   }, [openMoreOption]);
 
   return (
-    <S.ChatArea>
-      <ChatAreaHead setToggleOption={showDrawer} />
-      <MoreOptions
-        roomInfo={roomInfo.info!}
-        setToggleOption={onCloseDrawer}
-        toggleOption={openMoreOption}
-        setToggleImageZoom={setToggleImageZoom}
-        setImageZoomList={setImageZoomList}
-      />
+    <>
       {toggleImageZoom && (
         <ChatImageZoom
           imageZoomList={imageZoomList.list}
@@ -328,71 +320,81 @@ const ChatArea = () => {
           currentIndex={imageZoomList.index}
         />
       )}
-      <Formik
-        initialValues={initialValues}
-        onSubmit={onSubmit}
-        validationSchema={validationSchema}
-        enableReinitialize
-      >
-        {({ values, setFieldValue, submitForm, isSubmitting }) => (
-          <DropZone
-            onDrop={(acceptedFiles) =>
-              fileDropped(acceptedFiles, values, setFieldValue)
-            }
-            noClick
-            noKeyboard
-          >
-            {({ getRootProps, getInputProps, isDragActive }) => (
-              <S.ChatAreaMain {...getRootProps()}>
-                <ChatAreaMainMsg
-                  bottomDiv={bottomDiv}
-                  chatMainMsgOuter={chatMainMsgOuter}
-                  isSubmitting={isSubmitting}
-                  newMsgNoti={newMsgNoti}
-                  toggleTyping={toggleTyping}
-                  setImageZoomList={setImageZoomList}
-                  setToggleImageZoom={setToggleImageZoom}
-                  checkChatScrollBottom={checkChatScrollBottom}
-                  newMsgNotiClick={newMsgNotiClick}
-                />
-                {chatScrollBottom && (
-                  <S.ChatAreaMainScrollBottom onClick={scrollToNewMsg} />
-                )}
-                {values.files.length > 0 && (
-                  <S.ChatChatAreaFilePreview>
-                    <S.ChatChatAreaFilePreviewInner>
-                      {values.files.map((data, index) => (
-                        <FilePreview
-                          files={values.files}
-                          setFieldValue={setFieldValue}
-                          index={index}
-                          key={index}
-                        />
-                      ))}
-                    </S.ChatChatAreaFilePreviewInner>
-                  </S.ChatChatAreaFilePreview>
-                )}
-
-                {!blockInput || roomInfo.info.roomInfo.isGroup ? (
-                  <ChatAreaMainForm
-                    isDragActive={isDragActive}
-                    values={values}
+      <S.ChatArea>
+        <ChatAreaHead setToggleOption={showDrawer} />
+        <MoreOptions
+          roomInfo={roomInfo.info!}
+          setToggleOption={onCloseDrawer}
+          toggleOption={openMoreOption}
+          setToggleImageZoom={setToggleImageZoom}
+          setImageZoomList={setImageZoomList}
+        />
+        <Formik
+          initialValues={initialValues}
+          onSubmit={onSubmit}
+          validationSchema={validationSchema}
+          enableReinitialize
+        >
+          {({ values, setFieldValue, submitForm, isSubmitting }) => (
+            <DropZone
+              onDrop={(acceptedFiles) =>
+                fileDropped(acceptedFiles, values, setFieldValue)
+              }
+              noClick
+              noKeyboard
+            >
+              {({ getRootProps, getInputProps, isDragActive }) => (
+                <S.ChatAreaMain {...getRootProps()}>
+                  <ChatAreaMainMsg
+                    bottomDiv={bottomDiv}
+                    chatMainMsgOuter={chatMainMsgOuter}
                     isSubmitting={isSubmitting}
-                    fileChoosen={fileChoosen}
-                    getInputProps={getInputProps}
-                    onInputChange={onInputChange}
-                    setFieldValue={setFieldValue}
-                    submitForm={submitForm}
+                    newMsgNoti={newMsgNoti}
+                    toggleTyping={toggleTyping}
+                    setImageZoomList={setImageZoomList}
+                    setToggleImageZoom={setToggleImageZoom}
+                    checkChatScrollBottom={checkChatScrollBottom}
+                    newMsgNotiClick={newMsgNotiClick}
                   />
-                ) : (
-                  <i>You can&apos;t chat to this conversation </i>
-                )}
-              </S.ChatAreaMain>
-            )}
-          </DropZone>
-        )}
-      </Formik>
-    </S.ChatArea>
+                  {chatScrollBottom && (
+                    <S.ChatAreaMainScrollBottom onClick={scrollToNewMsg} />
+                  )}
+                  {values.files.length > 0 && (
+                    <S.ChatChatAreaFilePreview>
+                      <S.ChatChatAreaFilePreviewInner>
+                        {values.files.map((data, index) => (
+                          <FilePreview
+                            files={values.files}
+                            setFieldValue={setFieldValue}
+                            index={index}
+                            key={index}
+                          />
+                        ))}
+                      </S.ChatChatAreaFilePreviewInner>
+                    </S.ChatChatAreaFilePreview>
+                  )}
+
+                  {!blockInput || roomInfo.info.roomInfo.isGroup ? (
+                    <ChatAreaMainForm
+                      isDragActive={isDragActive}
+                      values={values}
+                      isSubmitting={isSubmitting}
+                      fileChoosen={fileChoosen}
+                      getInputProps={getInputProps}
+                      onInputChange={onInputChange}
+                      setFieldValue={setFieldValue}
+                      submitForm={submitForm}
+                    />
+                  ) : (
+                    <i>You can&apos;t chat to this conversation </i>
+                  )}
+                </S.ChatAreaMain>
+              )}
+            </DropZone>
+          )}
+        </Formik>
+      </S.ChatArea>
+    </>
   );
 };
 

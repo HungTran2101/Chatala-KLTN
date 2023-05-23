@@ -1,6 +1,6 @@
-import styled, { keyframes, createGlobalStyle } from "styled-components";
-import { Form, Field } from "formik";
-import tw from "twin.macro";
+import styled, { keyframes, createGlobalStyle } from 'styled-components';
+import { Form, Field } from 'formik';
+import tw from 'twin.macro';
 
 const fadeIn = keyframes`
     from {
@@ -47,7 +47,7 @@ export const Title = styled.div`
 `;
 
 export const Banner = styled.figure`
-  ${tw`relative w-full h-[150px] cursor-pointer rounded-b-[20px] overflow-hidden`}
+  ${tw`relative w-full h-[220px] cursor-pointer overflow-hidden rounded-[10px]`}
 `;
 
 export const Button = styled.button`
@@ -58,7 +58,7 @@ export const Button = styled.button`
 `;
 
 export const Content = styled.div`
-  ${tw`w-[88%] flex mt-[72px] mb-[32px] mx-auto`}
+  ${tw` flex mt-[72px] mb-[32px] mx-auto`}
 `;
 
 export const GroupButton = styled.div`
@@ -74,7 +74,7 @@ export const GroupButton = styled.div`
 `;
 
 export const NewForm = styled(Form)`
-  ${tw`w-[90%] m-auto`}
+  ${tw`w-full m-auto`}
 `;
 
 export const Input = styled(Field)<{ error: boolean }>`
@@ -90,7 +90,10 @@ export const SetWidth = styled.div`
 `;
 
 export const GenderTitle = styled.span`
-  ${tw`block mt-6`}
+  ${tw`block`}
+`;
+export const GenderWrap = styled.span`
+  ${tw`flex justify-between items-center px-2 my-3`}
 `;
 
 export const DOBTitle = styled.span`
@@ -115,24 +118,20 @@ export const DatePickerWrapperStyles = createGlobalStyle`
     }
 `;
 
-export const DatePickerElement = styled.div`
-  input {
-    ${tw`rounded-[20px]`}
-  }
-`;
+export const DatePickerElement = styled.div``;
 
 export const ErrorMsg = styled.div`
   ${tw`text-red-500 mt-2`}
 `;
 
 export const UpdateAvatar = styled.label`
-  ${tw`absolute w-[26px] h-[26px] rounded-[50px] p-1 left-[55%] top-[-16%] bg-[#ddd] border border-[#000] cursor-pointer`}
+  ${tw`absolute w-[26px] h-[26px] rounded-[50px] p-1 left-[57%] bottom-[-23%] bg-[#ddd] border border-[#000] cursor-pointer`}
   input {
     ${tw`hidden`}
   }
 `;
 
 export const AvatarLabel = styled.label`
-  ${tw`w-[100px] h-[100px] absolute bottom-[0] left-[50%] rounded-[50%] border-[5px] border-[#ecf2f7] bg-[#000] cursor-pointer overflow-hidden `}
+  ${tw`absolute w-[150px] h-[150px] top-[50px] left-[50%] bg-[#000] border-[5px] border-[#ecf2f7] cursor-pointer rounded-[50%] overflow-hidden`}
   transform: translate(-50%, 50%);
 `;

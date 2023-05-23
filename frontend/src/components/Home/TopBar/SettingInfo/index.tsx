@@ -1,31 +1,33 @@
-import Image from "next/image";
+import Image from 'next/image';
 
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
-import Cropper from "react-easy-crop";
-import { useState, FormEvent } from "react";
-import { HiOutlineX } from "react-icons/hi";
-import { AiFillCamera } from "react-icons/ai";
+import Cropper from 'react-easy-crop';
+import { useState, FormEvent } from 'react';
+import { HiOutlineX } from 'react-icons/hi';
+import { AiFillCamera } from 'react-icons/ai';
 
-import * as Yup from "yup";
-import * as S from "./SettingInfo.styled";
-import { validImageTypes } from "../../../Global/ProcessFunctions";
-import { Formik, ErrorMessage } from "formik";
-import { UserAvatar } from "../../../../utils/dataConfig";
-import { updateUserInfo, info } from "../../../../utils/types";
+import * as Yup from 'yup';
+import * as S from './SettingInfo.styled';
+import { validImageTypes } from '../../../Global/ProcessFunctions';
+import { Formik, ErrorMessage } from 'formik';
+import { UserAvatar } from '../../../../utils/dataConfig';
+import { updateUserInfo, info } from '../../../../utils/types';
 import {
   API_KEY,
   MessageApi,
   CLOUD_NAME,
   UPLOAD_PRESET,
-} from "../../../../services/api/messages";
-import { API_URL } from "../../../../services/api/urls";
-import CropImage from "./CropImage";
-import { UsersApi } from "../../../../services/api/users";
-import { useDispatch } from "react-redux";
-import { userActions } from "../../../../features/redux/slices/userSlice";
-import { json } from "stream/consumers";
+} from '../../../../services/api/messages';
+import { API_URL } from '../../../../services/api/urls';
+import CropImage from './CropImage';
+import { UsersApi } from '../../../../services/api/users';
+import { useDispatch } from 'react-redux';
+import { userActions } from '../../../../features/redux/slices/userSlice';
+import { json } from 'stream/consumers';
+import { Input, Modal } from 'antd';
+import moment from 'moment';
 
 interface ISetingInfo {
   id: string;
@@ -33,7 +35,8 @@ interface ISetingInfo {
   gender: string;
   dob: string;
   avatar: string;
-  setEditInfo: (settingInfo: boolean) => void;
+  closeModal: () => void;
+  open: boolean;
 }
 
 const SettingInfo = ({
@@ -42,7 +45,8 @@ const SettingInfo = ({
   gender,
   dob,
   avatar,
-  setEditInfo,
+  closeModal,
+  open,
 }: ISetingInfo) => {
   const dispatch = useDispatch();
   const [previewAvt, setPreviewAvt] = useState<string>(avatar);
@@ -50,25 +54,25 @@ const SettingInfo = ({
   const [modalCrop, setModalCrop] = useState(false);
 
   const initialValues = {
-    id: id || "",
-    name: name || "",
-    gender: gender || "male",
+    id: id || '',
+    name: name || '',
+    gender: gender || 'male',
     dob: dob || new Date(),
-    avatar: avatar || "",
+    avatar: avatar || '',
   };
 
   const toggleEvent = () => {
-    setEditInfo(false);
+    closeModal();
   };
 
   const handleCrop = (e: FormEvent<HTMLInputElement>) => {
     let input = e.currentTarget;
     if (input.files?.length) {
       const reader = new FileReader();
-      reader.addEventListener("load", () => {
+      reader.addEventListener('load', () => {
         const typeImage = reader.result.slice(0, 10);
-        if (typeImage !== "data:image") {
-          alert("Please choose an image file");
+        if (typeImage !== 'data:image') {
+          alert('Please choose an image file');
         } else {
           setModalCrop(true);
           setCropImage(reader.result);
@@ -83,17 +87,17 @@ const SettingInfo = ({
     const signedKey = await MessageApi.getSignedKey(id);
 
     const form = new FormData();
-    form.append("file", file);
-    form.append("public_id", id);
-    form.append("api_key", API_KEY);
-    form.append("upload_preset", UPLOAD_PRESET);
-    form.append("timestamp", signedKey.timestamp.toString());
-    form.append("signature", signedKey.signature);
+    form.append('file', file);
+    form.append('public_id', id);
+    form.append('api_key', API_KEY);
+    form.append('upload_preset', UPLOAD_PRESET);
+    form.append('timestamp', signedKey.timestamp.toString());
+    form.append('signature', signedKey.signature);
 
     const response = await fetch(
       `${API_URL.uploadFile}/${CLOUD_NAME}/auto/upload`,
       {
-        method: "POST",
+        method: 'POST',
         body: form,
       }
     ).then((response) => {
@@ -108,16 +112,17 @@ const SettingInfo = ({
       let updated = false;
 
       if (avatar !== values.avatar) {
-        // @ts-ignores
-        const fileAvt = new File([values.avatar], id, { type: values.avatar.type });
+        const fileAvt = new File([values.avatar], id, {
+          // @ts-ignores
+          type: values.avatar?.type,
+        });
         const avatarUrl = await uploadFile(fileAvt);
         if (avatarUrl) {
           const result = await UsersApi.editAvatar(avatarUrl);
           alert(result.message);
           updated = true;
-        }
-        else{
-          alert("Update avatar failed! Try again later.");
+        } else {
+          alert('Update avatar failed! Try again later.');
         }
       }
 
@@ -145,87 +150,90 @@ const SettingInfo = ({
   };
 
   return (
-    <S.Modal>
-      <S.ModalOverlay onClick={() => toggleEvent()} />
-      <S.ModalBody>
-        <Formik initialValues={initialValues} onSubmit={onSubmit}>
-          {({ setFieldValue, values, errors, touched }) => (
-            <>
-              {modalCrop && (
-                <CropImage
-                  image={cropImage}
-                  setModalCrop={setModalCrop}
-                  setPreviewAvt={setPreviewAvt}
-                  setFieldValue={setFieldValue}
+    <Modal
+      open={open}
+      closeIcon={<></>}
+      onOk={closeModal}
+      onCancel={closeModal}
+      footer={<></>}
+      destroyOnClose
+      centered
+    >
+      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+        {({ handleChange, setFieldValue, values, errors, touched }) => (
+          <>
+            <CropImage
+              image={cropImage}
+              open={modalCrop}
+              closeModal={() => setModalCrop(false)}
+              setPreviewAvt={setPreviewAvt}
+              setFieldValue={setFieldValue}
+            />
+            <S.Header>
+              <S.Banner>
+                <Image src={UserAvatar} layout='fill' objectFit='cover' />
+              </S.Banner>
+              <S.AvatarLabel htmlFor='avatar'>
+                <Image src={previewAvt} layout='fill' objectFit='cover' />
+              </S.AvatarLabel>
+              <S.UpdateAvatar htmlFor='avatar'>
+                <AiFillCamera />
+                <input
+                  type='file'
+                  id='avatar'
+                  name='avatar'
+                  onChange={(e) => handleCrop(e)}
                 />
-              )}
-              <S.Header>
-                <S.Title>
-                  Update information
-                  <HiOutlineX onClick={() => toggleEvent()} />
-                </S.Title>
-                <S.Banner>
-                  <Image src={UserAvatar} layout="fill" objectFit="cover" />
-                </S.Banner>
-                <S.AvatarLabel htmlFor="avatar">
-                  <Image src={previewAvt} layout="fill" objectFit="cover" />
-                </S.AvatarLabel>
-              </S.Header>
-              <S.Content>
-                <S.NewForm>
-                  <S.SetWidth>
-                    <S.UpdateAvatar htmlFor="avatar">
-                      <AiFillCamera />
-                      <input
-                        type="file"
-                        id="avatar"
-                        name="avatar"
-                        onChange={(e) => handleCrop(e)}
-                      />
-                    </S.UpdateAvatar>
-                    <S.Label htmlFor="name">Full name</S.Label>
-                    <S.Input
-                      id="name"
-                      name="name"
-                      error={errors.name && touched.name ? 1 : 0}
-                    />
-                    <ErrorMessage name="name" component={S.ErrorMsg} />
+              </S.UpdateAvatar>
+            </S.Header>
+            <S.Content>
+              <S.NewForm>
+                <S.SetWidth>
+                  <Input
+                    placeholder='Name'
+                    size='large'
+                    name='name'
+                    onChange={handleChange}
+                    value={values.name}
+                    status={errors.name && touched.name ? 'error' : ''}
+                  />
+                  <ErrorMessage name='name' component={S.ErrorMsg} />
+                  <S.GenderWrap>
                     <S.GenderTitle>Gender</S.GenderTitle>
                     <S.GroupLabel>
                       <S.Label>
-                        <S.Radio type="radio" value="male" name="gender" />
+                        <S.Radio type='radio' value='male' name='gender' />
                         Male
                       </S.Label>
                       <S.Label>
-                        <S.Radio type="radio" value="female" name="gender" />
+                        <S.Radio type='radio' value='female' name='gender' />
                         Female
                       </S.Label>
                     </S.GroupLabel>
-                    <S.DOBTitle>Date of Birth</S.DOBTitle>
-                    <S.DatePickerElement>
-                      <DatePicker
-                        name="dob"
-                        dateFormat="d MMMM, yyyy"
-                        wrapperClassName="date_picker"
-                        selected={new Date(values.dob)}
-                        onChange={(value) => {
-                          setFieldValue("dob", value);
-                        }}
-                      />
-                      <S.DatePickerWrapperStyles />
-                    </S.DatePickerElement>
-                    <S.GroupButton>
-                      <S.Button type="submit">Update</S.Button>
-                      <S.Button onClick={() => toggleEvent()}>Cancel</S.Button>
-                    </S.GroupButton>
-                  </S.SetWidth>
-                </S.NewForm>
-              </S.Content>
-            </>
-          )}
-        </Formik>
-      </S.ModalBody>
-    </S.Modal>
+                  </S.GenderWrap>
+                  <S.DatePickerElement>
+                    <DatePicker
+                      name='dob'
+                      dateFormat='d MMMM, yyyy'
+                      wrapperClassName='date_picker'
+                      selected={new Date(values.dob)}
+                      customInput={<Input size='large' />}
+                      onChange={(value) => {
+                        setFieldValue('dob', value);
+                      }}
+                    />
+                  </S.DatePickerElement>
+                  <S.GroupButton>
+                    <S.Button type='submit'>Update</S.Button>
+                    <S.Button onClick={() => toggleEvent()}>Cancel</S.Button>
+                  </S.GroupButton>
+                </S.SetWidth>
+              </S.NewForm>
+            </S.Content>
+          </>
+        )}
+      </Formik>
+    </Modal>
   );
 };
 
