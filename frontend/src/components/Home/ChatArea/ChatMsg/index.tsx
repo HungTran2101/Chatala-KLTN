@@ -20,7 +20,7 @@ interface IChatMsg {
   position: string;
   isLastMsg: boolean;
   setToggleImageZoom: (toggle: boolean) => void;
-  setImageZoomList: (value: { index: number; list: fileType[] }) => void;
+  setImageId: (value: string) => void;
 }
 
 const ChatMsg = ({
@@ -28,7 +28,7 @@ const ChatMsg = ({
   position,
   isLastMsg,
   setToggleImageZoom,
-  setImageZoomList,
+  setImageId,
 }: IChatMsg) => {
   const [toggleOption, setToggleOption] = useState(false);
   const [toggleTooltip, setToggleTooltip] = useState(false);
@@ -39,6 +39,8 @@ const ChatMsg = ({
   const roomfiles = useSelector(selectFileState);
   const roomInfo = useSelector(selectRoomInfoState);
   const user = useSelector(selectUserState);
+
+  const photos = roomfiles.list.filter((file) => file.type === 'image');
 
   //Reply
   const replyMsg = getReplyInfo(
@@ -97,8 +99,8 @@ const ChatMsg = ({
     getFileAndImageList();
   }, [data.fileIds]);
 
-  const imageZoomClick = (index: number) => {
-    setImageZoomList({ index, list: images });
+  const imageZoomClick = (imgId: string) => {
+    setImageId(imgId);
     setToggleImageZoom(true);
   };
 
@@ -202,7 +204,7 @@ const ChatMsg = ({
                         <S.ChatMsgFileImage
                           key={index}
                           imgNum={images?.length}
-                          onClick={() => imageZoomClick(index)}
+                          onClick={() => imageZoomClick(image._id)}
                         >
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
@@ -310,7 +312,7 @@ const ChatMsg = ({
                         <S.ChatMsgFileImage
                           key={index}
                           imgNum={images?.length}
-                          onClick={() => imageZoomClick(index)}
+                          onClick={() => imageZoomClick(image._id)}
                         >
                           <img
                             src={image.url}

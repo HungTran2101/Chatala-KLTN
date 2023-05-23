@@ -25,9 +25,9 @@ const OTPCode = () => {
       const data: UserRegister = {
         name: router.query.name as string,
         phone: router.query.phone as string,
-        password: router.query.password as string
+        password: router.query.password as string,
       };
-      
+
       await UsersApi.register(data);
       alert('Registration succeed!');
       router.push('/login');
@@ -47,22 +47,18 @@ const OTPCode = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (countdown > 0) {
-        setCountdown(countdown - 1);
+        setCountdown((pre) => pre - 1);
       } else {
         setCountdown(0);
       }
     }, 1000);
     return () => clearInterval(interval);
-  }, [countdown]);
+  }, []);
 
   return (
     <FormTemplate>
       <span>
-        <S.BackIcon
-          onClick={() =>
-            router.back()
-          }
-        />
+        <S.BackIcon onClick={() => router.replace('/register')} />
       </span>
       <S.Suggest>Make sure your phone number is real!</S.Suggest>
       <S.Notify>
@@ -73,8 +69,8 @@ const OTPCode = () => {
           <S.NewForm>
             <S.SetWidth>
               <S.Input
-                placeholder='Verification OTP code'
-                name='otpCode'
+                placeholder="Verification OTP code"
+                name="otpCode"
                 checkerror={checkError}
               />
               {checkError === 'true' && <S.ErrorMsg>Incorrect otp!</S.ErrorMsg>}
@@ -95,9 +91,9 @@ const OTPCode = () => {
                   <p>Please check your phone number again!</p>
                 </S.CheckPhoneNumber>
               )}
-              <S.Button type='submit' disabled={isSubmitting ? true : false}>
+              <S.Button type="submit" disabled={isSubmitting ? true : false}>
                 {isSubmitting ? (
-                  <ClipLoader color='#fff' size={25} />
+                  <ClipLoader color="#fff" size={25} />
                 ) : (
                   'Verify'
                 )}

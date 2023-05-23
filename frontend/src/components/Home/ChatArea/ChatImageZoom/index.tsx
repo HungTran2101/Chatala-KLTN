@@ -15,28 +15,33 @@ import 'swiper/css/pagination';
 // import required modules
 import { Zoom, Navigation, Thumbs, FreeMode } from 'swiper';
 import { AiOutlineClose } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
+import { selectFileState } from '../../../../features/redux/slices/fileSlice';
 
 interface IChatImageZoom {
   setToggleImageZoom: (toggle: boolean) => void;
-  imageZoomList: fileType[];
-  currentIndex: number;
+  currentImgId: string;
 }
 
 const ChatImageZoom = ({
-  imageZoomList,
   setToggleImageZoom,
-  currentIndex = 0,
+  currentImgId,
 }: IChatImageZoom) => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(currentIndex);
+  const roomfiles = useSelector(selectFileState);
 
-  const navigateImage = (left: boolean) => {
-    if (left) {
-      if (currentImageIndex > 0) setCurrentImageIndex(currentImageIndex - 1);
-    } else {
-      if (currentImageIndex < imageZoomList.length - 1)
-        setCurrentImageIndex(currentImageIndex + 1);
-    }
-  };
+  const imageZoomList = roomfiles.list.filter((f) => f.type === 'image');
+  const currentIndex = imageZoomList.findIndex((f) => f._id === currentImgId);
+
+  // const [currentImageIndex, setCurrentImageIndex] = useState(currentIndex);
+
+  // const navigateImage = (left: boolean) => {
+  //   if (left) {
+  //     if (currentImageIndex > 0) setCurrentImageIndex(currentImageIndex - 1);
+  //   } else {
+  //     if (currentImageIndex < imageZoomList.length - 1)
+  //       setCurrentImageIndex(currentImageIndex + 1);
+  //   }
+  // };
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
@@ -109,14 +114,14 @@ const ChatImageZoom = ({
         spaceBetween={10}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Navigation, Thumbs]}
-        className='mySwiper2'
+        className="mySwiper2"
       >
         <S.CloseButton onClick={() => setToggleImageZoom(false)}>
           <AiOutlineClose />
         </S.CloseButton>
         {imageZoomList.map((image, index) => (
           <SwiperSlide key={index}>
-            <div className='swiper-zoom-container'>
+            <div className="swiper-zoom-container">
               <img src={image.url} />
             </div>
           </SwiperSlide>
@@ -129,7 +134,7 @@ const ChatImageZoom = ({
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
-        className='mySwiper'
+        className="mySwiper"
         style={{ height: '20%' }}
         breakpoints={{
           // when window width is <= 499px
@@ -150,7 +155,7 @@ const ChatImageZoom = ({
             style={{ display: 'flex', alignItems: 'center' }}
           >
             <div
-              className='swiper-zoom-container'
+              className="swiper-zoom-container"
               style={{
                 cursor: 'pointer',
                 height: 'auto',

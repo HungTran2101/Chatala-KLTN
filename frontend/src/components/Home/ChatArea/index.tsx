@@ -52,10 +52,7 @@ const ChatArea = () => {
   const chatMainMsgOuter = useRef<HTMLDivElement>(null);
 
   const [toggleImageZoom, setToggleImageZoom] = useState(false);
-  const [imageZoomList, setImageZoomList] = useState<{
-    index: number;
-    list: fileType[];
-  }>({ index: 0, list: [] });
+  const [imageId, setImageId] = useState<string>(null);
   const [toggleTyping, setToggleTyping] = useState(false);
   const [sendTyping, setSendTyping] = useState(false);
   const [newMsgNoti, setNewMsgNoti] = useState(false);
@@ -278,9 +275,6 @@ const ChatArea = () => {
 
   const [blockInput, setBlockInput] = useState(false);
   useEffect(() => {
-    console.log(friendList);
-    console.log(roomInfo.info.roomInfo.friendRelateId);
-
     const checker = async () => {
       try {
         const res = await FriendApi.checkFriend(
@@ -315,9 +309,8 @@ const ChatArea = () => {
     <>
       {toggleImageZoom && (
         <ChatImageZoom
-          imageZoomList={imageZoomList.list}
           setToggleImageZoom={setToggleImageZoom}
-          currentIndex={imageZoomList.index}
+          currentImgId={imageId}
         />
       )}
       <S.ChatArea>
@@ -327,7 +320,7 @@ const ChatArea = () => {
           setToggleOption={onCloseDrawer}
           toggleOption={openMoreOption}
           setToggleImageZoom={setToggleImageZoom}
-          setImageZoomList={setImageZoomList}
+          setImageId={setImageId}
         />
         <Formik
           initialValues={initialValues}
@@ -351,7 +344,7 @@ const ChatArea = () => {
                     isSubmitting={isSubmitting}
                     newMsgNoti={newMsgNoti}
                     toggleTyping={toggleTyping}
-                    setImageZoomList={setImageZoomList}
+                    setImageId={setImageId}
                     setToggleImageZoom={setToggleImageZoom}
                     checkChatScrollBottom={checkChatScrollBottom}
                     newMsgNotiClick={newMsgNotiClick}

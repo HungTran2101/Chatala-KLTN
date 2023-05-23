@@ -65,8 +65,7 @@ const RenewPassword = () => {
         <Link href='/login'>
           <span>
             <p>Remembered your password?</p>
-            {/* eslint-disable-next-line react/no-unescaped-entities */}
-            <p>Let's Login!</p>
+            <p>Let&apos;s Login!</p>
           </span>
         </Link>
       </S.SignUp>

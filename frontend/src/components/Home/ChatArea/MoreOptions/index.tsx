@@ -20,14 +20,14 @@ import { Drawer, Modal, Popconfirm } from 'antd';
 interface IMoreOptions {
   setToggleOption: () => void;
   setToggleImageZoom: (toggle: boolean) => void;
-  setImageZoomList: (value: { index: number; list: fileType[] }) => void;
+  setImageId: (value: string) => void;
   toggleOption: boolean;
   roomInfo: roomInfo;
 }
 
 const MoreOptions = ({
   setToggleOption,
-  setImageZoomList,
+  setImageId,
   setToggleImageZoom,
   roomInfo,
   toggleOption,
@@ -69,9 +69,9 @@ const MoreOptions = ({
     setModalUser(true);
   };
 
-  const photosClickHandler = (index: number) => {
+  const photosClickHandler = (imgId: string) => {
     setToggleImageZoom(true);
-    setImageZoomList({ index, list: photos });
+    setImageId(imgId);
   };
 
   const [open, setOpen] = useState(false);
@@ -195,7 +195,7 @@ const MoreOptions = ({
               {photos.map((file, index) => (
                 <S.UploadedMedia
                   key={index}
-                  onClick={() => photosClickHandler(index)}
+                  onClick={() => photosClickHandler(file._id)}
                 >
                   <Image
                     src={file.url}
