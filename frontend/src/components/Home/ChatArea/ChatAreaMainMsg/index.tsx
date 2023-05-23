@@ -12,6 +12,7 @@ interface IChatAreaMainMsg {
   toggleTyping: boolean;
   newMsgNoti: boolean;
   isSubmitting: boolean;
+  blockInput: boolean;
   setToggleImageZoom: (toggle: boolean) => void;
   setImageId: (value: string) => void;
   checkChatScrollBottom: () => void;
@@ -24,6 +25,7 @@ const ChatAreaMainMsg = ({
   toggleTyping,
   newMsgNoti,
   isSubmitting,
+  blockInput,
   setImageId,
   setToggleImageZoom,
   checkChatScrollBottom,
@@ -92,6 +94,7 @@ const ChatAreaMainMsg = ({
               isLastMsg={index === 0 ? true : false}
               setToggleImageZoom={setToggleImageZoom}
               setImageId={setImageId}
+              blockInput={blockInput}
             />
           ))}
         </S.ChatAreaMainMsgInner>

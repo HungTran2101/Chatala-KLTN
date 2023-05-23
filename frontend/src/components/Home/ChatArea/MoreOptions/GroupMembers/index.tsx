@@ -10,7 +10,7 @@ import { roomInfo, roomUser, userInfo } from '../../../../../utils/types';
 import UserInfo from '../../../TopBar/UserInfo';
 import NicknameModal from '../NicknameModal';
 import * as S from './GroupMembers.styled';
-import { Button as AntButton, Modal, message } from 'antd';
+import { Button as AntButton, Modal, Popconfirm, message } from 'antd';
 import { RoomApi } from '../../../../../services/api/room';
 import { roomListActions } from '../../../../../features/redux/slices/roomListSlice';
 import { socket } from '../../../../../contexts/socket';
@@ -29,6 +29,7 @@ const GroupMembers = ({ open, closeModal, roomInfo, user }: IGroupMembers) => {
   // const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
   // const [toggleNickname, setToggleNickname] = useState(false);
   const [userNeedChange, setUserNeedChange] = useState<roomUser>();
+  const [kickConfirm, setKickConfirm] = useState(-1);
 
   const activeUsers: roomUser[] = [];
   roomInfo.roomInfo.users.forEach((u) => !u.isLeave && activeUsers.push(u));
@@ -60,7 +61,7 @@ const GroupMembers = ({ open, closeModal, roomInfo, user }: IGroupMembers) => {
 
       socket.emit('kickmember', data.uid);
 
-      message.open({ content: `Kick ${data.nickname} succeed!` });
+      message.success(`Kick ${data.nickname} succeed!`);
     } catch (err) {
       console.log(err);
       message.error(err);
@@ -87,9 +88,11 @@ const GroupMembers = ({ open, closeModal, roomInfo, user }: IGroupMembers) => {
       <S.GroupMembersList>
         {activeUsers.map((data, index) => (
           <S.GroupMembersItem key={index}>
-            <S.GroupMembersInfo onClick={() => seeFriendProfile(data.uid)}>
+            <S.GroupMembersInfo>
               <S.LeftWrap>
-                <S.GroupMembersAvatar>
+                <S.GroupMembersAvatar
+                  onClick={() => seeFriendProfile(data.uid)}
+                >
                   <Image
                     src={data.avatar}
                     alt="avatar"
@@ -98,7 +101,9 @@ const GroupMembers = ({ open, closeModal, roomInfo, user }: IGroupMembers) => {
                   />
                 </S.GroupMembersAvatar>
                 <div>
-                  <S.GroupMembersName>
+                  <S.GroupMembersName
+                    onClick={() => seeFriendProfile(data.uid)}
+                  >
                     {data.nickname}{' '}
                     {data.role && (
                       <GrUserAdmin
@@ -118,7 +123,18 @@ const GroupMembers = ({ open, closeModal, roomInfo, user }: IGroupMembers) => {
               </S.LeftWrap>
 
               {isLeader && data.uid !== user._id && (
-                <Button onClick={() => kickMember(data)}>Kick member</Button>
+                <Popconfirm
+                  title={`You about to kick ${data.nickname}`}
+                  description="Please confirm"
+                  onConfirm={() => kickMember(data)}
+                  open={kickConfirm === index}
+                  onCancel={() => setKickConfirm(-1)}
+                  okType="danger"
+                >
+                  <Button onClick={() => setKickConfirm(index)}>
+                    Kick member
+                  </Button>
+                </Popconfirm>
               )}
             </S.GroupMembersInfo>
           </S.GroupMembersItem>

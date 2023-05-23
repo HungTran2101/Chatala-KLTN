@@ -302,10 +302,6 @@ const ChatArea = () => {
     setOpenMoreOption(false);
   };
 
-  useEffect(() => {
-    console.log(openMoreOption);
-  }, [openMoreOption]);
-
   return (
     <>
       {toggleImageZoom && (
@@ -322,6 +318,7 @@ const ChatArea = () => {
           toggleOption={openMoreOption}
           setToggleImageZoom={setToggleImageZoom}
           setImageId={setImageId}
+          blockInput={blockInput}
         />
         <Formik
           initialValues={initialValues}
@@ -349,6 +346,7 @@ const ChatArea = () => {
                     setToggleImageZoom={setToggleImageZoom}
                     checkChatScrollBottom={checkChatScrollBottom}
                     newMsgNotiClick={newMsgNotiClick}
+                    blockInput={blockInput}
                   />
                   {chatScrollBottom && (
                     <S.ChatAreaMainScrollBottom onClick={scrollToNewMsg} />

@@ -22,6 +22,7 @@ interface IMoreOptions {
   setImageId: (value: string) => void;
   toggleOption: boolean;
   roomInfo: roomInfo;
+  blockInput: boolean;
 }
 
 const MoreOptions = ({
@@ -30,6 +31,7 @@ const MoreOptions = ({
   setToggleImageZoom,
   roomInfo,
   toggleOption,
+  blockInput,
 }: IMoreOptions) => {
   // const handleOutsideClick = () => {
   //   setToggleOption(false);
@@ -80,7 +82,6 @@ const MoreOptions = ({
     setOpen(true);
   };
   const handleCancel = () => {
-    console.log('Clicked cancel button');
     setOpen(false);
   };
   const handleOk = async (friendRelateId: string) => {
@@ -104,7 +105,7 @@ const MoreOptions = ({
     <Drawer
       // title='Room detail'
       headerStyle={{ display: 'none' }}
-      placement='right'
+      placement="right"
       onClose={() => {
         setToggleOption();
         handleCancel();
@@ -120,14 +121,14 @@ const MoreOptions = ({
               (user, index) =>
                 index <= 3 && (
                   <S.RoomInfoAvatarGroup key={index}>
-                    <Image src={user.avatar} alt='avatar' layout='fill' />
+                    <Image src={user.avatar} alt="avatar" layout="fill" />
                   </S.RoomInfoAvatarGroup>
                 )
             )}
           </S.RoomInfoAvatar>
         ) : (
           <S.RoomInfoAvatar>
-            <Image src={roomInfo.roomAvatar} alt='avatar' layout='fill' />
+            <Image src={roomInfo.roomAvatar} alt="avatar" layout="fill" />
           </S.RoomInfoAvatar>
         )}
         <S.RoomInfoNameWrap>
@@ -161,20 +162,24 @@ const MoreOptions = ({
               <S.NormalItem onClick={() => seeFriendProfile()}>
                 Friend&apos;s profile
               </S.NormalItem>
-              <S.NormalItem onClick={() => setModalNickName(true)}>
-                Change Nickname
-              </S.NormalItem>
-              <Popconfirm
-                title='Title'
-                description='Open Popconfirm with async logic'
-                open={open}
-                onConfirm={() => handleOk(roomInfo.roomInfo.friendRelateId)}
-                okButtonProps={{ loading: confirmLoading }}
-                onCancel={handleCancel}
-                okType={'danger'}
-              >
-                <S.DeleteItem onClick={showPopconfirm}>Unfriend</S.DeleteItem>
-              </Popconfirm>
+              {!blockInput && (
+                <S.NormalItem onClick={() => setModalNickName(true)}>
+                  Change Nickname
+                </S.NormalItem>
+              )}
+              {!blockInput && (
+                <Popconfirm
+                  title={`You're about to unfriend ${userNeedChange.nickname}`}
+                  description="Please confirm"
+                  open={open}
+                  onConfirm={() => handleOk(roomInfo.roomInfo.friendRelateId)}
+                  okButtonProps={{ loading: confirmLoading }}
+                  onCancel={handleCancel}
+                  okType={'danger'}
+                >
+                  <S.DeleteItem onClick={showPopconfirm}>Unfriend</S.DeleteItem>
+                </Popconfirm>
+              )}
             </>
           )}
         </S.WhiteBox>
@@ -199,8 +204,8 @@ const MoreOptions = ({
                   <Image
                     src={file.url}
                     alt="room's file"
-                    layout='fill'
-                    objectFit='cover'
+                    layout="fill"
+                    objectFit="cover"
                   />
                 </S.UploadedMedia>
               ))}
@@ -224,7 +229,7 @@ const MoreOptions = ({
               {files.map((file, index) => (
                 <S.FilePreview
                   key={index}
-                  target='_blank'
+                  target="_blank"
                   download
                   href={file.url}
                 >

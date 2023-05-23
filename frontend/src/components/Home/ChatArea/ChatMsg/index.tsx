@@ -19,6 +19,7 @@ interface IChatMsg {
   data: messageType;
   position: string;
   isLastMsg: boolean;
+  blockInput: boolean;
   setToggleImageZoom: (toggle: boolean) => void;
   setImageId: (value: string) => void;
 }
@@ -27,6 +28,7 @@ const ChatMsg = ({
   data,
   position,
   isLastMsg,
+  blockInput,
   setToggleImageZoom,
   setImageId,
 }: IChatMsg) => {
@@ -39,8 +41,6 @@ const ChatMsg = ({
   const roomfiles = useSelector(selectFileState);
   const roomInfo = useSelector(selectRoomInfoState);
   const user = useSelector(selectUserState);
-
-  const photos = roomfiles.list.filter((file) => file.type === 'image');
 
   //Reply
   const replyMsg = getReplyInfo(
@@ -246,7 +246,7 @@ const ChatMsg = ({
                 <S.ChatMsgUnSend>Message has been unsend</S.ChatMsgUnSend>
               )}
             </S.ChatMsgWrapper>
-            {!data.unSend && (
+            {!data.unSend && !blockInput && (
               <S.ChatMsgMoreIconWrapper>
                 <S.ChatMsgMoreIcon onClick={() => setToggleOption(true)} />
                 {toggleOption && (
@@ -351,7 +351,7 @@ const ChatMsg = ({
                 </>
               )}
             </S.ChatMsgWrapper>
-            {!data.unSend && (
+            {!data.unSend && !blockInput && (
               <S.ChatMsgMoreIconWrapper>
                 <S.ChatMsgMoreIcon
                   onClick={() => setToggleOption(true)}
