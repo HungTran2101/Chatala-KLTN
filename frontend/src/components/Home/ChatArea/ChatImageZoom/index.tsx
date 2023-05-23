@@ -43,6 +43,7 @@ const ChatImageZoom = ({
   //   }
   // };
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(currentIndex);
 
   return (
     // <S.ChatImageZoom>
@@ -114,14 +115,15 @@ const ChatImageZoom = ({
         spaceBetween={10}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper2"
+        className='mySwiper2'
+        onSlideChange={(swiper) => setCurrentImageIndex(swiper.realIndex)}
       >
         <S.CloseButton onClick={() => setToggleImageZoom(false)}>
           <AiOutlineClose />
         </S.CloseButton>
         {imageZoomList.map((image, index) => (
           <SwiperSlide key={index}>
-            <div className="swiper-zoom-container">
+            <div className='swiper-zoom-container'>
               <img src={image.url} />
             </div>
           </SwiperSlide>
@@ -134,7 +136,7 @@ const ChatImageZoom = ({
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper"
+        className='mySwiper'
         style={{ height: '20%' }}
         breakpoints={{
           // when window width is <= 499px
@@ -155,15 +157,24 @@ const ChatImageZoom = ({
             style={{ display: 'flex', alignItems: 'center' }}
           >
             <div
-              className="swiper-zoom-container"
+              className='swiper-zoom-container'
               style={{
-                cursor: 'pointer',
-                height: 'auto',
+                height: 'fit-content',
+                position: 'relative',
                 borderRadius: '10px',
                 overflow: 'hidden',
+                cursor: 'pointer',
               }}
             >
-              <img src={image.url} />
+              <img
+                src={image.url}
+                style={{
+                  backgroundColor: '#eee',
+                  aspectRatio: 1,
+                  height: 'auto',
+                }}
+              />
+              {currentImageIndex !== index && <S.Overlay />}
             </div>
           </SwiperSlide>
         ))}

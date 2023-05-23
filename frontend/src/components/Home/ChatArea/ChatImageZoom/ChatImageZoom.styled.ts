@@ -45,3 +45,7 @@ export const NavigateRight = styled(IoIosArrowDropright)`
 export const CloseButton = styled.span`
   ${tw`absolute top-5 right-5 text-white text-4xl cursor-pointer z-[99999999]`}
 `;
+
+export const Overlay = styled.div`
+  ${tw`absolute top-0 left-0 right-0 bottom-0 bg-[rgba(0, 0, 0, 0.5)]`}
+`;
