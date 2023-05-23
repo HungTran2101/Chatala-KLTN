@@ -311,7 +311,7 @@ const ChatArea = () => {
         />
       )}
       <S.ChatArea>
-        <ChatAreaHead setToggleOption={showDrawer} />
+        <ChatAreaHead setToggleOption={showDrawer} blockInput={blockInput}/>
         <MoreOptions
           roomInfo={roomInfo.info!}
           setToggleOption={onCloseDrawer}

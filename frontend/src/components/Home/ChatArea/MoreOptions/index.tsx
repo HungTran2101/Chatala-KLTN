@@ -55,6 +55,11 @@ const MoreOptions = ({
   const photos = roomfiles.list.filter((file) => file.type === 'image');
   const files = roomfiles.list.filter((file) => file.type === 'file');
 
+  const activeAvatar = [];
+  roomInfo.roomInfo.users.forEach((u) => {
+    if (!u.isLeave) activeAvatar.push(u.avatar);
+  });
+
   // in case change nickname event happend
   const userNeedChange = roomInfo.roomInfo.users.find(
     (it) => it.uid !== user.info._id
@@ -117,11 +122,11 @@ const MoreOptions = ({
       <S.RoomInfo>
         {roomInfo.roomInfo.isGroup ? (
           <S.RoomInfoAvatar isGroup={1}>
-            {roomInfo.roomInfo.users.map(
-              (user, index) =>
+            {activeAvatar.map(
+              (url, index) =>
                 index <= 3 && (
                   <S.RoomInfoAvatarGroup key={index}>
-                    <Image src={user.avatar} alt="avatar" layout="fill" />
+                    <Image src={url} alt="avatar" layout="fill" />
                   </S.RoomInfoAvatarGroup>
                 )
             )}
