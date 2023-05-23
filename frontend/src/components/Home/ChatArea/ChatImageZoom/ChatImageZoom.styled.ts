@@ -43,5 +43,5 @@ export const NavigateRight = styled(IoIosArrowDropright)`
 `;
 
 export const CloseButton = styled.span`
-  ${tw`absolute top-10 right-10 text-white text-4xl cursor-pointer z-[99999999]`}
+  ${tw`absolute top-5 right-5 text-white text-4xl cursor-pointer z-[99999999]`}
 `;

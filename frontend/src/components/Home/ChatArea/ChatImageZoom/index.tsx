@@ -82,7 +82,8 @@ const ChatImageZoom = ({
     // </S.ChatImageZoom>
     <div
       style={{
-        backgroundColor: 'black',
+        backgroundColor: 'rgb(0,0,0,0.6)',
+        backdropFilter: 'blur(8px)',
         position: 'fixed',
         zIndex: 9999999,
         top: 0,
@@ -91,6 +92,8 @@ const ChatImageZoom = ({
         right: 0,
         width: '100vw',
         height: '100vh',
+        padding: '30px 20px',
+        paddingBottom: 0,
       }}
     >
       <Swiper
@@ -122,12 +125,24 @@ const ChatImageZoom = ({
       <Swiper
         onSwiper={setThumbsSwiper}
         spaceBetween={10}
-        slidesPerView={10}
+        slidesPerView={3}
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
         className='mySwiper'
         style={{ height: '20%' }}
+        breakpoints={{
+          // when window width is <= 499px
+          540: {
+            slidesPerView: 5,
+          },
+          768: {
+            slidesPerView: 7,
+          },
+          1024: {
+            slidesPerView: 10,
+          },
+        }}
       >
         {imageZoomList.map((image, index) => (
           <SwiperSlide
