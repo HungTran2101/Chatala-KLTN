@@ -25,6 +25,7 @@ const NicknameModal = ({
   const dispatch = useDispatch();
 
   const saveNickname = async () => {
+    if (input.current.value === '') return;
     try {
       await RoomApi.changeNickname(
         roomInfo.roomInfo._id,
@@ -44,6 +45,7 @@ const NicknameModal = ({
             nickname: input.current.value,
           })
         );
+      message.success(`Change nickname to ${input.current.value} succeed`)
       closeModal();
     } catch (err) {
       console.log(err);
@@ -57,7 +59,7 @@ const NicknameModal = ({
       open={open}
       onOk={saveNickname}
       onCancel={closeModal}
-      okType='link'
+      okType="link"
       destroyOnClose
       centered
     >

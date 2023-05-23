@@ -22,6 +22,7 @@ const GroupNameModal = ({ closeModal, open, roomInfo }: IGroupName) => {
   const socket = useSocketContext();
 
   const saveGroupName = async () => {
+    if (input.current.value === '') return;
     try {
       const res = await RoomApi.changeGroupName(
         roomInfo.roomInfo._id,
@@ -44,7 +45,7 @@ const GroupNameModal = ({ closeModal, open, roomInfo }: IGroupName) => {
         roomUserIds,
         res.room.groupName
       );
-
+      message.success(`Change group name to ${input.current.value} succeed`);
       closeModal();
     } catch (err) {
       console.log(err);
@@ -58,7 +59,7 @@ const GroupNameModal = ({ closeModal, open, roomInfo }: IGroupName) => {
       open={open}
       onOk={saveGroupName}
       onCancel={closeModal}
-      okType='link'
+      okType="link"
       centered
       destroyOnClose
     >
