@@ -1,4 +1,4 @@
-import { FormEvent, Ref, useState, useEffect, useMemo, useRef } from 'react';
+import { FormEvent, useState, useEffect, useMemo, useRef } from 'react';
 import * as S from './ChatAreaMainForm.styled';
 import EmojiPicker, { EmojiClickData, EmojiStyle } from 'emoji-picker-react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,6 +23,7 @@ import createMentionPlugin from '@draft-js-plugins/mention';
 
 import '@draft-js-plugins/mention/lib/plugin.css';
 import 'draft-js/dist/Draft.css';
+import { FiFilePlus } from 'react-icons/fi';
 
 interface IChatAreaMainForm {
   setFieldValue: any;
@@ -71,11 +72,10 @@ const ChatAreaMainForm = ({
 
   const getMentionList = (): MentionList => {
     const list: MentionList = [];
-    roomInfo.info.roomInfo.users.forEach(
-      (urs) =>
-        urs.uid !== user.info._id &&
-        list.push({ name: urs.nickname, avatar: urs.avatar, uid: urs._id })
-    );
+    roomInfo.info.roomInfo.users.forEach((urs) => {
+      if (urs.uid !== user.info._id && !urs.isLeave)
+        list.push({ name: urs.nickname, avatar: urs.avatar, uid: urs._id });
+    });
     return list;
   };
 
@@ -229,7 +229,9 @@ const ChatAreaMainForm = ({
             />
           </S.ChatAreaMainInputEmojiPicker>
         )}
-        <S.ChatAreaMainInputFile htmlFor="fileInput">+</S.ChatAreaMainInputFile>
+        <S.ChatAreaMainInputFile htmlFor="fileInput">
+          <FiFilePlus />
+        </S.ChatAreaMainInputFile>
         <S.ChatAreaMainInputMsgOuter>
           {util.replyId && replyMsg && (
             <S.ChatAreaMainInputReply

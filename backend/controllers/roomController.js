@@ -127,8 +127,8 @@ const getRoomInfo = asyncHandler(async (req, res, next) => {
 
   const messages = await Messages.find({
     roomId: roomId,
-  }).sort({ createdAt: -1 });
-  const files = await Files.find({ roomId: roomId });
+  }).sort({ createdAt: -1 }).skip(0).limit(20);
+  const files = await Files.find({ roomId: roomId }).sort({ createdAt: -1 });
 
   if (messages && files) {
     res.status(200).json({

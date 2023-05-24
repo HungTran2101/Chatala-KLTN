@@ -13,7 +13,10 @@ import {
 } from '../../../utils/types';
 import ChatImageZoom from './ChatImageZoom';
 import { useDispatch, useSelector } from 'react-redux';
-import { messageActions } from '../../../features/redux/slices/messageSlice';
+import {
+  messageActions,
+  selectMessageState,
+} from '../../../features/redux/slices/messageSlice';
 import { selectRoomInfoState } from '../../../features/redux/slices/roomInfoSlice';
 import {
   API_KEY,
@@ -36,7 +39,6 @@ import {
 } from '../../../features/redux/slices/utilSlice';
 import { RoomApi } from '../../../services/api/room';
 import { selectFriendListState } from '../../../features/redux/slices/friendListSlice';
-import { FriendApi } from '../../../services/api/friend';
 import { message } from 'antd';
 
 const ChatArea = () => {
@@ -47,7 +49,10 @@ const ChatArea = () => {
   const friends = useSelector(selectFriendListState);
   const user = useSelector(selectUserState);
   const util = useSelector(selectUtilState);
+  const messages = useSelector(selectMessageState);
   const socket = useSocketContext();
+
+  const currentRoom = roomInfo.info.roomInfo._id;
 
   const bottomDiv = useRef<HTMLDivElement>(null);
   const chatMainMsgOuter = useRef<HTMLDivElement>(null);
@@ -58,6 +63,8 @@ const ChatArea = () => {
   const [sendTyping, setSendTyping] = useState(false);
   const [newMsgNoti, setNewMsgNoti] = useState(false);
   const [chatScrollBottom, setChatScrollBottom] = useState(false);
+  const [chatScrollTop, setChatScrollTop] = useState(false);
+  const [chatLoadCounter, setChatLoadCounter] = useState<number>(1);
 
   //Handle Typing and Receive new messages
   useEffect(() => {
@@ -84,7 +91,6 @@ const ChatArea = () => {
       }
     });
     socket.on('receiveFiles', (files) => {
-      console.log('receiveFile');
       dispatch(fileActions.setFilesData(files));
     });
   }, []);
@@ -114,19 +120,56 @@ const ChatArea = () => {
     scrollToNewMsg();
     setNewMsgNoti(false);
   };
-  const checkChatScrollBottom = () => {
+  const checkChatScrollBottom = async (e: any) => {
     //e.target.scrollTop is bottom when value is 0, scroll up cause value goes negative
-    //Check if chat scroll at bottom
-    if (chatMainMsgOuter.current && chatMainMsgOuter.current.scrollTop >= 0) {
+    const offset = 100;
+
+    // console.log('clientHeight', e.target.clientHeight);
+    // console.log('scrollTop', e.target.scrollTop);
+    // console.log('scrollHeight', e.target.scrollHeight);
+
+    const scrollPosition = e.target.clientHeight - e.target.scrollTop;
+
+    //Check if chat scroll reach top
+    if (scrollPosition > e.target.scrollHeight - offset && scrollPosition <= e.target.scrollHeight) {
+      if (!chatScrollTop) {
+        setChatScrollTop(true);
+        setChatLoadCounter(chatLoadCounter + 1);
+
+        const res = await MessageApi.get(
+          roomInfo.info.roomInfo._id,
+          chatLoadCounter + 1
+        );
+        if (res.messages.length > 0) {
+          dispatch(messageActions.loadMessage(res.messages));
+        } else {
+          setChatScrollTop(false);
+          setChatLoadCounter(chatLoadCounter);
+        }
+      }
+    } else {
+      if (chatScrollTop) {
+        setChatScrollTop(false);
+      }
+    }
+
+    //Check if chat scroll reach bottom
+    if (e.target.scrollTop >= 0) {
       setNewMsgNoti(false);
     }
     //Check if chat scroll smaller than -500px then show scroll down button
-    if (chatMainMsgOuter.current && chatMainMsgOuter.current.scrollTop > -500) {
+    if (e.target.scrollTop > -500) {
       setChatScrollBottom(false);
     } else {
       setChatScrollBottom(true);
     }
   };
+  useEffect(() => {
+    if (messages.list.length <= 20) {
+      //which mean different room got selected
+      setChatLoadCounter(1);
+    }
+  }, [messages]);
 
   //Form
   const initialValues: messageRawType = {
@@ -252,10 +295,7 @@ const ChatArea = () => {
         };
 
         const res = await MessageApi.send(messageToSend);
-        const res1 = await RoomApi.incUnreadMsg(
-          user.info._id,
-          roomInfo.info.roomInfo._id
-        );
+        await RoomApi.incUnreadMsg(user.info._id, roomInfo.info.roomInfo._id);
         dispatch(messageActions.newMessage(res.result));
         dispatch(utilActions.clearReplyId());
         setFieldValue('files', []);
@@ -339,11 +379,12 @@ const ChatArea = () => {
                     isSubmitting={isSubmitting}
                     newMsgNoti={newMsgNoti}
                     toggleTyping={toggleTyping}
+                    isUnfriend={isUnfriend}
+                    chatScrollTop={chatScrollTop}
                     setImageId={setImageId}
                     setToggleImageZoom={setToggleImageZoom}
                     checkChatScrollBottom={checkChatScrollBottom}
                     newMsgNotiClick={newMsgNotiClick}
-                    isUnfriend={isUnfriend}
                   />
                   {chatScrollBottom && (
                     <S.ChatAreaMainScrollBottom onClick={scrollToNewMsg} />

@@ -28,7 +28,7 @@ export const Content = styled.div`
 `;
 
 export const Name = styled.div`
-  ${tw`font-semibold text-black text-[16px] text-left`}
+  ${tw`font-semibold text-black text-[17px] text-left`}
 `;
 
 export const Msg = styled.div<{ semibold: boolean }>`
@@ -49,7 +49,7 @@ export const ChatPreviewItem = styled.div<{
   active: boolean;
   unReadMsg: number;
 }>`
-  ${tw`flex items-center my-2 relative hover:cursor-pointer hover:bg-tertiary rounded-[20px]`}
+  ${tw`flex items-center my-2 relative hover:cursor-pointer hover:bg-tertiary rounded-[10px]`}
   ${({ unReadMsg }) => unReadMsg >= 1 && tw`bg-secondary shadow-sm`}
   ${({ active }) => active && tw`bg-quaternary shadow-md`}
 `;

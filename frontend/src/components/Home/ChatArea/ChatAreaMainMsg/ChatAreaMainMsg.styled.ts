@@ -1,6 +1,6 @@
-import { ClipLoader, PulseLoader } from "react-spinners";
-import styled, { keyframes } from "styled-components";
-import tw from "twin.macro";
+import { ClipLoader, PulseLoader } from 'react-spinners';
+import styled, { keyframes } from 'styled-components';
+import tw from 'twin.macro';
 
 export const ChatAreaMainMsg = styled.div`
   ${tw`relative flex-grow w-full flex flex-col items-center`}
@@ -52,3 +52,15 @@ export const ChatAreaMainNewNoti = styled.div`
 `;
 
 export const ChatAreaMainMsgInnerBottom = styled.div``;
+export const ChatAreaMainMsgInnerTop = styled.div`
+  ${tw`flex justify-center`}
+  @keyframes zoomOut {
+    0%{
+      transform: scale(0.5);
+    }
+    100%{
+      transform: scale(1);
+    }
+  }
+  animation: zoomOut 0.3s linear;
+`;

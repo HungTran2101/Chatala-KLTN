@@ -29,7 +29,7 @@ export const ShowFriendsSearch = styled.div`
   ${tw`relative w-full flex items-center mb-4`}
 `;
 export const ShowFriendsSearchInput = styled.input`
-  ${tw`bg-secondary text-lg rounded-[20px] pr-2 pl-9 py-2 w-full`}
+  ${tw`border-quaternary border-2 rounded-[10px] pr-2 pl-9 py-2 w-full`}
   outline: none;
 `;
 

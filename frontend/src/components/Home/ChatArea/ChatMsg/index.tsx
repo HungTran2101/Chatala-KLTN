@@ -14,6 +14,8 @@ import * as S from './ChatMsg.styled';
 import ChatMsgOption from './ChatMsgOption';
 import { selectMessageState } from '../../../../features/redux/slices/messageSlice';
 import { MdOutlineReply } from 'react-icons/md';
+import { Popover } from 'antd';
+import { FiMoreHorizontal } from 'react-icons/fi';
 
 interface IChatMsg {
   data: messageType;
@@ -109,7 +111,7 @@ const ChatMsg = ({
       const sender = roomInfo.info.roomInfo.users.find(
         (user) => user.uid === data.senderId
       );
-      return sender!.avatar;
+      return sender ? sender.avatar : '';
     } else {
       return roomInfo.info!.roomAvatar;
     }
@@ -120,7 +122,9 @@ const ChatMsg = ({
       const sender = roomInfo.info.roomInfo.users.find(
         (user) => user.uid === data.senderId
       );
-      return sender!.nickname + ' | ' + formatDate(data.updatedAt, '.', true);
+      return sender
+        ? sender!.nickname + ' | ' + formatDate(data.updatedAt, '.', true)
+        : '';
     }
     return formatDate(data.updatedAt, '.', true);
   };
@@ -140,14 +144,14 @@ const ChatMsg = ({
     return msg;
   };
 
-  const tooltip = useRef<number>();
+  let tooltip = null;
   const onHoverMsg = (show: boolean) => {
     if (show) {
-      tooltip.current = window.setTimeout(() => {
+      tooltip = window.setTimeout(() => {
         setToggleTooltip(true);
       }, 500);
     } else {
-      window.clearTimeout(tooltip.current);
+      window.clearTimeout(tooltip);
       if (toggleTooltip) {
         setToggleTooltip(false);
       }
@@ -177,20 +181,21 @@ const ChatMsg = ({
                         {replyLabel}
                         <MdOutlineReply />
                       </S.ChatReplyLabel>
-                      {replyMsg.type === 'image' ? (
-                        <S.ChatMsgReplyImage>
-                          <img src={replyMsg.msg} alt="reply img" />
-                        </S.ChatMsgReplyImage>
-                      ) : (
-                        <S.ChatMsgReplyText>
-                          {replyMsg.type === 'file' && (
-                            <S.ChatMsgReplyFileIcon>
-                              {getFileIcon({ name: replyMsg.msg })}
-                            </S.ChatMsgReplyFileIcon>
-                          )}
-                          {replyMsg.msg}
-                        </S.ChatMsgReplyText>
-                      )}
+                      {replyMsg &&
+                        (replyMsg.type === 'image' ? (
+                          <S.ChatMsgReplyImage>
+                            <img src={replyMsg.msg} alt="reply img" />
+                          </S.ChatMsgReplyImage>
+                        ) : (
+                          <S.ChatMsgReplyText>
+                            {replyMsg.type === 'file' && (
+                              <S.ChatMsgReplyFileIcon>
+                                {getFileIcon({ name: replyMsg.msg })}
+                              </S.ChatMsgReplyFileIcon>
+                            )}
+                            {replyMsg.msg}
+                          </S.ChatMsgReplyText>
+                        ))}
                     </S.ChatMsgReply>
                   )}
                   {data.msg !== '' && (
@@ -248,14 +253,21 @@ const ChatMsg = ({
             </S.ChatMsgWrapper>
             {!data.unSend && !isUnfriend && (
               <S.ChatMsgMoreIconWrapper>
-                <S.ChatMsgMoreIcon onClick={() => setToggleOption(true)} />
-                {toggleOption && (
-                  <ChatMsgOption
-                    msgId={data._id}
-                    setToggleOption={setToggleOption}
-                    isLastMsg={isLastMsg}
-                  />
-                )}
+                <Popover
+                  content={
+                    <ChatMsgOption
+                      msgId={data._id}
+                      setToggleOption={setToggleOption}
+                    />
+                  }
+                  placement="left"
+                  trigger="click"
+                  overlayInnerStyle={{ padding: '5px' }}
+                >
+                  <S.ChatMsgMoreIcon>
+                    <FiMoreHorizontal />
+                  </S.ChatMsgMoreIcon>
+                </Popover>
               </S.ChatMsgMoreIconWrapper>
             )}
           </S.ChatMsgRight>
@@ -285,20 +297,21 @@ const ChatMsg = ({
                     {replyLabel}
                     <MdOutlineReply />
                   </S.ChatReplyLabel>
-                  {replyMsg.type === 'image' ? (
-                    <S.ChatMsgReplyImage>
-                      <img src={replyMsg.msg} alt="reply img" />
-                    </S.ChatMsgReplyImage>
-                  ) : (
-                    <S.ChatMsgReplyText>
-                      {replyMsg.type === 'file' && (
-                        <S.ChatMsgReplyFileIcon>
-                          {getFileIcon({ name: replyMsg.msg })}
-                        </S.ChatMsgReplyFileIcon>
-                      )}
-                      {replyMsg.msg}
-                    </S.ChatMsgReplyText>
-                  )}
+                  {replyMsg &&
+                    (replyMsg.type === 'image' ? (
+                      <S.ChatMsgReplyImage>
+                        <img src={replyMsg.msg} alt="reply img" />
+                      </S.ChatMsgReplyImage>
+                    ) : (
+                      <S.ChatMsgReplyText>
+                        {replyMsg.type === 'file' && (
+                          <S.ChatMsgReplyFileIcon>
+                            {getFileIcon({ name: replyMsg.msg })}
+                          </S.ChatMsgReplyFileIcon>
+                        )}
+                        {replyMsg.msg}
+                      </S.ChatMsgReplyText>
+                    ))}
                 </S.ChatMsgReply>
               )}
               {data.unSend ? (
@@ -353,18 +366,22 @@ const ChatMsg = ({
             </S.ChatMsgWrapper>
             {!data.unSend && !isUnfriend && (
               <S.ChatMsgMoreIconWrapper>
-                <S.ChatMsgMoreIcon
-                  onClick={() => setToggleOption(true)}
-                  isleft={1}
-                />
-                {toggleOption && (
-                  <ChatMsgOption
-                    msgId={data._id}
-                    setToggleOption={setToggleOption}
-                    isleft={1}
-                    isLastMsg={isLastMsg}
-                  />
-                )}
+                <Popover
+                  content={
+                    <ChatMsgOption
+                      msgId={data._id}
+                      setToggleOption={setToggleOption}
+                      isleft={1}
+                    />
+                  }
+                  placement="right"
+                  trigger="click"
+                  overlayInnerStyle={{ padding: '5px' }}
+                >
+                  <S.ChatMsgMoreIcon isleft={1}>
+                    <FiMoreHorizontal />
+                  </S.ChatMsgMoreIcon>
+                </Popover>
               </S.ChatMsgMoreIconWrapper>
             )}
           </S.ChatMsgLeft>

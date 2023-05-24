@@ -17,7 +17,7 @@ const ChatPreviewItem = ({
   status,
   onClick,
 }: IChatPreviewItem) => {
-  const loggeduser = useSelector(selectUserState);
+  const user = useSelector(selectUserState);
 
   const activeAvatar = [];
   roomInfo.roomInfo.users.forEach((u) => {
@@ -25,7 +25,7 @@ const ChatPreviewItem = ({
   });
 
   const unReadMsgNumber = roomInfo.roomInfo.users.find(
-    (user) => user.uid === loggeduser.info._id
+    (u) => u.uid === user.info._id
   ).unReadMsg;
 
   return (

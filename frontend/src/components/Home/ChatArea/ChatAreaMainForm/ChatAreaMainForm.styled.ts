@@ -15,7 +15,7 @@ export const ChatAreaMainInput = styled.div`
 `;
 
 export const ChatAreaMainInputFile = styled.label`
-  ${tw`flex flex-shrink-0 shadow text-quaternary bg-primary self-end rounded-full w-12 h-12 items-center justify-center text-4xl hover:cursor-pointer hover:opacity-80`}
+  ${tw`flex flex-shrink-0 shadow text-quaternary bg-primary self-end rounded-full w-12 h-12 items-center justify-center text-2xl hover:cursor-pointer hover:opacity-80`}
 `;
 
 export const ChatAreaMainInputMsgOuter = styled.div`
@@ -23,7 +23,7 @@ export const ChatAreaMainInputMsgOuter = styled.div`
 `;
 
 export const ChatAreaMainInputMsg = styled.div<{ isReplying: string }>`
-  ${tw`relative flex flex-grow shadow items-center p-1.5 bg-[#DFE2E2] rounded-[20px]`}
+  ${tw`relative flex flex-grow shadow items-center p-1.5 bg-gray-100 rounded-[10px]`}
   ${({ isReplying }) =>
     isReplying === "true" && tw`border-t-[1px] border-gray-400`}
 `;

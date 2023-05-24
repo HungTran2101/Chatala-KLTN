@@ -1,13 +1,22 @@
-import { fileType, messageSendType } from "../../utils/types";
-import http from "../http";
-import { API_URL } from "./urls";
+import { fileType, messageSendType } from '../../utils/types';
+import http from '../http';
+import { API_URL } from './urls';
 
-export const CLOUD_NAME = "dzikgumce";
-export const API_KEY = "883356262461341";
-export const CLOUD_FOLDER_NAME = "Chatala";
-export const UPLOAD_PRESET = "chatala_preset";
+export const CLOUD_NAME = 'dzikgumce';
+export const API_KEY = '883356262461341';
+export const CLOUD_FOLDER_NAME = 'Chatala';
+export const UPLOAD_PRESET = 'chatala_preset';
 
 export const MessageApi = {
+  get: async function (
+    roomId: string,
+    pageNum: number = 1,
+    limit: number = 20
+  ): Promise<any> {
+    return await http.get(
+      `${API_URL.getMessage}/${roomId}/${limit}/${pageNum}`
+    );
+  },
   send: async function (message: messageSendType): Promise<any> {
     return await http.post(API_URL.sendMessage, message);
   },
@@ -31,7 +40,7 @@ export const MessageApi = {
       `${API_URL.uploadFile}/${CLOUD_NAME}/auto/upload`,
       formData,
       {
-        headers: { "content-type": "multipart/form-data" },
+        headers: { 'content-type': 'multipart/form-data' },
       }
     );
   },

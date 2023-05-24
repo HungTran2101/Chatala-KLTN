@@ -1,9 +1,29 @@
-const asyncHandler = require("express-async-handler");
-const { default: mongoose } = require("mongoose");
-const Files = require("../models/fileModel");
-const Messages = require("../models/messageModel");
-const Rooms = require("../models/roomModel");
-const ErrorHandler = require("../utils/errorHandler");
+const asyncHandler = require('express-async-handler');
+const Files = require('../models/fileModel');
+const Messages = require('../models/messageModel');
+const Rooms = require('../models/roomModel');
+const ErrorHandler = require('../utils/errorHandler');
+
+const getMessages = asyncHandler(async (req, res, next) => {
+  const roomId = req.params.roomId;
+  const limit = !isNaN(req.params.limit) ? parseInt(req.params.limit) : 20;
+  const pageNum = !isNaN(req.params.pageNum) ? parseInt(req.params.pageNum) : 1;
+
+  const messages = await Messages.find({
+    roomId: roomId,
+  })
+    .sort({ createdAt: -1 })
+    .skip(limit * pageNum - limit)
+    .limit(limit);
+
+  if (messages) {
+    res.status(200).json({
+      messages,
+    });
+  } else {
+    return next(new ErrorHandler('Messages not found!', 404));
+  }
+});
 
 const sendMessage = asyncHandler(async (req, res, next) => {
   const io = req.io;
@@ -16,24 +36,24 @@ const sendMessage = asyncHandler(async (req, res, next) => {
     msg,
     replyId,
     fileIds,
-    mentions
+    mentions,
   });
 
   if (result) {
-    const lastMsg = msg !== "" ? msg : "File";
+    const lastMsg = msg !== '' ? msg : 'File';
     await Rooms.findByIdAndUpdate(roomId, { lastMsg }, { new: true });
-    io.emit("newLastMsg", {
+    io.emit('newLastMsg', {
       lastMsg,
       roomId,
     });
   }
 
-  io.in(roomId).emit("receiveMessage", result);
-  io.emit("incUnreadMsg", result.senderId, roomId)
+  io.in(roomId).emit('receiveMessage', result);
+  io.emit('incUnreadMsg', result.senderId, roomId);
 
   res.status(200).json({
     result,
-    message: "Send Message Successfully!",
+    message: 'Send Message Successfully!',
   });
 });
 
@@ -51,7 +71,7 @@ const saveFile = asyncHandler(async (req, res, next) => {
       fileIds,
     });
   }
-  return next(new ErrorHandler("No file exist!", 400));
+  return next(new ErrorHandler('No file exist!', 400));
 });
 
 const getFile = asyncHandler(async (req, res) => {
@@ -75,7 +95,7 @@ const unSendMessage = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({
     result,
-    message: "unSend Message Successfully!",
+    message: 'unSend Message Successfully!',
   });
 });
 
@@ -90,11 +110,12 @@ const deleteMessage = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({
     result,
-    message: "Delete Message Successfully!",
+    message: 'Delete Message Successfully!',
   });
 });
 
 module.exports = {
+  getMessages,
   sendMessage,
   saveFile,
   getFile,

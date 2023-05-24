@@ -36,6 +36,10 @@ export const messageSlice = createSlice({
       state.list.unshift(action.payload);
     },
 
+    loadMessage(state, action) {
+      state.list = state.list.concat(action.payload);
+    },
+
     clearMessage(state, action) {
       state.loading = false;
       state.list = messageInitialState;
