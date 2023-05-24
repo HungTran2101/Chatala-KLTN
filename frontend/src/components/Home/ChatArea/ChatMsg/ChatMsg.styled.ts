@@ -56,8 +56,8 @@ export const ChatMsgAvatar = styled.figure<{ position: string }>`
   border: 1px solid gray;
 `;
 
-export const ChatMsgMoreIcon = styled(FiMoreHorizontal)<{ isleft?: number }>`
-  ${tw`relative text-[20px] text-gray-600 cursor-pointer invisible`}
+export const ChatMsgMoreIcon = styled.span<{ isleft?: number }>`
+  ${tw`relative flex items-center text-[20px] text-gray-600 cursor-pointer invisible`}
   ${({ isleft }) => (isleft === 1 ? tw`ml-3.5` : tw`mr-3.5`)}
 `;
 

@@ -14,6 +14,8 @@ import * as S from './ChatMsg.styled';
 import ChatMsgOption from './ChatMsgOption';
 import { selectMessageState } from '../../../../features/redux/slices/messageSlice';
 import { MdOutlineReply } from 'react-icons/md';
+import { Popover } from 'antd';
+import { FiMoreHorizontal } from 'react-icons/fi';
 
 interface IChatMsg {
   data: messageType;
@@ -142,14 +144,14 @@ const ChatMsg = ({
     return msg;
   };
 
-  const tooltip = useRef<number>();
+  let tooltip = null;
   const onHoverMsg = (show: boolean) => {
     if (show) {
-      tooltip.current = window.setTimeout(() => {
+      tooltip = window.setTimeout(() => {
         setToggleTooltip(true);
       }, 500);
     } else {
-      window.clearTimeout(tooltip.current);
+      window.clearTimeout(tooltip);
       if (toggleTooltip) {
         setToggleTooltip(false);
       }
@@ -251,14 +253,21 @@ const ChatMsg = ({
             </S.ChatMsgWrapper>
             {!data.unSend && !isUnfriend && (
               <S.ChatMsgMoreIconWrapper>
-                <S.ChatMsgMoreIcon onClick={() => setToggleOption(true)} />
-                {toggleOption && (
-                  <ChatMsgOption
-                    msgId={data._id}
-                    setToggleOption={setToggleOption}
-                    isLastMsg={isLastMsg}
-                  />
-                )}
+                <Popover
+                  content={
+                    <ChatMsgOption
+                      msgId={data._id}
+                      setToggleOption={setToggleOption}
+                    />
+                  }
+                  placement="left"
+                  trigger="click"
+                  overlayInnerStyle={{ padding: '5px' }}
+                >
+                  <S.ChatMsgMoreIcon>
+                    <FiMoreHorizontal />
+                  </S.ChatMsgMoreIcon>
+                </Popover>
               </S.ChatMsgMoreIconWrapper>
             )}
           </S.ChatMsgRight>
@@ -357,18 +366,22 @@ const ChatMsg = ({
             </S.ChatMsgWrapper>
             {!data.unSend && !isUnfriend && (
               <S.ChatMsgMoreIconWrapper>
-                <S.ChatMsgMoreIcon
-                  onClick={() => setToggleOption(true)}
-                  isleft={1}
-                />
-                {toggleOption && (
-                  <ChatMsgOption
-                    msgId={data._id}
-                    setToggleOption={setToggleOption}
-                    isleft={1}
-                    isLastMsg={isLastMsg}
-                  />
-                )}
+                <Popover
+                  content={
+                    <ChatMsgOption
+                      msgId={data._id}
+                      setToggleOption={setToggleOption}
+                      isleft={1}
+                    />
+                  }
+                  placement="right"
+                  trigger="click"
+                  overlayInnerStyle={{ padding: '5px' }}
+                >
+                  <S.ChatMsgMoreIcon isleft={1}>
+                    <FiMoreHorizontal />
+                  </S.ChatMsgMoreIcon>
+                </Popover>
               </S.ChatMsgMoreIconWrapper>
             )}
           </S.ChatMsgLeft>

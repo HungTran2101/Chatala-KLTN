@@ -1,4 +1,3 @@
-import { useOutsideClick } from '../../../../Global/ProcessFunctions';
 import * as S from './ChatMsgOption.styled';
 import { MessageApi } from '../../../../../services/api/messages';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,28 +6,21 @@ import { selectRoomInfoState } from '../../../../../features/redux/slices/roomIn
 import { selectUserState } from '../../../../../features/redux/slices/userSlice';
 import { useSocketContext } from '../../../../../contexts/socket';
 import { utilActions } from '../../../../../features/redux/slices/utilSlice';
-import { useEffect } from 'react';
+import { useState } from 'react';
+import { Popconfirm } from 'antd';
 
 interface IChatMsgOption {
   msgId: string;
   isleft?: number; //mean this component will be in msg for other user
-  isLastMsg: boolean;
   setToggleOption: (toogle: boolean) => void;
 }
 
 const ChatMsgOption = ({
   msgId,
   isleft = 0,
-  isLastMsg,
   setToggleOption,
 }: IChatMsgOption) => {
   const dispatch = useDispatch();
-
-  const handleOutsideClick = () => {
-    setToggleOption(false);
-  };
-
-  const chatMsgOptionRef = useOutsideClick(handleOutsideClick);
 
   const roomInfo = useSelector(selectRoomInfoState);
   const user = useSelector(selectUserState);
@@ -36,6 +28,9 @@ const ChatMsgOption = ({
     (it) => it.uid !== user.info._id
   );
   const socket = useSocketContext();
+
+  const [unsendConfirm, setUnsendConfirm] = useState(false);
+  const [deleteConfirm, setDeleteConfirm] = useState(false);
 
   const unsendMsg = async () => {
     await MessageApi.unsend(msgId);
@@ -61,16 +56,32 @@ const ChatMsgOption = ({
   };
 
   return (
-    <S.ChatMsgOption
-      ref={chatMsgOptionRef}
-      isleft={isleft}
-      isLastMsg={isLastMsg ? 1 : 0}
-    >
+    <S.ChatMsgOption>
       <S.NormalItem onClick={() => replyMsg()}>Reply</S.NormalItem>
       {!isleft && (
         <>
-          <S.NormalItem onClick={() => unsendMsg()}>Unsend</S.NormalItem>
-          <S.DeteleItem onClick={() => deleteMsg()}>Delete</S.DeteleItem>
+          <Popconfirm
+            title={`You're about to unsend this message`}
+            description="This can't be undo"
+            open={unsendConfirm}
+            onConfirm={() => unsendMsg()}
+            onCancel={() => setUnsendConfirm(false)}
+            okType={'danger'}
+          >
+            <S.DeteleItem onClick={() => setUnsendConfirm(true)}>
+              Unsend
+            </S.DeteleItem>
+          </Popconfirm>
+          <Popconfirm
+            title={`You're about to delete this message`}
+            description="This can't be undo"
+            open={deleteConfirm}
+            onConfirm={() => deleteMsg()}
+            onCancel={() => setDeleteConfirm(false)}
+            okType={'danger'}
+          >
+            <S.DeteleItem onClick={() => deleteMsg()}>Delete</S.DeteleItem>
+          </Popconfirm>
         </>
       )}
     </S.ChatMsgOption>

@@ -100,10 +100,12 @@ const ChatAreaMainMsg = ({
               isUnfriend={isUnfriend}
             />
           ))}
-          {chatScrollTop && <S.ChatAreaMainMsgInnerTop>
-            <ClipLoader color='#769FCD' size={25}/>
-          </S.ChatAreaMainMsgInnerTop>}
         </S.ChatAreaMainMsgInner>
+        {chatScrollTop && (
+          <S.ChatAreaMainMsgInnerTop>
+            <ClipLoader color="#769FCD" size={25} />
+          </S.ChatAreaMainMsgInnerTop>
+        )}
       </S.ChatAreaMainMsgOuter>
       {toggleTyping && (
         <S.ChatAreaMainTyping

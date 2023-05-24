@@ -72,11 +72,10 @@ const ChatAreaMainForm = ({
 
   const getMentionList = (): MentionList => {
     const list: MentionList = [];
-    roomInfo.info.roomInfo.users.forEach(
-      (urs) =>
-        urs.uid !== user.info._id &&
-        list.push({ name: urs.nickname, avatar: urs.avatar, uid: urs._id })
-    );
+    roomInfo.info.roomInfo.users.forEach((urs) => {
+      if (urs.uid !== user.info._id && !urs.isLeave)
+        list.push({ name: urs.nickname, avatar: urs.avatar, uid: urs._id });
+    });
     return list;
   };
 
@@ -230,7 +229,9 @@ const ChatAreaMainForm = ({
             />
           </S.ChatAreaMainInputEmojiPicker>
         )}
-        <S.ChatAreaMainInputFile htmlFor="fileInput"><FiFilePlus /></S.ChatAreaMainInputFile>
+        <S.ChatAreaMainInputFile htmlFor="fileInput">
+          <FiFilePlus />
+        </S.ChatAreaMainInputFile>
         <S.ChatAreaMainInputMsgOuter>
           {util.replyId && replyMsg && (
             <S.ChatAreaMainInputReply

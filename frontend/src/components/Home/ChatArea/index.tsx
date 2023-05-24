@@ -124,11 +124,14 @@ const ChatArea = () => {
     //e.target.scrollTop is bottom when value is 0, scroll up cause value goes negative
     const offset = 100;
 
+    // console.log('clientHeight', e.target.clientHeight);
+    // console.log('scrollTop', e.target.scrollTop);
+    // console.log('scrollHeight', e.target.scrollHeight);
+
+    const scrollPosition = e.target.clientHeight - e.target.scrollTop;
+
     //Check if chat scroll reach top
-    if (
-      e.target.clientHeight - e.target.scrollTop - offset ===
-      e.target.scrollHeight - offset
-    ) {
+    if (scrollPosition > e.target.scrollHeight - offset && scrollPosition <= e.target.scrollHeight) {
       if (!chatScrollTop) {
         setChatScrollTop(true);
         setChatLoadCounter(chatLoadCounter + 1);
@@ -141,6 +144,7 @@ const ChatArea = () => {
           dispatch(messageActions.loadMessage(res.messages));
         } else {
           setChatScrollTop(false);
+          setChatLoadCounter(chatLoadCounter);
         }
       }
     } else {
@@ -161,7 +165,8 @@ const ChatArea = () => {
     }
   };
   useEffect(() => {
-    if (messages.list.length <= 20) { //which mean different room got selected
+    if (messages.list.length <= 20) {
+      //which mean different room got selected
       setChatLoadCounter(1);
     }
   }, [messages]);

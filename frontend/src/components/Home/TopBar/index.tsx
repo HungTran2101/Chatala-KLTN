@@ -224,8 +224,8 @@ const TopBar = () => {
         dispatch(friendListActions.setFriendList(friends));
         socket.emit('new room', uid);
       }
-      getListNotify()
-      message.success('Accept friend successfully')
+      getListNotify();
+      message.success('Accept friend successfully');
     } catch (err) {
       console.log(err);
     }
@@ -234,8 +234,8 @@ const TopBar = () => {
   const friendDecline = async (id: string) => {
     try {
       const res = await FriendApi.friendDecline(id);
-      message.success('Decline friend successfully')
-      getListNotify()
+      message.success('Decline friend successfully');
+      getListNotify();
       setAction(true);
     } catch (err) {
       console.log(err);
