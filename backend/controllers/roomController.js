@@ -9,6 +9,11 @@ const Files = require('../models/fileModel');
 const createRoom = asyncHandler(async (req, res, next) => {
   const { isGroup, users, friendRelateId } = req.body;
 
+  const roomExisted = await Rooms.findOne({ friendRelateId: friendRelateId });
+  if(roomExisted){
+    return res.status(200).json(roomExisted)
+  }
+
   if (users.every((user) => user.uid.toString() !== req.user._id.toString())) {
     users.push({
       uid: req.user._id,
@@ -16,7 +21,9 @@ const createRoom = asyncHandler(async (req, res, next) => {
       nickname: req.user.name,
     });
   } else {
-    return next(new ErrorHandler('Group member cannot include creator!', 400));
+    return next(
+      new ErrorHandler('Creating group member cannot include creator!', 400)
+    );
   }
 
   let roomToCreate = {};
@@ -72,7 +79,7 @@ const addAvatarForUserInRoom = (room, userInfos) => {
 const getRoomList = asyncHandler(async (req, res, next) => {
   const rooms = await Rooms.find({
     'users.uid': req.user._id,
-  }).sort({updatedAt: -1});
+  }).sort({ updatedAt: -1 });
 
   //get all uid have in all rooms
   let uids = [];

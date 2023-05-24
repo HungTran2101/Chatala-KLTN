@@ -44,7 +44,7 @@ const ChatArea = () => {
   const router = useRouter();
 
   const roomInfo = useSelector(selectRoomInfoState);
-  const friendList = useSelector(selectFriendListState);
+  const friends = useSelector(selectFriendListState);
   const user = useSelector(selectUserState);
   const util = useSelector(selectUtilState);
   const socket = useSocketContext();
@@ -274,23 +274,19 @@ const ChatArea = () => {
     router.push({ pathname: '/video-call', query: { action: 'create' } });
   };
 
-  const [blockInput, setBlockInput] = useState(false);
+  const [isUnfriend, setIsUnfriend] = useState(false);
   useEffect(() => {
-    const checker = async () => {
-      try {
-        const res = await FriendApi.checkFriend(
-          roomInfo.info.roomInfo.friendRelateId
-        );
-        if (res) {
-          setBlockInput(false);
-        }
-      } catch (error) {
-        setBlockInput(true);
-        console.log(error);
+    if (friends.list.length > 0) {
+      const friend = friends.list.find(
+        (fr) => fr.friendRelateId === roomInfo.info.roomInfo.friendRelateId
+      );
+      if (friend) {
+        if (friend.type === 'available') {
+          setIsUnfriend(false);
+        } else setIsUnfriend(true);
       }
-    };
-    checker();
-  }, [roomInfo]);
+    }
+  }, [roomInfo, friends]);
 
   const [openMoreOption, setOpenMoreOption] = useState(false);
 
@@ -311,14 +307,15 @@ const ChatArea = () => {
         />
       )}
       <S.ChatArea>
-        <ChatAreaHead setToggleOption={showDrawer} blockInput={blockInput}/>
+        <ChatAreaHead setToggleOption={showDrawer} isUnfriend={isUnfriend} />
         <MoreOptions
           roomInfo={roomInfo.info!}
           setToggleOption={onCloseDrawer}
           toggleOption={openMoreOption}
           setToggleImageZoom={setToggleImageZoom}
           setImageId={setImageId}
-          blockInput={blockInput}
+          isUnfriend={isUnfriend}
+          setIsUnfriend={setIsUnfriend}
         />
         <Formik
           initialValues={initialValues}
@@ -346,7 +343,7 @@ const ChatArea = () => {
                     setToggleImageZoom={setToggleImageZoom}
                     checkChatScrollBottom={checkChatScrollBottom}
                     newMsgNotiClick={newMsgNotiClick}
-                    blockInput={blockInput}
+                    isUnfriend={isUnfriend}
                   />
                   {chatScrollBottom && (
                     <S.ChatAreaMainScrollBottom onClick={scrollToNewMsg} />
@@ -366,7 +363,7 @@ const ChatArea = () => {
                     </S.ChatChatAreaFilePreview>
                   )}
 
-                  {!blockInput || roomInfo.info.roomInfo.isGroup ? (
+                  {!isUnfriend || roomInfo.info.roomInfo.isGroup ? (
                     <ChatAreaMainForm
                       isDragActive={isDragActive}
                       values={values}

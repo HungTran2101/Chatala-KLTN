@@ -9,10 +9,10 @@ import CallNotiModal from './CallNotiModal';
 
 interface IChatAreaHead {
   setToggleOption: () => void;
-  blockInput: boolean;
+  isUnfriend: boolean;
 }
 
-const ChatAreaHead = ({ setToggleOption, blockInput }: IChatAreaHead) => {
+const ChatAreaHead = ({ setToggleOption, isUnfriend }: IChatAreaHead) => {
   const roomInfo = useSelector(selectRoomInfoState);
   const roomList = useSelector(selectRoomListState);
   const user = useSelector(selectUserState);
@@ -116,7 +116,7 @@ const ChatAreaHead = ({ setToggleOption, blockInput }: IChatAreaHead) => {
         </S.ChatAreaHeadNameWrapper>
       </S.ChatAreaHeadInfo>
       <S.RightWrap>
-        {!blockInput && <S.CallButton onClick={() => makeCall()} />}
+        {!isUnfriend && <S.CallButton onClick={() => makeCall()} />}
         <S.ChatAreaHeadOption onClick={() => setToggleOption()} />
       </S.RightWrap>
       {makingACall && (

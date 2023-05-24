@@ -19,7 +19,7 @@ interface IChatMsg {
   data: messageType;
   position: string;
   isLastMsg: boolean;
-  blockInput: boolean;
+  isUnfriend: boolean;
   setToggleImageZoom: (toggle: boolean) => void;
   setImageId: (value: string) => void;
 }
@@ -28,7 +28,7 @@ const ChatMsg = ({
   data,
   position,
   isLastMsg,
-  blockInput,
+  isUnfriend,
   setToggleImageZoom,
   setImageId,
 }: IChatMsg) => {
@@ -246,7 +246,7 @@ const ChatMsg = ({
                 <S.ChatMsgUnSend>Message has been unsend</S.ChatMsgUnSend>
               )}
             </S.ChatMsgWrapper>
-            {!data.unSend && !blockInput && (
+            {!data.unSend && !isUnfriend && (
               <S.ChatMsgMoreIconWrapper>
                 <S.ChatMsgMoreIcon onClick={() => setToggleOption(true)} />
                 {toggleOption && (
@@ -351,7 +351,7 @@ const ChatMsg = ({
                 </>
               )}
             </S.ChatMsgWrapper>
-            {!data.unSend && !blockInput && (
+            {!data.unSend && !isUnfriend && (
               <S.ChatMsgMoreIconWrapper>
                 <S.ChatMsgMoreIcon
                   onClick={() => setToggleOption(true)}

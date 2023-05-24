@@ -1,55 +1,14 @@
 import * as S from './NotiModal.styled';
 import * as React from 'react';
-import { useOutsideClick } from '../../../Global/ProcessFunctions';
-import { FriendApi } from '../../../../services/api/friend';
-import { RoomApi } from '../../../../services/api/room';
-import { useDispatch, useSelector } from 'react-redux';
-import { roomListActions } from '../../../../features/redux/slices/roomListSlice';
-
 import Image from 'next/image';
-import { useSocketContext } from '../../../../contexts/socket';
 
 interface INotiModal {
   listNoti: any;
-  getListNotify: () => void;
+  friendAccept: (notificationId: string, uid: string, nickname: string) => void;
+  friendDecline: (notificationId: string) => void;
 }
 
-const NotiModal = ({ listNoti, getListNotify }: INotiModal) => {
-  const dispatch = useDispatch();
-  const socket = useSocketContext();
-
-  const friendAccept = async (id: string, uid: string, nickname: string) => {
-    try {
-      const res = await FriendApi.friendAccept(id);
-      getListNotify();
-      const userToRoom = [
-        {
-          uid,
-          nickname,
-        },
-      ];
-      const createdRoom = await RoomApi.createRoom({
-        users: userToRoom,
-        friendRelateId: res.friendRelate._id,
-      });
-      if (createdRoom) {
-        const rooms = await RoomApi.getRoomList();
-        dispatch(roomListActions.setRoomList(rooms.result));
-        socket.emit('new room', uid);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const friendDecline = async (id: string) => {
-    try {
-      await FriendApi.friendDecline(id);
-      getListNotify();
-    } catch (err) {
-      console.log(err);
-    }
-  };
+const NotiModal = ({ listNoti, friendAccept, friendDecline }: INotiModal) => {
 
   return (
     // <S.Noti ref={NotiRef}>
@@ -62,9 +21,9 @@ const NotiModal = ({ listNoti, getListNotify }: INotiModal) => {
               <S.NotiAvatar>
                 <Image
                   src={data.avatar}
-                  alt='avatar'
-                  layout='fill'
-                  objectFit='cover'
+                  alt="avatar"
+                  layout="fill"
+                  objectFit="cover"
                 />
               </S.NotiAvatar>
               <S.NotiNameWrapper>

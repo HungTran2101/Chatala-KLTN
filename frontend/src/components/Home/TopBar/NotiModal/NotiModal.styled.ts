@@ -36,7 +36,7 @@ export const NotiText = styled.div`
 `;
 
 export const NotiItem = styled.div`
-  ${tw`flex p-2 rounded-[20px] my-1.5 items-center relative w-full bg-tertiary`}
+  ${tw`flex p-2 rounded-[10px] my-1.5 items-center relative w-full bg-secondary`}
 `;
 
 export const NotiInfo = styled.div`
@@ -52,7 +52,7 @@ export const NotiNameWrapper = styled.div`
 `;
 
 export const NotiName = styled.div`
-  ${tw`text-primary font-semibold text-[18px] w-[175px]`}
+  ${tw`font-semibold text-[18px] w-[175px]`}
 `;
 
 export const NotiNumFriend = styled.div`

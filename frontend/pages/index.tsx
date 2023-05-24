@@ -39,7 +39,11 @@ const Home = () => {
     });
     socket.on('new room', () => {
       getRoomList();
+      getFriendList();
     });
+    socket.on('unfriended', () => {
+      getFriendList();
+    })
     socket.on('unsend msg', (msgId) => {
       dispatch(messageActions.unsend(msgId));
     });
@@ -80,7 +84,6 @@ const Home = () => {
 
   const getRoomList = async () => {
     try {
-      dispatch(roomListActions.requestRoomList(null));
       const rooms = await RoomApi.getRoomList();
       dispatch(roomListActions.setRoomList(rooms.result));
     } catch (err: any) {
@@ -95,7 +98,6 @@ const Home = () => {
 
   const getFriendList = async () => {
     try {
-      dispatch(friendListActions.requestFriendList(null));
       const friends = await FriendApi.friendList();
       dispatch(friendListActions.setFriendList(friends));
     } catch (err: any) {

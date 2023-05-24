@@ -6,8 +6,7 @@ const friendSchema = mongoose.Schema(
     uid1: { type: mongoose.Schema.Types.ObjectId, ref: 'Users' },
     uid2: { type: mongoose.Schema.Types.ObjectId, ref: 'Users' },
     status: {
-      type: { type: String, default: 'available' }, // available, oneWayBlock, disable
-      blockedId: { type: mongoose.Schema.Types.ObjectId, ref: 'Users' },
+      type: { type: String, default: 'available' }, // available, disable
     },
   },
   { timestamps: true }

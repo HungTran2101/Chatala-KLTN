@@ -97,7 +97,7 @@ io.on('connection', (socket) => {
     socket.to(roomId).emit('stop typing');
   });
 
-  socket.on('receiveNoti', (receiveId) => {
+  socket.on('sendNoti', (receiveId) => {
     const receiveUser = users.find(
       (user) => user.uid.toString() === receiveId.toString()
     );
@@ -112,6 +112,13 @@ io.on('connection', (socket) => {
     );
     receiveUser && socket.to(receiveUser.socketId).emit('new room');
   });
+
+  socket.on('unfriend', ({friendRelateId, receiveId}) => {
+    const receiveUser = users.find(
+      (user) => user.uid.toString() === receiveId.toString()
+    );
+    receiveUser && socket.to(receiveUser.socketId).emit('unfriended');
+  })
 
   socket.on('unsend msg', (receiveId, msgId) => {
     const receiveUser = users.find(

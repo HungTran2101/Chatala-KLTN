@@ -6,7 +6,6 @@ import UserInfo from './UserInfo';
 import NotiModal from './NotiModal';
 import SettingsModal from './SettingsModal';
 import { UsersApi } from '../../../services/api/users';
-import SearchModal from './SearchModal';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectUserState,
@@ -24,17 +23,17 @@ import {
 } from '../../../features/redux/slices/roomListSlice';
 import { FriendApi } from '../../../services/api/friend';
 import { useSocketContext } from '../../../contexts/socket';
-import { AutoComplete, Popover, Select, SelectProps } from 'antd';
+import { AutoComplete, Popover, Select, SelectProps, message } from 'antd';
 import { RoomApi } from '../../../services/api/room';
 import { messageActions } from '../../../features/redux/slices/messageSlice';
 import { fileActions } from '../../../features/redux/slices/fileSlice';
+import { friendListActions } from '../../../features/redux/slices/friendListSlice';
 
 const TopBar = () => {
   // const [userInfoModal, setUserInfoModal] = useState(false);
   const [activeNotiModal, setActiveNotiModal] = useState(false);
   const [searchResult, setSearchResult] = useState<SearchResult[]>([]);
   const [searchInput, setSearchInput] = useState('');
-  const [searchModal, setSearchModal] = useState(false);
   const [action, setAction] = useState(false);
   const [searchLoading, setSearchLoading] = useState(false);
 
@@ -76,7 +75,6 @@ const TopBar = () => {
       try {
         const res = await UsersApi.userFind({ search: searchInput });
         setSearchResult(res.result);
-        setSearchModal(true);
         setSearchLoading(false);
       } catch (err) {
         console.log(err);
@@ -192,7 +190,8 @@ const TopBar = () => {
   const friendRequest = async (id: string) => {
     try {
       const res = await FriendApi.friendRequest(id);
-      socket.emit('receiveNoti', id);
+      message.success(res.msg);
+      socket.emit('sendNoti', id);
       setAction(true);
     } catch (err) {
       console.log(err);
@@ -216,13 +215,17 @@ const TopBar = () => {
       ];
       const createdRoom = await RoomApi.createRoom({
         users: userToRoom,
-        friendRelateId: res.friendRelate._id,
+        friendRelateId: res.friendRelateId,
       });
       if (createdRoom) {
         const rooms = await RoomApi.getRoomList();
         dispatch(roomListActions.setRoomList(rooms.result));
+        const friends = await FriendApi.friendList();
+        dispatch(friendListActions.setFriendList(friends));
         socket.emit('new room', uid);
       }
+      getListNotify()
+      message.success('Accept friend successfully')
     } catch (err) {
       console.log(err);
     }
@@ -231,6 +234,8 @@ const TopBar = () => {
   const friendDecline = async (id: string) => {
     try {
       const res = await FriendApi.friendDecline(id);
+      message.success('Decline friend successfully')
+      getListNotify()
       setAction(true);
     } catch (err) {
       console.log(err);
@@ -305,17 +310,8 @@ const TopBar = () => {
                 placeholder="Search..."
                 onChange={(e) => setSearchInput(e.target.value)}
                 value={searchInput}
-                // onFocus={() => setSearchModal(true)}
               />
             </AutoComplete>
-            {/* {searchModal && searchInput && (
-              <SearchModal
-                setSearchModal={setSearchModal}
-                searchResult={searchResult}
-                setAction={setAction}
-                loading={searchLoading}
-              />
-            )} */}
           </S.Search>
           <S.Option>
             <S.OptionNotifyWrapper>
@@ -323,8 +319,8 @@ const TopBar = () => {
                 content={
                   <NotiModal
                     listNoti={listNoti}
-                    getListNotify={getListNotify}
-                    // setActiveNotiModal={setActiveNotiModal}
+                    friendAccept={friendAccept}
+                    friendDecline={friendDecline}
                   />
                 }
                 title="Notification"

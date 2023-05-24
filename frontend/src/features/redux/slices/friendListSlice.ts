@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AppState } from "../store";
 import { HYDRATE } from "next-redux-wrapper";
-import { userInfo } from "../../../utils/types";
+import { friendInfo } from "../../../utils/types";
 
 // Type for our state
 export interface friendListState {
-  list: userInfo[];
+  list: friendInfo[];
   loading: boolean;
 }
 
-const friendListInitialState: userInfo[] = [];
+const friendListInitialState: friendInfo[] = [];
 
 // Initial state
 const initialState: friendListState = {

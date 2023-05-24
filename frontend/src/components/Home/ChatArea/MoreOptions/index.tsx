@@ -14,39 +14,32 @@ import { FriendApi } from '../../../../services/api/friend';
 import { selectFileState } from '../../../../features/redux/slices/fileSlice';
 import GroupNameModal from './GroupNameModal';
 import AddMemberModal from './AddMemberModal';
-import { Drawer, Modal, Popconfirm } from 'antd';
+import { Drawer, Modal, Popconfirm, message } from 'antd';
+import { useSocketContext } from '../../../../contexts/socket';
 
 interface IMoreOptions {
   setToggleOption: () => void;
   setToggleImageZoom: (toggle: boolean) => void;
   setImageId: (value: string) => void;
+  setIsUnfriend: (toggle: boolean) => void;
   toggleOption: boolean;
   roomInfo: roomInfo;
-  blockInput: boolean;
+  isUnfriend: boolean;
 }
 
 const MoreOptions = ({
   setToggleOption,
   setImageId,
   setToggleImageZoom,
+  setIsUnfriend,
   roomInfo,
   toggleOption,
-  blockInput,
+  isUnfriend,
 }: IMoreOptions) => {
-  // const handleOutsideClick = () => {
-  //   setToggleOption(false);
-  // };
-
-  // const moreOptionsRef = useOutsideClick(handleOutsideClick);
+  const socket = useSocketContext();
 
   const [photoExtend, setPhotoExtend] = useState(false);
   const [fileExtend, setFileExtend] = useState(false);
-  // const [toggleNickname, setToggleNickname] = useState(false);
-  // const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
-  // const [toggleGroupMembers, setToggleGroupMembers] = useState(false);
-  // const [toggleGroupName, setToggleGroupName] = useState(false);
-  // const [toggleAddMember, setToggleAddMember] = useState(false);
-  // const [toggleKickMember, setToggleKickMember] = useState(false);
   const [friendProfile, setFriendProfile] = useState<userInfo>();
 
   const user = useSelector(selectUserState);
@@ -81,23 +74,19 @@ const MoreOptions = ({
   };
 
   const [open, setOpen] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
-
   const showPopconfirm = () => {
     setOpen(true);
   };
   const handleCancel = () => {
     setOpen(false);
   };
-  const handleOk = async (friendRelateId: string) => {
-    setConfirmLoading(true);
+  const handleUnfriend = async (friendRelateId: string) => {
+    const friend = roomInfo.roomInfo.users.find((u) => u.uid !== user.info._id);
 
-    await FriendApi.unfriend(friendRelateId);
-
-    setTimeout(() => {
-      setOpen(false);
-      setConfirmLoading(false);
-    }, 2000);
+    const res = await FriendApi.unfriend(friendRelateId);
+    socket.emit('unfriend', { friendRelateId, receiveId: friend.uid });
+    message.success(res.message);
+    setIsUnfriend(true);
   };
 
   const [modalUser, setModalUser] = useState(false);
@@ -167,18 +156,20 @@ const MoreOptions = ({
               <S.NormalItem onClick={() => seeFriendProfile()}>
                 Friend&apos;s profile
               </S.NormalItem>
-              {!blockInput && (
+              {!isUnfriend && (
                 <S.NormalItem onClick={() => setModalNickName(true)}>
                   Change Nickname
                 </S.NormalItem>
               )}
-              {!blockInput && (
+              {!isUnfriend && (
                 <Popconfirm
                   title={`You're about to unfriend ${userNeedChange.nickname}`}
                   description="Please confirm"
                   open={open}
-                  onConfirm={() => handleOk(roomInfo.roomInfo.friendRelateId)}
-                  okButtonProps={{ loading: confirmLoading }}
+                  onConfirm={() =>
+                    handleUnfriend(roomInfo.roomInfo.friendRelateId)
+                  }
+                  // okButtonProps={{ loading: confirmLoading }}
                   onCancel={handleCancel}
                   okType={'danger'}
                 >
