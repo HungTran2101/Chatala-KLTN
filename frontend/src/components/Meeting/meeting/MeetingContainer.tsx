@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef, createRef } from 'react';
 import {
   Constants,
   createCameraVideoTrack,
+  createMicrophoneAudioTrack,
   useMeeting,
   usePubSub,
 } from '@videosdk.live/react-sdk';
@@ -145,7 +146,7 @@ export default function MeetingContainer({
             optimizationMode: 'motion',
             encoderConfig: 'h540p_w960p',
             facingMode: 'environment',
-            multiStream: false,
+            multiStream: true,
           });
           changeWebcam(track);
           resolve();
@@ -156,8 +157,17 @@ export default function MeetingContainer({
     if (micEnabled && selectedMic.id) {
       await new Promise((resolve) => {
         muteMic();
-        setTimeout(() => {
-          changeMic(selectedMic.id);
+        setTimeout(async () => {
+          const audioTrack = await createMicrophoneAudioTrack({
+            microphoneId: selectedMic.id,
+            encoderConfig: 'speech_standard',
+            noiseConfig: {
+              noiseSuppression: true,
+              echoCancellation: true,
+              autoGainControl: true,
+            },
+          });
+          changeMic(audioTrack);
           resolve();
         }, 500);
       });

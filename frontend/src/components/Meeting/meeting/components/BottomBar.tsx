@@ -815,12 +815,7 @@ export function BottomBar({
                               />
                             ) : icon ===
                               BottomBarButtonTypes.MEETING_ID_COPY ? (
-                              <>
-                                {/* <MeetingIdCopyBTN
-                                isMobile={isMobile}
-                                isTab={isTab}
-                              /> */}
-                              </>
+                              <div className='w-[150px]' />
                             ) : icon === BottomBarButtonTypes.PIP ? (
                               <PipBTN isMobile={isMobile} isTab={isTab} />
                             ) : null}
@@ -838,7 +833,7 @@ export function BottomBar({
     </div>
   ) : (
     <div className='md:flex lg:px-2 xl:px-6 pb-2 px-2 hidden'>
-      {/* <MeetingIdCopyBTN /> */}
+      <div className='w-[150px]' />
 
       <div className='flex flex-1 items-center justify-center' ref={tollTipEl}>
         <RecordingBTN />
