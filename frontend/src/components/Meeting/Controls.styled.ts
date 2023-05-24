@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import tw from 'twin.macro';
 
 export const Container = styled.div`
-  ${tw`flex justify-center`}
+  ${tw`flex justify-center fixed bottom-2 right-0`}
 `;
 
 export const Button = styled.button<{ redBg?: boolean }>`

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Controls from './Controls';
 import ParticipantView from './ParticipantView';
 import * as S from './MeetingView.styled';
+import GridLayout from 'react-grid-layout';
 
 const MeetingView = (props) => {
   const [joined, setJoined] = useState(null);
@@ -27,13 +28,23 @@ const MeetingView = (props) => {
   useEffect(() => {
     joinMeeting();
   }, []);
-
   return (
     <S.Container>
       {/* <h3>Meeting Id: {props.meetingId}</h3> */}
       {joined && joined == 'JOINED' ? (
-        <div>
-          <S.ParticipantWrap>
+        <>
+          {/* <S.ParticipantWrap> */}
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(6,1fr)',
+              gridTemplateRows: 'repeat(5,1fr)',
+              width: '100vw',
+              height: '100vh',
+              paddingBottom: '70px',
+            }}
+          >
             {/* @ts-ignore */}
             {[...participants.keys()].map((participantId) => (
               <ParticipantView
@@ -41,9 +52,10 @@ const MeetingView = (props) => {
                 key={participantId}
               />
             ))}
-          </S.ParticipantWrap>
+          </div>
+          {/* </S.ParticipantWrap> */}
           <Controls />
-        </div>
+        </>
       ) : joined && joined == 'JOINING' ? (
         <p>Joining the meeting...</p>
       ) : (

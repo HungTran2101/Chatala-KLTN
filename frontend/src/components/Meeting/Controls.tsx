@@ -7,48 +7,41 @@ import {
   BsCameraVideoOffFill,
   BsFillCameraVideoOffFill,
 } from 'react-icons/bs';
-import { MdCallEnd } from 'react-icons/md';
+import { MdCallEnd, MdScreenShare } from 'react-icons/md';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { utilActions } from '../../features/redux/slices/utilSlice';
 const Controls = () => {
-  const { leave, toggleMic, toggleWebcam } = useMeeting();
+  const { leave, toggleMic, toggleWebcam, toggleScreenShare } = useMeeting();
 
-  const [controls, setControls] = useState({ cam: false, mic: false });
-
+  const handleToggleScreenShare = () => {
+    // Toggling screen share
+    toggleScreenShare();
+  };
   const dispatch = useDispatch();
 
   return (
     <S.Container>
       <S.Button
         onClick={() => {
-          setControls({ ...controls, mic: !controls.mic });
           toggleMic();
         }}
       >
-        {controls.mic ? <BsFillMicFill /> : <BsFillMicMuteFill />}
+        <BsFillMicFill />
+      </S.Button>
+      <S.Button
+        onClick={() => {
+          toggleWebcam();
+        }}
+      >
+        <BsCameraVideoFill />
+      </S.Button>
+      <S.Button onClick={handleToggleScreenShare}>
+        <MdScreenShare />
       </S.Button>
       <S.Button onClick={() => leave()} redBg>
         <MdCallEnd />
       </S.Button>
-      <S.Button
-        onClick={() => {
-          setControls({ ...controls, cam: !controls.cam });
-          toggleWebcam();
-        }}
-      >
-        {controls.cam ? <BsCameraVideoFill /> : <BsFillCameraVideoOffFill />}
-      </S.Button>
-      {/* <button style={{ backgroundColor: 'red' }}>Leave</button>
-      <button onClick={() => toggleMic()} style={{ backgroundColor: 'green' }}>
-        toggleMic
-      </button>
-      <button
-        onClick={() => toggleWebcam()}
-        style={{ backgroundColor: 'yellow' }}
-      >
-        toggleWebcam
-      </button> */}
     </S.Container>
   );
 };
