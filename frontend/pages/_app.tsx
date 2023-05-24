@@ -8,6 +8,7 @@ import { SocketProvider } from '../src/contexts/socket';
 import { ClipLoader } from 'react-spinners';
 import Logo from '../src/assets/imgs/LogoFullLong.png';
 import Image from 'next/image';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MyApp: FC<AppProps> = ({ Component, ...rest }) => {
   const { store, props } = wrapper.useWrappedStore(rest);
