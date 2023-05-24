@@ -109,7 +109,7 @@ const ChatMsg = ({
       const sender = roomInfo.info.roomInfo.users.find(
         (user) => user.uid === data.senderId
       );
-      return sender!.avatar;
+      return sender ? sender.avatar : '';
     } else {
       return roomInfo.info!.roomAvatar;
     }
@@ -120,7 +120,9 @@ const ChatMsg = ({
       const sender = roomInfo.info.roomInfo.users.find(
         (user) => user.uid === data.senderId
       );
-      return sender!.nickname + ' | ' + formatDate(data.updatedAt, '.', true);
+      return sender
+        ? sender!.nickname + ' | ' + formatDate(data.updatedAt, '.', true)
+        : '';
     }
     return formatDate(data.updatedAt, '.', true);
   };
@@ -177,20 +179,21 @@ const ChatMsg = ({
                         {replyLabel}
                         <MdOutlineReply />
                       </S.ChatReplyLabel>
-                      {replyMsg.type === 'image' ? (
-                        <S.ChatMsgReplyImage>
-                          <img src={replyMsg.msg} alt="reply img" />
-                        </S.ChatMsgReplyImage>
-                      ) : (
-                        <S.ChatMsgReplyText>
-                          {replyMsg.type === 'file' && (
-                            <S.ChatMsgReplyFileIcon>
-                              {getFileIcon({ name: replyMsg.msg })}
-                            </S.ChatMsgReplyFileIcon>
-                          )}
-                          {replyMsg.msg}
-                        </S.ChatMsgReplyText>
-                      )}
+                      {replyMsg &&
+                        (replyMsg.type === 'image' ? (
+                          <S.ChatMsgReplyImage>
+                            <img src={replyMsg.msg} alt="reply img" />
+                          </S.ChatMsgReplyImage>
+                        ) : (
+                          <S.ChatMsgReplyText>
+                            {replyMsg.type === 'file' && (
+                              <S.ChatMsgReplyFileIcon>
+                                {getFileIcon({ name: replyMsg.msg })}
+                              </S.ChatMsgReplyFileIcon>
+                            )}
+                            {replyMsg.msg}
+                          </S.ChatMsgReplyText>
+                        ))}
                     </S.ChatMsgReply>
                   )}
                   {data.msg !== '' && (
@@ -285,20 +288,21 @@ const ChatMsg = ({
                     {replyLabel}
                     <MdOutlineReply />
                   </S.ChatReplyLabel>
-                  {replyMsg.type === 'image' ? (
-                    <S.ChatMsgReplyImage>
-                      <img src={replyMsg.msg} alt="reply img" />
-                    </S.ChatMsgReplyImage>
-                  ) : (
-                    <S.ChatMsgReplyText>
-                      {replyMsg.type === 'file' && (
-                        <S.ChatMsgReplyFileIcon>
-                          {getFileIcon({ name: replyMsg.msg })}
-                        </S.ChatMsgReplyFileIcon>
-                      )}
-                      {replyMsg.msg}
-                    </S.ChatMsgReplyText>
-                  )}
+                  {replyMsg &&
+                    (replyMsg.type === 'image' ? (
+                      <S.ChatMsgReplyImage>
+                        <img src={replyMsg.msg} alt="reply img" />
+                      </S.ChatMsgReplyImage>
+                    ) : (
+                      <S.ChatMsgReplyText>
+                        {replyMsg.type === 'file' && (
+                          <S.ChatMsgReplyFileIcon>
+                            {getFileIcon({ name: replyMsg.msg })}
+                          </S.ChatMsgReplyFileIcon>
+                        )}
+                        {replyMsg.msg}
+                      </S.ChatMsgReplyText>
+                    ))}
                 </S.ChatMsgReply>
               )}
               {data.unSend ? (

@@ -28,7 +28,7 @@ export const Content = styled.div`
 `;
 
 export const Name = styled.div`
-  ${tw`font-semibold text-black text-[16px] text-left`}
+  ${tw`font-semibold text-black text-[17px] text-left`}
 `;
 
 export const Msg = styled.div<{ semibold: boolean }>`

@@ -1,10 +1,11 @@
-import { Ref } from "react";
-import * as S from "./ChatAreaMainMsg.styled";
-import ChatMsg from "../ChatMsg";
-import { useSelector } from "react-redux";
-import { selectMessageState } from "../../../../features/redux/slices/messageSlice";
-import { fileType, messageType } from "../../../../utils/types";
-import { FiChevronsDown } from "react-icons/fi";
+import { Ref, useState, useEffect } from 'react';
+import * as S from './ChatAreaMainMsg.styled';
+import ChatMsg from '../ChatMsg';
+import { useSelector } from 'react-redux';
+import { selectMessageState } from '../../../../features/redux/slices/messageSlice';
+import { messageType } from '../../../../utils/types';
+import { FiChevronsDown } from 'react-icons/fi';
+import { ClipLoader } from 'react-spinners';
 
 interface IChatAreaMainMsg {
   chatMainMsgOuter: Ref<HTMLDivElement>;
@@ -13,9 +14,10 @@ interface IChatAreaMainMsg {
   newMsgNoti: boolean;
   isSubmitting: boolean;
   isUnfriend: boolean;
+  chatScrollTop: boolean;
   setToggleImageZoom: (toggle: boolean) => void;
   setImageId: (value: string) => void;
-  checkChatScrollBottom: () => void;
+  checkChatScrollBottom: (e: any) => void;
   newMsgNotiClick: () => void;
 }
 
@@ -26,6 +28,7 @@ const ChatAreaMainMsg = ({
   newMsgNoti,
   isSubmitting,
   isUnfriend,
+  chatScrollTop,
   setImageId,
   setToggleImageZoom,
   checkChatScrollBottom,
@@ -59,20 +62,20 @@ const ChatAreaMainMsg = ({
         list[index + skipDeletedMessage(index, true)]?.senderId &&
       data.senderId === list[index - skipDeletedMessage(index, false)]?.senderId
     )
-      return "top";
+      return 'top';
     else if (
       data.senderId ===
         list[index - skipDeletedMessage(index, false)]?.senderId &&
       data.senderId === list[index + skipDeletedMessage(index, true)]?.senderId
     )
-      return "middle";
+      return 'middle';
     else if (
       data.senderId !==
         list[index - skipDeletedMessage(index, false)]?.senderId &&
       data.senderId !== list[index + skipDeletedMessage(index, true)]?.senderId
     )
-      return "alone";
-    else return "bottom";
+      return 'alone';
+    else return 'bottom';
   };
 
   return (
@@ -97,6 +100,9 @@ const ChatAreaMainMsg = ({
               isUnfriend={isUnfriend}
             />
           ))}
+          {chatScrollTop && <S.ChatAreaMainMsgInnerTop>
+            <ClipLoader color='#769FCD' size={25}/>
+          </S.ChatAreaMainMsgInnerTop>}
         </S.ChatAreaMainMsgInner>
       </S.ChatAreaMainMsgOuter>
       {toggleTyping && (

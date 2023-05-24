@@ -15,7 +15,7 @@ export const ChatAreaMainInput = styled.div`
 `;
 
 export const ChatAreaMainInputFile = styled.label`
-  ${tw`flex flex-shrink-0 shadow text-quaternary bg-primary self-end rounded-full w-12 h-12 items-center justify-center text-4xl hover:cursor-pointer hover:opacity-80`}
+  ${tw`flex flex-shrink-0 shadow text-quaternary bg-primary self-end rounded-full w-12 h-12 items-center justify-center text-2xl hover:cursor-pointer hover:opacity-80`}
 `;
 
 export const ChatAreaMainInputMsgOuter = styled.div`
