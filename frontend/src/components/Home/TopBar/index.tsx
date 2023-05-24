@@ -138,9 +138,9 @@ const TopBar = () => {
           <S.SearchModalAvatar>
             <Image
               src={data.avatar}
-              alt='avatar'
-              layout='fill'
-              objectFit='cover'
+              alt="avatar"
+              layout="fill"
+              objectFit="cover"
             />
           </S.SearchModalAvatar>
           <S.SearchModalNameWrapper>
@@ -277,9 +277,9 @@ const TopBar = () => {
             {user.info?.avatar && user.info.avatar !== '' && (
               <Image
                 src={user.info.avatar}
-                alt='avatar'
-                layout='fill'
-                objectFit='cover'
+                alt="avatar"
+                layout="fill"
+                objectFit="cover"
               />
             )}
           </S.Avatar>
@@ -288,21 +288,21 @@ const TopBar = () => {
         <S.RightWrapper>
           <S.LogoContainer>
             <S.Logo>
-              <Image src={Logo} alt='logo' />
+              <Image src={Logo} alt="logo" />
             </S.Logo>
           </S.LogoContainer>
           <S.Search>
             <S.SearchIcon />
             <AutoComplete
-              popupClassName='certain-category-search-dropdown'
+              popupClassName="certain-category-search-dropdown"
               dropdownMatchSelectWidth={500}
               style={{ width: '100%' }}
               options={options}
-              notFoundContent='Loading!'
+              notFoundContent="Loading!"
               listHeight={500}
             >
               <S.SearchInput
-                placeholder='Search...'
+                placeholder="Search..."
                 onChange={(e) => setSearchInput(e.target.value)}
                 value={searchInput}
                 // onFocus={() => setSearchModal(true)}
@@ -327,9 +327,9 @@ const TopBar = () => {
                     // setActiveNotiModal={setActiveNotiModal}
                   />
                 }
-                title='Notification'
-                trigger='click'
-                placement='bottomRight'
+                title="Notification"
+                trigger="click"
+                placement="bottomRight"
               >
                 <S.OptionNotify />
                 {listNoti.length > 0 && (

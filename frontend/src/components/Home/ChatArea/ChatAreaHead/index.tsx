@@ -1,27 +1,26 @@
 import Image from 'next/image';
 import * as S from './ChatAreaHead.styled';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectRoomInfoState } from '../../../../features/redux/slices/roomInfoSlice';
 import { useEffect, useState } from 'react';
 import { selectRoomListState } from '../../../../features/redux/slices/roomListSlice';
-import { popupCallWindow } from '../../../Global/ProcessFunctions';
 import { selectUserState } from '../../../../features/redux/slices/userSlice';
-import {
-  selectUtilState,
-  utilActions,
-} from '../../../../features/redux/slices/utilSlice';
 import CallNotiModal from './CallNotiModal';
-import { useSocketContext } from '../../../../contexts/socket';
 
 interface IChatAreaHead {
   setToggleOption: () => void;
+  blockInput: boolean;
 }
 
-const ChatAreaHead = ({ setToggleOption }: IChatAreaHead) => {
+const ChatAreaHead = ({ setToggleOption, blockInput }: IChatAreaHead) => {
   const roomInfo = useSelector(selectRoomInfoState);
   const roomList = useSelector(selectRoomListState);
   const user = useSelector(selectUserState);
-  const utils = useSelector(selectUtilState);
+
+  const activeAvatar = [];
+  roomInfo.info.roomInfo.users.forEach((u) => {
+    if (!u.isLeave) activeAvatar.push(u.avatar);
+  });
 
   const [status, setStatus] = useState(1);
   const [makingACall, setMakingACall] = useState(false);
@@ -83,11 +82,11 @@ const ChatAreaHead = ({ setToggleOption }: IChatAreaHead) => {
       <S.ChatAreaHeadInfo>
         {roomInfo.info?.roomInfo.isGroup ? (
           <S.ChatAreaHeadAvatar isGroup={1}>
-            {roomInfo.info.roomInfo.users.map(
-              (user, index) =>
+            {activeAvatar.map(
+              (url, index) =>
                 index <= 3 && (
                   <S.ChatAvatarGroup key={index}>
-                    <Image src={user.avatar} alt="avatar" layout="fill" />
+                    <Image src={url} alt="avatar" layout="fill" />
                   </S.ChatAvatarGroup>
                 )
             )}
@@ -117,7 +116,7 @@ const ChatAreaHead = ({ setToggleOption }: IChatAreaHead) => {
         </S.ChatAreaHeadNameWrapper>
       </S.ChatAreaHeadInfo>
       <S.RightWrap>
-        <S.CallButton onClick={() => makeCall()} />
+        {!blockInput && <S.CallButton onClick={() => makeCall()} />}
         <S.ChatAreaHeadOption onClick={() => setToggleOption()} />
       </S.RightWrap>
       {makingACall && (

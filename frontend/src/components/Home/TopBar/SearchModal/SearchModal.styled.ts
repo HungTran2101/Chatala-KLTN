@@ -1,6 +1,6 @@
-import styled, { keyframes } from "styled-components";
-import tw from "twin.macro";
-import { merge, zoomIn, slideInDown } from "react-animations";
+import styled, { keyframes } from 'styled-components';
+import tw from 'twin.macro';
+import { merge, zoomIn, slideInDown } from 'react-animations';
 
 const SearchModalAnimate = keyframes`${merge(zoomIn, slideInDown)}`;
 
@@ -25,7 +25,7 @@ export const SearchModalList = styled.div`
 `;
 
 export const SearchModalItem = styled.div`
-  ${tw`relative flex p-2 rounded-[20px] my-1.5 items-center w-full bg-secondary`}
+  ${tw`relative flex p-2 rounded-[10px] my-1.5 items-center w-full bg-secondary`}
 `;
 
 export const SearchModalInfo = styled.div`
