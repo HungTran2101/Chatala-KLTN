@@ -23,7 +23,7 @@ export const NicknameTitle = styled.div`
 `;
 
 export const NicknameInput = styled.input`
-  ${tw`w-full bg-secondary rounded-[10px] px-2 py-1 outline-none`}
+  ${tw`w-full border-2 border-quaternary rounded-[5px] px-2 py-1 outline-none`}
 `;
 
 export const NicknameSave = styled.div`

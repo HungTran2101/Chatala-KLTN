@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Button = styled.div`
-  ${tw`hover:cursor-pointer bg-secondary rounded-[20px] shadow-md w-full mx-1`}
+  ${tw`hover:cursor-pointer bg-secondary rounded-[10px] shadow-md w-full mx-1`}
 `;
 
 export const Options = styled.div`

@@ -70,7 +70,7 @@ export const Avatar = styled.figure`
 `;
 
 export const Content = styled.div`
-  ${tw`bg-secondary flex rounded-[20px] mt-[50px] mb-[32px] mx-auto`}
+  ${tw`bg-secondary flex rounded-[10px] mt-[50px] mb-[32px] mx-auto`}
 `;
 
 export const Description = styled.div`

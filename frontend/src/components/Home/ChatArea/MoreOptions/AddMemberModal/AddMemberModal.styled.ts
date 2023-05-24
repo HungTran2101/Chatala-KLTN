@@ -27,7 +27,7 @@ export const AddMemberSearch = styled.div`
   ${tw`relative w-full flex items-center mb-4`}
 `;
 export const AddMemberSearchInput = styled.input`
-  ${tw`bg-secondary text-lg rounded-[50px] pr-2 pl-9 py-2 w-full`}
+  ${tw`border-2 border-quaternary rounded-[10px] pr-2 pl-9 py-2 w-full`}
   outline: none;
 `;
 

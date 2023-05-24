@@ -3,11 +3,11 @@ import tw from 'twin.macro';
 import { BsChevronCompactDown } from 'react-icons/bs';
 import { IoCloseSharp } from 'react-icons/io5';
 export const ChatArea = styled.div`
-  ${tw`relative bg-secondary shadow-md rounded-[20px] flex-grow flex flex-col overflow-hidden`}
+  ${tw`relative bg-secondary shadow-md rounded-[10px] flex-grow flex flex-col overflow-hidden`}
 `;
 
 export const ChatAreaMain = styled.div`
-  ${tw`relative flex flex-col flex-grow bg-tertiary px-6 pb-4 pt-0 rounded-[20px] shadow-inner items-center`}
+  ${tw`relative flex flex-col flex-grow bg-tertiary px-6 pb-4 pt-0 rounded-[10px] shadow-inner items-center`}
 `;
 
 export const ChatAreaMainScrollBottom = styled(BsChevronCompactDown)`

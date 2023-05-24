@@ -49,7 +49,7 @@ export const ChatPreviewItem = styled.div<{
   active: boolean;
   unReadMsg: number;
 }>`
-  ${tw`flex items-center my-2 relative hover:cursor-pointer hover:bg-tertiary rounded-[20px]`}
+  ${tw`flex items-center my-2 relative hover:cursor-pointer hover:bg-tertiary rounded-[10px]`}
   ${({ unReadMsg }) => unReadMsg >= 1 && tw`bg-secondary shadow-sm`}
   ${({ active }) => active && tw`bg-quaternary shadow-md`}
 `;

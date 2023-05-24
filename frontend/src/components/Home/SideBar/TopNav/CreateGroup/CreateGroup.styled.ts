@@ -29,9 +29,8 @@ export const CreateGroupSearch = styled.div<{ noAdded: boolean }>`
   ${({ noAdded }) => !noAdded && tw`mb-0`}
 `;
 export const CreateGroupSearchInput = styled.input<{ noAdded: boolean }>`
-  ${tw`bg-secondary text-lg rounded-[20px] pr-2 pl-9 py-2 w-full`}
+  ${tw`border-quaternary border-2 rounded-[10px] pr-2 pl-9 py-2 w-full`}
   outline: none;
-  ${({ noAdded }) => !noAdded && tw`rounded-b-none`}
 `;
 
 export const CreateGroupSearchIcon = styled(BiSearchAlt)`
@@ -39,17 +38,17 @@ export const CreateGroupSearchIcon = styled(BiSearchAlt)`
 `;
 
 export const CreateGroupAddedUsers = styled.div`
-  ${tw`flex overflow-hidden mb-2 items-center`}
+  ${tw`flex overflow-hidden my-2 items-center`}
 `;
 
 export const CreateGroupAddedUsersInner = styled.div`
-  ${tw`flex w-0 flex-grow overflow-auto bg-secondary rounded-b-[20px]`}
+  ${tw`flex w-0 flex-grow overflow-auto rounded-b-[20px]`}
   &::-webkit-scrollbar-track {
     ${tw`bg-transparent rounded-[10px]`}
   }
 
   &::-webkit-scrollbar {
-    ${tw`h-[5px]`}
+    ${tw`h-[3px]`}
   }
 
   &::-webkit-scrollbar-thumb {
@@ -62,11 +61,11 @@ export const CreateGroupSubmit = styled.div`
 `;
 
 export const CreateGroupAddedUser = styled.span`
-  ${tw`relative ml-1 mr-2 my-1 bg-gray-50 p-1 rounded-[20px] flex items-center`}
+  ${tw`relative ml-1 mr-2 my-1 bg-secondary p-1 rounded-[10px] flex items-center`}
 `;
 
 export const CreateGroupAddedUserName = styled.span`
-  ${tw`ml-2 w-[100px] overflow-ellipsis overflow-hidden whitespace-nowrap mr-1`}
+  ${tw`ml-2 w-[100px] font-semibold overflow-ellipsis overflow-hidden whitespace-nowrap mr-1`}
 `;
 
 export const CreateGroupAddedUserAvatar = styled.figure`
@@ -75,7 +74,7 @@ export const CreateGroupAddedUserAvatar = styled.figure`
 `;
 
 export const CreateGroupAddedUserRemove = styled(MdCancel)`
-  ${tw`absolute transition-colors bg-gray-200 rounded-full text-[20px] hover:opacity-80 hover:cursor-pointer right-[-5px] top-[-2px]`}
+  ${tw`absolute transition-colors bg-white rounded-full text-red-400 text-[20px] hover:text-red-500 hover:cursor-pointer right-[-5px] top-[-2px]`}
 `;
 
 export const GreateGroupList = styled.div`

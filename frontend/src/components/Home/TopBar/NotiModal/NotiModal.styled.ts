@@ -32,7 +32,7 @@ export const NotiList = styled.div`
 `;
 
 export const NotiText = styled.div`
-  ${tw`text-base italic p-3 text-center rounded-[10px] bg-[#bedee7] text-black`}
+  ${tw`text-base italic p-3 text-center rounded-[10px] bg-quaternary text-black`}
 `;
 
 export const NotiItem = styled.div`

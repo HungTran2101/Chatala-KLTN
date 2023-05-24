@@ -23,7 +23,7 @@ export const ChatAreaMainInputMsgOuter = styled.div`
 `;
 
 export const ChatAreaMainInputMsg = styled.div<{ isReplying: string }>`
-  ${tw`relative flex flex-grow shadow items-center p-1.5 bg-[#DFE2E2] rounded-[20px]`}
+  ${tw`relative flex flex-grow shadow items-center p-1.5 bg-gray-100 rounded-[10px]`}
   ${({ isReplying }) =>
     isReplying === "true" && tw`border-t-[1px] border-gray-400`}
 `;
