@@ -53,8 +53,8 @@ const loginUser = asyncHandler(async (req, res, next) => {
       res.cookie('token', generateJWT(user._id), {
         signed: true,
         httpOnly: true,
-        secure: true,
-        // sameSite: true,
+        secure: secure,
+        sameSite: cookieSameSite,
       });
       res.status(200).json({
         user,
