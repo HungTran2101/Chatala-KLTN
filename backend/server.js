@@ -15,7 +15,11 @@ const errorMiddleware = require('./middlewares/errors');
 const PORT = process.env.PORT || 5000;
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://chatala-frontend.vercel.app', 'https://chatala-kltn.vercel.app'],
+  origin: [
+    'http://localhost:3000',
+    'https://chatala-frontend.vercel.app',
+    'https://chatala-kltn.vercel.app',
+  ],
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
@@ -49,7 +53,11 @@ const server = app.listen(
 const io = require('socket.io')(server, {
   pingTimeout: 60000,
   cors: {
-    origin: ['http://localhost:3000', 'https://chatala-frontend.vercel.app', 'https://chatala-kltn.vercel.app'],
+    origin: [
+      'http://localhost:3000',
+      'https://chatala-frontend.vercel.app',
+      'https://chatala-kltn.vercel.app',
+    ],
   },
 });
 
@@ -113,12 +121,12 @@ io.on('connection', (socket) => {
     receiveUser && socket.to(receiveUser.socketId).emit('new room');
   });
 
-  socket.on('unfriend', ({friendRelateId, receiveId}) => {
+  socket.on('unfriend', ({ friendRelateId, receiveId }) => {
     const receiveUser = users.find(
       (user) => user.uid.toString() === receiveId.toString()
     );
     receiveUser && socket.to(receiveUser.socketId).emit('unfriended');
-  })
+  });
 
   socket.on('unsend msg', (receiveId, msgId) => {
     const receiveUser = users.find(
@@ -172,10 +180,7 @@ io.on('connection', (socket) => {
 
   socket.on('declineCall', (callInfo) => {
     const user = users.find((u) => u.uid === callInfo.callerId);
-    user &&
-      socket
-        .to(user.socketId)
-        .emit('callDeclined');
+    user && socket.to(user.socketId).emit('callDeclined');
   });
 
   socket.on('groupname', (roomId, roomUserIds, groupName) => {

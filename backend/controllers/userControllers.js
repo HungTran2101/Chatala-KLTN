@@ -54,7 +54,7 @@ const loginUser = asyncHandler(async (req, res, next) => {
         signed: true,
         httpOnly: true,
         secure: true,
-        sameSite: true,
+        // sameSite: true,
       });
       res.status(200).json({
         user,
