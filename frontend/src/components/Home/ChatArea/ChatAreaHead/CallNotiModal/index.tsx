@@ -116,7 +116,7 @@ const CallNotiModal = ({ setCallNotiShow, callInfo }: ICallNoti) => {
     <S.CallNotiModal>
       <S.CallNotiOverlay />
       <S.CallNotiBody makecall={callInfo.isCaller ? 1 : 0}>
-        {/* <audio src="/ringtone.mp3" loop autoPlay /> */}
+        <audio src="/ringtone.mp3" loop autoPlay />
         <S.CallNotiInfo>
           <S.CallNotiLabel>
             {callInfo.isCaller

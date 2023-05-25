@@ -176,6 +176,7 @@ function VideoCall() {
               setWebcamOn(false);
               setMicOn(false);
               setMeetingStarted(false);
+              window.close()
             }}
             setIsMeetingLeft={setIsMeetingLeft}
             selectedMic={selectedMic}

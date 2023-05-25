@@ -750,7 +750,7 @@ export function BottomBar({
       <LeaveBTN />
       <MicBTN />
       <WebCamBTN />
-      <RecordingBTN />
+      {/* <RecordingBTN /> */}
       <OutlinedButton
         Icon={DotsHorizontalIcon}
         onClick={handleClickFAB}
@@ -836,7 +836,7 @@ export function BottomBar({
       <div className='w-[150px]' />
 
       <div className='flex flex-1 items-center justify-center' ref={tollTipEl}>
-        <RecordingBTN />
+        {/* <RecordingBTN /> */}
         <RaiseHandBTN isMobile={isMobile} isTab={isTab} />
         <MicBTN />
         <WebCamBTN />
