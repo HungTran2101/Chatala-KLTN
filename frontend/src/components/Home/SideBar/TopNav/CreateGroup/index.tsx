@@ -64,6 +64,7 @@ const CreateGroup = ({ open, onClose }: ICreateGroup) => {
         if (createdRoom) {
           const rooms = await RoomApi.getRoomList();
           dispatch(roomListActions.setRoomList(rooms.result));
+          message.success('Create group successfully');
           onClose();
         }
       } catch (err: any) {
