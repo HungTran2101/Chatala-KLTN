@@ -58,6 +58,7 @@ const io = require('socket.io')(server, {
       'https://chatala-frontend.vercel.app',
       'https://chatala-kltn.vercel.app',
     ],
+    credentials: true, //access-control-allow-credentials:true
   },
 });
 
