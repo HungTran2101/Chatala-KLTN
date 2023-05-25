@@ -5,7 +5,7 @@ import { messageActions } from '../../../../../features/redux/slices/messageSlic
 import { selectRoomInfoState } from '../../../../../features/redux/slices/roomInfoSlice';
 import { selectUserState } from '../../../../../features/redux/slices/userSlice';
 import { useSocketContext } from '../../../../../contexts/socket';
-import { utilActions } from '../../../../../features/redux/slices/utilSlice';
+import { selectUtilState, utilActions } from '../../../../../features/redux/slices/utilSlice';
 import { useState } from 'react';
 import { Popconfirm } from 'antd';
 
@@ -24,6 +24,8 @@ const ChatMsgOption = ({
 
   const roomInfo = useSelector(selectRoomInfoState);
   const user = useSelector(selectUserState);
+  const UIText = useSelector(selectUtilState).UItext.chatArea.chatAreaMain
+
   const friend = roomInfo.info.roomInfo.users.find(
     (it) => it.uid !== user.info._id
   );
@@ -57,30 +59,32 @@ const ChatMsgOption = ({
 
   return (
     <S.ChatMsgOption>
-      <S.NormalItem onClick={() => replyMsg()}>Reply</S.NormalItem>
+      <S.NormalItem onClick={() => replyMsg()}>{UIText.reply}</S.NormalItem>
       {!isleft && (
         <>
           <Popconfirm
-            title={`You're about to unsend this message`}
-            description="This can't be undo"
+            title={UIText.unsendConfirm}
+            description={UIText.descriptionConfirm}
             open={unsendConfirm}
             onConfirm={() => unsendMsg()}
             onCancel={() => setUnsendConfirm(false)}
+            cancelText={UIText.cancelConfirm}
             okType={'danger'}
           >
             <S.DeteleItem onClick={() => setUnsendConfirm(true)}>
-              Unsend
+              {UIText.unsend}
             </S.DeteleItem>
           </Popconfirm>
           <Popconfirm
-            title={`You're about to delete this message`}
-            description="This can't be undo"
+            title={UIText.deleteConfirm}
+            description={UIText.descriptionConfirm}
             open={deleteConfirm}
             onConfirm={() => deleteMsg()}
             onCancel={() => setDeleteConfirm(false)}
+            cancelText={UIText.cancelConfirm}
             okType={'danger'}
           >
-            <S.DeteleItem onClick={() => deleteMsg()}>Delete</S.DeteleItem>
+            <S.DeteleItem onClick={() => setDeleteConfirm(true)}>{UIText.delete}</S.DeteleItem>
           </Popconfirm>
         </>
       )}

@@ -3,6 +3,9 @@ import ChangePassword from './ChangePassword';
 import * as S from './SettingsModal.styled';
 import { Modal, Tabs, TabsProps } from 'antd';
 import { TabsPosition } from 'antd/es/tabs';
+import General from './General';
+import { useSelector } from 'react-redux';
+import { selectUtilState } from '../../../../features/redux/slices/utilSlice';
 
 export const settingsModalData = [
   { name: 'changePassword', title: 'Change Password' },
@@ -15,23 +18,26 @@ interface SettingsModalProps {
 }
 
 const onChange = (key: string) => {
-  console.log(key);
+  // console.log(key);
 };
 
-const items: TabsProps['items'] = [
-  {
-    key: '1',
-    label: `Security`,
-    children: <ChangePassword />,
-  },
-  {
-    key: '2',
-    label: `General`,
-    children: `Content of Tab Pane 2`,
-  },
-];
 const SettingsModal = ({ onClose, open }: SettingsModalProps) => {
   const [tabPosition, setTabPosition] = useState<TabsPosition>('left');
+
+  const UIText = useSelector(selectUtilState).UItext.topBar.setting
+
+  const items: TabsProps['items'] = [
+    {
+      key: '1',
+      label: UIText.general.title,
+      children: <General />,
+    },
+    {
+      key: '2',
+      label: UIText.security.title,
+      children: <ChangePassword />,
+    },
+  ];
 
   useEffect(() => {
     if (screen.width > 768) {

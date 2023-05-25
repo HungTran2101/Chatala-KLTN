@@ -46,6 +46,9 @@ export const UsersApi = {
       newPassword: newPassword,
     });
   },
+  changeLocale: async function (locale: string = 'en'): Promise<any> {
+    return await http.put(API_URL.changeLocale, { locale });
+  },
   //   list: async function (params?: any): Promise<any> {
   //     return await http.get(API_URL.login, { params: params })
   //   },

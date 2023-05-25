@@ -1,3 +1,5 @@
+import type { StaticImageData } from 'next/image';
+
 export type userInfo = {
   _id: string;
   avatar: string;
@@ -8,6 +10,7 @@ export type userInfo = {
   dob: string;
   createdAt: string;
   updatedAt: string;
+  locale: string;
   __v: number;
 };
 
@@ -23,6 +26,7 @@ export type friendInfo = {
   updatedAt: string;
   __v: number;
   type: string;
+  locale: string;
   friendRelateId: string;
 };
 
@@ -143,6 +147,7 @@ export type SearchResult = {
   updatedAt: string;
   __v: number;
   status: string;
+  locale: string;
   notificationId: string;
 };
 
@@ -163,3 +168,137 @@ export type Mention = {
 };
 
 export type MentionList = Mention[];
+
+export type UITextType = {
+  locale: string;
+  webTitle: string;
+  welcome: {
+    welcomeLabel: string;
+    description: string;
+  };
+  topBar: {
+    info: {
+      phoneLable: string;
+      fullnameLabel: string;
+      genderLabel: string;
+      dobLabel: string;
+      update: {
+        genderLabel: string;
+        maleLabel: string;
+        femaleLabel: string;
+        updateConfirm: string;
+        updateCancel: string;
+        cropZoom: string;
+        cropRotate: string;
+        cropConfirm: string;
+        cropCancel: string;
+      };
+    };
+    search: {
+      placeHolder: string;
+      modal: {
+        loading: string;
+        message: string;
+        accept: string;
+        decline: string;
+        pending: string;
+        addfriend: string;
+      };
+    };
+    noti: {
+      title: string;
+      empty: string;
+      accept: string;
+      decline: string;
+    };
+    setting: {
+      general: {
+        title: string;
+        language: {
+          label: string;
+          options: StaticImageData[];
+        };
+      };
+      security: {
+        title: string;
+        password: {
+          title: string;
+          oldpass: string;
+          newpass: string;
+          confirmpass: string;
+          update: string;
+        };
+      };
+    };
+  };
+  sideBar: {
+    topNav: {
+      createGroup: {
+        title: string;
+        searchPlaceholder: string;
+        addbutton: string;
+        confirm: string;
+        cancel: string;
+      };
+      friendList: {
+        title: string;
+        searchPlaceholder: string;
+      };
+    };
+  };
+  chatArea: {
+    online: string;
+    offline: string;
+    chatAreaMain: {
+      inputPlaceholder: string;
+      inputReplyTo: string;
+      yourself: string;
+      replyToYourself: string;
+      replyToOther: string;
+      replyToMe: string;
+      replyToThemselves: string;
+      replyTo: string;
+      reply: string;
+      unsend: string;
+      unsended: string;
+      delete: string;
+      unsendConfirm: string;
+      deleteConfirm: string;
+      descriptionConfirm: string;
+      cancelConfirm: string;
+    };
+    moreOptions: {
+      profile: string;
+      nickname: {
+        label: string;
+        title: string;
+        cancel: string;
+      };
+      unfriend: {
+        label: string;
+        titleConfirm: string;
+        descriptionConfirm: string;
+        cancelConfirm: string;
+      };
+      groupMembers: {
+        label: string;
+        searchPlaceholder: string;
+        nickname: string;
+        kick: string;
+        titleConfirm: string;
+        descriptionConfirm: string;
+        cancelConfirm: string;
+      };
+      addMembers: {
+        label: string;
+        searchPlaceholder: string;
+        add: string;
+        titleConfirm: string;
+        descriptionConfirm: string;
+        cancelConfirm: string;
+      };
+      photos: string;
+      files: string;
+    };
+  };
+};

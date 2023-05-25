@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { selectRoomListState } from '../../../../features/redux/slices/roomListSlice';
 import { selectUserState } from '../../../../features/redux/slices/userSlice';
 import CallNotiModal from './CallNotiModal';
+import { selectUtilState } from '../../../../features/redux/slices/utilSlice';
 
 interface IChatAreaHead {
   setToggleOption: () => void;
@@ -16,6 +17,7 @@ const ChatAreaHead = ({ setToggleOption, isUnfriend }: IChatAreaHead) => {
   const roomInfo = useSelector(selectRoomInfoState);
   const roomList = useSelector(selectRoomListState);
   const user = useSelector(selectUserState);
+  const UIText = useSelector(selectUtilState).UItext.chatArea;
 
   const activeAvatar = [];
   roomInfo.info.roomInfo.users.forEach((u) => {
@@ -109,7 +111,7 @@ const ChatAreaHead = ({ setToggleOption, isUnfriend }: IChatAreaHead) => {
           </S.ChatAreaHeadName>
           {!roomInfo.info?.roomInfo.isGroup && (
             <S.ChatAreaHeadStatus>
-              {status ? 'Online' : 'Offline'}
+              {status ? UIText.online : UIText.offline}
               <S.ChatAreaHeadStatusIcon status={status} />
             </S.ChatAreaHeadStatus>
           )}

@@ -16,6 +16,7 @@ import { selectMessageState } from '../../../../features/redux/slices/messageSli
 import { MdOutlineReply } from 'react-icons/md';
 import { Popover } from 'antd';
 import { FiMoreHorizontal } from 'react-icons/fi';
+import { selectUtilState } from '../../../../features/redux/slices/utilSlice';
 
 interface IChatMsg {
   data: messageType;
@@ -43,6 +44,7 @@ const ChatMsg = ({
   const roomfiles = useSelector(selectFileState);
   const roomInfo = useSelector(selectRoomInfoState);
   const user = useSelector(selectUserState);
+  const UIText = useSelector(selectUtilState).UItext.chatArea.chatAreaMain;
 
   //Reply
   const replyMsg = getReplyInfo(
@@ -66,16 +68,16 @@ const ChatMsg = ({
       );
       if (data.senderId === user.info._id) {
         //message on the right
-        if (replyTarget.uid === data.senderId)
-          return `You replying to yourself`;
-        else return `You replying to ${replyTarget.nickname}`;
+        if (replyTarget.uid === data.senderId) return UIText.replyToYourself;
+        else return `${UIText.replyToOther} ${replyTarget.nickname}`;
       } else {
         //message on the left
         if (replyTarget.uid === user.info._id)
-          return `${replyUser.nickname} replying to you`;
+          return `${replyUser.nickname} ${UIText.replyToMe}`;
         else if (replyTarget.uid === data.senderId)
-          return `${replyUser.nickname} replying to themselves`;
-        else return `${replyUser.nickname} replying to ${replyTarget.nickname}`;
+          return `${replyUser.nickname} ${UIText.replyToThemselves}`;
+        else
+          return `${replyUser.nickname} ${UIText.replyTo} ${replyTarget.nickname}`;
       }
     } else return '';
   };
@@ -248,7 +250,7 @@ const ChatMsg = ({
                   </S.ChatMsgSenderName>
                 </>
               ) : (
-                <S.ChatMsgUnSend>Message has been unsend</S.ChatMsgUnSend>
+                <S.ChatMsgUnSend>{UIText.unsended}</S.ChatMsgUnSend>
               )}
             </S.ChatMsgWrapper>
             {!data.unSend && !isUnfriend && (

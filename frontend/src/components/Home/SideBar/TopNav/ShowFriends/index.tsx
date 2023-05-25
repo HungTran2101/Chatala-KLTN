@@ -6,6 +6,7 @@ import { selectFriendListState } from '../../../../../features/redux/slices/frie
 import UserInfo from '../../../TopBar/UserInfo';
 import { userInfo } from '../../../../../utils/types';
 import { Modal } from 'antd';
+import { selectUtilState } from '../../../../../features/redux/slices/utilSlice';
 
 interface IShowFriends {
   onClose: () => void;
@@ -14,6 +15,7 @@ interface IShowFriends {
 
 const ShowFriends = ({ onClose, open }: IShowFriends) => {
   const friends = useSelector(selectFriendListState);
+  const UIText = useSelector(selectUtilState).UItext.sideBar.topNav.friendList
 
   // const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
   const [friendProfile, setFriendProfile] = useState<userInfo>();
@@ -33,7 +35,7 @@ const ShowFriends = ({ onClose, open }: IShowFriends) => {
 
   return (
     <Modal
-      title='Your Friends'
+      title={UIText.title}
       open={open}
       onOk={onClose}
       onCancel={onClose}
@@ -42,7 +44,7 @@ const ShowFriends = ({ onClose, open }: IShowFriends) => {
     >
       <S.ShowFriendsSearch>
         <S.ShowFriendsSearchIcon />
-        <S.ShowFriendsSearchInput placeholder='Search with name or phone number...' />
+        <S.ShowFriendsSearchInput placeholder={UIText.searchPlaceholder} />
       </S.ShowFriendsSearch>
       <S.FriendList>
         {friends.list.map((data, index) => (

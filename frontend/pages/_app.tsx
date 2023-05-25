@@ -9,6 +9,8 @@ import { ClipLoader } from 'react-spinners';
 import Logo from '../src/assets/imgs/LogoFullLong.png';
 import Image from 'next/image';
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/router';
+import { UIText } from '../src/utils/dataConfig';
 
 const MyApp: FC<AppProps> = ({ Component, ...rest }) => {
   const { store, props } = wrapper.useWrappedStore(rest);

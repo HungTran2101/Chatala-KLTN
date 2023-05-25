@@ -6,6 +6,8 @@ import { BiCrop } from 'react-icons/bi';
 import { MdCancelPresentation } from 'react-icons/md';
 import getCroppedImg from '../../../../Global/ProcessFunctions';
 import { Modal } from 'antd';
+import { useSelector } from 'react-redux';
+import { selectUtilState } from '../../../../../features/redux/slices/utilSlice';
 
 interface ICrop {
   image: string | ArrayBuffer | null;
@@ -26,6 +28,8 @@ const CropImage = ({
   setPreviewAvt,
   setFieldValue,
 }: ICrop) => {
+  const UIText = useSelector(selectUtilState).UItext.topBar.info;
+
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [rotation, setRotation] = useState(0);
@@ -64,7 +68,7 @@ const CropImage = ({
           maxZoom={10}
           rotation={rotation}
           aspect={1}
-          cropShape='round'
+          cropShape="round"
           onZoomChange={setZoom}
           onRotationChange={setRotation}
           onCropChange={setCrop}
@@ -73,9 +77,9 @@ const CropImage = ({
       </S.Content>
       <S.Action>
         <S.ZoomAndRotate>
-          <p>Zoom: {zoom * 10}%</p>
+          <p>{`${UIText.update.cropZoom}: ${zoom * 10}%`}</p>
           <S.Slider
-            type='range'
+            type="range"
             min={1}
             max={10}
             step={0.5}
@@ -84,9 +88,9 @@ const CropImage = ({
           />
         </S.ZoomAndRotate>
         <S.ZoomAndRotate>
-          <p>Rotation: {rotation}°</p>
+          <p>{`${UIText.update.cropRotate}: ${rotation}°`}</p>
           <S.Slider
-            type='range'
+            type="range"
             min={1}
             max={360}
             step={1}
@@ -97,11 +101,11 @@ const CropImage = ({
         <S.ButtonCropZone>
           <S.Button onClick={onCrop}>
             <BiCrop />
-            <p>CROP</p>
+            <p>{UIText.update.cropConfirm}</p>
           </S.Button>
           <S.Button onClick={() => closeModal()}>
             <MdCancelPresentation />
-            <p>Cancel</p>
+            <p>{UIText.update.cropCancel}</p>
           </S.Button>
         </S.ButtonCropZone>
       </S.Action>

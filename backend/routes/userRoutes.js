@@ -12,6 +12,7 @@ const {
   findUserById,
   changePassword,
   resetPassword,
+  changeLocale,
 } = require('../controllers/userControllers');
 
 const router = express.Router();
@@ -27,5 +28,6 @@ router.route('/update').post(authMiddleware, editUserInfo);
 router.route('/update/avatar').post(authMiddleware, editAvatar);
 router.route('/update/password').post(authMiddleware, changePassword);
 router.route('/reset-password').post(resetPassword);
+router.route('/change-locale').put(authMiddleware, changeLocale);
 
 module.exports = router;

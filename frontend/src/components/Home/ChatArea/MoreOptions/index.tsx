@@ -16,6 +16,7 @@ import GroupNameModal from './GroupNameModal';
 import AddMemberModal from './AddMemberModal';
 import { Drawer, Modal, Popconfirm, message } from 'antd';
 import { useSocketContext } from '../../../../contexts/socket';
+import { selectUtilState } from '../../../../features/redux/slices/utilSlice';
 
 interface IMoreOptions {
   setToggleOption: () => void;
@@ -44,6 +45,7 @@ const MoreOptions = ({
 
   const user = useSelector(selectUserState);
   const roomfiles = useSelector(selectFileState);
+  const UIText = useSelector(selectUtilState).UItext.chatArea.moreOptions;
 
   const photos = roomfiles.list.filter((file) => file.type === 'image');
   const files = roomfiles.list.filter((file) => file.type === 'file');
@@ -141,10 +143,10 @@ const MoreOptions = ({
           {roomInfo.roomInfo.isGroup && (
             <>
               <S.NormalItem onClick={() => setModalGroupMembers(true)}>
-                Group Members
+                {UIText.groupMembers.label}
               </S.NormalItem>
               <S.NormalItem onClick={() => setModalGroupAdd(true)}>
-                Add Members
+                {UIText.addMembers.label}
               </S.NormalItem>
               {/* <S.DeleteItem onClick={() => setToggleKickMember(true)}>
                 Kick Members
@@ -154,26 +156,27 @@ const MoreOptions = ({
           {!roomInfo.roomInfo.isGroup && (
             <>
               <S.NormalItem onClick={() => seeFriendProfile()}>
-                Friend&apos;s profile
+                {UIText.profile}
               </S.NormalItem>
               {!isUnfriend && (
                 <S.NormalItem onClick={() => setModalNickName(true)}>
-                  Change Nickname
+                  {UIText.nickname.label}
                 </S.NormalItem>
               )}
               {!isUnfriend && (
                 <Popconfirm
-                  title={`You're about to unfriend ${userNeedChange.nickname}`}
-                  description="Please confirm"
+                  title={`${UIText.unfriend.titleConfirm} ${userNeedChange.nickname}`}
+                  description={UIText.unfriend.descriptionConfirm}
                   open={open}
                   onConfirm={() =>
                     handleUnfriend(roomInfo.roomInfo.friendRelateId)
                   }
                   // okButtonProps={{ loading: confirmLoading }}
                   onCancel={handleCancel}
+                  cancelText={UIText.unfriend.cancelConfirm}
                   okType={'danger'}
                 >
-                  <S.DeleteItem onClick={showPopconfirm}>Unfriend</S.DeleteItem>
+                  <S.DeleteItem onClick={showPopconfirm}>{UIText.unfriend.label}</S.DeleteItem>
                 </Popconfirm>
               )}
             </>
@@ -181,7 +184,7 @@ const MoreOptions = ({
         </S.WhiteBox>
         <S.WhiteBox>
           <S.Title onClick={() => setPhotoExtend(!photoExtend)}>
-            Photos
+            {UIText.photos}
             <IoMdArrowDropdown
               style={{
                 fontSize: '24px',
@@ -211,7 +214,7 @@ const MoreOptions = ({
         </S.WhiteBox>
         <S.WhiteBox>
           <S.Title onClick={() => setFileExtend(!fileExtend)}>
-            Files
+            {UIText.files}
             <IoMdArrowDropdown
               style={{
                 fontSize: '24px',

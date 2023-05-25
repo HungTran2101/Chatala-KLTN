@@ -10,6 +10,7 @@ import UserInfo from '../../../TopBar/UserInfo';
 import * as S from './CreateGroup.styled';
 import { Modal, Button as AntButton, message } from 'antd';
 import Button from '../../../../Global/Button';
+import { selectUtilState } from '../../../../../features/redux/slices/utilSlice';
 
 interface ICreateGroup {
   onClose: () => void;
@@ -29,6 +30,7 @@ const CreateGroup = ({ open, onClose }: ICreateGroup) => {
   const [friendProfile, setFriendProfile] = useState<userInfo>();
 
   const friends = useSelector(selectFriendListState);
+  const UIText = useSelector(selectUtilState).UItext.sideBar.topNav.createGroup;
 
   const showFriendProfile = (data: userInfo) => {
     showModalUser();
@@ -87,21 +89,22 @@ const CreateGroup = ({ open, onClose }: ICreateGroup) => {
 
   return (
     <Modal
-      title='Create group'
+      title={UIText.title}
       open={open}
       onOk={() => {
         createGroup();
         onClose();
       }}
       onCancel={onClose}
-      okType='default'
-      okText='Create group'
+      okType="default"
+      okText={UIText.confirm}
+      cancelText={UIText.cancel}
       okButtonProps={{ disabled: addedUsers.length > 0 ? false : true }}
     >
       <S.CreateGroupSearch noAdded={addedUsers.length > 0 ? false : true}>
         <S.CreateGroupSearchIcon />
         <S.CreateGroupSearchInput
-          placeholder='Search with name or phone number...'
+          placeholder={UIText.searchPlaceholder}
           noAdded={addedUsers.length > 0 ? false : true}
         />
       </S.CreateGroupSearch>
@@ -111,7 +114,7 @@ const CreateGroup = ({ open, onClose }: ICreateGroup) => {
             {addedUsers.map((data, index) => (
               <S.CreateGroupAddedUser key={index}>
                 <S.CreateGroupAddedUserAvatar>
-                  <Image src={data.avatar} layout='fill' />
+                  <Image src={data.avatar} layout="fill" />
                 </S.CreateGroupAddedUserAvatar>
                 <S.CreateGroupAddedUserName>
                   {data.name}
@@ -131,9 +134,9 @@ const CreateGroup = ({ open, onClose }: ICreateGroup) => {
               <S.CreateGroupAvatar>
                 <Image
                   src={data.avatar}
-                  alt='avatar'
-                  layout='fill'
-                  objectFit='cover'
+                  alt="avatar"
+                  layout="fill"
+                  objectFit="cover"
                 />
               </S.CreateGroupAvatar>
               <S.CreateGroupName>{data.name}</S.CreateGroupName>
@@ -142,13 +145,13 @@ const CreateGroup = ({ open, onClose }: ICreateGroup) => {
               <S.CreateGroupAdded>Added</S.CreateGroupAdded>
             ) : ( */}
             <Button
-              variant='blue'
+              variant="blue"
               disabled={
                 addedUsers.some((user) => user._id === data._id) ? true : false
               }
               onClick={() => addUserToGroup(data)}
             >
-              + Add to group
+              + {UIText.addbutton}
             </Button>
             {/* )} */}
           </S.CreateGroupItem>

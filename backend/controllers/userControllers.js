@@ -291,6 +291,24 @@ const resetPassword = asyncHandler(async (req, res, next) => {
   }
 });
 
+const changeLocale = asyncHandler(async (req, res, next) => {
+  const { locale } = req.body;
+
+  if (!locale) return next(new ErrorHandler('Locale is required', 400));
+
+  const result = await Users.findByIdAndUpdate(
+    req.user._id,
+    {
+      $set: { locale: locale },
+    },
+    { new: true }
+  );
+
+  return res.status(200).json({
+    user: result
+  })
+});
+
 module.exports = {
   checkUser,
   registerUser,
@@ -303,4 +321,5 @@ module.exports = {
   editAvatar,
   findUserById,
   changePassword,
+  changeLocale,
 };

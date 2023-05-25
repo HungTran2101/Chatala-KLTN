@@ -1,17 +1,20 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AppState } from '../store';
-import { fileType } from '../../../utils/types';
+import { UITextType } from '../../../utils/types';
+import { UIText } from '../../../utils/dataConfig';
 
 // Type for our state
 export interface UtilState {
   replyId: string;
   onCall: boolean;
+  UItext: UITextType;
 }
 
 // Initial state
 const initialState: UtilState = {
   replyId: null,
   onCall: false,
+  UItext: UIText[0],
 };
 
 // Actual Slice
@@ -27,6 +30,11 @@ export const utilSlice = createSlice({
     },
     toggleCalling(state, action) {
       state.onCall = action.payload;
+    },
+    setUIText(state, action) {
+      const { locale } = action.payload;
+      const uiText = UIText.find((it) => it.locale === locale);
+      state.UItext = uiText;
     },
 
     // // Special reducer for hydrating the state. Special case for next-redux-wrapper

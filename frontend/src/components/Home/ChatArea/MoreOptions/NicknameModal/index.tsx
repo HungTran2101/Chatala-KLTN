@@ -1,11 +1,12 @@
 import { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { roomInfoActions } from '../../../../../features/redux/slices/roomInfoSlice';
 import { roomListActions } from '../../../../../features/redux/slices/roomListSlice';
 import { RoomApi } from '../../../../../services/api/room';
 import { roomInfo, roomUser } from '../../../../../utils/types';
 import * as S from './NicknameModal.styled';
 import { Modal, message } from 'antd';
+import { selectUtilState } from '../../../../../features/redux/slices/utilSlice';
 
 interface INickname {
   closeModal: () => void;
@@ -23,6 +24,8 @@ const NicknameModal = ({
   const input = useRef<HTMLInputElement>();
 
   const dispatch = useDispatch();
+
+  const UIText = useSelector(selectUtilState).UItext.chatArea.moreOptions.nickname
 
   const saveNickname = async () => {
     if (input.current.value === '') return;
@@ -55,11 +58,12 @@ const NicknameModal = ({
 
   return (
     <Modal
-      title={`Change nickname for ${userNeedChange?.nickname}`}
+      title={`${UIText.title} ${userNeedChange?.nickname}`}
       open={open}
       onOk={saveNickname}
       onCancel={closeModal}
       okType="link"
+      cancelText={UIText.cancel}
       destroyOnClose
       centered
     >

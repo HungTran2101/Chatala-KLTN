@@ -23,11 +23,12 @@ import {
 import { API_URL } from '../../../../services/api/urls';
 import CropImage from './CropImage';
 import { UsersApi } from '../../../../services/api/users';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userActions } from '../../../../features/redux/slices/userSlice';
 import { json } from 'stream/consumers';
 import { Input, Modal, message } from 'antd';
 import moment from 'moment';
+import { selectUtilState } from '../../../../features/redux/slices/utilSlice';
 
 interface ISetingInfo {
   id: string;
@@ -48,6 +49,8 @@ const SettingInfo = ({
   closeModal,
   open,
 }: ISetingInfo) => {
+  const UIText = useSelector(selectUtilState).UItext.topBar.info;
+
   const dispatch = useDispatch();
   const [previewAvt, setPreviewAvt] = useState<string>(avatar);
   const [cropImage, setCropImage] = useState<string | ArrayBuffer | null>(null);
@@ -171,17 +174,17 @@ const SettingInfo = ({
             />
             <S.Header>
               <S.Banner>
-                <Image src={UserAvatar} layout='fill' objectFit='cover' />
+                <Image src={UserAvatar} layout="fill" objectFit="cover" />
               </S.Banner>
-              <S.AvatarLabel htmlFor='avatar'>
-                <Image src={previewAvt} layout='fill' objectFit='cover' />
+              <S.AvatarLabel htmlFor="avatar">
+                <Image src={previewAvt} layout="fill" objectFit="cover" />
               </S.AvatarLabel>
-              <S.UpdateAvatar htmlFor='avatar'>
+              <S.UpdateAvatar htmlFor="avatar">
                 <AiFillCamera />
                 <input
-                  type='file'
-                  id='avatar'
-                  name='avatar'
+                  type="file"
+                  id="avatar"
+                  name="avatar"
                   onChange={(e) => handleCrop(e)}
                 />
               </S.UpdateAvatar>
@@ -190,42 +193,48 @@ const SettingInfo = ({
               <S.NewForm>
                 <S.SetWidth>
                   <Input
-                    placeholder='Name'
-                    size='large'
-                    name='name'
+                    placeholder="Name"
+                    size="large"
+                    name="name"
                     onChange={handleChange}
                     value={values.name}
                     status={errors.name && touched.name ? 'error' : ''}
                   />
-                  <ErrorMessage name='name' component={S.ErrorMsg} />
+                  <ErrorMessage name="name" component={S.ErrorMsg} />
                   <S.GenderWrap>
-                    <S.GenderTitle>Gender</S.GenderTitle>
+                    <S.GenderTitle>
+                      {UIText.update.genderLabel}
+                    </S.GenderTitle>
                     <S.GroupLabel>
                       <S.Label>
-                        <S.Radio type='radio' value='male' name='gender' />
-                        Male
+                        <S.Radio type="radio" value="male" name="gender" />
+                        {UIText.update.maleLabel}
                       </S.Label>
                       <S.Label>
-                        <S.Radio type='radio' value='female' name='gender' />
-                        Female
+                        <S.Radio type="radio" value="female" name="gender" />
+                        {UIText.update.femaleLabel}
                       </S.Label>
                     </S.GroupLabel>
                   </S.GenderWrap>
                   <S.DatePickerElement>
                     <DatePicker
-                      name='dob'
-                      dateFormat='d MMMM, yyyy'
-                      wrapperClassName='date_picker'
+                      name="dob"
+                      dateFormat="d MMMM, yyyy"
+                      wrapperClassName="date_picker"
                       selected={new Date(values.dob)}
-                      customInput={<Input size='large' />}
+                      customInput={<Input size="large" />}
                       onChange={(value) => {
                         setFieldValue('dob', value);
                       }}
                     />
                   </S.DatePickerElement>
                   <S.GroupButton>
-                    <S.Button type='submit'>Update</S.Button>
-                    <S.Button onClick={() => toggleEvent()}>Cancel</S.Button>
+                    <S.Button type="submit">
+                      {UIText.update.updateConfirm}
+                    </S.Button>
+                    <S.Button onClick={() => toggleEvent()}>
+                      {UIText.update.updateCancel}
+                    </S.Button>
                   </S.GroupButton>
                 </S.SetWidth>
               </S.NewForm>

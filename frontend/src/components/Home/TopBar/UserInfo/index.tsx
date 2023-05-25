@@ -10,6 +10,7 @@ import { selectUserState } from '../../../../features/redux/slices/userSlice';
 import { userInfo } from '../../../../utils/types';
 import { Modal, Image } from 'antd';
 import bgWave from '../../../../assets/imgs/wage_bg.png';
+import { selectUtilState } from '../../../../features/redux/slices/utilSlice';
 
 interface IUserInfo {
   friendProfile?: userInfo;
@@ -19,6 +20,8 @@ interface IUserInfo {
 
 const UserInfo = ({ friendProfile, open, closeModal }: IUserInfo) => {
   const user = useSelector(selectUserState);
+  const UIText = useSelector(selectUtilState).UItext.topBar.info;
+
   const { phone, avatar, banner, name, gender, dob } =
     friendProfile || user.info || {};
 
@@ -52,10 +55,10 @@ const UserInfo = ({ friendProfile, open, closeModal }: IUserInfo) => {
       </S.Header>
       <S.Content>
         <S.Description>
-          <span>Phone</span>
-          <span>Fullname</span>
-          <span>Gender</span>
-          <span>Date of Birth</span>
+          <span>{UIText.phoneLable}</span>
+          <span>{UIText.fullnameLabel}</span>
+          <span>{UIText.genderLabel}</span>
+          <span>{UIText.dobLabel}</span>
         </S.Description>
         <S.Info>
           <span>{phone}</span>
@@ -67,7 +70,9 @@ const UserInfo = ({ friendProfile, open, closeModal }: IUserInfo) => {
       {!friendProfile && (
         <S.Button>
           <HiPencil />
-          <span onClick={() => setEditInfo(true)}>Update information</span>
+          <span onClick={() => setEditInfo(true)}>
+            {UIText.update.updateConfirm}
+          </span>
         </S.Button>
       )}
       <SettingInfo

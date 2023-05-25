@@ -16,6 +16,7 @@ import { roomListActions } from '../../../../../features/redux/slices/roomListSl
 import { socket } from '../../../../../contexts/socket';
 import Button from '../../../../Global/Button';
 import { GrUserAdmin } from 'react-icons/gr';
+import { selectUtilState } from '../../../../../features/redux/slices/utilSlice';
 
 interface IGroupMembers {
   open: boolean;
@@ -25,6 +26,9 @@ interface IGroupMembers {
 }
 
 const GroupMembers = ({ open, closeModal, roomInfo, user }: IGroupMembers) => {
+
+  const UIText = useSelector(selectUtilState).UItext.chatArea.moreOptions.groupMembers
+
   const [friendProfile, setFriendProfile] = useState<userInfo>();
   // const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
   // const [toggleNickname, setToggleNickname] = useState(false);
@@ -73,7 +77,7 @@ const GroupMembers = ({ open, closeModal, roomInfo, user }: IGroupMembers) => {
 
   return (
     <Modal
-      title={`Group member`}
+      title={UIText.label}
       open={open}
       onOk={closeModal}
       onCancel={closeModal}
@@ -83,7 +87,7 @@ const GroupMembers = ({ open, closeModal, roomInfo, user }: IGroupMembers) => {
     >
       <S.GroupMembersSearch>
         <S.GroupMembersSearchIcon />
-        <S.GroupMembersSearchInput placeholder="Search with name or phone number..." />
+        <S.GroupMembersSearchInput placeholder={UIText.searchPlaceholder} />
       </S.GroupMembersSearch>
       <S.GroupMembersList>
         {activeUsers.map((data, index) => (
@@ -117,22 +121,23 @@ const GroupMembers = ({ open, closeModal, roomInfo, user }: IGroupMembers) => {
                     onClick={() => changeNicknameClicked(data)}
                     style={{ fontStyle: 'italic', marginTop: '-10px' }}
                   >
-                    Change nickname
+                    {UIText.nickname}
                   </AntButton>
                 </div>
               </S.LeftWrap>
 
               {isLeader && data.uid !== user._id && (
                 <Popconfirm
-                  title={`You about to kick ${data.nickname}`}
-                  description="Please confirm"
+                  title={`${UIText.titleConfirm} ${data.nickname}`}
+                  description={UIText.descriptionConfirm}
                   onConfirm={() => kickMember(data)}
                   open={kickConfirm === index}
                   onCancel={() => setKickConfirm(-1)}
                   okType="danger"
+                  cancelText={UIText.cancelConfirm}
                 >
                   <Button onClick={() => setKickConfirm(index)}>
-                    Kick member
+                    {UIText.kick}
                   </Button>
                 </Popconfirm>
               )}

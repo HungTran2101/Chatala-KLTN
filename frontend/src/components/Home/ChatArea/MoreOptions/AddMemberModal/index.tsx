@@ -14,6 +14,7 @@ import { Modal, Popconfirm } from 'antd';
 import Button from '../../../../Global/Button';
 import { message } from 'antd';
 import { useState } from 'react';
+import { selectUtilState } from '../../../../../features/redux/slices/utilSlice';
 
 interface IAddMemberModal {
   closeModal: () => void;
@@ -23,6 +24,7 @@ interface IAddMemberModal {
 
 const AddMemberModal = ({ open, closeModal, roomInfo }: IAddMemberModal) => {
   const friends = useSelector(selectFriendListState);
+  const UItext = useSelector(selectUtilState).UItext.chatArea.moreOptions.addMembers
 
   const [confirmAdd, setConfirmAdd] = useState(-1);
 
@@ -68,7 +70,7 @@ const AddMemberModal = ({ open, closeModal, roomInfo }: IAddMemberModal) => {
 
   return (
     <Modal
-      title={`Group add`}
+      title={UItext.label}
       open={open}
       onOk={closeModal}
       onCancel={closeModal}
@@ -78,7 +80,7 @@ const AddMemberModal = ({ open, closeModal, roomInfo }: IAddMemberModal) => {
     >
       <S.AddMemberSearch>
         <S.AddMemberSearchIcon />
-        <S.AddMemberSearchInput placeholder="Search with name or phone number..." />
+        <S.AddMemberSearchInput placeholder={UItext.searchPlaceholder} />
       </S.AddMemberSearch>
       <S.AddMemberList>
         {unAddMembers.map((data, index) => (
@@ -95,15 +97,16 @@ const AddMemberModal = ({ open, closeModal, roomInfo }: IAddMemberModal) => {
               <S.AddMemberName>{data.name}</S.AddMemberName>
             </S.AddMemberInfo>
             <Popconfirm
-              title={`You adding ${data.name} to ${roomInfo.roomName}`}
-              description="Please confirm"
+              title={`${UItext.titleConfirm} ${data.name}`}
+              description={UItext.descriptionConfirm}
               open={confirmAdd === index}
               okType='default'
               onConfirm={() => addMember(data)}
               onCancel={() => setConfirmAdd(-1)}
+              cancelText = {UItext.cancelConfirm}
             >
               <Button variant="blue" onClick={() => setConfirmAdd(index)}>
-                + Add member
+                + {UItext.add}
               </Button>
             </Popconfirm>
           </S.AddMemberItem>

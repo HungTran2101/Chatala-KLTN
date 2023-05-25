@@ -28,10 +28,13 @@ import { RoomApi } from '../../../services/api/room';
 import { messageActions } from '../../../features/redux/slices/messageSlice';
 import { fileActions } from '../../../features/redux/slices/fileSlice';
 import { friendListActions } from '../../../features/redux/slices/friendListSlice';
+import {
+  selectUtilState,
+  utilActions,
+} from '../../../features/redux/slices/utilSlice';
 
 const TopBar = () => {
   // const [userInfoModal, setUserInfoModal] = useState(false);
-  const [activeNotiModal, setActiveNotiModal] = useState(false);
   const [searchResult, setSearchResult] = useState<SearchResult[]>([]);
   const [searchInput, setSearchInput] = useState('');
   const [action, setAction] = useState(false);
@@ -40,6 +43,8 @@ const TopBar = () => {
   const socket = useSocketContext();
   const user = useSelector(selectUserState);
   const roomInfo = useSelector(selectRoomInfoState);
+  const UIText = useSelector(selectUtilState).UItext.topBar;
+
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -47,7 +52,9 @@ const TopBar = () => {
 
   const getLoggedUser = async () => {
     const result = await UsersApi.getLoggedUser();
-    if (result) dispatch(userActions.setUserInfo(result));
+    if (result) {
+      dispatch(userActions.setUserInfo(result));
+    }
   };
 
   const getListNotify = async () => {
@@ -95,6 +102,8 @@ const TopBar = () => {
 
   useEffect(() => {
     if (user.loading === false && user.info) {
+      dispatch(utilActions.setUIText({ locale: user.info.locale }));
+
       // @ts-ignore
       socket.emit('logged', user.info._id);
       socket.on('getUsers', (users) => {
@@ -147,7 +156,7 @@ const TopBar = () => {
         </S.SearchModalInfo>
         {data.status === 'available' ? (
           <S.SearchModalMessage onClick={() => messagesClick(data._id)}>
-            Message
+            {UIText.search.modal.message}
           </S.SearchModalMessage>
         ) : data.status === 'receive' ? (
           <S.FlexWrap>
@@ -156,19 +165,21 @@ const TopBar = () => {
                 friendAccept(data.notificationId, data._id, data.name)
               }
             >
-              Accept
+              {UIText.search.modal.accept}
             </S.SearchModalAccept>
             <S.SearchModalDecline
               onClick={() => friendDecline(data.notificationId)}
             >
-              Decline
+              {UIText.search.modal.decline}
             </S.SearchModalDecline>
           </S.FlexWrap>
         ) : data.status === 'request' ? (
-          <S.SearchModalPending>Pending</S.SearchModalPending>
+          <S.SearchModalPending>
+            {UIText.search.modal.pending}
+          </S.SearchModalPending>
         ) : (
           <S.SearchModalAddFriend onClick={() => friendRequest(data._id)}>
-            Add Friend
+            {UIText.search.modal.addfriend}
           </S.SearchModalAddFriend>
         )}
       </S.SearchModalItem>
@@ -303,11 +314,11 @@ const TopBar = () => {
               dropdownMatchSelectWidth={500}
               style={{ width: '100%' }}
               options={options}
-              notFoundContent="Loading!"
+              notFoundContent={UIText.search.modal.loading}
               listHeight={500}
             >
               <S.SearchInput
-                placeholder="Search..."
+                placeholder={UIText.search.placeHolder}
                 onChange={(e) => setSearchInput(e.target.value)}
                 value={searchInput}
               />
@@ -323,7 +334,7 @@ const TopBar = () => {
                     friendDecline={friendDecline}
                   />
                 }
-                title="Notification"
+                title={UIText.noti.title}
                 trigger="click"
                 placement="bottomRight"
               >

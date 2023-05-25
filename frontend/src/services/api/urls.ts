@@ -19,6 +19,7 @@ export const API_URL = {
   getLoggedUser: `${API_BASE}/user/getLoggedUser`,
   userFind: `${API_BASE}/user/find`,
   changePassword: `${API_BASE}/user/update/password`,
+  changeLocale: `${API_BASE}/user/change-locale`,
   getFriendRequestList: `${API_BASE}/friend/request`,
   friendRequest: `${API_BASE}/friend/request`,
   friendAccept: `${API_BASE}/friend/accept`,

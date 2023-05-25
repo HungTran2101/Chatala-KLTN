@@ -1,6 +1,8 @@
 import * as S from './NotiModal.styled';
 import * as React from 'react';
 import Image from 'next/image';
+import { useSelector } from 'react-redux';
+import { selectUtilState } from '../../../../features/redux/slices/utilSlice';
 
 interface INotiModal {
   listNoti: any;
@@ -9,6 +11,8 @@ interface INotiModal {
 }
 
 const NotiModal = ({ listNoti, friendAccept, friendDecline }: INotiModal) => {
+
+  const UIText = useSelector(selectUtilState).UItext.topBar.noti
 
   return (
     // <S.Noti ref={NotiRef}>
@@ -34,16 +38,16 @@ const NotiModal = ({ listNoti, friendAccept, friendDecline }: INotiModal) => {
             <S.NotiAccept
               onClick={() => friendAccept(data._id, data.uid, data.name)}
             >
-              Accept
+              {UIText.accept}
             </S.NotiAccept>
             <S.NotiDecline onClick={() => friendDecline(data._id)}>
-              Decline
+              {UIText.decline}
             </S.NotiDecline>
           </S.NotiItem>
         ))}
       </S.NotiList>
     ) : (
-      <S.NotiText>You don&apos;t have any friend requests</S.NotiText>
+      <S.NotiText>{UIText.empty}</S.NotiText>
     )
   );
 };

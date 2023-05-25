@@ -34,7 +34,7 @@ export const ChatAreaHeadStatus = styled.div`
 `;
 
 export const ChatAreaHeadStatusIcon = styled(FaCircle)<{ status: number }>`
-  ${tw`mt-[-2px] text-[12px]`}
+  ${tw`mb-[-2px] text-[12px]`}
   ${({ status }) => (status === 1 ? tw`text-green-400` : tw`text-gray-400`)}
 `;
 

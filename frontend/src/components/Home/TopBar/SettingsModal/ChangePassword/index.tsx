@@ -5,6 +5,8 @@ import * as S from './ChangePassword.styled';
 import { useFormik } from 'formik';
 import { UsersApi } from '../../../../../services/api/users';
 import { Button, Input, Space, message } from 'antd';
+import { selectUtilState } from '../../../../../features/redux/slices/utilSlice';
+import { useSelector } from 'react-redux';
 
 const validationSchema = Yup.object().shape({
   oldPassword: Yup.string().required('This field is required.'),
@@ -42,6 +44,8 @@ const ChangePassword = () => {
   });
   const [messageApi, contextHolder] = message.useMessage();
 
+  const UIText = useSelector(selectUtilState).UItext.topBar.setting.security;
+
   const success = (message: string) => {
     messageApi.open({
       type: 'success',
@@ -67,14 +71,13 @@ const ChangePassword = () => {
     <>
       {contextHolder}
       <S.ChangePassword>
-        <S.Title>Change Password</S.Title>
-
+        <S.Title>{UIText.password.title}</S.Title>
         <S.Form onSubmit={formik.handleSubmit}>
-          <Space direction='vertical'>
+          <Space direction="vertical">
             <Input.Password
-              placeholder='Old password'
-              size='large'
-              name='oldPassword'
+              placeholder={UIText.password.oldpass}
+              size="large"
+              name="oldPassword"
               onChange={formik.handleChange}
               value={formik.values.oldPassword}
               status={
@@ -87,9 +90,9 @@ const ChangePassword = () => {
               <S.ErrorMsg>{formik.errors.oldPassword}</S.ErrorMsg>
             )}
             <Input.Password
-              placeholder='Password'
-              size='large'
-              name='password'
+              placeholder={UIText.password.newpass}
+              size="large"
+              name="password"
               onChange={formik.handleChange}
               value={formik.values.password}
               status={
@@ -100,9 +103,9 @@ const ChangePassword = () => {
               <S.ErrorMsg>{formik.errors.password}</S.ErrorMsg>
             )}
             <Input.Password
-              placeholder='Confirm password'
-              size='large'
-              name='confirmPassword'
+              placeholder={UIText.password.confirmpass}
+              size="large"
+              name="confirmPassword"
               onChange={formik.handleChange}
               value={formik.values.confirmPassword}
               status={
@@ -116,7 +119,7 @@ const ChangePassword = () => {
                 <S.ErrorMsg>{formik.errors.confirmPassword}</S.ErrorMsg>
               )}
             <S.ButtonWrap>
-              <S.Button type='submit'>Update</S.Button>
+              <S.Button type="submit">{UIText.password.update}</S.Button>
             </S.ButtonWrap>
           </Space>
         </S.Form>
