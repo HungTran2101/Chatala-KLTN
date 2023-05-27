@@ -8,7 +8,10 @@ import { selectFriendListState } from '../../../../../features/redux/slices/frie
 import { selectUserState } from '../../../../../features/redux/slices/userSlice';
 import { CallApi } from '../../../../../services/api/call';
 import { useSocketContext } from '../../../../../contexts/socket';
-import { utilActions } from '../../../../../features/redux/slices/utilSlice';
+import {
+  selectUtilState,
+  utilActions,
+} from '../../../../../features/redux/slices/utilSlice';
 
 interface ICallNoti {
   setCallNotiShow: (toggle: boolean) => void;
@@ -25,6 +28,7 @@ interface ICallNoti {
 const CallNotiModal = ({ setCallNotiShow, callInfo }: ICallNoti) => {
   const friends = useSelector(selectFriendListState);
   const user = useSelector(selectUserState);
+  const UIText = useSelector(selectUtilState).UItext.chatArea;
 
   const socket = useSocketContext();
   const dispatch = useDispatch();
@@ -95,7 +99,7 @@ const CallNotiModal = ({ setCallNotiShow, callInfo }: ICallNoti) => {
     });
     socket.on('callDeclined', () => {
       setCallNotiShow(false);
-    })
+    });
   }, []);
 
   useEffect(() => {
@@ -119,9 +123,7 @@ const CallNotiModal = ({ setCallNotiShow, callInfo }: ICallNoti) => {
         <audio src="/ringtone.mp3" loop autoPlay />
         <S.CallNotiInfo>
           <S.CallNotiLabel>
-            {callInfo.isCaller
-              ? 'You are calling'
-              : 'You receiving a call from'}
+            {callInfo.isCaller ? UIText.callLabel : UIText.receiveCallLabel}
           </S.CallNotiLabel>
           {(callInfo.avatar || caller) && (
             <S.CallNotiAvatar>
@@ -141,17 +143,17 @@ const CallNotiModal = ({ setCallNotiShow, callInfo }: ICallNoti) => {
             <>
               <S.CallNotiDecline onClick={() => declineCall()}>
                 <FaPhoneSlash />
-                Decline
+                {UIText.callDecline}
               </S.CallNotiDecline>
               <S.CallNotiAccept onClick={() => acceptCall()}>
                 <FaPhoneAlt />
-                Accept
+                {UIText.callAccept}
               </S.CallNotiAccept>
             </>
           ) : (
             <S.CallNotiDecline onClick={() => cancelCall()}>
               <FaPhoneSlash />
-              Cancel
+              {UIText.callCancel}
             </S.CallNotiDecline>
           )}
         </S.CallNotiControls>

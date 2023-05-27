@@ -34,7 +34,7 @@ export const utilSlice = createSlice({
     setUIText(state, action) {
       const { locale } = action.payload;
       const uiText = UI.find((it) => it.locale === locale);
-      state.UItext = uiText;
+      state.UItext = uiText || UI[0];
     },
 
     // // Special reducer for hydrating the state. Special case for next-redux-wrapper

@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { roomInfoActions } from '../../../../../features/redux/slices/roomInfoSlice';
 import { roomListActions } from '../../../../../features/redux/slices/roomListSlice';
 import { RoomApi } from '../../../../../services/api/room';
@@ -7,6 +7,7 @@ import { roomInfo } from '../../../../../utils/types';
 import * as S from './GroupNameModel.styled';
 import { useSocketContext } from '../../../../../contexts/socket';
 import { Modal, message } from 'antd';
+import { selectUtilState } from '../../../../../features/redux/slices/utilSlice';
 
 interface IGroupName {
   closeModal: () => void;
@@ -20,6 +21,8 @@ const GroupNameModal = ({ closeModal, open, roomInfo }: IGroupName) => {
   const dispatch = useDispatch();
 
   const socket = useSocketContext();
+
+  const UIText = useSelector(selectUtilState).UItext.chatArea.moreOptions.groupname
 
   const saveGroupName = async () => {
     if (input.current.value === '') return;
@@ -55,11 +58,12 @@ const GroupNameModal = ({ closeModal, open, roomInfo }: IGroupName) => {
 
   return (
     <Modal
-      title={`Change group name`}
+      title={UIText.label}
       open={open}
       onOk={saveGroupName}
       onCancel={closeModal}
       okType="link"
+      cancelText={UIText.label}
       centered
       destroyOnClose
     >

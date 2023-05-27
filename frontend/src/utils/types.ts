@@ -249,6 +249,11 @@ export type UITextType = {
   chatArea: {
     online: string;
     offline: string;
+    callLabel: string;
+    receiveCallLabel: string;
+    callCancel: string;
+    callAccept: string;
+    callDecline: string;
     chatAreaMain: {
       inputPlaceholder: string;
       inputReplyTo: string;
@@ -272,6 +277,10 @@ export type UITextType = {
       nickname: {
         label: string;
         title: string;
+        cancel: string;
+      };
+      groupname: {
+        label: string;
         cancel: string;
       };
       unfriend: {

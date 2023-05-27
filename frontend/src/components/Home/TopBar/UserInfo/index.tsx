@@ -63,7 +63,11 @@ const UserInfo = ({ friendProfile, open, closeModal }: IUserInfo) => {
         <S.Info>
           <span>{phone}</span>
           <span>{name}</span>
-          <span>{gender}</span>
+          <span>
+            {gender === 'male'
+              ? UIText.update.maleLabel
+              : UIText.update.femaleLabel}
+          </span>
           <span>{formatDate(dob)}</span>
         </S.Info>
       </S.Content>

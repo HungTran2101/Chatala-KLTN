@@ -86,6 +86,11 @@ export const UIText = [
     chatArea: {
       online: 'Online',
       offline: 'Offline',
+      callLabel: 'You are calling',
+      receiveCallLabel: 'You receiving a call from',
+      callCancel: 'Cancel',
+      callAccept: 'Accept',
+      callDecline: 'Decline',
       chatAreaMain: {
         inputPlaceholder: 'Write something to',
         inputReplyTo: 'Replying to',
@@ -109,6 +114,10 @@ export const UIText = [
         nickname: {
           label: 'Change nickname',
           title: 'Change nickname for',
+          cancel: 'Cancel',
+        },
+        groupname: {
+          label: 'Change group name',
           cancel: 'Cancel',
         },
         unfriend: {
@@ -219,6 +228,11 @@ export const UIText = [
     chatArea: {
       online: 'Đang hoạt động',
       offline: 'Không hoạt động',
+      callLabel: 'Bạn đang gọi',
+      receiveCallLabel: 'Bạn đang nhận cuộc gọi từ',
+      callCancel: 'Hủy',
+      callAccept: 'Đồng ý',
+      callDecline: 'Từ chối',
       chatAreaMain: {
         inputPlaceholder: 'Nhắn gì đó cho',
         inputReplyTo: 'Đang trả lời',
@@ -238,10 +252,14 @@ export const UIText = [
         cancelConfirm: 'Hủy',
       },
       moreOptions: {
-        profile: "Trang cá nhân",
+        profile: 'Trang cá nhân',
         nickname: {
           label: 'Đổi nickname',
           title: 'Đổi nickname cho',
+          cancel: 'Hủy',
+        },
+        groupname: {
+          label: 'Đổi tên nhóm',
           cancel: 'Hủy',
         },
         unfriend: {
