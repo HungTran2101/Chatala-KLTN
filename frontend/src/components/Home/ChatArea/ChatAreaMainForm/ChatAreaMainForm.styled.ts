@@ -3,6 +3,7 @@ import { zoomIn } from "react-animations";
 import { BsEmojiLaughingFill } from "react-icons/bs";
 import { IoCloseSharp } from "react-icons/io5";
 import { RiSendPlaneFill } from "react-icons/ri";
+import { ClipLoader } from "react-spinners";
 import styled, { keyframes } from "styled-components";
 import tw from "twin.macro";
 
@@ -80,11 +81,15 @@ export const ChatAreaMainInputText = styled.div`
 `;
 
 export const ChatAreaMainInputButtonSend = styled.button`
-  ${tw`bg-quaternary text-primary hover:text-secondary p-2 rounded-full ml-2.5 outline-none`}
+  ${tw`flex justify-center items-center bg-quaternary text-primary hover:text-secondary w-[40px] h-[40px] p-2 rounded-full ml-2.5 outline-none`}
 `;
 
 export const ChatAreaMainInputSendIcon = styled(RiSendPlaneFill)`
   ${tw`text-[20px]`}
+`;
+
+export const ChatAreaMainInputLoading = styled(ClipLoader)`
+  ${tw``}
 `;
 
 export const ChatAreaMainDropZone = styled.div`

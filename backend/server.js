@@ -198,9 +198,9 @@ io.on('connection', (socket) => {
     user && socket.to(user.socketId).emit('addmember');
   });
 
-  socket.on('kickmember', (uid) => {
+  socket.on('kickmember', ({ uid, roomId }) => {
     const user = users.find((u) => u.uid === uid);
-    user && socket.to(user.socketId).emit('kickmember');
+    user && socket.to(user.socketId).emit('kickmember', roomId);
   });
 
   // socket.on("sendMessage", (message, roomId) => {

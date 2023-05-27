@@ -165,7 +165,7 @@ const MoreOptions = ({
               )}
               {!isUnfriend && (
                 <Popconfirm
-                  title={`${UIText.unfriend.titleConfirm} ${userNeedChange.nickname}`}
+                  title={`${UIText.unfriend.titleConfirm} ${userNeedChange?.nickname}`}
                   description={UIText.unfriend.descriptionConfirm}
                   open={open}
                   onConfirm={() =>

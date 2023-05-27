@@ -154,7 +154,7 @@ export const UIText = [
         dobLabel: 'Ngày sinh',
         update: {
           genderLabel: 'Giới tính',
-          maleLabel: 'Name',
+          maleLabel: 'Nam',
           femaleLabel: 'Nữ',
           updateConfirm: 'Cập nhật',
           updateCancel: 'Hủy',

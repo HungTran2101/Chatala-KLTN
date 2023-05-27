@@ -17,6 +17,7 @@ import { messageActions } from '../../../../features/redux/slices/messageSlice';
 import { useSocketContext } from '../../../../contexts/socket';
 import { fileActions } from '../../../../features/redux/slices/fileSlice';
 import { selectUserState } from '../../../../features/redux/slices/userSlice';
+import { message } from 'antd';
 
 const ChatList = () => {
   const [roomSelected, setRoomSelected] = useState<number>(-1);
@@ -64,6 +65,7 @@ const ChatList = () => {
       );
 
       setRoomSelected(index);
+      document.getElementById('bottomDiv')?.scrollIntoView()
     }
   };
 
@@ -92,9 +94,7 @@ const ChatList = () => {
       (it) => it.roomInfo._id === roomInfo.info?.roomInfo._id
     );
     setRoomSelected(index);
-  }, [roomInfo]);
 
-  useEffect(() => {
     socket.on('receivegroupname', (info) => {
       roomInfo.info &&
         roomInfo.info.roomInfo._id === info.roomId &&
@@ -106,27 +106,25 @@ const ChatList = () => {
         })
       );
     });
-
-    return () => {
-      socket.off('receivegroupname');
-    };
-  }, [roomList, roomInfo]);
-
-  useEffect(() => {
     socket.on('addmember', async () => {
       const res = await RoomApi.getRoomList();
       dispatch(roomListActions.setRoomList(res.result));
     });
-    socket.on('kickmember', async () => {
+    socket.on('kickmember', async (roomId: string) => {
       const res = await RoomApi.getRoomList();
       dispatch(roomListActions.setRoomList(res.result));
+      if (roomId === roomInfo.info.roomInfo._id) {
+        message.warning(`You have been kick from ${roomInfo.info.roomName}`);
+        dispatch(roomInfoActions.clearRoomInfo(null));
+      }
     });
 
     return () => {
-      socket.off('addmember')
-      socket.off('kickmember')
-    }
-  }, []);
+      socket.off('receivegroupname');
+      socket.off('addmember');
+      socket.off('kickmember');
+    };
+  }, [roomList, roomInfo]);
 
   return (
     <S.ChatList>

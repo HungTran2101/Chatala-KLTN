@@ -376,7 +376,6 @@ const ChatArea = () => {
                   <ChatAreaMainMsg
                     bottomDiv={bottomDiv}
                     chatMainMsgOuter={chatMainMsgOuter}
-                    isSubmitting={isSubmitting}
                     newMsgNoti={newMsgNoti}
                     toggleTyping={toggleTyping}
                     isUnfriend={isUnfriend}

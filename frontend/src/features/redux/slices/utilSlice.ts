@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AppState } from '../store';
 import { UITextType } from '../../../utils/types';
-import { UIText } from '../../../utils/dataConfig';
+import { UIText as UI } from '../../../utils/dataConfig';
 
 // Type for our state
 export interface UtilState {
@@ -14,7 +14,7 @@ export interface UtilState {
 const initialState: UtilState = {
   replyId: null,
   onCall: false,
-  UItext: UIText[0],
+  UItext: UI[0],
 };
 
 // Actual Slice
@@ -33,7 +33,7 @@ export const utilSlice = createSlice({
     },
     setUIText(state, action) {
       const { locale } = action.payload;
-      const uiText = UIText.find((it) => it.locale === locale);
+      const uiText = UI.find((it) => it.locale === locale);
       state.UItext = uiText;
     },
 

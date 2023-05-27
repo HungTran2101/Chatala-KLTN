@@ -76,7 +76,7 @@ const UserInfo = ({ friendProfile, open, closeModal }: IUserInfo) => {
         </S.Button>
       )}
       <SettingInfo
-        id={user.info?._id}
+        id={user.info._id}
         name={name}
         gender={gender}
         dob={dob}

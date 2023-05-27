@@ -28,13 +28,13 @@ const General = () => {
       <S.LanguageItem>
         <S.GeneralItemLanguageLabel>{UIText.language.label}</S.GeneralItemLanguageLabel>
         <S.GeneralItemLanguageButton
-          active={user.info?.locale === 'en' ? 1 : 0}
+          active={user.info.locale === 'en' ? 1 : 0}
           onClick={() => changeLocale('en')}
         >
           <Image src={usflag} alt="flag" layout="fill" />
         </S.GeneralItemLanguageButton>
         <S.GeneralItemLanguageButton
-          active={user.info?.locale === 'vi' ? 1 : 0}
+          active={user.info.locale === 'vi' ? 1 : 0}
           onClick={() => changeLocale('vi')}
         >
           <Image src={vnflag} alt="flag" layout="fill" />

@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { AppState } from "../store";
-import { HYDRATE } from "next-redux-wrapper";
-import { userInfo } from "../../../utils/types";
+import { createSlice } from '@reduxjs/toolkit';
+import { AppState } from '../store';
+import { HYDRATE } from 'next-redux-wrapper';
+import { userInfo } from '../../../utils/types';
 
 // Type for our state
 export interface UserState {
@@ -9,7 +9,19 @@ export interface UserState {
   loading: boolean;
 }
 
-const userInfoInitialState = undefined
+const userInfoInitialState = {
+  _id: '',
+  avatar: '',
+  banner: '',
+  name: '',
+  phone: '',
+  gender: '',
+  dob: '',
+  createdAt: '',
+  updatedAt: '',
+  locale: '',
+  __v: 0,
+};
 
 // Initial state
 const initialState: UserState = {
@@ -19,7 +31,7 @@ const initialState: UserState = {
 
 // Actual Slice
 export const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {
     requestUserInfo(state, action) {

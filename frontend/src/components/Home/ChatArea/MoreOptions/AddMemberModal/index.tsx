@@ -24,7 +24,8 @@ interface IAddMemberModal {
 
 const AddMemberModal = ({ open, closeModal, roomInfo }: IAddMemberModal) => {
   const friends = useSelector(selectFriendListState);
-  const UItext = useSelector(selectUtilState).UItext.chatArea.moreOptions.addMembers
+  const UItext =
+    useSelector(selectUtilState).UItext.chatArea.moreOptions.addMembers;
 
   const [confirmAdd, setConfirmAdd] = useState(-1);
 
@@ -60,6 +61,7 @@ const AddMemberModal = ({ open, closeModal, roomInfo }: IAddMemberModal) => {
       );
 
       socket.emit('addmember', data._id);
+      setConfirmAdd(-1);
 
       message.success(`Add ${data.name} to group succeed!`);
     } catch (err) {
@@ -100,10 +102,10 @@ const AddMemberModal = ({ open, closeModal, roomInfo }: IAddMemberModal) => {
               title={`${UItext.titleConfirm} ${data.name}`}
               description={UItext.descriptionConfirm}
               open={confirmAdd === index}
-              okType='default'
+              okType="default"
               onConfirm={() => addMember(data)}
               onCancel={() => setConfirmAdd(-1)}
-              cancelText = {UItext.cancelConfirm}
+              cancelText={UItext.cancelConfirm}
             >
               <Button variant="blue" onClick={() => setConfirmAdd(index)}>
                 + {UItext.add}

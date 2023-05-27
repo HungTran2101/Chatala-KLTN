@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { AppState } from '../store';
 import { HYDRATE } from 'next-redux-wrapper';
 import { roomInfo } from '../../../utils/types';
+import { message } from 'antd';
 
 // Type for our state
 export interface roomListState {

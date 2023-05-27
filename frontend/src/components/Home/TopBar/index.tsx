@@ -101,7 +101,7 @@ const TopBar = () => {
   }, []);
 
   useEffect(() => {
-    if (user.loading === false && user.info) {
+    if (user.info._id !== '') {
       dispatch(utilActions.setUIText({ locale: user.info.locale }));
 
       // @ts-ignore
@@ -290,7 +290,7 @@ const TopBar = () => {
       <S.Wrapper>
         <S.LeftWrapper onClick={() => showUserInfo()}>
           <S.Avatar>
-            {user.info?.avatar && user.info.avatar !== '' && (
+            {user.info.avatar !== '' && (
               <Image
                 src={user.info.avatar}
                 alt="avatar"
@@ -299,7 +299,7 @@ const TopBar = () => {
               />
             )}
           </S.Avatar>
-          <S.UserName>{user.info?.name}</S.UserName>
+          <S.UserName>{user.info.name}</S.UserName>
         </S.LeftWrapper>
         <S.RightWrapper>
           <S.LogoContainer>

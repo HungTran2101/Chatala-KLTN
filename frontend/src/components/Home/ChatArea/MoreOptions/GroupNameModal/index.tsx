@@ -55,7 +55,7 @@ const GroupNameModal = ({ closeModal, open, roomInfo }: IGroupName) => {
 
   return (
     <Modal
-      title={`Group name`}
+      title={`Change group name`}
       open={open}
       onOk={saveGroupName}
       onCancel={closeModal}

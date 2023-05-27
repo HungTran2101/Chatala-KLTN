@@ -63,7 +63,8 @@ const GroupMembers = ({ open, closeModal, roomInfo, user }: IGroupMembers) => {
         })
       );
 
-      socket.emit('kickmember', data.uid);
+      socket.emit('kickmember', {uid: res.uid, roomId: res.roomId});
+      setKickConfirm(-1)
 
       message.success(`Kick ${data.nickname} succeed!`);
     } catch (err) {

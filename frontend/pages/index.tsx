@@ -118,7 +118,7 @@ const Home = () => {
         <TopBar />
         <S.Wrapper>
           <SideBar />
-          {roomInfo.info ? <ChatArea /> : <Welcome home={true} />}
+          {roomInfo.info.roomName !== "" ? <ChatArea /> : <Welcome home={true} />}
         </S.Wrapper>
         {callNotiShow && callInfo && (
           <CallNotiModel

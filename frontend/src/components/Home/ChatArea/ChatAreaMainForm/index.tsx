@@ -288,7 +288,15 @@ const ChatAreaMainForm = ({
                 }
               }}
             >
-              <S.ChatAreaMainInputSendIcon />
+              {isSubmitting ? (
+                <S.ChatAreaMainInputLoading
+                  size={15}
+                  speedMultiplier={0.5}
+                  color="#FFFFFF"
+                />
+              ) : (
+                <S.ChatAreaMainInputSendIcon />
+              )}
             </S.ChatAreaMainInputButtonSend>
           </S.ChatAreaMainInputMsg>
         </S.ChatAreaMainInputMsgOuter>

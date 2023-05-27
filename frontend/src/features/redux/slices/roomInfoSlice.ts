@@ -9,7 +9,21 @@ export interface roomInfoState {
   loading: boolean;
 }
 
-const roomInfoInitialState = undefined;
+const roomInfoInitialState = {
+  roomName: '',
+  roomAvatar: '',
+  roomInfo: {
+    createdAt: '',
+    groupName: '',
+    isGroup: false,
+    lastMsg: '',
+    updatedAt: '',
+    friendRelateId: '',
+    users: [],
+    __v: 0,
+    _id: '',
+  },
+};
 
 // Initial state
 const initialState: roomInfoState = {

@@ -12,7 +12,6 @@ interface IChatAreaMainMsg {
   bottomDiv: Ref<HTMLDivElement>;
   toggleTyping: boolean;
   newMsgNoti: boolean;
-  isSubmitting: boolean;
   isUnfriend: boolean;
   chatScrollTop: boolean;
   setToggleImageZoom: (toggle: boolean) => void;
@@ -26,7 +25,6 @@ const ChatAreaMainMsg = ({
   bottomDiv,
   toggleTyping,
   newMsgNoti,
-  isSubmitting,
   isUnfriend,
   chatScrollTop,
   setImageId,
@@ -87,6 +85,7 @@ const ChatAreaMainMsg = ({
       >
         <S.ChatAreaMainMsgInner id="ChatAreaMainMsgInner">
           <S.ChatAreaMainMsgInnerBottom
+            id="bottomDiv"
             ref={bottomDiv}
           ></S.ChatAreaMainMsgInnerBottom>
           {messages.list.map((data, index) => (
@@ -114,13 +113,6 @@ const ChatAreaMainMsg = ({
           color="#769FCD"
           margin={2}
         ></S.ChatAreaMainTyping>
-      )}
-      {isSubmitting && (
-        <S.ChatAreaMainMsgLoading
-          size={20}
-          speedMultiplier={0.5}
-          color="#769FCD"
-        ></S.ChatAreaMainMsgLoading>
       )}
       {newMsgNoti && (
         <S.ChatAreaMainNewNoti onClick={() => newMsgNotiClick()}>
