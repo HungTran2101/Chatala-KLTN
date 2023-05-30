@@ -176,6 +176,22 @@ export type UITextType = {
     welcomeLabel: string;
     description: string;
   };
+  messageNoti: {
+    resetPasswordSuccess: string;
+    unfriendSuccess: string;
+    addToGroupSuccess: string;
+    kickFromGroupSuccess: string;
+    changeGroupNameSuccess: string;
+    changeNicknameSuccess: string;
+    createGroupSuccess: string;
+    requestFriendSuccess: string;
+    acceptFriendSuccess: string;
+    declineFriendSuccess: string;
+    editAvatarSuccess: string;
+    editInfoSuccess: string;
+    registrationSuccess: string;
+    kickFromWarning: string;
+  };
   topBar: {
     info: {
       phoneLable: string;

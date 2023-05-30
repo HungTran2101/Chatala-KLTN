@@ -7,12 +7,16 @@ import { UsersApi } from '../../services/api/users';
 import { UserRegister } from '../../utils/types';
 import { ClipLoader } from 'react-spinners';
 import { message } from 'antd';
+import { useSelector } from 'react-redux';
+import { selectUtilState } from '../../features/redux/slices/utilSlice';
 
 const OTPCode = () => {
   const router = useRouter();
 
   const [checkError, setCheckError] = useState('false');
   const [countdown, setCountdown] = useState(120);
+
+  const UIText = useSelector(selectUtilState).UIText;
 
   const initialValues = {
     otpCode: '',
@@ -30,7 +34,7 @@ const OTPCode = () => {
       };
 
       await UsersApi.register(data);
-      message.success('Registration succeed!');
+      message.success(UIText.messageNoti.registrationSuccess);
       router.push('/login');
     } catch {
       setCheckError('true');

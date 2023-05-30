@@ -93,7 +93,7 @@ export const GenderTitle = styled.span`
   ${tw`block`}
 `;
 export const GenderWrap = styled.span`
-  ${tw`flex justify-between items-center px-2 my-3`}
+  ${tw`flex justify-between items-center my-3`}
 `;
 
 export const DOBTitle = styled.span`

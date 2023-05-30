@@ -30,7 +30,7 @@ const CreateGroup = ({ open, onClose }: ICreateGroup) => {
   const [friendProfile, setFriendProfile] = useState<userInfo>();
 
   const friends = useSelector(selectFriendListState);
-  const UIText = useSelector(selectUtilState).UItext.sideBar.topNav.createGroup;
+  const UIText = useSelector(selectUtilState).UIText;
 
   const showFriendProfile = (data: userInfo) => {
     showModalUser();
@@ -64,7 +64,7 @@ const CreateGroup = ({ open, onClose }: ICreateGroup) => {
         if (createdRoom) {
           const rooms = await RoomApi.getRoomList();
           dispatch(roomListActions.setRoomList(rooms.result));
-          message.success('Create group successfully');
+          message.success(UIText.messageNoti.createGroupSuccess);
           onClose();
         }
       } catch (err: any) {
@@ -90,7 +90,7 @@ const CreateGroup = ({ open, onClose }: ICreateGroup) => {
 
   return (
     <Modal
-      title={UIText.title}
+      title={UIText.sideBar.topNav.createGroup.title}
       open={open}
       onOk={() => {
         createGroup();
@@ -98,14 +98,14 @@ const CreateGroup = ({ open, onClose }: ICreateGroup) => {
       }}
       onCancel={onClose}
       okType="default"
-      okText={UIText.confirm}
-      cancelText={UIText.cancel}
+      okText={UIText.sideBar.topNav.createGroup.confirm}
+      cancelText={UIText.sideBar.topNav.createGroup.cancel}
       okButtonProps={{ disabled: addedUsers.length > 0 ? false : true }}
     >
       <S.CreateGroupSearch noAdded={addedUsers.length > 0 ? false : true}>
         <S.CreateGroupSearchIcon />
         <S.CreateGroupSearchInput
-          placeholder={UIText.searchPlaceholder}
+          placeholder={UIText.sideBar.topNav.createGroup.searchPlaceholder}
           noAdded={addedUsers.length > 0 ? false : true}
         />
       </S.CreateGroupSearch>
@@ -152,7 +152,7 @@ const CreateGroup = ({ open, onClose }: ICreateGroup) => {
               }
               onClick={() => addUserToGroup(data)}
             >
-              + {UIText.addbutton}
+              + {UIText.sideBar.topNav.createGroup.addbutton}
             </Button>
             {/* )} */}
           </S.CreateGroupItem>

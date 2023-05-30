@@ -22,7 +22,8 @@ const GroupNameModal = ({ closeModal, open, roomInfo }: IGroupName) => {
 
   const socket = useSocketContext();
 
-  const UIText = useSelector(selectUtilState).UItext.chatArea.moreOptions.groupname
+  const UIText =
+    useSelector(selectUtilState).UIText;
 
   const saveGroupName = async () => {
     if (input.current.value === '') return;
@@ -48,7 +49,7 @@ const GroupNameModal = ({ closeModal, open, roomInfo }: IGroupName) => {
         roomUserIds,
         res.room.groupName
       );
-      message.success(`Change group name to ${input.current.value} succeed`);
+      message.success(UIText.messageNoti.changeGroupNameSuccess);
       closeModal();
     } catch (err) {
       console.log(err);
@@ -58,12 +59,12 @@ const GroupNameModal = ({ closeModal, open, roomInfo }: IGroupName) => {
 
   return (
     <Modal
-      title={UIText.label}
+      title={UIText.chatArea.moreOptions.groupname.label}
       open={open}
       onOk={saveGroupName}
       onCancel={closeModal}
       okType="link"
-      cancelText={UIText.label}
+      cancelText={UIText.chatArea.moreOptions.groupname.label}
       centered
       destroyOnClose
     >

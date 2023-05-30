@@ -15,7 +15,7 @@ interface IShowFriends {
 
 const ShowFriends = ({ onClose, open }: IShowFriends) => {
   const friends = useSelector(selectFriendListState);
-  const UIText = useSelector(selectUtilState).UItext.sideBar.topNav.friendList
+  const UIText = useSelector(selectUtilState).UIText.sideBar.topNav.friendList;
 
   // const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
   const [friendProfile, setFriendProfile] = useState<userInfo>();
@@ -40,7 +40,7 @@ const ShowFriends = ({ onClose, open }: IShowFriends) => {
       onOk={onClose}
       onCancel={onClose}
       okButtonProps={{ style: { display: 'none' } }}
-      cancelText='OK'
+      cancelText="OK"
     >
       <S.ShowFriendsSearch>
         <S.ShowFriendsSearchIcon />
@@ -56,9 +56,9 @@ const ShowFriends = ({ onClose, open }: IShowFriends) => {
               <S.ShowFriendsAvatar>
                 <Image
                   src={data.avatar}
-                  alt='avatar'
-                  layout='fill'
-                  objectFit='cover'
+                  alt="avatar"
+                  layout="fill"
+                  objectFit="cover"
                 />
               </S.ShowFriendsAvatar>
               <S.ShowFriendsName>{data.name}</S.ShowFriendsName>

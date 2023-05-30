@@ -28,7 +28,7 @@ interface ICallNoti {
 const CallNotiModal = ({ setCallNotiShow, callInfo }: ICallNoti) => {
   const friends = useSelector(selectFriendListState);
   const user = useSelector(selectUserState);
-  const UIText = useSelector(selectUtilState).UItext.chatArea;
+  const UIText = useSelector(selectUtilState).UIText.chatArea;
 
   const socket = useSocketContext();
   const dispatch = useDispatch();

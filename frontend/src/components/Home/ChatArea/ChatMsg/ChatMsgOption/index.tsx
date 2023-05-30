@@ -5,7 +5,10 @@ import { messageActions } from '../../../../../features/redux/slices/messageSlic
 import { selectRoomInfoState } from '../../../../../features/redux/slices/roomInfoSlice';
 import { selectUserState } from '../../../../../features/redux/slices/userSlice';
 import { useSocketContext } from '../../../../../contexts/socket';
-import { selectUtilState, utilActions } from '../../../../../features/redux/slices/utilSlice';
+import {
+  selectUtilState,
+  utilActions,
+} from '../../../../../features/redux/slices/utilSlice';
 import { useState } from 'react';
 import { Popconfirm } from 'antd';
 
@@ -24,7 +27,7 @@ const ChatMsgOption = ({
 
   const roomInfo = useSelector(selectRoomInfoState);
   const user = useSelector(selectUserState);
-  const UIText = useSelector(selectUtilState).UItext.chatArea.chatAreaMain
+  const UIText = useSelector(selectUtilState).UIText.chatArea.chatAreaMain;
 
   const friend = roomInfo.info.roomInfo.users.find(
     (it) => it.uid !== user.info._id
@@ -84,7 +87,9 @@ const ChatMsgOption = ({
             cancelText={UIText.cancelConfirm}
             okType={'danger'}
           >
-            <S.DeteleItem onClick={() => setDeleteConfirm(true)}>{UIText.delete}</S.DeteleItem>
+            <S.DeteleItem onClick={() => setDeleteConfirm(true)}>
+              {UIText.delete}
+            </S.DeteleItem>
           </Popconfirm>
         </>
       )}

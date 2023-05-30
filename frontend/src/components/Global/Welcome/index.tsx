@@ -1,17 +1,16 @@
-import Image from "next/image";
-import logo from "../../../assets/imgs/LogoFullLong.png";
-import chatbot from "../../../assets/imgs/chatbot.png";
-import * as S from "./Welcome.styled";
-import { useSelector } from "react-redux";
-import { selectUtilState } from "../../../features/redux/slices/utilSlice";
+import Image from 'next/image';
+import logo from '../../../assets/imgs/LogoFullLong.png';
+import chatbot from '../../../assets/imgs/chatbot.png';
+import * as S from './Welcome.styled';
+import { useSelector } from 'react-redux';
+import { selectUtilState } from '../../../features/redux/slices/utilSlice';
 
 interface IWelcome {
   home?: boolean;
 }
 
 const Welcome = ({ home = false }: IWelcome) => {
-
-  const UIText = useSelector(selectUtilState).UItext.welcome
+  const UIText = useSelector(selectUtilState).UIText.welcome;
 
   return (
     <S.Welcome home={home}>

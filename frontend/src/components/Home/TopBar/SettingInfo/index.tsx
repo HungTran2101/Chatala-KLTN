@@ -49,7 +49,7 @@ const SettingInfo = ({
   closeModal,
   open,
 }: ISetingInfo) => {
-  const UIText = useSelector(selectUtilState).UItext.topBar.info;
+  const UIText = useSelector(selectUtilState).UIText;
 
   const dispatch = useDispatch();
   const [previewAvt, setPreviewAvt] = useState<string>(avatar);
@@ -122,7 +122,7 @@ const SettingInfo = ({
         const avatarUrl = await uploadFile(fileAvt);
         if (avatarUrl) {
           const result = await UsersApi.editAvatar(avatarUrl);
-          message.success(result.message);
+          message.success(UIText.messageNoti.editAvatarSuccess);
           updated = true;
         } else {
           message.error('Update avatar failed! Try again later.');
@@ -140,7 +140,7 @@ const SettingInfo = ({
           dob: values.dob,
         };
         const result = await UsersApi.editUserInfo(newValue);
-        message.success(result.message);
+        message.success(UIText.messageNoti.editInfoSuccess);
         updated = true;
       }
       if (updated) {
@@ -192,6 +192,7 @@ const SettingInfo = ({
             <S.Content>
               <S.NewForm>
                 <S.SetWidth>
+                  {UIText.topBar.info.fullnameLabel}
                   <Input
                     placeholder="Name"
                     size="large"
@@ -202,21 +203,20 @@ const SettingInfo = ({
                   />
                   <ErrorMessage name="name" component={S.ErrorMsg} />
                   <S.GenderWrap>
-                    <S.GenderTitle>
-                      {UIText.update.genderLabel}
-                    </S.GenderTitle>
+                    <S.GenderTitle>{UIText.topBar.info.update.genderLabel}</S.GenderTitle>
                     <S.GroupLabel>
                       <S.Label>
                         <S.Radio type="radio" value="male" name="gender" />
-                        {UIText.update.maleLabel}
+                        {UIText.topBar.info.update.maleLabel}
                       </S.Label>
                       <S.Label>
                         <S.Radio type="radio" value="female" name="gender" />
-                        {UIText.update.femaleLabel}
+                        {UIText.topBar.info.update.femaleLabel}
                       </S.Label>
                     </S.GroupLabel>
                   </S.GenderWrap>
                   <S.DatePickerElement>
+                    {UIText.topBar.info.dobLabel}
                     <DatePicker
                       name="dob"
                       dateFormat="d MMMM, yyyy"
@@ -230,10 +230,10 @@ const SettingInfo = ({
                   </S.DatePickerElement>
                   <S.GroupButton>
                     <S.Button type="submit">
-                      {UIText.update.updateConfirm}
+                      {UIText.topBar.info.update.updateConfirm}
                     </S.Button>
                     <S.Button onClick={() => toggleEvent()}>
-                      {UIText.update.updateCancel}
+                      {UIText.topBar.info.update.updateCancel}
                     </S.Button>
                   </S.GroupButton>
                 </S.SetWidth>

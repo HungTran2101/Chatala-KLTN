@@ -44,7 +44,7 @@ const ChatMsg = ({
   const roomfiles = useSelector(selectFileState);
   const roomInfo = useSelector(selectRoomInfoState);
   const user = useSelector(selectUserState);
-  const UIText = useSelector(selectUtilState).UItext.chatArea.chatAreaMain;
+  const UIText = useSelector(selectUtilState).UIText.chatArea.chatAreaMain;
 
   //Reply
   const replyMsg = getReplyInfo(

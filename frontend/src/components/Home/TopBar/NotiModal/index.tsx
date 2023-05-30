@@ -11,8 +11,7 @@ interface INotiModal {
 }
 
 const NotiModal = ({ listNoti, friendAccept, friendDecline }: INotiModal) => {
-
-  const UIText = useSelector(selectUtilState).UItext.topBar.noti
+  const UIText = useSelector(selectUtilState).UIText.topBar.noti;
 
   return (
     // <S.Noti ref={NotiRef}>

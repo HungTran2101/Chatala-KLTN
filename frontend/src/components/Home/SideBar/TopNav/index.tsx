@@ -9,7 +9,7 @@ const TopNav = () => {
   const [toggleCreateGroup, setToggleCreateGroup] = useState(false);
   const [toggleShowFriends, setToggleShowFriends] = useState(false);
 
-  const UIText = useSelector(selectUtilState).UItext.sideBar.topNav
+  const UIText = useSelector(selectUtilState).UIText.sideBar.topNav;
 
   const showModalFriend = () => {
     setToggleShowFriends(true);

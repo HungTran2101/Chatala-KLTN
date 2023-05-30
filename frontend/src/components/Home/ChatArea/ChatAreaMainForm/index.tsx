@@ -238,11 +238,11 @@ const ChatAreaMainForm = ({
               isImg={replyMsg.type === 'image' ? 'true' : 'false'}
             >
               <S.ChatAreaMainInputReplyLabel>
-                {util.UItext.chatArea.chatAreaMain.inputReplyTo}{' '}
+                {util.UIText.chatArea.chatAreaMain.inputReplyTo}{' '}
                 <b>
                   {replyTarget.uid !== user.info._id
                     ? replyTarget?.nickname
-                    : util.UItext.chatArea.chatAreaMain.yourself}
+                    : util.UIText.chatArea.chatAreaMain.yourself}
                 </b>
                 :
               </S.ChatAreaMainInputReplyLabel>
@@ -265,7 +265,7 @@ const ChatAreaMainForm = ({
                 editorState={editorState}
                 onChange={editorChange}
                 plugins={plugins}
-                placeholder={`${util.UItext.chatArea.chatAreaMain.inputPlaceholder} ${roomInfo.info.roomName}...`}
+                placeholder={`${util.UIText.chatArea.chatAreaMain.inputPlaceholder} ${roomInfo.info.roomName}...`}
                 ref={refEditor}
               />
               {roomInfo.info.roomInfo.isGroup && (

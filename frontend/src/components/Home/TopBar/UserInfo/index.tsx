@@ -20,7 +20,7 @@ interface IUserInfo {
 
 const UserInfo = ({ friendProfile, open, closeModal }: IUserInfo) => {
   const user = useSelector(selectUserState);
-  const UIText = useSelector(selectUtilState).UItext.topBar.info;
+  const UIText = useSelector(selectUtilState).UIText.topBar.info;
 
   const { phone, avatar, banner, name, gender, dob } =
     friendProfile || user.info || {};

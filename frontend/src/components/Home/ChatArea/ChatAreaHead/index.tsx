@@ -17,7 +17,7 @@ const ChatAreaHead = ({ setToggleOption, isUnfriend }: IChatAreaHead) => {
   const roomInfo = useSelector(selectRoomInfoState);
   const roomList = useSelector(selectRoomListState);
   const user = useSelector(selectUserState);
-  const UIText = useSelector(selectUtilState).UItext.chatArea;
+  const UIText = useSelector(selectUtilState).UIText.chatArea;
 
   const activeAvatar = [];
   roomInfo.info.roomInfo.users.forEach((u) => {

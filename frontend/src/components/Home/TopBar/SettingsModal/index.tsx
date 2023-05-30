@@ -24,7 +24,7 @@ const onChange = (key: string) => {
 const SettingsModal = ({ onClose, open }: SettingsModalProps) => {
   const [tabPosition, setTabPosition] = useState<TabsPosition>('left');
 
-  const UIText = useSelector(selectUtilState).UItext.topBar.setting
+  const UIText = useSelector(selectUtilState).UIText.topBar.setting;
 
   const items: TabsProps['items'] = [
     {
@@ -48,17 +48,17 @@ const SettingsModal = ({ onClose, open }: SettingsModalProps) => {
   }, [screen.width]);
   return (
     <Modal
-      title='Settings'
+      title="Settings"
       open={open}
       onOk={onClose}
       onCancel={onClose}
       okButtonProps={{ style: { display: 'none' } }}
       cancelButtonProps={{ style: { display: 'none' } }}
-      cancelText='OK'
+      cancelText="OK"
       width={1000}
     >
       <Tabs
-        defaultActiveKey='1'
+        defaultActiveKey="1"
         items={items}
         onChange={onChange}
         tabPosition={tabPosition}

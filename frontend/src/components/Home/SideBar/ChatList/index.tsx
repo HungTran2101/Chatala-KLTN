@@ -18,6 +18,7 @@ import { useSocketContext } from '../../../../contexts/socket';
 import { fileActions } from '../../../../features/redux/slices/fileSlice';
 import { selectUserState } from '../../../../features/redux/slices/userSlice';
 import { message } from 'antd';
+import { selectUtilState } from '../../../../features/redux/slices/utilSlice';
 
 const ChatList = () => {
   const [roomSelected, setRoomSelected] = useState<number>(-1);
@@ -25,6 +26,8 @@ const ChatList = () => {
   const roomList = useSelector(selectRoomListState);
   const roomInfo = useSelector(selectRoomInfoState);
   const user = useSelector(selectUserState);
+  const UIText = useSelector(selectUtilState).UIText.messageNoti;
+
   const socket = useSocketContext();
 
   const dispatch = useDispatch();
@@ -65,7 +68,7 @@ const ChatList = () => {
       );
 
       setRoomSelected(index);
-      document.getElementById('bottomDiv')?.scrollIntoView()
+      document.getElementById('bottomDiv')?.scrollIntoView();
     }
   };
 
@@ -114,7 +117,7 @@ const ChatList = () => {
       const res = await RoomApi.getRoomList();
       dispatch(roomListActions.setRoomList(res.result));
       if (roomId === roomInfo.info.roomInfo._id) {
-        message.warning(`You have been kick from ${roomInfo.info.roomName}`);
+        message.warning(`${UIText.kickFromWarning} ${roomInfo.info.roomName}`);
         dispatch(roomInfoActions.clearRoomInfo(null));
       }
     });

@@ -9,9 +9,13 @@ import * as Yup from 'yup';
 import { UsersApi } from '../src/services/api/users';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { message } from 'antd';
+import { useSelector } from 'react-redux';
+import { selectUtilState } from '../src/features/redux/slices/utilSlice';
 
 const ResetPassword = () => {
   const router = useRouter();
+
+  const UIText = useSelector(selectUtilState).UIText.messageNoti;
 
   const [checkError, setCheckError] = useState<boolean | null>(null);
   const [countdown, setCountdown] = useState(120);
@@ -50,7 +54,7 @@ const ResetPassword = () => {
   const handleResetSubmit = async ({ password }) => {
     try {
       await UsersApi.resetPassword(router.query.phone as string, password);
-      message.success('Reset password succeed!');
+      message.success(UIText.resetPasswordSuccess);
       router.push('/login');
     } catch (err: any) {
       console.log(err);

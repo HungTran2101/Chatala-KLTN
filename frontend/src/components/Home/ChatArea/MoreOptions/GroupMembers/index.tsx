@@ -26,8 +26,8 @@ interface IGroupMembers {
 }
 
 const GroupMembers = ({ open, closeModal, roomInfo, user }: IGroupMembers) => {
-
-  const UIText = useSelector(selectUtilState).UItext.chatArea.moreOptions.groupMembers
+  const UIText =
+    useSelector(selectUtilState).UIText;
 
   const [friendProfile, setFriendProfile] = useState<userInfo>();
   // const [toggleFriendProfile, setToggleFriendProfile] = useState(false);
@@ -63,10 +63,10 @@ const GroupMembers = ({ open, closeModal, roomInfo, user }: IGroupMembers) => {
         })
       );
 
-      socket.emit('kickmember', {uid: res.uid, roomId: res.roomId});
-      setKickConfirm(-1)
+      socket.emit('kickmember', { uid: res.uid, roomId: res.roomId });
+      setKickConfirm(-1);
 
-      message.success(`Kick ${data.nickname} succeed!`);
+      message.success(UIText.messageNoti.kickFromGroupSuccess);
     } catch (err) {
       console.log(err);
       message.error(err);
@@ -78,7 +78,7 @@ const GroupMembers = ({ open, closeModal, roomInfo, user }: IGroupMembers) => {
 
   return (
     <Modal
-      title={UIText.label}
+      title={UIText.chatArea.moreOptions.groupMembers.label}
       open={open}
       onOk={closeModal}
       onCancel={closeModal}
@@ -88,7 +88,7 @@ const GroupMembers = ({ open, closeModal, roomInfo, user }: IGroupMembers) => {
     >
       <S.GroupMembersSearch>
         <S.GroupMembersSearchIcon />
-        <S.GroupMembersSearchInput placeholder={UIText.searchPlaceholder} />
+        <S.GroupMembersSearchInput placeholder={UIText.chatArea.moreOptions.groupMembers.searchPlaceholder} />
       </S.GroupMembersSearch>
       <S.GroupMembersList>
         {activeUsers.map((data, index) => (
@@ -122,23 +122,23 @@ const GroupMembers = ({ open, closeModal, roomInfo, user }: IGroupMembers) => {
                     onClick={() => changeNicknameClicked(data)}
                     style={{ fontStyle: 'italic', marginTop: '-10px' }}
                   >
-                    {UIText.nickname}
+                    {UIText.chatArea.moreOptions.groupMembers.nickname}
                   </AntButton>
                 </div>
               </S.LeftWrap>
 
               {isLeader && data.uid !== user._id && (
                 <Popconfirm
-                  title={`${UIText.titleConfirm} ${data.nickname}`}
-                  description={UIText.descriptionConfirm}
+                  title={`${UIText.chatArea.moreOptions.groupMembers.titleConfirm} ${data.nickname}`}
+                  description={UIText.chatArea.moreOptions.groupMembers.descriptionConfirm}
                   onConfirm={() => kickMember(data)}
                   open={kickConfirm === index}
                   onCancel={() => setKickConfirm(-1)}
                   okType="danger"
-                  cancelText={UIText.cancelConfirm}
+                  cancelText={UIText.chatArea.moreOptions.groupMembers.cancelConfirm}
                 >
                   <Button onClick={() => setKickConfirm(index)}>
-                    {UIText.kick}
+                    {UIText.chatArea.moreOptions.groupMembers.kick}
                   </Button>
                 </Popconfirm>
               )}

@@ -8,11 +8,14 @@ import {
   userActions,
 } from '../../../../../features/redux/slices/userSlice';
 import { UsersApi } from '../../../../../services/api/users';
-import { selectUtilState, utilActions } from '../../../../../features/redux/slices/utilSlice';
+import {
+  selectUtilState,
+  utilActions,
+} from '../../../../../features/redux/slices/utilSlice';
 
 const General = () => {
   const user = useSelector(selectUserState);
-  const UIText = useSelector(selectUtilState).UItext.topBar.setting.general
+  const UIText = useSelector(selectUtilState).UIText.topBar.setting.general;
 
   const dispatch = useDispatch();
 
@@ -26,7 +29,9 @@ const General = () => {
   return (
     <S.General>
       <S.LanguageItem>
-        <S.GeneralItemLanguageLabel>{UIText.language.label}</S.GeneralItemLanguageLabel>
+        <S.GeneralItemLanguageLabel>
+          {UIText.language.label}
+        </S.GeneralItemLanguageLabel>
         <S.GeneralItemLanguageButton
           active={user.info.locale === 'en' ? 1 : 0}
           onClick={() => changeLocale('en')}

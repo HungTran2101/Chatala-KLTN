@@ -43,7 +43,7 @@ const TopBar = () => {
   const socket = useSocketContext();
   const user = useSelector(selectUserState);
   const roomInfo = useSelector(selectRoomInfoState);
-  const UIText = useSelector(selectUtilState).UItext.topBar;
+  const UIText = useSelector(selectUtilState).UIText;
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -156,7 +156,7 @@ const TopBar = () => {
         </S.SearchModalInfo>
         {data.status === 'available' ? (
           <S.SearchModalMessage onClick={() => messagesClick(data._id)}>
-            {UIText.search.modal.message}
+            {UIText.topBar.search.modal.message}
           </S.SearchModalMessage>
         ) : data.status === 'receive' ? (
           <S.FlexWrap>
@@ -165,21 +165,21 @@ const TopBar = () => {
                 friendAccept(data.notificationId, data._id, data.name)
               }
             >
-              {UIText.search.modal.accept}
+              {UIText.topBar.search.modal.accept}
             </S.SearchModalAccept>
             <S.SearchModalDecline
               onClick={() => friendDecline(data.notificationId)}
             >
-              {UIText.search.modal.decline}
+              {UIText.topBar.search.modal.decline}
             </S.SearchModalDecline>
           </S.FlexWrap>
         ) : data.status === 'request' ? (
           <S.SearchModalPending>
-            {UIText.search.modal.pending}
+            {UIText.topBar.search.modal.pending}
           </S.SearchModalPending>
         ) : (
           <S.SearchModalAddFriend onClick={() => friendRequest(data._id)}>
-            {UIText.search.modal.addfriend}
+            {UIText.topBar.search.modal.addfriend}
           </S.SearchModalAddFriend>
         )}
       </S.SearchModalItem>
@@ -201,7 +201,7 @@ const TopBar = () => {
   const friendRequest = async (id: string) => {
     try {
       const res = await FriendApi.friendRequest(id);
-      message.success(res.msg);
+      message.success(UIText.messageNoti.requestFriendSuccess);
       socket.emit('sendNoti', id);
       setAction(true);
     } catch (err) {
@@ -236,7 +236,7 @@ const TopBar = () => {
         socket.emit('new room', uid);
       }
       getListNotify();
-      message.success('Accept friend successfully');
+      message.success(UIText.messageNoti.acceptFriendSuccess);
     } catch (err) {
       console.log(err);
     }
@@ -245,7 +245,7 @@ const TopBar = () => {
   const friendDecline = async (id: string) => {
     try {
       const res = await FriendApi.friendDecline(id);
-      message.success('Decline friend successfully');
+      message.success(UIText.messageNoti.declineFriendSuccess);
       getListNotify();
       setAction(true);
     } catch (err) {
@@ -314,11 +314,11 @@ const TopBar = () => {
               dropdownMatchSelectWidth={500}
               style={{ width: '100%' }}
               options={options}
-              notFoundContent={UIText.search.modal.loading}
+              notFoundContent={UIText.topBar.search.modal.loading}
               listHeight={500}
             >
               <S.SearchInput
-                placeholder={UIText.search.placeHolder}
+                placeholder={UIText.topBar.search.placeHolder}
                 onChange={(e) => setSearchInput(e.target.value)}
                 value={searchInput}
               />
@@ -334,7 +334,7 @@ const TopBar = () => {
                     friendDecline={friendDecline}
                   />
                 }
-                title={UIText.noti.title}
+                title={UIText.topBar.noti.title}
                 trigger="click"
                 placement="bottomRight"
               >

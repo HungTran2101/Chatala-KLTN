@@ -13,6 +13,22 @@ export const UIText = [
       welcomeLabel: 'Welcome to',
       description: 'Great socializing experience with friends',
     },
+    messageNoti: {
+      resetPasswordSuccess: 'Reset password successfully.',
+      unfriendSuccess: 'Unfriend successfully.',
+      addToGroupSuccess: 'Add member successfully.',
+      kickFromGroupSuccess: 'Kick member successfully.',
+      changeGroupNameSuccess: 'Change group name successfully.',
+      changeNicknameSuccess: 'Change nickname successfully.',
+      createGroupSuccess: 'Create group successfully.',
+      requestFriendSuccess: 'Send friend request successfully.',
+      acceptFriendSuccess: 'Accept friend successfully.',
+      declineFriendSuccess: 'Decline friend successfully.',
+      editAvatarSuccess: 'Update avatar successfully.',
+      editInfoSuccess: 'Update info successfully.',
+      registrationSuccess: 'Registration successfully.',
+      kickFromWarning: 'You have been kicked from',
+    },
     topBar: {
       info: {
         phoneLable: 'Phone',
@@ -154,6 +170,22 @@ export const UIText = [
     welcome: {
       welcomeLabel: 'Chào mừng đến với',
       description: 'Trải nghiệm giao lưu tuyệt vời với bạn bè',
+    },
+    messageNoti: {
+      resetPasswordSuccess: 'Tạo lại mật khẩu thành công.',
+      unfriendSuccess: 'Hủy kết bạn thành công.',
+      addToGroupSuccess: 'Thêm thành viên thành công.',
+      kickFromGroupSuccess: 'Đá thành viên thành công.',
+      changeGroupNameSuccess: 'Đổi tên nhóm thành công.',
+      changeNicknameSuccess: 'Đổi biệt danh thành công.',
+      createGroupSuccess: 'Tạo nhóm thành công.',
+      requestFriendSuccess: 'Gửi lời mời kết bạn thành công.',
+      acceptFriendSuccess: 'Chấp nhận kết bạn thành công.',
+      declineFriendSuccess: 'Từ chối kết bạn thành công.',
+      editAvatarSuccess: 'Cập nhật ảnh đại diện thành công.',
+      editInfoSuccess: 'Cập nhật thông tin cá nhân thành công.',
+      registrationSuccess: 'Đăng ký thành công.',
+      kickFromWarning: 'Bạn đã bị đá khỏi.',
     },
     topBar: {
       info: {

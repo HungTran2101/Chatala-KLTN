@@ -7,14 +7,14 @@ import { UIText as UI } from '../../../utils/dataConfig';
 export interface UtilState {
   replyId: string;
   onCall: boolean;
-  UItext: UITextType;
+  UIText: UITextType;
 }
 
 // Initial state
 const initialState: UtilState = {
   replyId: null,
   onCall: false,
-  UItext: UI[0],
+  UIText: UI[0],
 };
 
 // Actual Slice
@@ -34,7 +34,7 @@ export const utilSlice = createSlice({
     setUIText(state, action) {
       const { locale } = action.payload;
       const uiText = UI.find((it) => it.locale === locale);
-      state.UItext = uiText || UI[0];
+      state.UIText = uiText || UI[0];
     },
 
     // // Special reducer for hydrating the state. Special case for next-redux-wrapper

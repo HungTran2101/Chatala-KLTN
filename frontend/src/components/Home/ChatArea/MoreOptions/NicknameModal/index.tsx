@@ -25,7 +25,8 @@ const NicknameModal = ({
 
   const dispatch = useDispatch();
 
-  const UIText = useSelector(selectUtilState).UItext.chatArea.moreOptions.nickname
+  const UIText =
+    useSelector(selectUtilState).UIText;
 
   const saveNickname = async () => {
     if (input.current.value === '') return;
@@ -48,7 +49,7 @@ const NicknameModal = ({
             nickname: input.current.value,
           })
         );
-      message.success(`Change nickname to ${input.current.value} succeed`)
+      message.success(UIText.messageNoti.changeNicknameSuccess);
       closeModal();
     } catch (err) {
       console.log(err);
@@ -58,12 +59,12 @@ const NicknameModal = ({
 
   return (
     <Modal
-      title={`${UIText.title} ${userNeedChange?.nickname}`}
+      title={`${UIText.chatArea.moreOptions.nickname.title} ${userNeedChange?.nickname}`}
       open={open}
       onOk={saveNickname}
       onCancel={closeModal}
       okType="link"
-      cancelText={UIText.cancel}
+      cancelText={UIText.chatArea.moreOptions.nickname.cancel}
       destroyOnClose
       centered
     >

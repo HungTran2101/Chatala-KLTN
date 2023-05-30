@@ -44,7 +44,7 @@ const ChangePassword = () => {
   });
   const [messageApi, contextHolder] = message.useMessage();
 
-  const UIText = useSelector(selectUtilState).UItext.topBar.setting.security;
+  const UIText = useSelector(selectUtilState).UIText.topBar.setting.security;
 
   const success = (message: string) => {
     messageApi.open({

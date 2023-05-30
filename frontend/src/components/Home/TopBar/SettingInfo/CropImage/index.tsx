@@ -28,7 +28,7 @@ const CropImage = ({
   setPreviewAvt,
   setFieldValue,
 }: ICrop) => {
-  const UIText = useSelector(selectUtilState).UItext.topBar.info;
+  const UIText = useSelector(selectUtilState).UIText.topBar.info;
 
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
