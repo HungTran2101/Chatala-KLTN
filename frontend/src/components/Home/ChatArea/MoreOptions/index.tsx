@@ -7,7 +7,7 @@ import { useState } from 'react';
 import NicknameModal from './NicknameModal';
 import UserInfo from '../../TopBar/UserInfo';
 import { selectUserState } from '../../../../features/redux/slices/userSlice';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { UsersApi } from '../../../../services/api/users';
 import GroupMembers from './GroupMembers';
 import { FriendApi } from '../../../../services/api/friend';
@@ -17,6 +17,9 @@ import AddMemberModal from './AddMemberModal';
 import { Drawer, Modal, Popconfirm, message } from 'antd';
 import { useSocketContext } from '../../../../contexts/socket';
 import { selectUtilState } from '../../../../features/redux/slices/utilSlice';
+import { RoomApi } from '../../../../services/api/room';
+import { roomListActions } from '../../../../features/redux/slices/roomListSlice';
+import { roomInfoActions } from '../../../../features/redux/slices/roomInfoSlice';
 
 interface IMoreOptions {
   setToggleOption: () => void;
@@ -46,6 +49,8 @@ const MoreOptions = ({
   const user = useSelector(selectUserState);
   const roomfiles = useSelector(selectFileState);
   const UIText = useSelector(selectUtilState).UIText;
+
+  const dispatch = useDispatch();
 
   const photos = roomfiles.list.filter((file) => file.type === 'image');
   const files = roomfiles.list.filter((file) => file.type === 'file');
@@ -89,6 +94,34 @@ const MoreOptions = ({
     socket.emit('unfriend', { friendRelateId, receiveId: friend.uid });
     message.success(UIText.messageNoti.unfriendSuccess);
     setIsUnfriend(true);
+  };
+
+  const handleLeaveGroup = async () => {
+    try {
+      const userLeave = roomInfo.roomInfo.users.find(
+        (u) => u.uid === user.info._id
+      );
+
+      const res1 = await RoomApi.kickMember(
+        roomInfo.roomInfo._id,
+        user.info._id,
+        userLeave.role
+      );
+      const res2 = await RoomApi.getRoomList();
+      dispatch(roomListActions.setRoomList(res2.result));
+      dispatch(roomInfoActions.clearRoomInfo(null));
+
+      socket.emit('memberLeaveGroup', {
+        roomId: roomInfo.roomInfo._id,
+        username: user.info.name,
+        roomUsers: roomInfo.roomInfo.users,
+      });
+
+      message.success(UIText.messageNoti.leaveGroupSuccess);
+    } catch (error) {
+      console.log(error);
+      message.error(error);
+    }
   };
 
   const [modalUser, setModalUser] = useState(false);
@@ -151,6 +184,24 @@ const MoreOptions = ({
               {/* <S.DeleteItem onClick={() => setToggleKickMember(true)}>
                 Kick Members
               </S.DeleteItem> */}
+              <Popconfirm
+                title={`${UIText.chatArea.moreOptions.leaveGroup.titleConfirm} ${roomInfo.roomName}`}
+                description={
+                  UIText.chatArea.moreOptions.leaveGroup.descriptionConfirm
+                }
+                open={open}
+                onConfirm={() => handleLeaveGroup()}
+                // okButtonProps={{ loading: confirmLoading }}
+                onCancel={handleCancel}
+                cancelText={
+                  UIText.chatArea.moreOptions.leaveGroup.cancelConfirm
+                }
+                okType={'danger'}
+              >
+                <S.DeleteItem onClick={showPopconfirm}>
+                  {UIText.chatArea.moreOptions.leaveGroup.label}
+                </S.DeleteItem>
+              </Popconfirm>
             </>
           )}
           {!roomInfo.roomInfo.isGroup && (

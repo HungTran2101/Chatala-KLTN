@@ -28,6 +28,8 @@ export const UIText = [
       editInfoSuccess: 'Update info successfully.',
       registrationSuccess: 'Registration successfully.',
       kickFromWarning: 'You have been kicked from',
+      leaveGroupSuccess: 'Leave group successfully.',
+      memberLeaveNoti: 'have leave group.',
     },
     topBar: {
       info: {
@@ -142,6 +144,12 @@ export const UIText = [
           descriptionConfirm: 'Please confirm',
           cancelConfirm: 'Cancel',
         },
+        leaveGroup: {
+          label: 'Leave group',
+          titleConfirm: 'You are about to leave group',
+          descriptionConfirm: 'Please confirm',
+          cancelConfirm: 'Cancel',
+        },
         groupMembers: {
           label: 'Group Members',
           searchPlaceholder: 'Search...',
@@ -186,6 +194,8 @@ export const UIText = [
       editInfoSuccess: 'Cập nhật thông tin cá nhân thành công.',
       registrationSuccess: 'Đăng ký thành công.',
       kickFromWarning: 'Bạn đã bị đá khỏi.',
+      leaveGroupSuccess: 'Rời nhóm thành công.',
+      memberLeaveNoti: 'đã rời nhóm.',
     },
     topBar: {
       info: {
@@ -297,6 +307,12 @@ export const UIText = [
         unfriend: {
           label: 'Hủy kết bạn',
           titleConfirm: 'Bạn sắp hủy kết bạn',
+          descriptionConfirm: 'Xin xác nhận',
+          cancelConfirm: 'Hủy',
+        },
+        leaveGroup: {
+          label: 'Rời nhóm',
+          titleConfirm: 'Bạn sắp rời nhóm',
           descriptionConfirm: 'Xin xác nhận',
           cancelConfirm: 'Hủy',
         },

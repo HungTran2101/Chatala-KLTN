@@ -121,11 +121,23 @@ const ChatList = () => {
         dispatch(roomInfoActions.clearRoomInfo(null));
       }
     });
+    socket.on('memberLeaveGroup', async ({ roomId, username }) => {
+      const res = await RoomApi.getRoomList();
+      const newRoom = res.result.find((r) => r.roomInfo._id === roomId);
+
+      dispatch(roomListActions.setRoomList(res.result));
+
+      if (roomId === roomInfo.info.roomInfo._id) {
+        dispatch(roomInfoActions.setRoomInfo(newRoom));
+        message.info(`${username} ${UIText.memberLeaveNoti}`);
+      }
+    });
 
     return () => {
       socket.off('receivegroupname');
       socket.off('addmember');
       socket.off('kickmember');
+      socket.off('memberLeaveGroup');
     };
   }, [roomList, roomInfo]);
 

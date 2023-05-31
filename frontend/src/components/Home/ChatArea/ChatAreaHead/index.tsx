@@ -35,13 +35,13 @@ const ChatAreaHead = ({ setToggleOption, isUnfriend }: IChatAreaHead) => {
   }>();
 
   //Handle status
-  const handleStatus = () => {
-    const roomSelectedIndex = roomList.list.findIndex(
-      (room) => room.roomInfo._id === roomInfo.info?.roomInfo._id
-    );
-    setStatus(roomList.activeList[roomSelectedIndex]);
-  };
   useEffect(() => {
+    const handleStatus = () => {
+      const roomSelectedIndex = roomList.list.findIndex(
+        (room) => room.roomInfo._id === roomInfo.info?.roomInfo._id
+      );
+      setStatus(roomList.activeList[roomSelectedIndex]);
+    };
     handleStatus();
   }, [roomList.activeList, roomInfo.info]);
 

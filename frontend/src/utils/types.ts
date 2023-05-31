@@ -191,6 +191,8 @@ export type UITextType = {
     editInfoSuccess: string;
     registrationSuccess: string;
     kickFromWarning: string;
+    leaveGroupSuccess: string;
+    memberLeaveNoti: string,
   };
   topBar: {
     info: {
@@ -300,6 +302,12 @@ export type UITextType = {
         cancel: string;
       };
       unfriend: {
+        label: string;
+        titleConfirm: string;
+        descriptionConfirm: string;
+        cancelConfirm: string;
+      };
+      leaveGroup: {
         label: string;
         titleConfirm: string;
         descriptionConfirm: string;

@@ -203,11 +203,17 @@ io.on('connection', (socket) => {
     user && socket.to(user.socketId).emit('kickmember', roomId);
   });
 
-  // socket.on("sendMessage", (message, roomId) => {
-  //   console.log("new message: ", message);
-  //   console.log("roomId: ", roomId);
-  //   socket.to(roomId).emit("receiveMessage", message);
-  // });
+  socket.on('memberLeaveGroup', ({roomId, username, roomUsers}) => {
+    const roomUserIds = []
+    roomUsers.forEach(user => roomUserIds.push(user.uid))
+
+    const _users = users.filter((u) => roomUserIds.includes(u.uid));
+    if (_users.length > 0) {
+      _users.forEach((u) => {
+        socket.to(u.socketId).emit('memberLeaveGroup', { roomId, username });
+      });
+    }
+  })
 
   socket.on('disconnect', () => {
     console.log('A user disconnected'.gray.bold);

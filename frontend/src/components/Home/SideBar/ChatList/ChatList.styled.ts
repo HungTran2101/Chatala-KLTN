@@ -25,6 +25,6 @@ export const Wrapper = styled.div`
   text-align: -webkit-center;
 
   @media only screen and (max-width: 1024px) {
-    ${tw`flex`}
+    ${tw`flex gap-2`}
   }
 `;

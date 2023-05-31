@@ -51,9 +51,14 @@ export const RoomApi = {
       uid,
     });
   },
-  kickMember: async function (roomId: string, uid: string): Promise<any> {
+  kickMember: async function (
+    roomId: string,
+    uid: string,
+    leaderShift: boolean = false
+  ): Promise<any> {
     return await http.put(`${API_URL.kickMember}/${roomId}/kick-member`, {
       uid,
+      leaderShift,
     });
   },
 };

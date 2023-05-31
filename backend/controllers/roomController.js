@@ -10,8 +10,8 @@ const createRoom = asyncHandler(async (req, res, next) => {
   const { isGroup, users, friendRelateId } = req.body;
 
   const roomExisted = await Rooms.findOne({ friendRelateId: friendRelateId });
-  if(roomExisted){
-    return res.status(200).json(roomExisted)
+  if (roomExisted) {
+    return res.status(200).json(roomExisted);
   }
 
   if (users.every((user) => user.uid.toString() !== req.user._id.toString())) {
@@ -127,7 +127,10 @@ const getRoomInfo = asyncHandler(async (req, res, next) => {
 
   const messages = await Messages.find({
     roomId: roomId,
-  }).sort({ createdAt: -1 }).skip(0).limit(20);
+  })
+    .sort({ createdAt: -1 })
+    .skip(0)
+    .limit(20);
   const files = await Files.find({ roomId: roomId }).sort({ createdAt: -1 });
 
   if (messages && files) {
@@ -228,7 +231,7 @@ const addMember = asyncHandler(async (req, res, next) => {
 
 const kickMember = asyncHandler(async (req, res, next) => {
   const roomId = req.params.roomId;
-  const { uid } = req.body;
+  const { uid, leaderShift } = req.body;
 
   try {
     if (!mongoose.isValidObjectId(uid)) {
@@ -238,13 +241,19 @@ const kickMember = asyncHandler(async (req, res, next) => {
       return next(new ErrorHandler(`Room id is required`, 400));
     }
 
-    const newRoomMember = await Rooms.findOneAndUpdate(
+    if (leaderShift) {
+      await Rooms.findOneAndUpdate(
+        { _id: roomId, 'users.role': false },
+        { $set: { 'users.$.role': true } },
+        { new: true }
+      );
+    }
+    const result = await Rooms.findOneAndUpdate(
       { _id: roomId, 'users.uid': uid },
-      { $set: { 'users.$.isLeave': true } },
+      { $set: { 'users.$.isLeave': true, 'users.$.role': false } },
       { new: true }
     );
-
-    return res.status(200).json({ uid, roomId });
+    return res.status(200).json({ uid, roomId, result });
   } catch (error) {
     return res.status(400).json(error);
   }
