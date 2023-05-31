@@ -1,0 +1,443 @@
+[{
+  "_id": {
+    "$oid": "6427157618189e55bd916823"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/image/upload/v1680282999/Chatala/qrgdbfttakzzjjnaxdif.png",
+  "type": "image",
+  "name": "Image",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-03-31T17:16:38.826Z"
+  },
+  "updatedAt": {
+    "$date": "2023-03-31T17:16:38.826Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64280e987a5bfa9366ae0426"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/image/upload/v1680346774/Chatala/k8vbnuu0pnsrk0d9d5i5.pdf",
+  "type": "file",
+  "name": "HCI_Course-Topics_2022.pdf",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-01T10:59:36.314Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-01T10:59:36.314Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "642c490e02cfaecfd74db1ec"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/image/upload/v1680623885/Chatala/ionnwp3c0otnz4llp999.jpg",
+  "type": "image",
+  "name": "Image",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-04T15:58:06.194Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-04T15:58:06.194Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "642c490e02cfaecfd74db1eb"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/image/upload/v1680623884/Chatala/uwzc4xb1riydfjhyxdgl.jpg",
+  "type": "image",
+  "name": "Image",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-04T15:58:06.193Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-04T15:58:06.193Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "642c4a1602cfaecfd74db212"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/image/upload/v1680624149/Chatala/cx5xdyydgtghlhfbeqqk.jpg",
+  "type": "image",
+  "name": "Image",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-04T16:02:30.243Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-04T16:02:30.243Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64344a5196fe4f3bf156e40b"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/image/upload/v1681148498/Chatala/bust1mrh7qzb0zftecxr.jpg",
+  "type": "image",
+  "name": "Image",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-10T17:41:37.958Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T17:41:37.958Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64344aad96fe4f3bf156e429"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/image/upload/v1681148589/Chatala/k9qgrvy5hbeszgpquzq8.pdf",
+  "type": "file",
+  "name": "HCI_Course-Topics_2022.pdf",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-10T17:43:09.688Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T17:43:09.688Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64344b6a96fe4f3bf156e462"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/image/upload/v1681148779/Chatala/mtjcw6pdkcklell4yxcm.pdf",
+  "type": "file",
+  "name": "HCI_Course-Topics_2022.pdf",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-10T17:46:18.718Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T17:46:18.718Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64344bc996fe4f3bf156e4ba"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/image/upload/v1681148873/Chatala/zepae3uy2fuzagqnbfmv.jpg",
+  "type": "image",
+  "name": "Image",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-10T17:47:53.303Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T17:47:53.303Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64344cf896fe4f3bf156e4f3"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/image/upload/v1681149176/Chatala/ftyaivtgsvq4ljalfhfl.pdf",
+  "type": "file",
+  "name": "HCI_Course-Topics_2022.pdf",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-10T17:52:56.563Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T17:52:56.563Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64344ee881118e09ca65834a"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/image/upload/v1681149673/Chatala/gw0ybfqcm1e24flhu9c1.pdf",
+  "type": "file",
+  "name": "HCI_Course-Topics_2022.pdf",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-10T18:01:12.687Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T18:01:12.687Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64344f0b81118e09ca658371"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/image/upload/v1681149708/Chatala/nyoukxhfv3jbzcdwu9xp.pdf",
+  "type": "file",
+  "name": "HCI_Course-Topics_2022.pdf",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-10T18:01:47.801Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T18:01:47.801Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64344f8581118e09ca6583ab"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/image/upload/v1681149829/Chatala/axhvbn479op3l8nn2uat.png",
+  "type": "image",
+  "name": "Image",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-10T18:03:49.483Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T18:03:49.483Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64344f8681118e09ca6583b6"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/image/upload/v1681149830/Chatala/va51wpxdoon1r2rwurtv.png",
+  "type": "image",
+  "name": "Image",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-10T18:03:50.368Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T18:03:50.368Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643454fd81118e09ca658480"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/image/upload/v1681151229/Chatala/gidwgrsinkeahcq1ohqg.jpg",
+  "type": "image",
+  "name": "Image",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-10T18:27:09.307Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T18:27:09.307Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643455b00936ecfd34a76f17"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/image/upload/v1681151408/Chatala/edw2zghlzihcz4kavqw0.pdf",
+  "type": "file",
+  "name": "HCI_Course-Topics_2022.pdf",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-10T18:30:08.304Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T18:30:08.304Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643456c56996d328f10914c1"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/image/upload/v1681151685/Chatala/yj6sqvkxipuqzra9bkru.jpg",
+  "type": "image",
+  "name": "Image",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-10T18:34:45.965Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T18:34:45.965Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64358d84e30d0da704ddd0b2"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/image/upload/v1681231237/Chatala/vmbkzdy5eyagkwuotyw9.pdf",
+  "type": "file",
+  "name": "HCI_Course-Topics_2022.pdf",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-11T16:40:36.786Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-11T16:40:36.786Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64358dd603b4fd076a023b43"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/image/upload/v1681231318/Chatala/xrobsjvippuocrazekvt.pdf",
+  "type": "file",
+  "name": "HCI_Course-Topics_2022.pdf",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-11T16:41:58.490Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-11T16:41:58.490Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64358def03b4fd076a023b4f"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/image/upload/v1681231344/Chatala/a9xkuc0sz1g7jnk8e9cm.jpg",
+  "type": "image",
+  "name": "Image",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-11T16:42:23.643Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-11T16:42:23.643Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643d6dcf9546b147c7d83665"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/raw/upload/v1681747407/Chatala/l3eesuhhbxonmlrs3xbk.xlsx",
+  "type": "file",
+  "name": "KLTN_2_22-23-Final.xlsx",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-17T16:03:27.973Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-17T16:03:27.973Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643d6e7e9546b147c7d83671"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/raw/upload/v1681747582/Chatala/m3wzsxwc1rnqboiy58cx.xlsx",
+  "type": "file",
+  "name": "KLTN_2_22-23-Final.xlsx",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-17T16:06:22.566Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-17T16:06:22.566Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643d719f9546b147c7d836b7"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/raw/upload/v1681748383/Chatala/ymegd3aytdt0q85ncglj.xlsx",
+  "type": "file",
+  "name": "KLTN_2_22-23-Final.xlsx",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-04-17T16:19:43.722Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-17T16:19:43.722Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646f15090d448aa16152e09a"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/image/upload/v1685001477/Chatala/em2q3xzbv29eeyqiehvj.png",
+  "type": "image",
+  "name": "Image",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-05-25T07:58:01.520Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-25T07:58:01.520Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646f15090d448aa16152e09b"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/raw/upload/v1685001480/Chatala/dczv1heogzgezpms4itp.xlsx",
+  "type": "file",
+  "name": "KLTN_2_22-23-Final.xlsx",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-05-25T07:58:01.520Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-25T07:58:01.520Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646f22114ab495ccdc89996e"
+  },
+  "url": "https://res.cloudinary.com/dzikgumce/raw/upload/v1685004816/Chatala/pw4hi6fmqewugfjp5jzb.xlsx",
+  "type": "file",
+  "name": "KLTN_2_22-23-Final.xlsx",
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "createdAt": {
+    "$date": "2023-05-25T08:53:37.477Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-25T08:53:37.477Z"
+  },
+  "__v": 0
+}]

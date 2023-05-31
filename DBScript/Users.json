@@ -1,0 +1,190 @@
+[{
+  "_id": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "avatar": "https://res.cloudinary.com/dzikgumce/image/upload/v1683030606/642012f9a20ba00b213ddd6a.jpg",
+  "banner": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  "name": "hung1",
+  "password": "$2a$10$s0Y57d1Wkf72fQQpCRaC9.4f8KIW0I4R2Szy30Fi35yrW28gjk1Xm",
+  "phone": "0931199067",
+  "gender": "male",
+  "dob": {
+    "$date": "2023-03-26T09:37:16.472Z"
+  },
+  "createdAt": {
+    "$date": "2023-03-26T09:40:09.859Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-25T06:56:58.061Z"
+  },
+  "__v": 0,
+  "locale": "vi"
+},{
+  "_id": {
+    "$oid": "6420131ea20ba00b213ddd6c"
+  },
+  "avatar": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  "banner": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  "name": "hung2",
+  "password": "$2a$10$Fj50boZGxn2A1Wj81MUone0Gi1WaUcz2tUqRPQ37rh.HDaohIMO/K",
+  "phone": "0932199067",
+  "gender": "male",
+  "dob": {
+    "$date": "2023-03-26T09:37:16.472Z"
+  },
+  "createdAt": {
+    "$date": "2023-03-26T09:40:46.213Z"
+  },
+  "updatedAt": {
+    "$date": "2023-03-26T09:40:46.213Z"
+  },
+  "__v": 0,
+  "locale": "en"
+},{
+  "_id": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "avatar": "https://res.cloudinary.com/dzikgumce/image/upload/v1684818776/Chatala/6420eea412b89c1dabcb3f68.jpg",
+  "banner": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  "name": "Huu Thanh",
+  "password": "$2a$10$bF78Li.S9gsbVZrhX7z9BOnxp.lfraLoIOw.9tfVx.guFvgE/O9Cu",
+  "phone": "0919978345",
+  "gender": "male",
+  "dob": {
+    "$date": "2002-03-27T01:01:29.000Z"
+  },
+  "createdAt": {
+    "$date": "2023-03-27T01:17:24.813Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-30T16:00:15.854Z"
+  },
+  "__v": 0,
+  "locale": "vi"
+},{
+  "_id": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "avatar": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  "banner": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  "name": "thanh2",
+  "password": "$2a$10$H.GskeAYQr.2yZv0GqgzQOot6kMUWWOneu..QRZ67jG7NwI3kSoQy",
+  "phone": "0948498222",
+  "gender": "male",
+  "dob": {
+    "$date": "2023-03-27T01:01:29.571Z"
+  },
+  "createdAt": {
+    "$date": "2023-03-27T03:43:25.094Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-21T19:10:10.449Z"
+  },
+  "__v": 0,
+  "locale": "en"
+},{
+  "_id": {
+    "$oid": "6462d3a9666a37e348358c81"
+  },
+  "avatar": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  "banner": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  "name": "Nhat Hung",
+  "password": "$2a$10$uWToJC0hgnNb4pU/irznMey5kGgbwWcdSLIBMyCQ/mMuzoFkmEYla",
+  "phone": "0933199067",
+  "gender": "male",
+  "dob": {
+    "$date": "2023-05-16T00:42:07.673Z"
+  },
+  "createdAt": {
+    "$date": "2023-05-16T00:51:53.051Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-16T00:59:18.749Z"
+  },
+  "__v": 0,
+  "locale": "en"
+},{
+  "_id": {
+    "$oid": "6462d3b0666a37e348358c83"
+  },
+  "avatar": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  "banner": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  "name": "hung4",
+  "password": "$2a$10$GNYKp2qCRCJPeazmzjmNZuv2XWnF3VMVwjdY.MnSxF9u9NHoR15b.",
+  "phone": "0934199067",
+  "gender": "male",
+  "dob": {
+    "$date": "2023-05-16T00:42:07.673Z"
+  },
+  "createdAt": {
+    "$date": "2023-05-16T00:52:00.083Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-16T00:52:00.083Z"
+  },
+  "__v": 0,
+  "locale": "en"
+},{
+  "_id": {
+    "$oid": "6462d3bc666a37e348358c85"
+  },
+  "avatar": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  "banner": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  "name": "hung5",
+  "password": "$2a$10$md11okQcI14fHR2EWLst..AgcQultoyVOOsUxh4Iy9wVBHR2SzY.S",
+  "phone": "0935199067",
+  "gender": "male",
+  "dob": {
+    "$date": "2023-05-16T00:42:07.673Z"
+  },
+  "createdAt": {
+    "$date": "2023-05-16T00:52:12.830Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-16T00:52:12.830Z"
+  },
+  "__v": 0,
+  "locale": "en"
+},{
+  "_id": {
+    "$oid": "6462d3c6666a37e348358c87"
+  },
+  "avatar": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  "banner": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  "name": "hung6",
+  "password": "$2a$10$RLypu1/YtRrHIXOxK.DmQ.DJ8k8UBJgUa2O0zs71QTGgJcz5DqGpi",
+  "phone": "0936199067",
+  "gender": "male",
+  "dob": {
+    "$date": "2023-05-16T00:42:07.673Z"
+  },
+  "createdAt": {
+    "$date": "2023-05-16T00:52:22.605Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-16T00:52:22.605Z"
+  },
+  "__v": 0,
+  "locale": "en"
+},{
+  "_id": {
+    "$oid": "646947c2a0ab5d468a77d3f5"
+  },
+  "avatar": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  "banner": "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+  "name": "Clark Le",
+  "password": "$2a$10$pQoPuCuzDGzBaWFyXmJeNeT165e6tvvfxDPElgL0u3u0KwWyT9XRa",
+  "phone": "0931511760",
+  "gender": "male",
+  "dob": {
+    "$date": "2023-05-20T19:39:09.910Z"
+  },
+  "createdAt": {
+    "$date": "2023-05-20T22:20:50.876Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-20T22:20:50.876Z"
+  },
+  "__v": 0,
+  "locale": "en"
+}]

@@ -1,0 +1,250 @@
+{
+  "fields": [
+    {
+      "name": "_id",
+      "path": "_id",
+      "count": 9,
+      "types": [
+        {
+          "name": "ObjectId",
+          "bsonType": "ObjectId",
+          "path": "_id",
+          "count": 9,
+          "values": [
+            "646dd87ae9dd6817066d4288",
+            "6468cdc5d9edec79d5302e47",
+            "6462d45d666a37e348358d21",
+            "6462d45f666a37e348358d7c",
+            "64319216e9f2096551bb5889",
+            "646dce28d44f0e288029e57a",
+            "6462d45f666a37e348358d5d",
+            "6421af2ac0bee3bc4fd965b7",
+            "6421af0fc0bee3bc4fd96596"
+          ],
+          "total_count": 0,
+          "probability": 1,
+          "unique": 9,
+          "has_duplicates": false
+        }
+      ],
+      "total_count": 9,
+      "type": "ObjectId",
+      "has_duplicates": false,
+      "probability": 1
+    },
+    {
+      "name": "__v",
+      "path": "__v",
+      "count": 9,
+      "types": [
+        {
+          "name": "Int32",
+          "bsonType": "Int32",
+          "path": "__v",
+          "count": 9,
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "total_count": 0,
+          "probability": 1,
+          "unique": 1,
+          "has_duplicates": true
+        }
+      ],
+      "total_count": 9,
+      "type": "Int32",
+      "has_duplicates": true,
+      "probability": 1
+    },
+    {
+      "name": "createdAt",
+      "path": "createdAt",
+      "count": 9,
+      "types": [
+        {
+          "name": "Date",
+          "bsonType": "Date",
+          "path": "createdAt",
+          "count": 9,
+          "values": [
+            "2023-05-24T09:27:22.372Z",
+            "2023-05-20T13:40:21.492Z",
+            "2023-05-16T00:54:53.978Z",
+            "2023-05-16T00:54:55.889Z",
+            "2023-04-08T16:11:02.690Z",
+            "2023-05-24T08:43:20.458Z",
+            "2023-05-16T00:54:55.076Z",
+            "2023-03-27T14:58:50.503Z",
+            "2023-03-27T14:58:23.209Z"
+          ],
+          "total_count": 0,
+          "probability": 1,
+          "unique": 8,
+          "has_duplicates": true
+        }
+      ],
+      "total_count": 9,
+      "type": "Date",
+      "has_duplicates": true,
+      "probability": 1
+    },
+    {
+      "name": "status",
+      "path": "status",
+      "count": 9,
+      "types": [
+        {
+          "name": "Document",
+          "bsonType": "Document",
+          "path": "status",
+          "count": 9,
+          "fields": [
+            {
+              "name": "type",
+              "path": "status.type",
+              "count": 9,
+              "types": [
+                {
+                  "name": "String",
+                  "bsonType": "String",
+                  "path": "status.type",
+                  "count": 9,
+                  "values": [
+                    "available",
+                    "available",
+                    "available",
+                    "disable",
+                    "available",
+                    "available",
+                    "available",
+                    "available",
+                    "available"
+                  ],
+                  "total_count": 0,
+                  "probability": 1,
+                  "unique": 2,
+                  "has_duplicates": true
+                }
+              ],
+              "total_count": 9,
+              "type": "String",
+              "has_duplicates": true,
+              "probability": 1
+            }
+          ],
+          "total_count": 0,
+          "probability": 1
+        }
+      ],
+      "total_count": 9,
+      "type": "Document",
+      "has_duplicates": false,
+      "probability": 1
+    },
+    {
+      "name": "uid1",
+      "path": "uid1",
+      "count": 9,
+      "types": [
+        {
+          "name": "ObjectId",
+          "bsonType": "ObjectId",
+          "path": "uid1",
+          "count": 9,
+          "values": [
+            "6462d3c6666a37e348358c87",
+            "6420eea412b89c1dabcb3f68",
+            "6462d3a9666a37e348358c81",
+            "6462d3bc666a37e348358c85",
+            "6420131ea20ba00b213ddd6c",
+            "642012f9a20ba00b213ddd6a",
+            "6462d3b0666a37e348358c83",
+            "6420eea412b89c1dabcb3f68",
+            "6420eea412b89c1dabcb3f68"
+          ],
+          "total_count": 0,
+          "probability": 1,
+          "unique": 7,
+          "has_duplicates": true
+        }
+      ],
+      "total_count": 9,
+      "type": "ObjectId",
+      "has_duplicates": true,
+      "probability": 1
+    },
+    {
+      "name": "uid2",
+      "path": "uid2",
+      "count": 9,
+      "types": [
+        {
+          "name": "ObjectId",
+          "bsonType": "ObjectId",
+          "path": "uid2",
+          "count": 9,
+          "values": [
+            "6420eea412b89c1dabcb3f68",
+            "642110dd12b89c1dabcb3f86",
+            "6420eea412b89c1dabcb3f68",
+            "6420eea412b89c1dabcb3f68",
+            "642012f9a20ba00b213ddd6a",
+            "642110dd12b89c1dabcb3f86",
+            "6420eea412b89c1dabcb3f68",
+            "6420131ea20ba00b213ddd6c",
+            "642012f9a20ba00b213ddd6a"
+          ],
+          "total_count": 0,
+          "probability": 1,
+          "unique": 4,
+          "has_duplicates": true
+        }
+      ],
+      "total_count": 9,
+      "type": "ObjectId",
+      "has_duplicates": true,
+      "probability": 1
+    },
+    {
+      "name": "updatedAt",
+      "path": "updatedAt",
+      "count": 9,
+      "types": [
+        {
+          "name": "Date",
+          "bsonType": "Date",
+          "path": "updatedAt",
+          "count": 9,
+          "values": [
+            "2023-05-24T09:27:22.372Z",
+            "2023-05-25T19:03:31.145Z",
+            "2023-05-16T00:54:53.978Z",
+            "2023-05-24T18:47:43.116Z",
+            "2023-04-08T16:11:02.690Z",
+            "2023-05-24T08:43:20.458Z",
+            "2023-05-16T00:54:55.076Z",
+            "2023-03-27T14:58:50.503Z",
+            "2023-03-27T14:58:23.209Z"
+          ],
+          "total_count": 0,
+          "probability": 1,
+          "unique": 9,
+          "has_duplicates": false
+        }
+      ],
+      "total_count": 9,
+      "type": "Date",
+      "has_duplicates": false,
+      "probability": 1
+    }
+  ],
+  "count": 9
+}

@@ -1,0 +1,181 @@
+[{
+  "_id": {
+    "$oid": "6421af0fc0bee3bc4fd96596"
+  },
+  "uid1": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "uid2": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "status": {
+    "type": "available"
+  },
+  "createdAt": {
+    "$date": "2023-03-27T14:58:23.209Z"
+  },
+  "updatedAt": {
+    "$date": "2023-03-27T14:58:23.209Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6421af2ac0bee3bc4fd965b7"
+  },
+  "uid1": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "uid2": {
+    "$oid": "6420131ea20ba00b213ddd6c"
+  },
+  "status": {
+    "type": "available"
+  },
+  "createdAt": {
+    "$date": "2023-03-27T14:58:50.503Z"
+  },
+  "updatedAt": {
+    "$date": "2023-03-27T14:58:50.503Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64319216e9f2096551bb5889"
+  },
+  "uid1": {
+    "$oid": "6420131ea20ba00b213ddd6c"
+  },
+  "uid2": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "status": {
+    "type": "available"
+  },
+  "createdAt": {
+    "$date": "2023-04-08T16:11:02.690Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-08T16:11:02.690Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6462d45d666a37e348358d21"
+  },
+  "uid1": {
+    "$oid": "6462d3a9666a37e348358c81"
+  },
+  "uid2": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "status": {
+    "type": "available"
+  },
+  "createdAt": {
+    "$date": "2023-05-16T00:54:53.978Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-16T00:54:53.978Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6462d45f666a37e348358d5d"
+  },
+  "uid1": {
+    "$oid": "6462d3b0666a37e348358c83"
+  },
+  "uid2": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "status": {
+    "type": "available"
+  },
+  "createdAt": {
+    "$date": "2023-05-16T00:54:55.076Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-16T00:54:55.076Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6462d45f666a37e348358d7c"
+  },
+  "uid1": {
+    "$oid": "6462d3bc666a37e348358c85"
+  },
+  "uid2": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "status": {
+    "type": "disable"
+  },
+  "createdAt": {
+    "$date": "2023-05-16T00:54:55.889Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T18:47:43.116Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6468cdc5d9edec79d5302e47"
+  },
+  "uid1": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "uid2": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "status": {
+    "type": "available"
+  },
+  "createdAt": {
+    "$date": "2023-05-20T13:40:21.492Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-25T19:03:31.145Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646dce28d44f0e288029e57a"
+  },
+  "uid1": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "uid2": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "status": {
+    "type": "available"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T08:43:20.458Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T08:43:20.458Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646dd87ae9dd6817066d4288"
+  },
+  "uid1": {
+    "$oid": "6462d3c6666a37e348358c87"
+  },
+  "uid2": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "status": {
+    "type": "available"
+  },
+  "createdAt": {
+    "$date": "2023-05-24T09:27:22.372Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T09:27:22.372Z"
+  },
+  "__v": 0
+}]

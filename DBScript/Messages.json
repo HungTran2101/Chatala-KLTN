@@ -1,0 +1,3117 @@
+[{
+  "_id": {
+    "$oid": "6426fd33809b2dee5a420ef7"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "hello",
+  "fileIds": [],
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-03-31T15:33:07.584Z"
+  },
+  "updatedAt": {
+    "$date": "2023-03-31T15:33:07.584Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6426fe00809b2dee5a420f33"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "how are you",
+  "fileIds": [],
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-03-31T15:36:32.255Z"
+  },
+  "updatedAt": {
+    "$date": "2023-03-31T15:36:32.255Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6427157718189e55bd916828"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "",
+  "fileIds": [
+    {
+      "$oid": "6427157618189e55bd916823"
+    }
+  ],
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-03-31T17:16:39.034Z"
+  },
+  "updatedAt": {
+    "$date": "2023-03-31T17:16:39.034Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64280e987a5bfa9366ae042b"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "",
+  "fileIds": [
+    {
+      "$oid": "64280e987a5bfa9366ae0426"
+    }
+  ],
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-01T10:59:36.545Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-01T10:59:36.545Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "642c490e02cfaecfd74db1f2"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "",
+  "fileIds": [
+    {
+      "$oid": "642c490e02cfaecfd74db1eb"
+    },
+    {
+      "$oid": "642c490e02cfaecfd74db1ec"
+    }
+  ],
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-04T15:58:06.407Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-04T15:58:06.407Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "642c4a0c02cfaecfd74db20b"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "hello my friend",
+  "fileIds": [],
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-04T16:02:20.636Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-04T16:02:20.636Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "642c4a1602cfaecfd74db217"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "",
+  "fileIds": [
+    {
+      "$oid": "642c4a1602cfaecfd74db212"
+    }
+  ],
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-04T16:02:30.449Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-04T16:02:30.449Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "642ee5fceef52946eb753883"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "hello my fiend",
+  "fileIds": [],
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-06T15:32:12.318Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-06T15:32:12.318Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6431934c5b55b1f1d63ab6b1"
+  },
+  "roomId": {
+    "$oid": "64319216e9f2096551bb588e"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "hello my friend",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-08T16:16:12.717Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-08T16:16:12.717Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643194015b55b1f1d63ab702"
+  },
+  "roomId": {
+    "$oid": "64319216e9f2096551bb588e"
+  },
+  "senderId": {
+    "$oid": "6420131ea20ba00b213ddd6c"
+  },
+  "msg": "hi, how are you today",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-08T16:19:13.567Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-08T16:19:13.567Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643194145b55b1f1d63ab709"
+  },
+  "roomId": {
+    "$oid": "64319216e9f2096551bb588e"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "What you are doing wrong here is trying to cast a number on an ID field. Since it's a reference of another object Id field, you can not set 0 to it. What you need to do is to set null when a user is created in db and initialize it with a null value of earning",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-08T16:19:32.935Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-08T16:19:32.935Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643194255b55b1f1d63ab710"
+  },
+  "roomId": {
+    "$oid": "64319216e9f2096551bb588e"
+  },
+  "senderId": {
+    "$oid": "6420131ea20ba00b213ddd6c"
+  },
+  "msg": "I have a user profile, I have a field of 'earning' and it look like this in the schema",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-08T16:19:49.018Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-08T16:19:49.018Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643194335b55b1f1d63ab717"
+  },
+  "roomId": {
+    "$oid": "64319216e9f2096551bb588e"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "When instantiating a document based on a Schema which has a key of type 'ObjectId' and a ref to another collection, the only way that I've found to set a 'default' value is through the use of Mongoose middleware at the schema level as described here. For example, setting a comment's author to a default 'guest' document from a User collection when the author is not logged in might look like this:",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-08T16:20:03.784Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-08T16:20:03.784Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64343c0e87139f11c9e0d22e"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "how are you today",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-10T16:40:46.908Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T16:40:46.908Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64343caf87139f11c9e0d278"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "i'm good thank you",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-10T16:43:27.457Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T16:43:27.457Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64343ccf87139f11c9e0d2ac"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "so how long you have been in the city?",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-10T16:43:59.278Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T16:43:59.278Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6434433c87139f11c9e0d484"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "for a while you know",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-10T17:11:24.035Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T17:11:24.035Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64344a4696fe4f3bf156e404"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "so how about you",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-10T17:41:26.675Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T17:41:26.675Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64344a5296fe4f3bf156e410"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "",
+  "fileIds": [
+    {
+      "$oid": "64344a5196fe4f3bf156e40b"
+    }
+  ],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-10T17:41:38.165Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T17:41:38.165Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64344aad96fe4f3bf156e42e"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "",
+  "fileIds": [
+    {
+      "$oid": "64344aad96fe4f3bf156e429"
+    }
+  ],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-10T17:43:09.873Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T17:43:09.873Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64344b6a96fe4f3bf156e467"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "",
+  "fileIds": [
+    {
+      "$oid": "64344b6a96fe4f3bf156e462"
+    }
+  ],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-10T17:46:18.923Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T17:46:18.923Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64344bc996fe4f3bf156e4bf"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "",
+  "fileIds": [
+    {
+      "$oid": "64344bc996fe4f3bf156e4ba"
+    }
+  ],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-10T17:47:53.502Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T17:47:53.502Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64344cf896fe4f3bf156e4f8"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "",
+  "fileIds": [
+    {
+      "$oid": "64344cf896fe4f3bf156e4f3"
+    }
+  ],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-10T17:52:56.740Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T17:52:56.740Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64344ee881118e09ca65834f"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "",
+  "fileIds": [
+    {
+      "$oid": "64344ee881118e09ca65834a"
+    }
+  ],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-10T18:01:12.887Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T18:01:12.887Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64344f0b81118e09ca658376"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "",
+  "fileIds": [
+    {
+      "$oid": "64344f0b81118e09ca658371"
+    }
+  ],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-10T18:01:47.983Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T18:01:47.983Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64344f8581118e09ca6583b0"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "",
+  "fileIds": [
+    {
+      "$oid": "64344f8581118e09ca6583ab"
+    }
+  ],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-10T18:03:49.671Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T18:03:49.671Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64344f8681118e09ca6583bb"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "",
+  "fileIds": [
+    {
+      "$oid": "64344f8681118e09ca6583b6"
+    }
+  ],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-10T18:03:50.560Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T18:03:50.560Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643454fd81118e09ca658485"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "",
+  "fileIds": [
+    {
+      "$oid": "643454fd81118e09ca658480"
+    }
+  ],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-10T18:27:09.489Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T18:27:09.489Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643455b00936ecfd34a76f1c"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "",
+  "fileIds": [
+    {
+      "$oid": "643455b00936ecfd34a76f17"
+    }
+  ],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-10T18:30:08.533Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T18:30:08.533Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643456c66996d328f10914c6"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "",
+  "fileIds": [
+    {
+      "$oid": "643456c56996d328f10914c1"
+    }
+  ],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-10T18:34:46.180Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-10T18:34:46.180Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64358d84e30d0da704ddd0b7"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "",
+  "fileIds": [
+    {
+      "$oid": "64358d84e30d0da704ddd0b2"
+    }
+  ],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-11T16:40:36.985Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-11T16:40:36.985Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64358dcd03b4fd076a023b3c"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "helloo",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-11T16:41:49.174Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-11T16:41:49.174Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64358dd603b4fd076a023b48"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "",
+  "fileIds": [
+    {
+      "$oid": "64358dd603b4fd076a023b43"
+    }
+  ],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-11T16:41:58.689Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-11T16:41:58.689Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64358def03b4fd076a023b54"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test file send",
+  "fileIds": [
+    {
+      "$oid": "64358def03b4fd076a023b4f"
+    }
+  ],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-11T16:42:23.851Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-11T16:42:23.851Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6436e16a0fbe99a06e1b233f"
+  },
+  "roomId": {
+    "$oid": "6421b2c53ae69c6ae0f5af2b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "hello guys",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-12T16:50:50.897Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-12T16:50:50.897Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6436ebd0297de42a6e8c9efa"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "helooooo",
+  "fileIds": [],
+  "replyId": {
+    "$oid": "64343ccf87139f11c9e0d2ac"
+  },
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-12T17:35:12.967Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-12T17:35:12.967Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643c2db5b995b577f00c3a6e"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "reply to image",
+  "fileIds": [],
+  "replyId": {
+    "$oid": "64344f8581118e09ca6583b0"
+  },
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-16T17:17:41.790Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-16T17:17:41.790Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643c2dddb995b577f00c3a75"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "reply to file",
+  "fileIds": [],
+  "replyId": {
+    "$oid": "64358dd603b4fd076a023b48"
+  },
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-16T17:18:21.160Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-16T17:18:21.160Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643d6dd09546b147c7d8366a"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "some file send test",
+  "fileIds": [
+    {
+      "$oid": "643d6dcf9546b147c7d83665"
+    }
+  ],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-17T16:03:28.202Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-17T16:03:28.202Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643d6e7e9546b147c7d83676"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "file send test 2",
+  "fileIds": [
+    {
+      "$oid": "643d6e7e9546b147c7d83671"
+    }
+  ],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-17T16:06:22.786Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-17T16:06:22.786Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643d719f9546b147c7d836bc"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "testtttttttttttttttttttt",
+  "fileIds": [
+    {
+      "$oid": "643d719f9546b147c7d836b7"
+    }
+  ],
+  "replyId": {
+    "$oid": "643456c66996d328f10914c6"
+  },
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-17T16:19:43.931Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-17T16:19:43.931Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643f56a036e8c4a6a9b7a7e1"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test reply to my self",
+  "fileIds": [],
+  "replyId": {
+    "$oid": "6434433c87139f11c9e0d484"
+  },
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-19T02:49:04.649Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-19T02:49:04.649Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643f72dd36e8c4a6a9b7a86d"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test reply againn",
+  "fileIds": [],
+  "replyId": {
+    "$oid": "643d719f9546b147c7d836bc"
+  },
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-19T04:49:33.788Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-19T04:49:33.788Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643f735536e8c4a6a9b7a87c"
+  },
+  "roomId": {
+    "$oid": "6421b2c53ae69c6ae0f5af2b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "how are you today?",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-19T04:51:33.717Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-19T04:51:33.717Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643f738c36e8c4a6a9b7a8a0"
+  },
+  "roomId": {
+    "$oid": "6421b2c53ae69c6ae0f5af2b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "im fine bro, how about you",
+  "fileIds": [],
+  "replyId": {
+    "$oid": "643f735536e8c4a6a9b7a87c"
+  },
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-19T04:52:28.258Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-19T04:52:28.258Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643f73cc36e8c4a6a9b7a8a8"
+  },
+  "roomId": {
+    "$oid": "6421b2c53ae69c6ae0f5af2b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "hiii",
+  "fileIds": [],
+  "replyId": {
+    "$oid": "6436e16a0fbe99a06e1b233f"
+  },
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-19T04:53:32.587Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-19T04:53:32.587Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643f740b36e8c4a6a9b7a8b0"
+  },
+  "roomId": {
+    "$oid": "6421b2c53ae69c6ae0f5af2b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test again mate",
+  "fileIds": [],
+  "replyId": {
+    "$oid": "643f735536e8c4a6a9b7a87c"
+  },
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-19T04:54:35.832Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-19T04:54:35.832Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643f747436e8c4a6a9b7a8b8"
+  },
+  "roomId": {
+    "$oid": "6421b2c53ae69c6ae0f5af2b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "im gonna test againn",
+  "fileIds": [],
+  "replyId": {
+    "$oid": "643f735536e8c4a6a9b7a87c"
+  },
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-19T04:56:20.558Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-19T04:56:20.558Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643f74e836e8c4a6a9b7a8e1"
+  },
+  "roomId": {
+    "$oid": "6421b2c53ae69c6ae0f5af2b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "im reply to my self",
+  "fileIds": [],
+  "replyId": {
+    "$oid": "643f738c36e8c4a6a9b7a8a0"
+  },
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-19T04:58:16.934Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-19T04:58:16.934Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "643f750136e8c4a6a9b7a8e9"
+  },
+  "roomId": {
+    "$oid": "6421b2c53ae69c6ae0f5af2b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test again brooo",
+  "fileIds": [],
+  "replyId": {
+    "$oid": "643f735536e8c4a6a9b7a87c"
+  },
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-19T04:58:41.935Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-19T04:58:41.935Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e20a0c2ef9c0a67242a93"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "hellooo",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T08:02:40.335Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T08:02:40.335Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e27eec2ef9c0a67242acd"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "what's up bro",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T08:33:50.929Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T08:33:50.929Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e284cc2ef9c0a67242aff"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "i'm here bro 😁",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T08:35:24.964Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T08:35:24.964Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e2878c2ef9c0a67242b0c"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "yo bro",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T08:36:08.857Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T08:36:08.857Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e289dc2ef9c0a67242b19"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "yooo",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T08:36:45.907Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T08:36:45.907Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e29bb893544164869ef0b"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "how are you today?",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T08:41:31.072Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T08:41:31.072Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e2a18893544164869ef3d"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "im fine thanks bro",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T08:43:04.921Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T08:43:04.921Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e2a8d893544164869ef94"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "how about you?",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T08:45:01.770Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T08:45:01.770Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e2ab8893544164869ef9b"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test test",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T08:45:44.330Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T08:45:44.330Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e2c0b893544164869f078"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "ok test broo",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T08:51:23.831Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T08:51:23.831Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e2c66893544164869f07f"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test inc unread msg",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T08:52:54.939Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T08:52:54.939Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e2c8c893544164869f0b1"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test inc unread msg #2",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T08:53:32.694Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T08:53:32.694Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e2ce7893544164869f108"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test inc unread msg #3",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T08:55:03.621Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T08:55:03.621Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e2d5b893544164869f10f"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test inc unread msg #4",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T08:56:59.588Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T08:56:59.588Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e2d75893544164869f141"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test inc unread msg #5",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T08:57:25.897Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T08:57:25.897Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e2da9893544164869f173"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test inc unread msg #6",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T08:58:17.747Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T08:58:17.747Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e2e6f893544164869f1b1"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test inc unread msg #7",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T09:01:35.395Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T09:01:35.395Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e2eda893544164869f1e3"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test inc unread msg #8",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T09:03:22.927Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T09:03:22.927Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e301d893544164869f215"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test inc unread msg #9",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T09:08:45.946Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T09:08:45.946Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e42af1021d67c3b8778ac"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test inc unread msg #10",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T10:27:59.813Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T10:27:59.813Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e43251021d67c3b8778de"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test inc unread msg #11",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T10:29:57.391Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T10:29:57.391Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e43c81021d67c3b877910"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test inc unread msg #12",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T10:32:40.727Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T10:32:40.727Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e44d71021d67c3b877967"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test inc unread msg #13",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T10:37:11.663Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T10:37:11.663Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e451b1021d67c3b877999"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test inc unread msg #14",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T10:38:19.599Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T10:38:19.599Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e46a4fd798f37c56d19c5"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test #15",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T10:44:52.080Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T10:44:52.080Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e4731fd798f37c56d19f7"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test #16",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T10:47:13.214Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T10:47:13.214Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e47793fc7766b9e8a1898"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test #17",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T10:48:25.144Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T10:48:25.144Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e47923fc7766b9e8a189f"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test #18",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T10:48:50.734Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T10:48:50.734Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e47bd3fc7766b9e8a18a6"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test #19",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T10:49:33.448Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T10:49:33.448Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e47e13fc7766b9e8a18d8"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test #20",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T10:50:09.085Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T10:50:09.085Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e47f33fc7766b9e8a18df"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test #21",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T10:50:27.196Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T10:50:27.196Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e48833fc7766b9e8a191d"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test #22",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T10:52:51.689Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T10:52:51.689Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e48943fc7766b9e8a1924"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test #23",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T10:53:08.658Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T10:53:08.658Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e4cf03fc7766b9e8a1956"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test #24",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T11:11:44.341Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T11:11:44.341Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e4d2c3fc7766b9e8a1988"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test #25",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T11:12:44.969Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T11:12:44.969Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e4dc93fc7766b9e8a19df"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test #26",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T11:15:21.970Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T11:15:21.970Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e4ed83fc7766b9e8a1a22"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test #27",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T11:19:52.708Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T11:19:52.708Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e4f633fc7766b9e8a1a54"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test #28",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T11:22:11.583Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T11:22:11.583Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e50c53fc7766b9e8a1ad0"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test #29",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T11:28:05.054Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T11:28:05.054Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e50ef3fc7766b9e8a1b27"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test #30",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T11:28:47.786Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T11:28:47.786Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e51353fc7766b9e8a1ba3"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test #31",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T11:29:57.542Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T11:29:57.542Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e51693fc7766b9e8a1bd5"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test #32",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T11:30:49.511Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T11:30:49.511Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e52a53fc7766b9e8a1c21"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test #33",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T11:36:05.150Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T11:36:05.150Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e53123fc7766b9e8a1c53"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test #34",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T11:37:54.873Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T11:37:54.873Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e53283fc7766b9e8a1c60"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test #35",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T11:38:16.922Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T11:38:16.922Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e53623fc7766b9e8a1c92"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test #36",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T11:39:14.292Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T11:39:14.292Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e542d3fc7766b9e8a1cc4"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test #37",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T11:42:37.674Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T11:42:37.674Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e54953fc7766b9e8a1cf6"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test #38",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T11:44:21.684Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T11:44:21.684Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e54a13fc7766b9e8a1d03"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test #39",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T11:44:33.678Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T11:44:33.678Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e86443fc7766b9e8a1d35"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test #40",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T15:16:20.014Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T15:16:20.014Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e86763fc7766b9e8a1d67"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test #41",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T15:17:10.444Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T15:17:10.444Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e868d3fc7766b9e8a1d74"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test #42",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T15:17:33.131Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T15:17:33.131Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e87e03fc7766b9e8a1dcb"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test #43",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T15:23:12.378Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T15:23:12.378Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e87f53fc7766b9e8a1dd2"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test #44",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T15:23:33.286Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T15:23:33.286Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e87f53fc7766b9e8a1dd9"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test #44",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T15:23:33.832Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T15:23:33.832Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e88143fc7766b9e8a1e0b"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test #45",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T15:24:04.644Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T15:24:04.644Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e881d3fc7766b9e8a1e12"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test #46",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T15:24:13.337Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T15:24:13.337Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e89733fc7766b9e8a204a"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test #47",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T15:29:55.627Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T15:29:55.627Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e89853fc7766b9e8a205d"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "test #48",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T15:30:13.381Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T15:30:13.381Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e8bf43fc7766b9e8a21be"
+  },
+  "roomId": {
+    "$oid": "6421b2c53ae69c6ae0f5af2b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "hello broo",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T15:40:36.558Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T15:40:36.558Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e8c053fc7766b9e8a21e8"
+  },
+  "roomId": {
+    "$oid": "6421b2c53ae69c6ae0f5af2b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "hello",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T15:40:53.977Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T15:40:53.977Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e8c1c3fc7766b9e8a21ff"
+  },
+  "roomId": {
+    "$oid": "6421b2c53ae69c6ae0f5af2b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "how bro doing?",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T15:41:16.375Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T15:41:16.375Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e8e0d3fc7766b9e8a22a8"
+  },
+  "roomId": {
+    "$oid": "6421b2c53ae69c6ae0f5af2b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "im doing good bro",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T15:49:33.428Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T15:49:33.428Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e8e443fc7766b9e8a22c1"
+  },
+  "roomId": {
+    "$oid": "6421b2c53ae69c6ae0f5af2b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "how about you bro",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T15:50:28.414Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T15:50:28.414Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "644e8fa23fc7766b9e8a2306"
+  },
+  "roomId": {
+    "$oid": "6421b2c53ae69c6ae0f5af2b"
+  },
+  "senderId": {
+    "$oid": "642012f9a20ba00b213ddd6a"
+  },
+  "msg": "yeah im good too bro",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-04-30T15:56:18.005Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T15:56:18.005Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6461158a9f9011cc68739739"
+  },
+  "roomId": {
+    "$oid": "6421b2c53ae69c6ae0f5af2b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test mention #1 @hung1 @hung2",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-05-14T17:08:26.881Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-14T17:08:26.881Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6462dd01666a37e348358f06"
+  },
+  "roomId": {
+    "$oid": "6462d45e666a37e348358d26"
+  },
+  "senderId": {
+    "$oid": "6462d3a9666a37e348358c81"
+  },
+  "msg": "helo thanh",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-05-16T01:31:45.516Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-16T01:31:45.516Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6462dd0d666a37e348358f1b"
+  },
+  "roomId": {
+    "$oid": "6462d45e666a37e348358d26"
+  },
+  "senderId": {
+    "$oid": "6462d3a9666a37e348358c81"
+  },
+  "msg": "how are u",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-05-16T01:31:57.003Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-16T01:31:57.003Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64671d0a55a77d056f3dd897"
+  },
+  "roomId": {
+    "$oid": "6421af2ac0bee3bc4fd965bb"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "hello",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-05-19T06:54:02.845Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-19T06:54:02.845Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6468b840b38d047a5fa36be7"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "hii",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-05-20T12:08:32.846Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-20T12:08:32.846Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646cf40e3e84db6d3decb995"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "hello how are u today",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-05-23T17:12:47.876Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-23T17:12:47.876Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646cf4243e84db6d3decb9a0"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "i don't here much about you",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": true,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-05-23T17:13:08.199Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T15:12:00.200Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e17f416e96933b76e21fe"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "hello again",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-05-24T13:58:12.573Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T13:58:12.573Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e18e416e96933b76e2245"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "again again",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-05-24T14:02:12.306Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T14:02:12.306Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e190f16e96933b76e2283"
+  },
+  "roomId": {
+    "$oid": "6421af2ac0bee3bc4fd965bb"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "hello again",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": true,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-05-24T14:02:55.309Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T15:38:50.475Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e198f16e96933b76e22ff"
+  },
+  "roomId": {
+    "$oid": "6421af2ac0bee3bc4fd965bb"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "again again",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-05-24T14:05:03.983Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T14:05:03.983Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e28ea56b798ad3751bb8d"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "nice to meet you",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": true,
+  "createdAt": {
+    "$date": "2023-05-24T15:10:34.906Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-25T03:32:26.331Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646e2afa56b798ad3751bb9e"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "trả lời tin nhắn",
+  "fileIds": [],
+  "replyId": {
+    "$oid": "644e88143fc7766b9e8a1e0b"
+  },
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-05-24T15:19:22.642Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T15:19:22.642Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646f150a0d448aa16152e0a1"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "test file send",
+  "fileIds": [
+    {
+      "$oid": "646f15090d448aa16152e09a"
+    },
+    {
+      "$oid": "646f15090d448aa16152e09b"
+    }
+  ],
+  "replyId": {
+    "$oid": "644e20a0c2ef9c0a67242a93"
+  },
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-05-25T07:58:02.115Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-25T07:58:02.115Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646f1e244ab495ccdc89982d"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "test send message",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-05-25T08:36:52.649Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-25T08:36:52.649Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646f213d4ab495ccdc8998ea"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "hello cau",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-05-25T08:50:05.714Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-25T08:50:05.714Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646f215e4ab495ccdc89992c"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "642110dd12b89c1dabcb3f86"
+  },
+  "msg": "hello cau again",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-05-25T08:50:38.703Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-25T08:50:38.703Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646f22114ab495ccdc899973"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test send file",
+  "fileIds": [
+    {
+      "$oid": "646f22114ab495ccdc89996e"
+    }
+  ],
+  "replyId": {
+    "$oid": "646f1e244ab495ccdc89982d"
+  },
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-05-25T08:53:37.682Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-25T08:53:37.682Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646fe65ed6fc7bf318dcdf24"
+  },
+  "roomId": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "😉",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-05-25T22:51:10.601Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-25T22:51:10.601Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6471efffb3a7aa6086bc1752"
+  },
+  "roomId": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "test send loading",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-05-27T11:56:47.611Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-27T11:56:47.611Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6471f1efb3a7aa6086bc1869"
+  },
+  "roomId": {
+    "$oid": "6421af2ac0bee3bc4fd965bb"
+  },
+  "senderId": {
+    "$oid": "6420eea412b89c1dabcb3f68"
+  },
+  "msg": "hello my friend",
+  "fileIds": [],
+  "replyId": null,
+  "unSend": false,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2023-05-27T12:05:03.312Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-27T12:05:03.312Z"
+  },
+  "__v": 0
+}]

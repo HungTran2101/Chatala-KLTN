@@ -1,0 +1,620 @@
+[{
+  "_id": {
+    "$oid": "6421110a12b89c1dabcb3fa7"
+  },
+  "groupName": "",
+  "isGroup": false,
+  "users": [
+    {
+      "uid": {
+        "$oid": "6420eea412b89c1dabcb3f68"
+      },
+      "role": false,
+      "nickname": "Huu Thanh",
+      "_id": {
+        "$oid": "6421110a12b89c1dabcb3fa8"
+      },
+      "unReadMsg": 0,
+      "isLeave": false
+    },
+    {
+      "uid": {
+        "$oid": "642110dd12b89c1dabcb3f86"
+      },
+      "role": true,
+      "nickname": "Thanh 2",
+      "_id": {
+        "$oid": "6421110a12b89c1dabcb3fa9"
+      },
+      "unReadMsg": 1,
+      "isLeave": false
+    }
+  ],
+  "lastMsg": "test send loading",
+  "createdAt": {
+    "$date": "2023-03-27T03:44:10.915Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-30T16:00:22.950Z"
+  },
+  "__v": 0,
+  "friendRelateId": {
+    "$oid": "6468cdc5d9edec79d5302e47"
+  }
+},{
+  "_id": {
+    "$oid": "6421af0fc0bee3bc4fd9659b"
+  },
+  "groupName": "",
+  "isGroup": false,
+  "users": [
+    {
+      "uid": {
+        "$oid": "6420eea412b89c1dabcb3f68"
+      },
+      "role": false,
+      "nickname": "Huu Thanh",
+      "_id": {
+        "$oid": "6421af0fc0bee3bc4fd9659c"
+      }
+    },
+    {
+      "uid": {
+        "$oid": "642012f9a20ba00b213ddd6a"
+      },
+      "role": true,
+      "nickname": "hung1",
+      "_id": {
+        "$oid": "6421af0fc0bee3bc4fd9659d"
+      },
+      "avatar": "https://res.cloudinary.com/dzikgumce/image/upload/v1683030606/642012f9a20ba00b213ddd6a.jpg",
+      "unReadMsg": 1
+    }
+  ],
+  "lastMsg": "😉",
+  "createdAt": {
+    "$date": "2023-03-27T14:58:23.406Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-27T12:29:26.021Z"
+  },
+  "__v": 0,
+  "friendRelateId": {
+    "$oid": "6421af0fc0bee3bc4fd96596"
+  }
+},{
+  "_id": {
+    "$oid": "6421af2ac0bee3bc4fd965bb"
+  },
+  "groupName": "",
+  "isGroup": false,
+  "users": [
+    {
+      "uid": {
+        "$oid": "6420eea412b89c1dabcb3f68"
+      },
+      "role": false,
+      "nickname": "Huu Thanh",
+      "_id": {
+        "$oid": "6421af2ac0bee3bc4fd965bc"
+      },
+      "unReadMsg": 0
+    },
+    {
+      "uid": {
+        "$oid": "6420131ea20ba00b213ddd6c"
+      },
+      "role": true,
+      "nickname": "hung2",
+      "_id": {
+        "$oid": "6421af2ac0bee3bc4fd965bd"
+      },
+      "unReadMsg": 0
+    }
+  ],
+  "lastMsg": "hello my friend",
+  "createdAt": {
+    "$date": "2023-03-27T14:58:50.662Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-31T12:08:48.342Z"
+  },
+  "__v": 0,
+  "friendRelateId": {
+    "$oid": "6421af2ac0bee3bc4fd965b7"
+  }
+},{
+  "_id": {
+    "$oid": "6421b2c53ae69c6ae0f5af2b"
+  },
+  "groupName": "KLTN Group",
+  "isGroup": true,
+  "users": [
+    {
+      "uid": {
+        "$oid": "642012f9a20ba00b213ddd6a"
+      },
+      "role": false,
+      "nickname": "hung1",
+      "_id": {
+        "$oid": "6421b2c53ae69c6ae0f5af2c"
+      },
+      "unReadMsg": 0,
+      "isLeave": false
+    },
+    {
+      "uid": {
+        "$oid": "6420131ea20ba00b213ddd6c"
+      },
+      "role": false,
+      "nickname": "hung2",
+      "_id": {
+        "$oid": "6421b2c53ae69c6ae0f5af2d"
+      },
+      "unReadMsg": 9,
+      "isLeave": false
+    },
+    {
+      "uid": {
+        "$oid": "6420eea412b89c1dabcb3f68"
+      },
+      "role": true,
+      "nickname": "Huu Thanh",
+      "_id": {
+        "$oid": "6421b2c53ae69c6ae0f5af2e"
+      },
+      "unReadMsg": 0,
+      "isLeave": false
+    },
+    {
+      "uid": {
+        "$oid": "642110dd12b89c1dabcb3f86"
+      },
+      "role": false,
+      "nickname": "thanh2",
+      "unReadMsg": 0,
+      "isLeave": true,
+      "_id": {
+        "$oid": "6469e0e54e3d9e1e24534a80"
+      }
+    },
+    {
+      "uid": {
+        "$oid": "6462d3a9666a37e348358c81"
+      },
+      "role": false,
+      "nickname": "Nhat Hung",
+      "unReadMsg": 0,
+      "isLeave": false,
+      "_id": {
+        "$oid": "646b8d03af5c8109e2b6d290"
+      }
+    },
+    {
+      "uid": {
+        "$oid": "6462d3b0666a37e348358c83"
+      },
+      "role": false,
+      "nickname": "hung4",
+      "unReadMsg": 0,
+      "isLeave": true,
+      "_id": {
+        "$oid": "646c916c3e84db6d3decb5ce"
+      }
+    }
+  ],
+  "lastMsg": "test mention #1 @hung1 @hung2",
+  "createdAt": {
+    "$date": "2023-03-27T15:14:13.272Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-27T12:29:26.021Z"
+  },
+  "__v": 0,
+  "friendRelateId": {
+    "$oid": "64671c70b06b9b1a624ffe22"
+  }
+},{
+  "_id": {
+    "$oid": "64319216e9f2096551bb588e"
+  },
+  "groupName": "",
+  "isGroup": false,
+  "users": [
+    {
+      "uid": {
+        "$oid": "6420131ea20ba00b213ddd6c"
+      },
+      "role": false,
+      "nickname": "hung2",
+      "_id": {
+        "$oid": "64319216e9f2096551bb588f"
+      }
+    },
+    {
+      "uid": {
+        "$oid": "642012f9a20ba00b213ddd6a"
+      },
+      "role": true,
+      "nickname": "hung1",
+      "_id": {
+        "$oid": "64319216e9f2096551bb5890"
+      },
+      "unReadMsg": 0
+    }
+  ],
+  "lastMsg": "When instantiating a document based on a Schema which has a key of type 'ObjectId' and a ref to another collection, the only way that I've found to set a 'default' value is through the use of Mongoose middleware at the schema level as described here. For example, setting a comment's author to a default 'guest' document from a User collection when the author is not logged in might look like this:",
+  "createdAt": {
+    "$date": "2023-04-08T16:11:02.803Z"
+  },
+  "updatedAt": {
+    "$date": "2023-04-30T15:44:45.317Z"
+  },
+  "__v": 0,
+  "friendRelateId": {
+    "$oid": "64319216e9f2096551bb5889"
+  }
+},{
+  "_id": {
+    "$oid": "6462d45e666a37e348358d26"
+  },
+  "groupName": "",
+  "isGroup": false,
+  "users": [
+    {
+      "uid": {
+        "$oid": "6462d3a9666a37e348358c81"
+      },
+      "role": false,
+      "nickname": "Nhat Hung 3",
+      "unReadMsg": 0,
+      "_id": {
+        "$oid": "6462d45e666a37e348358d27"
+      }
+    },
+    {
+      "uid": {
+        "$oid": "6420eea412b89c1dabcb3f68"
+      },
+      "role": true,
+      "nickname": "Huu Thanh",
+      "unReadMsg": 0,
+      "_id": {
+        "$oid": "6462d45e666a37e348358d28"
+      }
+    }
+  ],
+  "lastMsg": "how are u",
+  "createdAt": {
+    "$date": "2023-05-16T00:54:54.075Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-27T12:29:26.021Z"
+  },
+  "__v": 0,
+  "friendRelateId": {
+    "$oid": "6462d45d666a37e348358d21"
+  }
+},{
+  "_id": {
+    "$oid": "6462d45f666a37e348358d61"
+  },
+  "groupName": "",
+  "isGroup": false,
+  "users": [
+    {
+      "uid": {
+        "$oid": "6462d3b0666a37e348358c83"
+      },
+      "role": false,
+      "nickname": "Nhat Lam 4",
+      "unReadMsg": 0,
+      "_id": {
+        "$oid": "6462d45f666a37e348358d62"
+      }
+    },
+    {
+      "uid": {
+        "$oid": "6420eea412b89c1dabcb3f68"
+      },
+      "role": true,
+      "nickname": "Huu Thanh",
+      "unReadMsg": 0,
+      "_id": {
+        "$oid": "6462d45f666a37e348358d63"
+      }
+    }
+  ],
+  "lastMsg": "",
+  "createdAt": {
+    "$date": "2023-05-16T00:54:55.168Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-27T12:29:26.021Z"
+  },
+  "__v": 0,
+  "friendRelateId": {
+    "$oid": "6462d45f666a37e348358d5d"
+  }
+},{
+  "_id": {
+    "$oid": "6462d45f666a37e348358d81"
+  },
+  "groupName": "",
+  "isGroup": false,
+  "users": [
+    {
+      "uid": {
+        "$oid": "6462d3bc666a37e348358c85"
+      },
+      "role": false,
+      "nickname": "Dung Quang 5",
+      "unReadMsg": 0,
+      "_id": {
+        "$oid": "6462d45f666a37e348358d82"
+      }
+    },
+    {
+      "uid": {
+        "$oid": "6420eea412b89c1dabcb3f68"
+      },
+      "role": true,
+      "nickname": "Huu Thanh",
+      "unReadMsg": 0,
+      "_id": {
+        "$oid": "6462d45f666a37e348358d83"
+      }
+    }
+  ],
+  "lastMsg": "",
+  "createdAt": {
+    "$date": "2023-05-16T00:54:55.984Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-27T12:29:26.021Z"
+  },
+  "__v": 0,
+  "friendRelateId": {
+    "$oid": "6462d45f666a37e348358d7c"
+  }
+},{
+  "_id": {
+    "$oid": "646b2c2baf5c8109e2b6ca33"
+  },
+  "groupName": "Hội anh em cây khế",
+  "isGroup": true,
+  "friendRelateId": null,
+  "users": [
+    {
+      "uid": {
+        "$oid": "642012f9a20ba00b213ddd6a"
+      },
+      "role": false,
+      "nickname": "hung1",
+      "unReadMsg": 0,
+      "isLeave": false,
+      "_id": {
+        "$oid": "646b2c2baf5c8109e2b6ca34"
+      }
+    },
+    {
+      "uid": {
+        "$oid": "6420131ea20ba00b213ddd6c"
+      },
+      "role": false,
+      "nickname": "hung2",
+      "unReadMsg": 0,
+      "isLeave": false,
+      "_id": {
+        "$oid": "646b2c2baf5c8109e2b6ca35"
+      }
+    },
+    {
+      "uid": {
+        "$oid": "6462d3a9666a37e348358c81"
+      },
+      "role": false,
+      "nickname": "Nhat Hung",
+      "unReadMsg": 0,
+      "isLeave": false,
+      "_id": {
+        "$oid": "646b2c2baf5c8109e2b6ca36"
+      }
+    },
+    {
+      "uid": {
+        "$oid": "6462d3b0666a37e348358c83"
+      },
+      "role": false,
+      "nickname": "hung4",
+      "unReadMsg": 0,
+      "isLeave": false,
+      "_id": {
+        "$oid": "646b2c2baf5c8109e2b6ca37"
+      }
+    },
+    {
+      "uid": {
+        "$oid": "6420eea412b89c1dabcb3f68"
+      },
+      "role": true,
+      "nickname": "Huu Thanh",
+      "unReadMsg": 0,
+      "isLeave": false,
+      "_id": {
+        "$oid": "646b2c2baf5c8109e2b6ca38"
+      }
+    }
+  ],
+  "lastMsg": "",
+  "createdAt": {
+    "$date": "2023-05-22T08:47:39.024Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-27T12:29:26.021Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646b2c2faf5c8109e2b6ca55"
+  },
+  "groupName": "NCKH group",
+  "isGroup": true,
+  "friendRelateId": null,
+  "users": [
+    {
+      "uid": {
+        "$oid": "642012f9a20ba00b213ddd6a"
+      },
+      "role": false,
+      "nickname": "hung1",
+      "unReadMsg": 0,
+      "isLeave": true,
+      "_id": {
+        "$oid": "646b2c2faf5c8109e2b6ca56"
+      }
+    },
+    {
+      "uid": {
+        "$oid": "6420131ea20ba00b213ddd6c"
+      },
+      "role": true,
+      "nickname": "hung2",
+      "unReadMsg": 0,
+      "isLeave": false,
+      "_id": {
+        "$oid": "646b2c2faf5c8109e2b6ca57"
+      }
+    },
+    {
+      "uid": {
+        "$oid": "6462d3a9666a37e348358c81"
+      },
+      "role": false,
+      "nickname": "Nhat Hung",
+      "unReadMsg": 0,
+      "isLeave": false,
+      "_id": {
+        "$oid": "646b2c2faf5c8109e2b6ca58"
+      }
+    },
+    {
+      "uid": {
+        "$oid": "6462d3b0666a37e348358c83"
+      },
+      "role": false,
+      "nickname": "hung4",
+      "unReadMsg": 0,
+      "isLeave": false,
+      "_id": {
+        "$oid": "646b2c2faf5c8109e2b6ca59"
+      }
+    },
+    {
+      "uid": {
+        "$oid": "6420eea412b89c1dabcb3f68"
+      },
+      "role": false,
+      "nickname": "Huu Thanh",
+      "unReadMsg": 0,
+      "isLeave": false,
+      "_id": {
+        "$oid": "646b2c2faf5c8109e2b6ca5a"
+      }
+    }
+  ],
+  "lastMsg": "",
+  "createdAt": {
+    "$date": "2023-05-22T08:47:43.128Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-31T12:12:47.834Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646dce28d44f0e288029e57f"
+  },
+  "groupName": "",
+  "isGroup": false,
+  "friendRelateId": {
+    "$oid": "646dce28d44f0e288029e57a"
+  },
+  "users": [
+    {
+      "uid": {
+        "$oid": "642012f9a20ba00b213ddd6a"
+      },
+      "role": false,
+      "nickname": "hung1",
+      "unReadMsg": 0,
+      "isLeave": false,
+      "_id": {
+        "$oid": "646dce28d44f0e288029e580"
+      }
+    },
+    {
+      "uid": {
+        "$oid": "642110dd12b89c1dabcb3f86"
+      },
+      "role": true,
+      "nickname": "thanh2",
+      "unReadMsg": 0,
+      "isLeave": false,
+      "_id": {
+        "$oid": "646dce28d44f0e288029e581"
+      }
+    }
+  ],
+  "lastMsg": "",
+  "createdAt": {
+    "$date": "2023-05-24T08:43:20.666Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-24T08:43:20.666Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646dd87ae9dd6817066d428c"
+  },
+  "groupName": "",
+  "isGroup": false,
+  "friendRelateId": {
+    "$oid": "646dd87ae9dd6817066d4288"
+  },
+  "users": [
+    {
+      "uid": {
+        "$oid": "6462d3c6666a37e348358c87"
+      },
+      "role": false,
+      "nickname": "hung6",
+      "unReadMsg": 0,
+      "isLeave": false,
+      "_id": {
+        "$oid": "646dd87ae9dd6817066d428d"
+      }
+    },
+    {
+      "uid": {
+        "$oid": "6420eea412b89c1dabcb3f68"
+      },
+      "role": true,
+      "nickname": "Huu Thanh",
+      "unReadMsg": 0,
+      "isLeave": false,
+      "_id": {
+        "$oid": "646dd87ae9dd6817066d428e"
+      }
+    }
+  ],
+  "lastMsg": "",
+  "createdAt": {
+    "$date": "2023-05-24T09:27:22.624Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-27T12:29:26.021Z"
+  },
+  "__v": 0
+}]

@@ -1,0 +1,389 @@
+{
+  "fields": [
+    {
+      "name": "_id",
+      "path": "_id",
+      "count": 9,
+      "types": [
+        {
+          "name": "ObjectId",
+          "bsonType": "ObjectId",
+          "path": "_id",
+          "count": 9,
+          "values": [
+            "6462d3bc666a37e348358c85",
+            "6462d3b0666a37e348358c83",
+            "642012f9a20ba00b213ddd6a",
+            "642110dd12b89c1dabcb3f86",
+            "6420eea412b89c1dabcb3f68",
+            "6420131ea20ba00b213ddd6c",
+            "646947c2a0ab5d468a77d3f5",
+            "6462d3c6666a37e348358c87",
+            "6462d3a9666a37e348358c81"
+          ],
+          "total_count": 0,
+          "probability": 1,
+          "unique": 9,
+          "has_duplicates": false
+        }
+      ],
+      "total_count": 9,
+      "type": "ObjectId",
+      "has_duplicates": false,
+      "probability": 1
+    },
+    {
+      "name": "__v",
+      "path": "__v",
+      "count": 9,
+      "types": [
+        {
+          "name": "Int32",
+          "bsonType": "Int32",
+          "path": "__v",
+          "count": 9,
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "total_count": 0,
+          "probability": 1,
+          "unique": 1,
+          "has_duplicates": true
+        }
+      ],
+      "total_count": 9,
+      "type": "Int32",
+      "has_duplicates": true,
+      "probability": 1
+    },
+    {
+      "name": "avatar",
+      "path": "avatar",
+      "count": 9,
+      "types": [
+        {
+          "name": "String",
+          "bsonType": "String",
+          "path": "avatar",
+          "count": 9,
+          "values": [
+            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+            "https://res.cloudinary.com/dzikgumce/image/upload/v1683030606/642012f9a20ba00b213ddd6a.jpg",
+            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+            "https://res.cloudinary.com/dzikgumce/image/upload/v1684818776/Chatala/6420eea412b89c1dabcb3f68.jpg",
+            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+          ],
+          "total_count": 0,
+          "probability": 1,
+          "unique": 3,
+          "has_duplicates": true
+        }
+      ],
+      "total_count": 9,
+      "type": "String",
+      "has_duplicates": true,
+      "probability": 1
+    },
+    {
+      "name": "banner",
+      "path": "banner",
+      "count": 9,
+      "types": [
+        {
+          "name": "String",
+          "bsonType": "String",
+          "path": "banner",
+          "count": 9,
+          "values": [
+            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
+            "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+          ],
+          "total_count": 0,
+          "probability": 1,
+          "unique": 1,
+          "has_duplicates": true
+        }
+      ],
+      "total_count": 9,
+      "type": "String",
+      "has_duplicates": true,
+      "probability": 1
+    },
+    {
+      "name": "createdAt",
+      "path": "createdAt",
+      "count": 9,
+      "types": [
+        {
+          "name": "Date",
+          "bsonType": "Date",
+          "path": "createdAt",
+          "count": 9,
+          "values": [
+            "2023-05-16T00:52:12.830Z",
+            "2023-05-16T00:52:00.083Z",
+            "2023-03-26T09:40:09.859Z",
+            "2023-03-27T03:43:25.094Z",
+            "2023-03-27T01:17:24.813Z",
+            "2023-03-26T09:40:46.213Z",
+            "2023-05-20T22:20:50.876Z",
+            "2023-05-16T00:52:22.605Z",
+            "2023-05-16T00:51:53.051Z"
+          ],
+          "total_count": 0,
+          "probability": 1,
+          "unique": 9,
+          "has_duplicates": false
+        }
+      ],
+      "total_count": 9,
+      "type": "Date",
+      "has_duplicates": false,
+      "probability": 1
+    },
+    {
+      "name": "dob",
+      "path": "dob",
+      "count": 9,
+      "types": [
+        {
+          "name": "Date",
+          "bsonType": "Date",
+          "path": "dob",
+          "count": 9,
+          "values": [
+            "2023-05-16T00:42:07.673Z",
+            "2023-05-16T00:42:07.673Z",
+            "2023-03-26T09:37:16.472Z",
+            "2023-03-27T01:01:29.571Z",
+            "2002-03-27T01:01:29.000Z",
+            "2023-03-26T09:37:16.472Z",
+            "2023-05-20T19:39:09.910Z",
+            "2023-05-16T00:42:07.673Z",
+            "2023-05-16T00:42:07.673Z"
+          ],
+          "total_count": 0,
+          "probability": 1,
+          "unique": 5,
+          "has_duplicates": true
+        }
+      ],
+      "total_count": 9,
+      "type": "Date",
+      "has_duplicates": true,
+      "probability": 1
+    },
+    {
+      "name": "gender",
+      "path": "gender",
+      "count": 9,
+      "types": [
+        {
+          "name": "String",
+          "bsonType": "String",
+          "path": "gender",
+          "count": 9,
+          "values": [
+            "male",
+            "male",
+            "male",
+            "male",
+            "male",
+            "male",
+            "male",
+            "male",
+            "male"
+          ],
+          "total_count": 0,
+          "probability": 1,
+          "unique": 1,
+          "has_duplicates": true
+        }
+      ],
+      "total_count": 9,
+      "type": "String",
+      "has_duplicates": true,
+      "probability": 1
+    },
+    {
+      "name": "locale",
+      "path": "locale",
+      "count": 9,
+      "types": [
+        {
+          "name": "String",
+          "bsonType": "String",
+          "path": "locale",
+          "count": 9,
+          "values": [
+            "en",
+            "en",
+            "vi",
+            "en",
+            "vi",
+            "en",
+            "en",
+            "en",
+            "en"
+          ],
+          "total_count": 0,
+          "probability": 1,
+          "unique": 2,
+          "has_duplicates": true
+        }
+      ],
+      "total_count": 9,
+      "type": "String",
+      "has_duplicates": true,
+      "probability": 1
+    },
+    {
+      "name": "name",
+      "path": "name",
+      "count": 9,
+      "types": [
+        {
+          "name": "String",
+          "bsonType": "String",
+          "path": "name",
+          "count": 9,
+          "values": [
+            "hung5",
+            "hung4",
+            "hung1",
+            "thanh2",
+            "Huu Thanh",
+            "hung2",
+            "Clark Le",
+            "hung6",
+            "Nhat Hung"
+          ],
+          "total_count": 0,
+          "probability": 1,
+          "unique": 9,
+          "has_duplicates": false
+        }
+      ],
+      "total_count": 9,
+      "type": "String",
+      "has_duplicates": false,
+      "probability": 1
+    },
+    {
+      "name": "password",
+      "path": "password",
+      "count": 9,
+      "types": [
+        {
+          "name": "String",
+          "bsonType": "String",
+          "path": "password",
+          "count": 9,
+          "values": [
+            "$2a$10$md11okQcI14fHR2EWLst..AgcQultoyVOOsUxh4Iy9wVBHR2SzY.S",
+            "$2a$10$GNYKp2qCRCJPeazmzjmNZuv2XWnF3VMVwjdY.MnSxF9u9NHoR15b.",
+            "$2a$10$s0Y57d1Wkf72fQQpCRaC9.4f8KIW0I4R2Szy30Fi35yrW28gjk1Xm",
+            "$2a$10$H.GskeAYQr.2yZv0GqgzQOot6kMUWWOneu..QRZ67jG7NwI3kSoQy",
+            "$2a$10$bF78Li.S9gsbVZrhX7z9BOnxp.lfraLoIOw.9tfVx.guFvgE/O9Cu",
+            "$2a$10$Fj50boZGxn2A1Wj81MUone0Gi1WaUcz2tUqRPQ37rh.HDaohIMO/K",
+            "$2a$10$pQoPuCuzDGzBaWFyXmJeNeT165e6tvvfxDPElgL0u3u0KwWyT9XRa",
+            "$2a$10$RLypu1/YtRrHIXOxK.DmQ.DJ8k8UBJgUa2O0zs71QTGgJcz5DqGpi",
+            "$2a$10$uWToJC0hgnNb4pU/irznMey5kGgbwWcdSLIBMyCQ/mMuzoFkmEYla"
+          ],
+          "total_count": 0,
+          "probability": 1,
+          "unique": 9,
+          "has_duplicates": false
+        }
+      ],
+      "total_count": 9,
+      "type": "String",
+      "has_duplicates": false,
+      "probability": 1
+    },
+    {
+      "name": "phone",
+      "path": "phone",
+      "count": 9,
+      "types": [
+        {
+          "name": "String",
+          "bsonType": "String",
+          "path": "phone",
+          "count": 9,
+          "values": [
+            "0935199067",
+            "0934199067",
+            "0931199067",
+            "0948498222",
+            "0919978345",
+            "0932199067",
+            "0931511760",
+            "0936199067",
+            "0933199067"
+          ],
+          "total_count": 0,
+          "probability": 1,
+          "unique": 9,
+          "has_duplicates": false
+        }
+      ],
+      "total_count": 9,
+      "type": "String",
+      "has_duplicates": false,
+      "probability": 1
+    },
+    {
+      "name": "updatedAt",
+      "path": "updatedAt",
+      "count": 9,
+      "types": [
+        {
+          "name": "Date",
+          "bsonType": "Date",
+          "path": "updatedAt",
+          "count": 9,
+          "values": [
+            "2023-05-16T00:52:12.830Z",
+            "2023-05-16T00:52:00.083Z",
+            "2023-05-25T06:56:58.061Z",
+            "2023-05-21T19:10:10.449Z",
+            "2023-05-30T16:00:15.854Z",
+            "2023-03-26T09:40:46.213Z",
+            "2023-05-20T22:20:50.876Z",
+            "2023-05-16T00:52:22.605Z",
+            "2023-05-16T00:59:18.749Z"
+          ],
+          "total_count": 0,
+          "probability": 1,
+          "unique": 9,
+          "has_duplicates": false
+        }
+      ],
+      "total_count": 9,
+      "type": "Date",
+      "has_duplicates": false,
+      "probability": 1
+    }
+  ],
+  "count": 9
+}
