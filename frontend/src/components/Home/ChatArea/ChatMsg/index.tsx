@@ -258,6 +258,7 @@ const ChatMsg = ({
                 <Popover
                   content={
                     <ChatMsgOption
+                      createdAt={data.createdAt}
                       msgId={data._id}
                       setToggleOption={setToggleOption}
                     />
@@ -320,7 +321,11 @@ const ChatMsg = ({
                 <S.ChatMsgUnSend>Message has been unsend</S.ChatMsgUnSend>
               ) : (
                 <>
-                  {data.msg !== '' && <S.ChatMsgText>{data.msg}</S.ChatMsgText>}
+                  {data.msg !== '' && (
+                    <S.ChatMsgText
+                      dangerouslySetInnerHTML={{ __html: preProcessMsg() }}
+                    ></S.ChatMsgText>
+                  )}
                   {images?.length > 0 && (
                     <S.ChatMsgFileImages imgNum={images?.length}>
                       {images?.map((image, index) => (
@@ -371,6 +376,7 @@ const ChatMsg = ({
                 <Popover
                   content={
                     <ChatMsgOption
+                      createdAt={data.createdAt}
                       msgId={data._id}
                       setToggleOption={setToggleOption}
                       isleft={1}

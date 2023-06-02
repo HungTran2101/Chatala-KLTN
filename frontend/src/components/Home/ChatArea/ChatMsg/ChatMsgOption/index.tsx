@@ -13,16 +13,23 @@ import { useState } from 'react';
 import { Popconfirm } from 'antd';
 
 interface IChatMsgOption {
+  createdAt: string;
   msgId: string;
   isleft?: number; //mean this component will be in msg for other user
   setToggleOption: (toogle: boolean) => void;
 }
 
 const ChatMsgOption = ({
+  createdAt,
   msgId,
   isleft = 0,
   setToggleOption,
 }: IChatMsgOption) => {
+
+  const now = new Date()
+  const then = new Date(createdAt)
+  const isOver30mins = now.getTime() - then.getTime() > (1000*60*30)
+
   const dispatch = useDispatch();
 
   const roomInfo = useSelector(selectRoomInfoState);
@@ -63,7 +70,7 @@ const ChatMsgOption = ({
   return (
     <S.ChatMsgOption>
       <S.NormalItem onClick={() => replyMsg()}>{UIText.reply}</S.NormalItem>
-      {!isleft && (
+      {!isleft && !isOver30mins && (
         <>
           <Popconfirm
             title={UIText.unsendConfirm}

@@ -284,7 +284,7 @@ export const UIText = [
         replyToMe: 'đã trả lời bạn',
         replyToThemselves: 'đã trả lời chính họ',
         replyTo: 'đã trả lời',
-        reply: 'Trả lời',
+        reply: 'Phản hồi',
         unsend: 'Thu hồi',
         unsended: 'Tin nhắn đã được thu hồi',
         delete: 'Xóa',
