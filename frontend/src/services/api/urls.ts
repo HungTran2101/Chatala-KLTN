@@ -15,6 +15,8 @@ export const API_URL = {
   editAvatar: `${API_BASE}/user/update/avatar`,
   getRoomList: `${API_BASE}/room`,
   getFriendList: `${API_BASE}/friend`,
+  getFriendListLimit: `${API_BASE}/friend/limit`,
+  searchFriend: `${API_BASE}/friend/search`,
   getRoomInfo: `${API_BASE}/room`,
   getLoggedUser: `${API_BASE}/user/getLoggedUser`,
   userFind: `${API_BASE}/user/find`,

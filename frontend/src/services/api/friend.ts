@@ -9,6 +9,21 @@ export const FriendApi = {
   friendList: async function (): Promise<any> {
     return await http.get(API_URL.getFriendList);
   },
+  friendListLimit: async function (
+    pageNum: number = 1,
+    limit: number = 20
+  ): Promise<any> {
+    return await http.get(`${API_URL.getFriendListLimit}/${limit}/${pageNum}`);
+  },
+  search: async function (
+    search: string,
+    pageNum: number = 1,
+    limit: number = 20
+  ): Promise<any> {
+    return await http.get(
+      `${API_URL.searchFriend}/${search}/${limit}/${pageNum}`
+    );
+  },
   friendRequest: async function (id: any): Promise<any> {
     return await http.post(`${API_URL.friendRequest}/${id}`);
   },

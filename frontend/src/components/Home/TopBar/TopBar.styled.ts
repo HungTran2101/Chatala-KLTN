@@ -23,13 +23,16 @@ export const LeftWrapper = styled.div`
 `;
 
 export const RightWrapper = styled.div`
-  ${tw`flex flex-grow justify-between`}
+  ${tw`flex flex-grow justify-between py-1`}
+  @media only screen and (max-width: 1024px) {
+    ${tw`justify-end`}
+  }
 `;
 
 export const UserName = styled.div`
-  ${tw`self-stretch flex items-center max-w-6xl w-[350px] text-black flex-shrink-0 pl-24 pr-8 text-xl font-semibold py-2 rounded-[10px] bg-gradient-to-r from-secondary to-quaternary`}
+  ${tw`self-stretch flex items-center max-w-[350px] w-full text-black flex-shrink-0 pl-24 pr-8 text-xl font-semibold py-2 rounded-[10px] bg-gradient-to-r from-secondary to-quaternary`}
   @media only screen and (max-width: 1024px) {
-    ${tw`hidden`}
+    ${tw`max-w-none text-base px-4 pl-[70px]`}
   }
 `;
 
@@ -44,16 +47,20 @@ export const Logo = styled.figure`
   ${tw`w-[100px] my-1 flex items-center`}
 `;
 
-export const Search = styled.div`
-  ${tw`relative max-w-[550px] w-full flex items-center py-1`}
-  @media only screen and (max-width: 1024px) {
-    ${tw`ml-[80px] max-w-full mr-2`}
-  }
-`;
 export const SearchInput = styled.input`
   ${tw`text-lg rounded-[10px] pr-10 pl-5 py-1 w-full outline-none`}
 `;
 
+export const Search = styled.div<{ mobile?: boolean }>`
+  ${tw`relative max-w-[550px] w-full flex mx-auto items-center`}
+  ${({ mobile }) => mobile && tw`hidden`}
+  @media only screen and (max-width: 1024px) {
+    ${({ mobile }) => (!mobile ? tw`hidden` : tw`flex py-2 pt-1`)}
+    ${SearchInput} {
+      ${tw`border-[1px] border-solid border-quaternary`}
+    }
+  }
+`;
 export const SearchIcon = styled(BiSearchAlt)`
   ${tw`absolute hover:cursor-pointer text-[28px] text-quaternary mr-1.5 right-0 z-50`}
 `;
