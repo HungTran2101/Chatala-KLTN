@@ -133,14 +133,15 @@ const MoreOptions = ({
   return (
     <Drawer
       // title='Room detail'
-      headerStyle={{ display: 'none' }}
-      placement="right"
+      // headerStyle={{ display: 'none' }}
+      placement='right'
       onClose={() => {
         setToggleOption();
         handleCancel();
       }}
       open={toggleOption}
       getContainer={false}
+      width={320}
     >
       {/* <S.MoreOptions ref={moreOptionsRef} toggleOption={toggleOption}> */}
       <S.RoomInfo>
@@ -150,14 +151,14 @@ const MoreOptions = ({
               (url, index) =>
                 index <= 3 && (
                   <S.RoomInfoAvatarGroup key={index}>
-                    <Image src={url} alt="avatar" layout="fill" />
+                    <Image src={url} alt='avatar' layout='fill' />
                   </S.RoomInfoAvatarGroup>
                 )
             )}
           </S.RoomInfoAvatar>
         ) : (
           <S.RoomInfoAvatar>
-            <Image src={roomInfo.roomAvatar} alt="avatar" layout="fill" />
+            <Image src={roomInfo.roomAvatar} alt='avatar' layout='fill' />
           </S.RoomInfoAvatar>
         )}
         <S.RoomInfoNameWrap>
@@ -260,8 +261,8 @@ const MoreOptions = ({
                   <Image
                     src={file.url}
                     alt="room's file"
-                    layout="fill"
-                    objectFit="cover"
+                    layout='fill'
+                    objectFit='cover'
                   />
                 </S.UploadedMedia>
               ))}
@@ -285,7 +286,7 @@ const MoreOptions = ({
               {files.map((file, index) => (
                 <S.FilePreview
                   key={index}
-                  target="_blank"
+                  target='_blank'
                   download
                   href={file.url}
                 >

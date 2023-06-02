@@ -203,6 +203,8 @@ const unblock = asyncHandler(async (req, res, next) => {
 
 const friendList = asyncHandler(async (req, res, next) => {
   const user = req.user;
+  const limit = !isNaN(req.params.limit) ? parseInt(req.params.limit) : 20;
+  const pageNum = !isNaN(req.params.pageNum) ? parseInt(req.params.pageNum) : 1;
 
   const friends = await Friends.find({
     $or: [
@@ -231,6 +233,69 @@ const friendList = asyncHandler(async (req, res, next) => {
   }
 
   return res.status(200).json(result);
+});
+
+const friendListLimit = asyncHandler(async (req, res, next) => {
+  const user = req.user;
+  const limit = !isNaN(req.params.limit) ? parseInt(req.params.limit) : 20;
+  const pageNum = !isNaN(req.params.pageNum) ? parseInt(req.params.pageNum) : 1;
+
+  const friends = await Friends.find({
+    $or: [
+      {
+        uid1: user._id,
+      },
+      {
+        uid2: user._id,
+      },
+    ],
+  });
+
+  const result = [];
+  let index = 0;
+  for (const friend of friends) {
+    if (index >= limit * pageNum - limit && index < limit * pageNum) {
+      const friendId =
+        friend.uid1.toString() === user._id.toString()
+          ? friend.uid2
+          : friend.uid1;
+      const friendInfo = await Users.findById(friendId);
+      if (friendInfo)
+        result.push({
+          ...friendInfo.toObject(),
+          type: friend.status.type,
+          friendRelateId: friend._id,
+        });
+    }
+    index++;
+  }
+
+  return res.status(200).json(result);
+});
+
+const searchFriend = asyncHandler(async (req, res, next) => {
+  const id = req.user._id;
+  const search = req.params.search;
+  const limit = !isNaN(req.params.limit) ? parseInt(req.params.limit) : 20;
+  const pageNum = !isNaN(req.params.pageNum) ? parseInt(req.params.pageNum) : 1;
+
+  const searchFriends = await Users.find({
+    $or: [
+      {
+        phone: {
+          $regex: search,
+          $options: 'i',
+        },
+      },
+      {
+        name: {
+          $regex: search,
+          $options: 'i',
+        },
+      },
+    ],
+  }).limit(10);
+  return res.status(200).json(searchFriends);
 });
 
 const unfriend = asyncHandler(async (req, res, next) => {
@@ -279,4 +344,6 @@ module.exports = {
   friendList,
   unfriend,
   checkFriend,
+  friendListLimit,
+  searchFriend,
 };

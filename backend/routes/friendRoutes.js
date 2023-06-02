@@ -10,6 +10,8 @@ const {
   friendList,
   unfriend,
   checkFriend,
+  friendListLimit,
+  searchFriend,
 } = require('../controllers/friendControllers');
 
 const router = express.Router();
@@ -23,5 +25,9 @@ router.route('/unblock/:id').post(authMiddleware, unblock);
 router.route('/unfriend/:id').post(authMiddleware, unfriend);
 router.route('/check-friend').post(authMiddleware, checkFriend);
 router.route('/').get(authMiddleware, friendList);
+router.route('/limit/:limit/:pageNum').get(authMiddleware, friendListLimit);
+router
+  .route('/search/:search/:limit/:pageNum')
+  .get(authMiddleware, searchFriend);
 
 module.exports = router;
