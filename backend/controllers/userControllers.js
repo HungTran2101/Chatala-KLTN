@@ -305,8 +305,16 @@ const changeLocale = asyncHandler(async (req, res, next) => {
   );
 
   return res.status(200).json({
-    user: result
-  })
+    user: result,
+  });
+});
+
+const seenNoti = asyncHandler(async (req, res, next) => {
+  const id = req.user._id;
+
+  const newUser = await Users.findByIdAndUpdate(id, { unreadNoti: 0 }, { new: true });
+
+  return res.status(200).json(newUser);
 });
 
 module.exports = {
@@ -322,4 +330,5 @@ module.exports = {
   findUserById,
   changePassword,
   changeLocale,
+  seenNoti,
 };

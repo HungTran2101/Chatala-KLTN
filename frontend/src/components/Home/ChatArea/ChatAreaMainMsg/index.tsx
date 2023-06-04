@@ -6,6 +6,7 @@ import { selectMessageState } from '../../../../features/redux/slices/messageSli
 import { messageType } from '../../../../utils/types';
 import { FiChevronsDown } from 'react-icons/fi';
 import { ClipLoader } from 'react-spinners';
+import { selectUtilState } from '../../../../features/redux/slices/utilSlice';
 
 interface IChatAreaMainMsg {
   chatMainMsgOuter: Ref<HTMLDivElement>;
@@ -14,6 +15,7 @@ interface IChatAreaMainMsg {
   newMsgNoti: boolean;
   isUnfriend: boolean;
   chatScrollTop: boolean;
+  chatLoadEnd: boolean;
   setToggleImageZoom: (toggle: boolean) => void;
   setImageId: (value: string) => void;
   checkChatScrollBottom: (e: any) => void;
@@ -27,12 +29,14 @@ const ChatAreaMainMsg = ({
   newMsgNoti,
   isUnfriend,
   chatScrollTop,
+  chatLoadEnd,
   setImageId,
   setToggleImageZoom,
   checkChatScrollBottom,
   newMsgNotiClick,
 }: IChatAreaMainMsg) => {
   const messages = useSelector(selectMessageState);
+  const UIText = useSelector(selectUtilState).UIText.chatArea.chatAreaMain
 
   //Message
   const skipDeletedMessage = (index: number, plus: boolean) => {
@@ -102,7 +106,13 @@ const ChatAreaMainMsg = ({
         </S.ChatAreaMainMsgInner>
         {chatScrollTop && (
           <S.ChatAreaMainMsgInnerTop>
-            <ClipLoader color="#769FCD" size={25} />
+            {chatLoadEnd ? (
+              <S.ChatAreaMainMsgChatLoadEnd>
+                {UIText.endOfChat}
+              </S.ChatAreaMainMsgChatLoadEnd>
+            ) : (
+              <ClipLoader color="#769FCD" size={25} />
+            )}
           </S.ChatAreaMainMsgInnerTop>
         )}
       </S.ChatAreaMainMsgOuter>
@@ -116,7 +126,7 @@ const ChatAreaMainMsg = ({
       )}
       {newMsgNoti && (
         <S.ChatAreaMainNewNoti onClick={() => newMsgNotiClick()}>
-          New message
+          {UIText.newMessage}
           <FiChevronsDown size={20} />
         </S.ChatAreaMainNewNoti>
       )}

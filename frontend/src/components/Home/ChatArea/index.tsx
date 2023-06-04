@@ -50,6 +50,7 @@ const ChatArea = () => {
   const user = useSelector(selectUserState);
   const util = useSelector(selectUtilState);
   const messages = useSelector(selectMessageState);
+
   const socket = useSocketContext();
 
   const currentRoom = roomInfo.info.roomInfo._id;
@@ -65,6 +66,7 @@ const ChatArea = () => {
   const [chatScrollBottom, setChatScrollBottom] = useState(false);
   const [chatScrollTop, setChatScrollTop] = useState(false);
   const [chatLoadCounter, setChatLoadCounter] = useState<number>(1);
+  const [chatLoadEnd, setChatLoadEnd] = useState<boolean>(false);
 
   //Handle Typing and Receive new messages
   useEffect(() => {
@@ -131,26 +133,27 @@ const ChatArea = () => {
     const scrollPosition = e.target.clientHeight - e.target.scrollTop;
 
     //Check if chat scroll reach top
-    if (scrollPosition > e.target.scrollHeight - offset && scrollPosition <= e.target.scrollHeight) {
-      if (!chatScrollTop) {
+    if (
+      scrollPosition > e.target.scrollHeight - offset &&
+      scrollPosition <= e.target.scrollHeight
+    ) {
+      if (!chatScrollTop && !chatLoadEnd) {
         setChatScrollTop(true);
-        setChatLoadCounter(chatLoadCounter + 1);
 
         const res = await MessageApi.get(
           roomInfo.info.roomInfo._id,
           chatLoadCounter + 1
         );
         if (res.messages.length > 0) {
+          setChatLoadCounter(chatLoadCounter + 1);
           dispatch(messageActions.loadMessage(res.messages));
         } else {
-          setChatScrollTop(false);
-          setChatLoadCounter(chatLoadCounter);
+          // setChatScrollTop(false);
+          setChatLoadEnd(true);
         }
       }
-    } else {
-      if (chatScrollTop) {
-        setChatScrollTop(false);
-      }
+    } else if (chatScrollTop) {
+      setChatScrollTop(false);
     }
 
     //Check if chat scroll reach bottom
@@ -168,6 +171,7 @@ const ChatArea = () => {
     if (messages.list.length <= 20) {
       //which mean different room got selected
       setChatLoadCounter(1);
+      setChatLoadEnd(false);
     }
   }, [messages]);
 
@@ -195,7 +199,15 @@ const ChatArea = () => {
 
       const files = values.files;
       for (let i = 0; i < newFiles.length; i++) {
-        files.push(newFiles[i]);
+        if (newFiles[i].size > 1024 * 1024 * 10) {
+          //if file larger than 10MB
+          message.error(
+            `${newFiles[i].name} - ${util.UIText.messageNoti.largeFile}`,
+            3
+          );
+        } else {
+          files.push(newFiles[i]);
+        }
       }
 
       setFieldValue('files', files);
@@ -210,7 +222,15 @@ const ChatArea = () => {
   ) => {
     const files = values.files;
     for (let i = 0; i < newFiles.length; i++) {
-      files.push(newFiles[i]);
+      if (newFiles[i].size > 1024 * 1024 * 10) {
+        //if file larger than 10MB
+        message.error(
+          `${newFiles[i].name} - ${util.UIText.messageNoti.largeFile}`,
+          3
+        );
+      } else {
+        files.push(newFiles[i]);
+      }
     }
     setFieldValue('files', files);
   };
@@ -380,6 +400,7 @@ const ChatArea = () => {
                     toggleTyping={toggleTyping}
                     isUnfriend={isUnfriend}
                     chatScrollTop={chatScrollTop}
+                    chatLoadEnd={chatLoadEnd}
                     setImageId={setImageId}
                     setToggleImageZoom={setToggleImageZoom}
                     checkChatScrollBottom={checkChatScrollBottom}

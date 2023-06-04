@@ -35,6 +35,32 @@ const getFriendRequestList = asyncHandler(async (req, res, next) => {
   res.status(200).json(listRequest);
 });
 
+const getNotiList = asyncHandler(async (req, res, next) => {
+  const id = req.user._id;
+  let listNoti = [];
+
+  const _listNoti = await Notifications.find({
+    requestId: id,
+    status: { $ne: 'Pending' },
+  }).sort({ updatedAt: -1 });
+
+  for (const noti of _listNoti) {
+    if (noti.requestId.toString() === id.toString()) {
+      let getUser = await Users.findById(noti.receiveId);
+      listNoti.push({
+        _id: noti._id,
+        uid: noti.receiveId,
+        name: getUser.name,
+        avatar: getUser.avatar,
+        status: noti.status,
+        updatedAt: noti.updatedAt,
+      });
+    }
+  }
+
+  res.status(200).json(listNoti);
+});
+
 const friendReq = asyncHandler(async (req, res, next) => {
   const id = req.user._id;
   const receiveId = req.params.id;
@@ -86,6 +112,10 @@ const friendAccept = asyncHandler(async (req, res, next) => {
       },
     });
 
+    await Users.findByIdAndUpdate(notification.requestId, {
+      $inc: { unreadNoti: 1 },
+    });
+
     if (inRelationship && inRelationship.status.type === 'disable') {
       //accept again
       const friendRelate = await Friends.findByIdAndUpdate(
@@ -118,14 +148,32 @@ const friendAccept = asyncHandler(async (req, res, next) => {
 const friendDecline = asyncHandler(async (req, res, next) => {
   const id = req.params.id;
 
-  await Notifications.findByIdAndUpdate(id, {
-    $set: {
-      status: 'Denied',
+  const notification = await Notifications.findByIdAndUpdate(
+    id,
+    {
+      $set: {
+        status: 'Denied',
+      },
     },
+    { new: true }
+  );
+
+  await Users.findByIdAndUpdate(notification.requestId, {
+    $inc: { unreadNoti: 1 },
   });
 
   return res.status(200).json({
     message: 'Decline successfully',
+  });
+});
+
+const cancelRequest = asyncHandler(async (req, res, next) => {
+  const notificationId = req.params.notificationId;
+
+  await Notifications.findByIdAndRemove(notificationId);
+
+  return res.status(200).json({
+    message: 'Cancel request successfully',
   });
 });
 
@@ -336,9 +384,11 @@ const checkFriend = asyncHandler(async (req, res, next) => {
 });
 module.exports = {
   getFriendRequestList,
+  getNotiList,
   friendReq,
   friendAccept,
   friendDecline,
+  cancelRequest,
   block,
   unblock,
   friendList,

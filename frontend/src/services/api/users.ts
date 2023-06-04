@@ -49,6 +49,9 @@ export const UsersApi = {
   changeLocale: async function (locale: string = 'en'): Promise<any> {
     return await http.put(API_URL.changeLocale, { locale });
   },
+  seenNoti: async function (): Promise<any> {
+    return await http.get(API_URL.seenNoti);
+  },
   //   list: async function (params?: any): Promise<any> {
   //     return await http.get(API_URL.login, { params: params })
   //   },

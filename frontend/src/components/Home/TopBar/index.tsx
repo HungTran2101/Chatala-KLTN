@@ -23,7 +23,14 @@ import {
 } from '../../../features/redux/slices/roomListSlice';
 import { FriendApi } from '../../../services/api/friend';
 import { useSocketContext } from '../../../contexts/socket';
-import { AutoComplete, Popover, Select, SelectProps, message } from 'antd';
+import {
+  AutoComplete,
+  Popconfirm,
+  Popover,
+  Select,
+  SelectProps,
+  message,
+} from 'antd';
 import { RoomApi } from '../../../services/api/room';
 import { messageActions } from '../../../features/redux/slices/messageSlice';
 import { fileActions } from '../../../features/redux/slices/fileSlice';
@@ -32,6 +39,7 @@ import {
   selectUtilState,
   utilActions,
 } from '../../../features/redux/slices/utilSlice';
+import FriendRequestModal from './FriendRequestModal';
 
 const TopBar = () => {
   // const [userInfoModal, setUserInfoModal] = useState(false);
@@ -49,6 +57,8 @@ const TopBar = () => {
   const router = useRouter();
 
   const [listNoti, setListNoti] = useState([]);
+  const [listFriendRequest, setListFriendRequest] = useState([]);
+  const [unreadNoti, setUnreadNoti] = useState(0);
 
   const getLoggedUser = async () => {
     const result = await UsersApi.getLoggedUser();
@@ -57,9 +67,14 @@ const TopBar = () => {
     }
   };
 
-  const getListNotify = async () => {
-    const listNotify = await FriendApi.friendRequestList();
-    setListNoti(listNotify);
+  const getListFriendRequest = async () => {
+    const res = await FriendApi.friendRequestList();
+    setListFriendRequest(res);
+  };
+
+  const getNotiList = async () => {
+    const res = await FriendApi.notiList();
+    setListNoti(res);
   };
 
   const logout = async () => {
@@ -94,25 +109,36 @@ const TopBar = () => {
 
   useEffect(() => {
     getLoggedUser();
-    getListNotify();
-    socket.on('receiveNoti', () => {
-      getListNotify();
+    getListFriendRequest();
+    getNotiList();
+    socket.on('receiveFriendRequest', () => {
+      getListFriendRequest();
+    });
+    socket.on('friend noti', () => {
+      getNotiList();
+      getLoggedUser();
+      setUnreadNoti((pre) => pre + 1);
+    });
+    socket.on('friend cancel', () => {
+      getListFriendRequest();
     });
   }, []);
 
   useEffect(() => {
-    if (user.info._id !== '') {
-      dispatch(utilActions.setUIText({ locale: user.info.locale }));
+    //set unread Noti
+    setUnreadNoti(user.info.unreadNoti);
 
-      // @ts-ignore
-      socket.emit('logged', user.info._id);
-      socket.on('getUsers', (users) => {
-        console.log('users', users);
-        dispatch(
-          roomListActions.setActiveRoom({ users, loggedUid: user.info._id })
-        );
-      });
-    }
+    //set UI text base on locale
+    dispatch(utilActions.setUIText({ locale: user.info.locale }));
+
+    // @ts-ignore
+    socket.emit('logged', user.info._id);
+    socket.on('getUsers', (users) => {
+      console.log('users', users);
+      dispatch(
+        roomListActions.setActiveRoom({ users, loggedUid: user.info._id })
+      );
+    });
 
     return () => {
       socket.off('getUsers');
@@ -145,9 +171,9 @@ const TopBar = () => {
           <S.SearchModalAvatar>
             <Image
               src={data.avatar}
-              alt='avatar'
-              layout='fill'
-              objectFit='cover'
+              alt="avatar"
+              layout="fill"
+              objectFit="cover"
             />
           </S.SearchModalAvatar>
           <S.SearchModalNameWrapper>
@@ -168,15 +194,22 @@ const TopBar = () => {
               {UIText.topBar.search.modal.accept}
             </S.SearchModalAccept>
             <S.SearchModalDecline
-              onClick={() => friendDecline(data.notificationId)}
+              onClick={() => friendDecline(data.notificationId, data._id)}
             >
               {UIText.topBar.search.modal.decline}
             </S.SearchModalDecline>
           </S.FlexWrap>
         ) : data.status === 'request' ? (
-          <S.SearchModalPending>
-            {UIText.topBar.search.modal.pending}
-          </S.SearchModalPending>
+          <>
+            <S.SearchModalCancel
+              onClick={() => cancelRequest(data.notificationId, data._id)}
+            >
+              {UIText.topBar.search.modal.cancel}
+            </S.SearchModalCancel>
+            <S.SearchModalPending>
+              {UIText.topBar.search.modal.pending}
+            </S.SearchModalPending>
+          </>
         ) : (
           <S.SearchModalAddFriend onClick={() => friendRequest(data._id)}>
             {UIText.topBar.search.modal.addfriend}
@@ -202,7 +235,7 @@ const TopBar = () => {
     try {
       const res = await FriendApi.friendRequest(id);
       message.success(UIText.messageNoti.requestFriendSuccess);
-      socket.emit('sendNoti', id);
+      socket.emit('sendFriendRequest', id);
       setAction(true);
     } catch (err) {
       console.log(err);
@@ -234,19 +267,33 @@ const TopBar = () => {
         const friends = await FriendApi.friendList();
         dispatch(friendListActions.setFriendList(friends));
         socket.emit('new room', uid);
+        socket.emit('friend noti', uid);
       }
-      getListNotify();
+      getListFriendRequest();
       message.success(UIText.messageNoti.acceptFriendSuccess);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const friendDecline = async (id: string) => {
+  const friendDecline = async (notificationId: string, uid: string) => {
     try {
-      const res = await FriendApi.friendDecline(id);
+      const res = await FriendApi.friendDecline(notificationId);
+      getListFriendRequest();
       message.success(UIText.messageNoti.declineFriendSuccess);
-      getListNotify();
+      socket.emit('friend noti', uid);
+      setAction(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const cancelRequest = async (notificationId: string, uid: string) => {
+    try {
+      const res = await FriendApi.cancelRequest(notificationId);
+      message.success(UIText.messageNoti.cancelRequestSuccess);
+      socket.emit('friend cancel', uid);
+      getListFriendRequest();
       setAction(true);
     } catch (err) {
       console.log(err);
@@ -285,6 +332,13 @@ const TopBar = () => {
     setFriendProfile(undefined);
   };
 
+  const seenNoti = async (visible: boolean) => {
+    if (visible) {
+      const newUser = await UsersApi.seenNoti();
+      setUnreadNoti(0);
+    }
+  };
+
   return (
     <>
       <S.Container>
@@ -294,9 +348,9 @@ const TopBar = () => {
               {user.info.avatar !== '' && (
                 <Image
                   src={user.info.avatar}
-                  alt='avatar'
-                  layout='fill'
-                  objectFit='cover'
+                  alt="avatar"
+                  layout="fill"
+                  objectFit="cover"
                 />
               )}
             </S.Avatar>
@@ -305,13 +359,13 @@ const TopBar = () => {
           <S.RightWrapper>
             <S.LogoContainer>
               <S.Logo>
-                <Image src={Logo} alt='logo' />
+                <Image src={Logo} alt="logo" />
               </S.Logo>
             </S.LogoContainer>
             <S.Search>
               <S.SearchIcon />
               <AutoComplete
-                popupClassName='certain-category-search-dropdown'
+                popupClassName="certain-category-search-dropdown"
                 // dropdownMatchSelectWidth={500}
                 style={{ width: '100%' }}
                 options={options}
@@ -325,35 +379,60 @@ const TopBar = () => {
                 />
               </AutoComplete>
             </S.Search>
-            <S.Option>
-              <S.OptionNotifyWrapper>
+            <S.Options>
+              <S.OptionWrapper>
                 <Popover
                   content={
-                    <NotiModal
-                      listNoti={listNoti}
+                    <FriendRequestModal
+                      listFriendRequest={listFriendRequest}
                       friendAccept={friendAccept}
                       friendDecline={friendDecline}
                     />
                   }
-                  title={UIText.topBar.noti.title}
-                  trigger='click'
-                  placement='bottomRight'
+                  title={UIText.topBar.friendRequest.title}
+                  trigger="click"
+                  placement="bottomRight"
+                  arrow={{ pointAtCenter: true }}
                 >
-                  <S.OptionNotify />
-                  {listNoti.length > 0 && (
-                    <S.OptionNotifyNumber number={listNoti.length}>
-                      {listNoti.length < 100 ? listNoti.length : '99+'}
-                    </S.OptionNotifyNumber>
+                  <S.OptionFriendRequest />
+                  {listFriendRequest.length > 0 && (
+                    <S.OptionNumber number={listFriendRequest.length}>
+                      {listFriendRequest.length < 100
+                        ? listFriendRequest.length
+                        : '99+'}
+                    </S.OptionNumber>
                   )}
                 </Popover>
-              </S.OptionNotifyWrapper>
+              </S.OptionWrapper>
+              <S.OptionWrapper>
+                <Popover
+                  content={
+                    <NotiModal
+                      listNoti={listNoti}
+                      unreadNoti={user.info.unreadNoti}
+                    />
+                  }
+                  title={UIText.topBar.noti.title}
+                  trigger="click"
+                  placement="bottomRight"
+                  arrow={{ pointAtCenter: true }}
+                  onOpenChange={seenNoti}
+                >
+                  <S.OptionNotify />
+                  {unreadNoti > 0 && (
+                    <S.OptionNumber number={unreadNoti}>
+                      {unreadNoti < 100 ? unreadNoti : '99+'}
+                    </S.OptionNumber>
+                  )}
+                </Popover>
+              </S.OptionWrapper>
               <S.OptionSetting onClick={() => setSettingModal(true)} />
               <SettingsModal
                 onClose={() => setSettingModal(false)}
                 open={settingModal}
               />
               <S.OptionLogOut onClick={() => logout()} />
-            </S.Option>
+            </S.Options>
           </S.RightWrapper>
           <UserInfo
             open={modalUser}
@@ -366,7 +445,7 @@ const TopBar = () => {
       <S.Search mobile>
         <S.SearchIcon />
         <AutoComplete
-          popupClassName='certain-category-search-dropdown'
+          popupClassName="certain-category-search-dropdown"
           // dropdownMatchSelectWidth={500}
           style={{ width: '100%' }}
           options={options}

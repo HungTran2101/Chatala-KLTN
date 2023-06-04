@@ -11,6 +11,7 @@ export type userInfo = {
   createdAt: string;
   updatedAt: string;
   locale: string;
+  unreadNoti: number;
   __v: number;
 };
 
@@ -27,6 +28,7 @@ export type friendInfo = {
   __v: number;
   type: string;
   locale: string;
+  unreadNoti: number;
   friendRelateId: string;
 };
 
@@ -148,6 +150,7 @@ export type SearchResult = {
   __v: number;
   status: string;
   locale: string;
+  unreadNoti: number;
   notificationId: string;
 };
 
@@ -185,6 +188,7 @@ export type UITextType = {
     changeNicknameSuccess: string;
     createGroupSuccess: string;
     requestFriendSuccess: string;
+    cancelRequestSuccess: string;
     acceptFriendSuccess: string;
     declineFriendSuccess: string;
     editAvatarSuccess: string;
@@ -192,7 +196,8 @@ export type UITextType = {
     registrationSuccess: string;
     kickFromWarning: string;
     leaveGroupSuccess: string;
-    memberLeaveNoti: string,
+    memberLeaveNoti: string;
+    largeFile: string;
   };
   topBar: {
     info: {
@@ -221,9 +226,18 @@ export type UITextType = {
         decline: string;
         pending: string;
         addfriend: string;
+        cancel: string;
+        cancelConfirmTitle: string;
+        cancelConfirmDescription: string;
       };
     };
     noti: {
+      title: string;
+      empty: string;
+      friendAccept: string;
+      friendDecline: string;
+    };
+    friendRequest: {
       title: string;
       empty: string;
       accept: string;
@@ -289,6 +303,8 @@ export type UITextType = {
       deleteConfirm: string;
       descriptionConfirm: string;
       cancelConfirm: string;
+      endOfChat: string;
+      newMessage: string;
     };
     moreOptions: {
       profile: string;

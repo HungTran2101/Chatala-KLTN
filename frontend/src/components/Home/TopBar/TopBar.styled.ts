@@ -5,6 +5,7 @@ import { RiSettings3Fill } from 'react-icons/ri';
 import { FiLogOut } from 'react-icons/fi';
 import { IoNotificationsCircleSharp } from 'react-icons/io5';
 import { ImExit } from 'react-icons/im';
+import { FaUserPlus } from 'react-icons/fa';
 
 export const Avatar = styled.figure`
   ${tw`w-[60px] h-[60px] rounded-full overflow-hidden absolute shadow-md border-[2px] border-quaternary`}
@@ -65,7 +66,7 @@ export const SearchIcon = styled(BiSearchAlt)`
   ${tw`absolute hover:cursor-pointer text-[28px] text-quaternary mr-1.5 right-0 z-50`}
 `;
 
-export const Option = styled.div`
+export const Options = styled.div`
   ${tw`text-[25px] text-quaternary flex justify-between mr-3 items-center`}
 `;
 
@@ -77,23 +78,23 @@ export const OptionLogOut = styled(ImExit)`
   ${tw`hover:cursor-pointer mx-2.5 mb-[-2px] text-[25px] rounded-[4px]`}
 `;
 
+export const OptionFriendRequest = styled(FaUserPlus)`
+  ${tw`hover:cursor-pointer mx-2 text-[30px]`}
+`;
+
 export const OptionNotify = styled(IoNotificationsCircleSharp)`
   ${tw`hover:cursor-pointer mx-2 text-[30px]`}
 `;
 
-export const NotifyNumber = styled.div`
-  ${tw`hover:cursor-pointer text-[18px] w-[30px] h-[30px] text-center leading-[30px] text-red-500 bg-[#769fcd] rounded-[50px] border-[1px] border-solid border-red-500`}
-`;
-
-export const OptionNotifyWrapper = styled.div`
+export const OptionWrapper = styled.div`
   ${tw`relative`}
 `;
 
-export const OptionNotifyNumber = styled.div<{ number: number }>`
-  ${tw`flex justify-center items-center absolute text-[12px] text-red-500 top-[-2px] right-[9px] font-semibold text-left`}
+export const OptionNumber = styled.div<{ number: number }>`
+  ${tw`flex justify-center items-center absolute text-[12px] text-red-500 top-[-2px] left-[3px] font-semibold text-left`}
   text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
               1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
-  ${({ number }) => number >= 100 && tw`right-0`}
+  ${({ number }) => number >= 100 && tw`left-0`}
 `;
 
 // Search
@@ -135,6 +136,10 @@ export const SearchModalAddFriend = styled(SearchModalOption)`
 
 export const SearchModalPending = styled(SearchModalOption)`
   ${tw`bg-gray-500 opacity-50 hover:opacity-50 hover:cursor-default`}
+`;
+
+export const SearchModalCancel = styled(SearchModalOption)`
+  ${tw`bg-red-500 opacity-80 hover:opacity-100 hover:cursor-pointer`}
 `;
 
 export const SearchModalAccept = styled(SearchModalOption)`

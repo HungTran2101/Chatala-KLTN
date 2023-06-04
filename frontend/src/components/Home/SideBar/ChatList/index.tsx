@@ -45,7 +45,7 @@ const ChatList = () => {
 
       const unReadMsgNumber = roomList.list[index].roomInfo.users.find(
         (it) => it.uid === user.info._id
-      ).unReadMsg;
+      )?.unReadMsg;
 
       if (unReadMsgNumber >= 1) {
         seenRoom(roomList.list[index].roomInfo._id);

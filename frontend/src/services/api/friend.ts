@@ -9,6 +9,9 @@ export const FriendApi = {
   friendList: async function (): Promise<any> {
     return await http.get(API_URL.getFriendList);
   },
+  notiList: async function (): Promise<any> {
+    return await http.get(API_URL.getNotiList);
+  },
   friendListLimit: async function (
     pageNum: number = 1,
     limit: number = 20
@@ -32,6 +35,9 @@ export const FriendApi = {
   },
   friendDecline: async function (id: any): Promise<any> {
     return await http.post(`${API_URL.friendDecline}/${id}`);
+  },
+  cancelRequest: async function (notificationId: any): Promise<any> {
+    return await http.post(`${API_URL.cancelRequest}/${notificationId}`);
   },
   // block: async function (id: any): Promise<any> {
   //   return await http.post(`${API_URL.block}/${id}`);

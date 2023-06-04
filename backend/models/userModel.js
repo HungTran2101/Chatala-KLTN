@@ -30,6 +30,7 @@ const userSchema = mongoose.Schema(
     gender: { type: String, default: 'male' },
     dob: { type: Date, default: new Date() },
     locale: { type: String, default: 'en' },
+    unreadNoti: { type: Number, default: 0 },
   },
   { timestamps: true }
 );

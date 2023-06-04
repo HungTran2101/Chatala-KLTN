@@ -52,6 +52,7 @@ export const ChatAreaMainNewNoti = styled.div`
 `;
 
 export const ChatAreaMainMsgInnerBottom = styled.div``;
+
 export const ChatAreaMainMsgInnerTop = styled.div`
   ${tw`flex justify-center`}
   @keyframes zoomOut {
@@ -64,3 +65,7 @@ export const ChatAreaMainMsgInnerTop = styled.div`
   }
   animation: zoomOut 0.3s linear;
 `;
+
+export const ChatAreaMainMsgChatLoadEnd = styled.div`
+${tw`text-[14px] italic`}
+`

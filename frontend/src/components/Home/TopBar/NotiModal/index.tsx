@@ -3,23 +3,40 @@ import * as React from 'react';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
 import { selectUtilState } from '../../../../features/redux/slices/utilSlice';
+import { formatDate } from '../../../Global/ProcessFunctions';
+
+type NotiItem = {
+  _id: string;
+  uid: string;
+  name: string;
+  avatar: string;
+  status: string;
+  updatedAt: string;
+};
 
 interface INotiModal {
-  listNoti: any;
-  friendAccept: (notificationId: string, uid: string, nickname: string) => void;
-  friendDecline: (notificationId: string) => void;
+  listNoti: NotiItem[];
+  unreadNoti: number;
 }
 
-const NotiModal = ({ listNoti, friendAccept, friendDecline }: INotiModal) => {
+const NotiModal = ({ listNoti, unreadNoti = 0 }: INotiModal) => {
   const UIText = useSelector(selectUtilState).UIText.topBar.noti;
+
+  const getNotiContent = (data: string) => {
+    if (data === 'Accepted') {
+      return UIText.friendAccept;
+    } else {
+      return UIText.friendDecline;
+    }
+  };
 
   return (
     // <S.Noti ref={NotiRef}>
     // <S.NotiTitles>Friend Requests</S.NotiTitles>
     listNoti.length > 0 ? (
       <S.NotiList>
-        {listNoti.map((data: any, index: number) => (
-          <S.NotiItem key={index}>
+        {listNoti.map((data, index) => (
+          <S.NotiItem key={index} isUnread={index < unreadNoti}>
             <S.NotiInfo>
               <S.NotiAvatar>
                 <Image
@@ -30,18 +47,12 @@ const NotiModal = ({ listNoti, friendAccept, friendDecline }: INotiModal) => {
                 />
               </S.NotiAvatar>
               <S.NotiNameWrapper>
-                <S.NotiName>{data.name}</S.NotiName>
-                {/* <S.NotiNumFriend>{`${data.numFriends} Friends`}</S.NotiNumFriend> */}
+                <S.NotiName>
+                  {data.name + ' ' + getNotiContent(data.status)}
+                </S.NotiName>
+                <S.NotiTime>{formatDate(data.updatedAt, ".", true)}</S.NotiTime>
               </S.NotiNameWrapper>
             </S.NotiInfo>
-            <S.NotiAccept
-              onClick={() => friendAccept(data._id, data.uid, data.name)}
-            >
-              {UIText.accept}
-            </S.NotiAccept>
-            <S.NotiDecline onClick={() => friendDecline(data._id)}>
-              {UIText.decline}
-            </S.NotiDecline>
           </S.NotiItem>
         ))}
       </S.NotiList>

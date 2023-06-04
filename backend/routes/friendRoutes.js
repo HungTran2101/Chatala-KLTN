@@ -12,14 +12,18 @@ const {
   checkFriend,
   friendListLimit,
   searchFriend,
+  getNotiList,
+  cancelRequest,
 } = require('../controllers/friendControllers');
 
 const router = express.Router();
 
 router.route('/request').get(authMiddleware, getFriendRequestList);
+router.route('/noti').get(authMiddleware, getNotiList);
 router.route('/request/:id').post(authMiddleware, friendReq);
 router.route('/accept/:id').post(authMiddleware, friendAccept);
 router.route('/decline/:id').post(authMiddleware, friendDecline);
+router.route('/cancel/:notificationId').post(authMiddleware, cancelRequest);
 router.route('/block/:id').post(authMiddleware, block);
 router.route('/unblock/:id').post(authMiddleware, unblock);
 router.route('/unfriend/:id').post(authMiddleware, unfriend);

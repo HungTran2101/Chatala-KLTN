@@ -22,6 +22,7 @@ export const UIText = [
       changeNicknameSuccess: 'Change nickname successfully.',
       createGroupSuccess: 'Create group successfully.',
       requestFriendSuccess: 'Send friend request successfully.',
+      cancelRequestSuccess: 'Cancel friend request successfully.',
       acceptFriendSuccess: 'Accept friend successfully.',
       declineFriendSuccess: 'Decline friend successfully.',
       editAvatarSuccess: 'Update avatar successfully.',
@@ -30,6 +31,7 @@ export const UIText = [
       kickFromWarning: 'You have been kicked from',
       leaveGroupSuccess: 'Leave group successfully.',
       memberLeaveNoti: 'have leave group.',
+      largeFile: 'This file larger than 10MB',
     },
     topBar: {
       info: {
@@ -58,10 +60,19 @@ export const UIText = [
           decline: 'Decline',
           pending: 'Pending',
           addfriend: 'Add Friend',
+          cancel: 'Cancel',
+          cancelConfirmTitle: 'You about to cancel this request',
+          cancelConfirmDescription: 'Please confirm',
         },
       },
       noti: {
-        title: 'Notification',
+        title: 'Notifications',
+        empty: "You don't have any notify",
+        friendAccept: 'accepted your friend request',
+        friendDecline: 'declined your friend request',
+      },
+      friendRequest: {
+        title: 'Friend Requests',
         empty: "You don't have any friend requests",
         accept: 'Accept',
         decline: 'Decline',
@@ -126,6 +137,8 @@ export const UIText = [
         deleteConfirm: 'You about to delete this message',
         descriptionConfirm: "This can't be undo",
         cancelConfirm: 'Cancel',
+        endOfChat: 'Place where the chat begins',
+        newMessage: 'New message',
       },
       moreOptions: {
         profile: "Friend's profile",
@@ -188,6 +201,7 @@ export const UIText = [
       changeNicknameSuccess: 'Đổi biệt danh thành công.',
       createGroupSuccess: 'Tạo nhóm thành công.',
       requestFriendSuccess: 'Gửi lời mời kết bạn thành công.',
+      cancelRequestSuccess: 'Hủy lời mời kết bạn thành công',
       acceptFriendSuccess: 'Chấp nhận kết bạn thành công.',
       declineFriendSuccess: 'Từ chối kết bạn thành công.',
       editAvatarSuccess: 'Cập nhật ảnh đại diện thành công.',
@@ -196,6 +210,7 @@ export const UIText = [
       kickFromWarning: 'Bạn đã bị đá khỏi.',
       leaveGroupSuccess: 'Rời nhóm thành công.',
       memberLeaveNoti: 'đã rời nhóm.',
+      largeFile: 'File bạn đã chọn quá 10MB',
     },
     topBar: {
       info: {
@@ -224,10 +239,19 @@ export const UIText = [
           decline: 'Từ chối',
           pending: 'Đang chờ',
           addfriend: 'Kết bạn',
+          cancel: 'Hủy',
+          cancelConfirmTitle: 'Bạn sắp hủy lời mời này',
+          cancelConfirmDescription: 'Xin xác nhận',
         },
       },
       noti: {
         title: 'Thông báo',
+        empty: 'Bạn không có thông báo nào',
+        friendAccept: 'đã đồng ý lời mời kết bạn',
+        friendDecline: 'đã từ chối lời mời kết bạn',
+      },
+      friendRequest: {
+        title: 'Lời mời kết bạn',
         empty: 'Bạn không có lời mời kết bạn nào',
         accept: 'Đồng ý',
         decline: 'Từ chối',
@@ -292,6 +316,8 @@ export const UIText = [
         deleteConfirm: 'Bạn sắp xóa tin nhắn này',
         descriptionConfirm: 'Việc này không thể đảo ngược',
         cancelConfirm: 'Hủy',
+        endOfChat: 'Nơi cuộc trò chuyện bắt đầu',
+        newMessage: 'Tin nhắn mới',
       },
       moreOptions: {
         profile: 'Trang cá nhân',

@@ -106,12 +106,12 @@ io.on('connection', (socket) => {
     socket.to(roomId).emit('stop typing');
   });
 
-  socket.on('sendNoti', (receiveId) => {
+  socket.on('sendFriendRequest', (receiveId) => {
     const receiveUser = users.find(
       (user) => user.uid.toString() === receiveId.toString()
     );
     if (receiveUser) {
-      socket.to(receiveUser.socketId).emit('receiveNoti');
+      socket.to(receiveUser.socketId).emit('receiveFriendRequest');
     }
   });
 
@@ -120,6 +120,20 @@ io.on('connection', (socket) => {
       (user) => user.uid.toString() === receiveId.toString()
     );
     receiveUser && socket.to(receiveUser.socketId).emit('new room');
+  });
+
+  socket.on('friend noti', (receiveId) => {
+    const receiveUser = users.find(
+      (user) => user.uid.toString() === receiveId.toString()
+    );
+    receiveUser && socket.to(receiveUser.socketId).emit('friend noti');
+  });
+
+  socket.on('friend cancel', (receiveId) => {
+    const receiveUser = users.find(
+      (user) => user.uid.toString() === receiveId.toString()
+    );
+    receiveUser && socket.to(receiveUser.socketId).emit('friend cancel');
   });
 
   socket.on('unfriend', ({ friendRelateId, receiveId }) => {
@@ -203,9 +217,9 @@ io.on('connection', (socket) => {
     user && socket.to(user.socketId).emit('kickmember', roomId);
   });
 
-  socket.on('memberLeaveGroup', ({roomId, username, roomUsers}) => {
-    const roomUserIds = []
-    roomUsers.forEach(user => roomUserIds.push(user.uid))
+  socket.on('memberLeaveGroup', ({ roomId, username, roomUsers }) => {
+    const roomUserIds = [];
+    roomUsers.forEach((user) => roomUserIds.push(user.uid));
 
     const _users = users.filter((u) => roomUserIds.includes(u.uid));
     if (_users.length > 0) {
@@ -213,7 +227,7 @@ io.on('connection', (socket) => {
         socket.to(u.socketId).emit('memberLeaveGroup', { roomId, username });
       });
     }
-  })
+  });
 
   socket.on('disconnect', () => {
     console.log('A user disconnected'.gray.bold);
