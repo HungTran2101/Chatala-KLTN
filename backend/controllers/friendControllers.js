@@ -37,12 +37,18 @@ const getFriendRequestList = asyncHandler(async (req, res, next) => {
 
 const getNotiList = asyncHandler(async (req, res, next) => {
   const id = req.user._id;
+  const limit = !isNaN(req.params.limit) ? parseInt(req.params.limit) : 10;
+  const pageNum = !isNaN(req.params.pageNum) ? parseInt(req.params.pageNum) : 1;
+
   let listNoti = [];
 
   const _listNoti = await Notifications.find({
     requestId: id,
     status: { $ne: 'Pending' },
-  }).sort({ updatedAt: -1 });
+  })
+    .sort({ updatedAt: -1 })
+    .skip(limit * pageNum - limit)
+    .limit(limit);
 
   for (const noti of _listNoti) {
     if (noti.requestId.toString() === id.toString()) {

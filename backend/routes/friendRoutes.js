@@ -19,7 +19,7 @@ const {
 const router = express.Router();
 
 router.route('/request').get(authMiddleware, getFriendRequestList);
-router.route('/noti').get(authMiddleware, getNotiList);
+router.route('/noti/:limit/:pageNum').get(authMiddleware, getNotiList);
 router.route('/request/:id').post(authMiddleware, friendReq);
 router.route('/accept/:id').post(authMiddleware, friendAccept);
 router.route('/decline/:id').post(authMiddleware, friendDecline);

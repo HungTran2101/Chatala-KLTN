@@ -17,9 +17,10 @@ type NotiItem = {
 interface INotiModal {
   listNoti: NotiItem[];
   unreadNoti: number;
+  notiListScroll: (e: any) => void;
 }
 
-const NotiModal = ({ listNoti, unreadNoti = 0 }: INotiModal) => {
+const NotiModal = ({ listNoti, unreadNoti = 0, notiListScroll }: INotiModal) => {
   const UIText = useSelector(selectUtilState).UIText.topBar.noti;
 
   const getNotiContent = (data: string) => {
@@ -34,7 +35,7 @@ const NotiModal = ({ listNoti, unreadNoti = 0 }: INotiModal) => {
     // <S.Noti ref={NotiRef}>
     // <S.NotiTitles>Friend Requests</S.NotiTitles>
     listNoti.length > 0 ? (
-      <S.NotiList>
+      <S.NotiList onScroll={notiListScroll} id="notiList">
         {listNoti.map((data, index) => (
           <S.NotiItem key={index} isUnread={index < unreadNoti}>
             <S.NotiInfo>

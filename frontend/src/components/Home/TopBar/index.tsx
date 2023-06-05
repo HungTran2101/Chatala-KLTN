@@ -57,6 +57,8 @@ const TopBar = () => {
   const router = useRouter();
 
   const [listNoti, setListNoti] = useState([]);
+  const [notiLoadCount, setNotiLoadCount] = useState(1);
+  const [notiLoadEnd, setNotiLoadEnd] = useState(false);
   const [listFriendRequest, setListFriendRequest] = useState([]);
   const [unreadNoti, setUnreadNoti] = useState(0);
 
@@ -75,6 +77,28 @@ const TopBar = () => {
   const getNotiList = async () => {
     const res = await FriendApi.notiList();
     setListNoti(res);
+    setNotiLoadEnd(false);
+    setNotiLoadCount(1);
+  };
+
+  const notiListScroll = async (e: any) => {
+    // console.log('clientHeight', e.target.clientHeight);
+    // console.log('scrollTop', e.target.scrollTop);
+    // console.log('scrollHeight', e.target.scrollHeight);
+
+    const offset = 50;
+
+    const scrollPos = e.target.clientHeight + e.target.scrollTop;
+    if (scrollPos === e.target.scrollHeight && !notiLoadEnd) {
+      const moreListNoti = await FriendApi.notiList(notiLoadCount + 1);
+      if (moreListNoti.length > 0) {
+        const newListNoti = listNoti.concat(moreListNoti);
+        setListNoti(newListNoti);
+        setNotiLoadCount(notiLoadCount + 1);
+      } else {
+        setNotiLoadEnd(true);
+      }
+    }
   };
 
   const logout = async () => {
@@ -334,8 +358,12 @@ const TopBar = () => {
 
   const seenNoti = async (visible: boolean) => {
     if (visible) {
-      const newUser = await UsersApi.seenNoti();
-      setUnreadNoti(0);
+      if (unreadNoti > 0) {
+        const newUser = await UsersApi.seenNoti();
+        setUnreadNoti(0);
+      }
+    } else {
+      document.getElementById('notiList').scrollTop = 0;
     }
   };
 
@@ -410,6 +438,7 @@ const TopBar = () => {
                     <NotiModal
                       listNoti={listNoti}
                       unreadNoti={user.info.unreadNoti}
+                      notiListScroll={notiListScroll}
                     />
                   }
                   title={UIText.topBar.noti.title}
