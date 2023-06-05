@@ -16,7 +16,10 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  ${tw`bg-secondary w-full rounded-[10px] flex shadow-md`}
+  ${tw`bg-secondary w-full rounded-[10px] flex shadow-md relative`}
+  @media only screen and (max-width: 768px) {
+    ${tw`mb-[60px]`}
+  }
 `;
 
 export const LeftWrapper = styled.div`
@@ -31,9 +34,12 @@ export const RightWrapper = styled.div`
 `;
 
 export const UserName = styled.div`
-  ${tw`self-stretch flex items-center max-w-[350px] w-full text-black flex-shrink-0 pl-24 pr-8 text-xl font-semibold py-2 rounded-[10px] bg-gradient-to-r from-secondary to-quaternary`}
+  ${tw`self-stretch flex items-center w-[350px] text-black flex-shrink-0 pl-24 pr-8 text-xl font-semibold py-2 rounded-[10px] bg-gradient-to-r from-secondary to-quaternary`}
   @media only screen and (max-width: 1024px) {
-    ${tw`max-w-none text-base px-4 pl-[70px]`}
+    ${tw`w-[200px] text-base px-4 pl-[70px]`}
+  }
+  @media only screen and (max-width: 480px) {
+    ${tw`hidden`}
   }
 `;
 
@@ -53,17 +59,16 @@ export const SearchInput = styled.input`
 `;
 
 export const Search = styled.div<{ mobile?: boolean }>`
-  ${tw`relative max-w-[550px] w-full flex mx-auto items-center`}
-  ${({ mobile }) => mobile && tw`hidden`}
-  @media only screen and (max-width: 1024px) {
-    ${({ mobile }) => (!mobile ? tw`hidden` : tw`flex py-2 pt-1`)}
+  ${tw`relative max-w-[550px] w-full flex mx-auto items-center px-2`}
+  @media only screen and (max-width: 768px) {
+    ${tw`flex py-2 pt-1 px-0 absolute top-[60px] left-0 max-w-none`}
     ${SearchInput} {
       ${tw`border-[1px] border-solid border-quaternary`}
     }
   }
 `;
 export const SearchIcon = styled(BiSearchAlt)`
-  ${tw`absolute hover:cursor-pointer text-[28px] text-quaternary mr-1.5 right-0 z-50`}
+  ${tw`absolute hover:cursor-pointer text-[28px] text-quaternary mr-2 right-2 z-50`}
 `;
 
 export const Options = styled.div`
