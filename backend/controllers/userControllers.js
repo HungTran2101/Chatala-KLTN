@@ -135,10 +135,7 @@ const findUser = asyncHandler(async (req, res, next) => {
   const searchUsers = await Users.find({
     $or: [
       {
-        phone: {
-          $regex: search,
-          $options: 'i',
-        },
+        phone: search,
       },
       {
         name: {
@@ -312,7 +309,11 @@ const changeLocale = asyncHandler(async (req, res, next) => {
 const seenNoti = asyncHandler(async (req, res, next) => {
   const id = req.user._id;
 
-  const newUser = await Users.findByIdAndUpdate(id, { unreadNoti: 0 }, { new: true });
+  const newUser = await Users.findByIdAndUpdate(
+    id,
+    { unreadNoti: 0 },
+    { new: true }
+  );
 
   return res.status(200).json(newUser);
 });

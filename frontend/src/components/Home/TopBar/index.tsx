@@ -195,9 +195,9 @@ const TopBar = () => {
           <S.SearchModalAvatar>
             <Image
               src={data.avatar}
-              alt="avatar"
-              layout="fill"
-              objectFit="cover"
+              alt='avatar'
+              layout='fill'
+              objectFit='cover'
             />
           </S.SearchModalAvatar>
           <S.SearchModalNameWrapper>
@@ -367,6 +367,8 @@ const TopBar = () => {
     }
   };
 
+  const [open, setOpen] = useState(false);
+  const [openMobile, setOpenMobile] = useState(false);
   return (
     <>
       <S.Container>
@@ -376,9 +378,9 @@ const TopBar = () => {
               {user.info.avatar !== '' && (
                 <Image
                   src={user.info.avatar}
-                  alt="avatar"
-                  layout="fill"
-                  objectFit="cover"
+                  alt='avatar'
+                  layout='fill'
+                  objectFit='cover'
                 />
               )}
             </S.Avatar>
@@ -387,16 +389,19 @@ const TopBar = () => {
           <S.RightWrapper>
             <S.LogoContainer>
               <S.Logo>
-                <Image src={Logo} alt="logo" />
+                <Image src={Logo} alt='logo' />
               </S.Logo>
             </S.LogoContainer>
             <S.Search>
               <S.SearchIcon />
               <AutoComplete
-                popupClassName="certain-category-search-dropdown"
+                popupClassName='certain-category-search-dropdown'
                 // dropdownMatchSelectWidth={500}
                 style={{ width: '100%' }}
                 options={options}
+                open={open}
+                onFocus={() => setOpen(true)}
+                onBlur={() => setOpen(false)}
                 notFoundContent={UIText.topBar.search.modal.loading}
                 listHeight={500}
               >
@@ -404,6 +409,7 @@ const TopBar = () => {
                   placeholder={UIText.topBar.search.placeHolder}
                   onChange={(e) => setSearchInput(e.target.value)}
                   value={searchInput}
+                  defaultValue={searchInput}
                 />
               </AutoComplete>
             </S.Search>
@@ -418,8 +424,8 @@ const TopBar = () => {
                     />
                   }
                   title={UIText.topBar.friendRequest.title}
-                  trigger="click"
-                  placement="bottomRight"
+                  trigger='click'
+                  placement='bottomRight'
                   arrow={{ pointAtCenter: true }}
                 >
                   <S.OptionFriendRequest />
@@ -442,8 +448,8 @@ const TopBar = () => {
                     />
                   }
                   title={UIText.topBar.noti.title}
-                  trigger="click"
-                  placement="bottomRight"
+                  trigger='click'
+                  placement='bottomRight'
                   arrow={{ pointAtCenter: true }}
                   onOpenChange={seenNoti}
                 >
@@ -470,24 +476,6 @@ const TopBar = () => {
           />
         </S.Wrapper>
       </S.Container>
-
-      <S.Search mobile>
-        <S.SearchIcon />
-        <AutoComplete
-          popupClassName="certain-category-search-dropdown"
-          // dropdownMatchSelectWidth={500}
-          style={{ width: '100%' }}
-          options={options}
-          notFoundContent={UIText.topBar.search.modal.loading}
-          listHeight={500}
-        >
-          <S.SearchInput
-            placeholder={UIText.topBar.search.placeHolder}
-            onChange={(e) => setSearchInput(e.target.value)}
-            value={searchInput}
-          />
-        </AutoComplete>
-      </S.Search>
     </>
   );
 };
