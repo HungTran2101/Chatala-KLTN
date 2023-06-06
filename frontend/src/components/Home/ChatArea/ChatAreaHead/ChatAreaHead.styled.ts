@@ -39,12 +39,26 @@ export const ChatAreaHeadStatusIcon = styled(FaCircle)<{ status: number }>`
 `;
 
 export const ChatAreaHeadOption = styled(IoMenu)`
-  ${tw`text-[40px] text-quaternary hover:cursor-pointer`}
+  ${tw`text-[40px] text-quaternary hover:cursor-pointer ml-3`}
 `;
 
-export const CallButton = styled(MdVideoCall)`
-  ${tw`text-[40px] text-quaternary hover:cursor-pointer mr-3`}
+export const CallButton = styled(MdVideoCall)<{ iscalling: number }>`
+  ${tw`text-[40px] text-quaternary hover:cursor-pointer`}
+  @keyframes flicker {
+    0% {
+      ${tw`text-quaternary`}
+    }
+    50% {
+      ${tw`text-green-300`}
+    }
+    100% {
+      ${tw`text-quaternary`}
+    }
+  }
+  ${({ iscalling }) =>
+    iscalling === 1 && `animation: flicker 1s linear infinite;`}
 `;
+
 export const RightWrap = styled.div`
   ${tw`flex`}
 `;

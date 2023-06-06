@@ -295,6 +295,38 @@ const userSeenRoom = asyncHandler(async (req, res, next) => {
   }
 });
 
+const roomStartCall = asyncHandler(async (req, res, next) => {
+  const { meetingId, roomId } = req.body;
+
+  if (!roomId) return next(new ErrorHandler('roomId is required', 400));
+  if (!meetingId) return next(new ErrorHandler('meetingId is required', 400));
+
+  try {
+    await Rooms.findOneAndUpdate(
+      { _id: roomId },
+      { $set: { meetingId: meetingId } }
+    );
+    return res.status(200).json('Start call successful');
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({ message: 'Start call failed' });
+  }
+});
+
+const roomEndCall = asyncHandler(async (req, res, next) => {
+  const { roomId } = req.body;
+
+  if (!roomId) return next(new ErrorHandler('roomId is required', 400));
+
+  try {
+    await Rooms.findOneAndUpdate({ _id: roomId }, { $set: { meetingId: '' } });
+    return res.status(200).json('Start call successful');
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({ message: 'Start call failed' });
+  }
+});
+
 module.exports = {
   createRoom,
   getRoomList,
@@ -305,4 +337,6 @@ module.exports = {
   kickMember,
   increaseUnreadMsg,
   userSeenRoom,
+  roomStartCall,
+  roomEndCall,
 };

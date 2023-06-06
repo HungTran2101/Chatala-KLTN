@@ -19,6 +19,7 @@ const roomSchema = mongoose.Schema(
         isLeave: { type: Boolean, default: false },
       },
     ],
+    meetingId: { type: String, trim: true, default: '' },
     lastMsg: { type: String, trim: true, default: '' },
   },
   { timestamps: true }

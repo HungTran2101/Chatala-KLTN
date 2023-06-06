@@ -71,7 +71,9 @@ let users = [];
 // }
 
 const addUser = (uid, socketId) => {
-  !users.some((user) => user.uid === uid) && uid !== '' && users.push({ uid, socketId });
+  !users.some((user) => user.uid === uid) &&
+    uid !== '' &&
+    users.push({ uid, socketId });
 };
 
 const removeUser = (socketId) => {
@@ -163,7 +165,15 @@ io.on('connection', (socket) => {
   });
 
   socket.on('makecall', (callInfo) => {
-    const { meetingId, callerId, receiverIds, callerAvatar, callerName, isGroup } = callInfo;
+    const {
+      meetingId,
+      callerId,
+      receiverIds,
+      callerAvatar,
+      callerName,
+      isGroup,
+      roomId,
+    } = callInfo;
     const receiverArr = receiverIds.split(',');
 
     receiverArr.forEach((it) => {
@@ -171,7 +181,14 @@ io.on('connection', (socket) => {
       receiverId &&
         socket
           .to(receiverId.socketId)
-          .emit('receiveCall', { meetingId, callerId, callerAvatar, callerName, isGroup });
+          .emit('receiveCall', {
+            meetingId,
+            callerId,
+            callerAvatar,
+            callerName,
+            isGroup,
+            roomId,
+          });
     });
   });
 
@@ -196,6 +213,11 @@ io.on('connection', (socket) => {
   socket.on('declineCall', (callInfo) => {
     const user = users.find((u) => u.uid === callInfo.callerId);
     user && socket.to(user.socketId).emit('callDeclined');
+  });
+
+  socket.on('endCall', (roomId ) => {
+    console.log('end call');
+    io.emit('endCall', roomId);
   });
 
   socket.on('groupname', (roomId, roomUserIds, groupName) => {

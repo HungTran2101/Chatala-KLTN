@@ -146,6 +146,19 @@ export const roomListSlice = createSlice({
       state.list[roomIndex].roomInfo.users[uIndex].isLeave = true;
     },
 
+    startCall(state, action) {
+      const { meetingId, roomId } = action.payload;
+      const roomIndex = state.list.findIndex(r => r.roomInfo._id === roomId);
+      state.list[roomIndex].roomInfo.meetingId = meetingId;
+    },
+
+    endCall(state, action) {
+      const { roomId } = action.payload;
+      const roomIndex = state.list.findIndex(r => r.roomInfo._id === roomId);
+      state.list[roomIndex].roomInfo.meetingId = '';
+    },
+
+
     // Special reducer for hydrating the state. Special case for next-redux-wrapper
     // extraReducers: {
     //   // @ts-ignore

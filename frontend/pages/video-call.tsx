@@ -178,6 +178,7 @@ function VideoCall() {
               setMeetingStarted(false);
               window.close()
             }}
+            roomId={router.query.roomId}
             setIsMeetingLeft={setIsMeetingLeft}
             selectedMic={selectedMic}
             selectedWebcam={selectedWebcam}

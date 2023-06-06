@@ -5,7 +5,7 @@ import { roomInfo } from '../../../utils/types';
 
 // Type for our state
 export interface roomInfoState {
-  info: roomInfo | undefined;
+  info: roomInfo;
   loading: boolean;
 }
 
@@ -17,6 +17,7 @@ const roomInfoInitialState = {
     groupName: '',
     isGroup: false,
     lastMsg: '',
+    meetingId: '',
     updatedAt: '',
     friendRelateId: '',
     users: [],
@@ -89,6 +90,14 @@ export const roomInfoSlice = createSlice({
       const uindex = state.info.roomInfo.users.findIndex((u) => u.uid === uid);
 
       state.info.roomInfo.users[uindex].isLeave = true;
+    },
+
+    startCall(state, action) {
+      state.info.roomInfo.meetingId = action.payload;
+    },
+
+    endCall(state, action) {
+      state.info.roomInfo.meetingId = '';
     },
 
     // Special reducer for hydrating the state. Special case for next-redux-wrapper

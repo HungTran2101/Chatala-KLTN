@@ -38,6 +38,12 @@ export const RoomApi = {
   seenRoom: async function (uid: string, roomId: string): Promise<any> {
     return await http.post(API_URL.seenRoom, { uid, roomId });
   },
+  startCall: async function (meetingId: string, roomId: string): Promise<any> {
+    return await http.post(API_URL.startCall, { meetingId, roomId });
+  },
+  endCall: async function (roomId: string): Promise<any> {
+    return await http.post(API_URL.endCall, { roomId });
+  },
   changeGroupName: async function (
     roomId: string,
     groupName: string

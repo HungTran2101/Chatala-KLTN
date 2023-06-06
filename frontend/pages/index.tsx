@@ -7,8 +7,14 @@ import { withRouter, useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { RoomApi } from '../src/services/api/room';
 import { useDispatch, useSelector } from 'react-redux';
-import { roomListActions } from '../src/features/redux/slices/roomListSlice';
-import { selectRoomInfoState } from '../src/features/redux/slices/roomInfoSlice';
+import {
+  roomListActions,
+  selectRoomListState,
+} from '../src/features/redux/slices/roomListSlice';
+import {
+  roomInfoActions,
+  selectRoomInfoState,
+} from '../src/features/redux/slices/roomInfoSlice';
 import { messageActions } from '../src/features/redux/slices/messageSlice';
 import { friendListActions } from '../src/features/redux/slices/friendListSlice';
 import { FriendApi } from '../src/services/api/friend';
@@ -21,6 +27,7 @@ const Home = () => {
 
   const dispatch = useDispatch();
   const roomInfo = useSelector(selectRoomInfoState);
+  const roomList = useSelector(selectRoomListState);
 
   const [callNotiShow, setCallNotiShow] = useState<boolean>(false);
   const [callInfo, setCallInfo] = useState<{
@@ -32,6 +39,7 @@ const Home = () => {
     callerAvatar?: string;
     isGroup: boolean;
     isCaller: boolean;
+    roomId: string;
   }>(undefined);
 
   //socket client
@@ -64,9 +72,28 @@ const Home = () => {
         callerAvatar: callInfo.callerAvatar,
         isGroup: callInfo.isGroup,
         isCaller: false,
+        roomId: callInfo.roomId,
       });
       setCallNotiShow(true);
     });
+    socket.on('endCall', async (roomId) => {
+      const rooms = await RoomApi.getRoomList();
+      dispatch(roomListActions.setRoomList(rooms.result));
+      const room = rooms.result.find((r) => r.roomInfo._id === roomId);
+      if (room) {
+        dispatch(roomInfoActions.setRoomInfo(room));
+      }
+    });
+
+    return () => {
+      socket.off('newLastMsg');
+      socket.off('new room');
+      socket.off('unfriended');
+      socket.off('unsend msg');
+      socket.off('delete msg');
+      socket.off('receiveCall');
+      socket.off('endCall');
+    };
   }, []);
 
   const closeNoti = () => {

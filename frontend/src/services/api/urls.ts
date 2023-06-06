@@ -45,6 +45,8 @@ export const API_URL = {
   uploadFile: `https://api.cloudinary.com/v1_1`,
   incUnreadMsg: `${API_BASE}/room/inc`,
   seenRoom: `${API_BASE}/room/seen`,
+  startCall: `${API_BASE}/room/startCall`,
+  endCall: `${API_BASE}/room/endCall`,
   getCallToken: `${API_BASE}/call/get-token`,
   createMeeting: `${API_BASE}/call/create-meeting`,
   validateMeeting: `${API_BASE}/call/validate-meeting`,

@@ -13,6 +13,10 @@ import {
   utilActions,
 } from '../../../../../features/redux/slices/utilSlice';
 import { message } from 'antd';
+import { RoomApi } from '../../../../../services/api/room';
+import { roomInfo } from '../../../../../utils/types';
+import { roomInfoActions } from '../../../../../features/redux/slices/roomInfoSlice';
+import { roomListActions } from '../../../../../features/redux/slices/roomListSlice';
 
 interface ICallNoti {
   setCallNotiShow: (toggle: boolean) => void;
@@ -26,11 +30,11 @@ interface ICallNoti {
     callerAvatar?: string;
     isCaller: boolean;
     isGroup: boolean;
+    roomId: string;
   };
 }
 
 const CallNotiModal = ({ setCallNotiShow, callInfo }: ICallNoti) => {
-  const friends = useSelector(selectFriendListState);
   const user = useSelector(selectUserState);
   const UIText = useSelector(selectUtilState).UIText;
 
@@ -54,6 +58,7 @@ const CallNotiModal = ({ setCallNotiShow, callInfo }: ICallNoti) => {
       receiverIds: callInfo.receiverIds,
       callerName: callInfo.callerName,
       isGroup: callInfo.isGroup,
+      roomId: callInfo.roomId,
     });
   };
 
@@ -79,16 +84,24 @@ const CallNotiModal = ({ setCallNotiShow, callInfo }: ICallNoti) => {
     if (!callInfo.isCaller) {
       await joinMeeting();
 
+      await RoomApi.startCall(callInfo.meetingId, callInfo.roomId);
+
       socket.emit('acceptCall', {
         callerId: callInfo.callerId,
         meetingId: callInfo.meetingId,
       });
     }
-
+    dispatch(roomInfoActions.startCall(callInfo.meetingId));
+    dispatch(
+      roomListActions.startCall({
+        meetingId: callInfo.meetingId,
+        roomId: callInfo.roomId,
+      })
+    );
     popupCallWindow(
       `${document.URL}/video-call?meetingId=${
         callInfo.isCaller ? meetingId : callInfo.meetingId
-      }&name=${user.info.name}&token=${token}`,
+      }&name=${user.info.name}&roomId=${callInfo.roomId}&token=${token}`,
       'Call from Chatala',
       1200,
       700

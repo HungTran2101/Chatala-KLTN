@@ -19,9 +19,12 @@ import useIsTab from '../hooks/useIsTab';
 import { useMediaQuery } from 'react-responsive';
 import { toast } from 'react-toastify';
 import { useMeetingAppContext } from '../MeetingAppContextDef';
+import { RoomApi } from '../../../services/api/room';
+import { useSocketContext } from '../../../contexts/socket';
 
 export default function MeetingContainer({
   onMeetingLeave,
+  roomId,
   setIsMeetingLeft,
   selectedMic,
   selectedWebcam,
@@ -42,6 +45,8 @@ export default function MeetingContainer({
     useState(null);
   const [meetingErrorVisible, setMeetingErrorVisible] = useState(false);
   const [meetingError, setMeetingError] = useState(false);
+
+  const socket = useSocketContext();
 
   const mMeetingRef = useRef();
   const containerRef = createRef();
@@ -173,8 +178,16 @@ export default function MeetingContainer({
       });
     }
   }
-  function onMeetingLeft() {
+
+  const { participants } = useMeeting();
+
+  async function onMeetingLeft() {
     // console.log("onMeetingLeft");
+    if (participants.size === 1) {
+      console.log('call end');
+      await RoomApi.endCall(roomId);
+      socket.emit('endCall', roomId);
+    }
     onMeetingLeave();
   }
 
@@ -201,10 +214,8 @@ export default function MeetingContainer({
     });
   };
 
-  const { participants } = useMeeting();
   const onMeetingStateChanged = ({ state }) => {
     console.log(state);
-    console.log(participants);
   };
 
   const mMeeting = useMeeting({
@@ -283,8 +294,8 @@ export default function MeetingContainer({
   });
 
   return (
-    <div className='fixed inset-0'>
-      <div ref={containerRef} className='h-full flex flex-col bg-gray-800'>
+    <div className="fixed inset-0">
+      <div ref={containerRef} className="h-full flex flex-col bg-gray-800">
         {typeof localParticipantAllowedJoin === 'boolean' ? (
           localParticipantAllowedJoin ? (
             <>
@@ -321,7 +332,7 @@ export default function MeetingContainer({
         )}
         <ConfirmBox
           open={meetingErrorVisible}
-          successText='OKAY'
+          successText="OKAY"
           onSuccess={() => {
             setMeetingErrorVisible(false);
           }}

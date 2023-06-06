@@ -100,6 +100,7 @@ export type roomInfo = {
     groupName: string;
     isGroup: boolean;
     lastMsg: string;
+    meetingId: string;
     updatedAt: string;
     friendRelateId: string;
     users: roomUser[];
