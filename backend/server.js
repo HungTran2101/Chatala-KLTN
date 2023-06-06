@@ -71,7 +71,7 @@ let users = [];
 // }
 
 const addUser = (uid, socketId) => {
-  !users.some((user) => user.uid === uid) && users.push({ uid, socketId });
+  !users.some((user) => user.uid === uid) && uid !== '' && users.push({ uid, socketId });
 };
 
 const removeUser = (socketId) => {
