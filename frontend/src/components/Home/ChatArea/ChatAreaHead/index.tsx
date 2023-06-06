@@ -30,8 +30,11 @@ const ChatAreaHead = ({ setToggleOption, isUnfriend }: IChatAreaHead) => {
     avatar?: string;
     name?: string;
     receiverIds?: string;
+    callerName?: string;
+    callerAvatar?: string;
     callerId?: string;
     isCaller: boolean;
+    isGroup: boolean;
   }>();
 
   //Handle status
@@ -59,17 +62,22 @@ const ChatAreaHead = ({ setToggleOption, isUnfriend }: IChatAreaHead) => {
     if (roomInfo.info.roomInfo.isGroup) {
       setCallInfo({
         name: roomInfo.info.roomName,
+        callerName: roomInfo.info.roomName,
         receiverIds: getReceiverIds(),
         callerId: user.info._id,
         isCaller: true,
+        isGroup: true,
       });
     } else {
       setCallInfo({
         name: roomInfo.info.roomName,
         avatar: roomInfo.info.roomAvatar,
         receiverIds: getReceiverIds(),
+        callerName: user.info.name,
+        callerAvatar: user.info.avatar,
         callerId: user.info._id,
         isCaller: true,
+        isGroup: false,
       });
     }
     setMakingACall(true);

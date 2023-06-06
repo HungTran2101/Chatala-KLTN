@@ -26,6 +26,11 @@ const Home = () => {
   const [callInfo, setCallInfo] = useState<{
     meetingId: string;
     callerId: string;
+    name?: string;
+    avatar?: string;
+    callerName?: string;
+    callerAvatar?: string;
+    isGroup: boolean;
     isCaller: boolean;
   }>(undefined);
 
@@ -43,7 +48,7 @@ const Home = () => {
     });
     socket.on('unfriended', () => {
       getFriendList();
-    })
+    });
     socket.on('unsend msg', (msgId) => {
       dispatch(messageActions.unsend(msgId));
     });
@@ -55,6 +60,9 @@ const Home = () => {
       setCallInfo({
         meetingId: callInfo.meetingId,
         callerId: callInfo.callerId,
+        callerName: callInfo.callerName,
+        callerAvatar: callInfo.callerAvatar,
+        isGroup: callInfo.isGroup,
         isCaller: false,
       });
       setCallNotiShow(true);
@@ -68,7 +76,7 @@ const Home = () => {
 
   const openNoti = () => {
     const btn = (
-      <Button size="small" type='link' onClick={() => closeNoti()}>
+      <Button size="small" type="link" onClick={() => closeNoti()}>
         Redirect me now
       </Button>
     );
@@ -118,7 +126,11 @@ const Home = () => {
         <TopBar />
         <S.Wrapper>
           <SideBar />
-          {roomInfo.info.roomName !== "" ? <ChatArea /> : <Welcome home={true} />}
+          {roomInfo.info.roomName !== '' ? (
+            <ChatArea />
+          ) : (
+            <Welcome home={true} />
+          )}
         </S.Wrapper>
         {callNotiShow && callInfo && (
           <CallNotiModel

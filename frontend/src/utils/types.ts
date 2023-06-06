@@ -198,6 +198,8 @@ export type UITextType = {
     leaveGroupSuccess: string;
     memberLeaveNoti: string;
     largeFile: string;
+    missedCall: string;
+    declineCall: string;
   };
   topBar: {
     info: {

@@ -163,7 +163,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('makecall', (callInfo) => {
-    const { meetingId, callerId, receiverIds } = callInfo;
+    const { meetingId, callerId, receiverIds, callerAvatar, callerName, isGroup } = callInfo;
     const receiverArr = receiverIds.split(',');
 
     receiverArr.forEach((it) => {
@@ -171,7 +171,7 @@ io.on('connection', (socket) => {
       receiverId &&
         socket
           .to(receiverId.socketId)
-          .emit('receiveCall', { meetingId, callerId });
+          .emit('receiveCall', { meetingId, callerId, callerAvatar, callerName, isGroup });
     });
   });
 

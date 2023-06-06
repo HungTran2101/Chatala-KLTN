@@ -12,30 +12,32 @@ import {
   selectUtilState,
   utilActions,
 } from '../../../../../features/redux/slices/utilSlice';
+import { message } from 'antd';
 
 interface ICallNoti {
   setCallNotiShow: (toggle: boolean) => void;
   callInfo: {
     meetingId?: string;
-    callerId?: string;
     avatar?: string;
     receiverIds?: string;
     name?: string;
+    callerId?: string;
+    callerName?: string;
+    callerAvatar?: string;
     isCaller: boolean;
+    isGroup: boolean;
   };
 }
 
 const CallNotiModal = ({ setCallNotiShow, callInfo }: ICallNoti) => {
   const friends = useSelector(selectFriendListState);
   const user = useSelector(selectUserState);
-  const UIText = useSelector(selectUtilState).UIText.chatArea;
+  const UIText = useSelector(selectUtilState).UIText;
 
   const socket = useSocketContext();
   const dispatch = useDispatch();
 
   const [token, setToken] = useState(null);
-
-  const caller = friends.list.find((fr) => fr._id === callInfo.callerId);
 
   const getToken = async () => {
     const callToken = await CallApi.getToken();
@@ -48,7 +50,10 @@ const CallNotiModal = ({ setCallNotiShow, callInfo }: ICallNoti) => {
     socket.emit('makecall', {
       meetingId,
       callerId: callInfo.callerId,
+      callerAvatar: callInfo.callerAvatar,
       receiverIds: callInfo.receiverIds,
+      callerName: callInfo.callerName,
+      isGroup: callInfo.isGroup,
     });
   };
 
@@ -98,8 +103,23 @@ const CallNotiModal = ({ setCallNotiShow, callInfo }: ICallNoti) => {
       setCallNotiShow(false);
     });
     socket.on('callDeclined', () => {
+      message.info(`${callInfo.name} ${UIText.messageNoti.declineCall}`);
       setCallNotiShow(false);
     });
+
+    var callingTimeout = null;
+    if (callInfo.isCaller) {
+      callingTimeout = setTimeout(() => {
+        message.info(`${callInfo.name} ${UIText.messageNoti.missedCall}`);
+        cancelCall();
+      }, 1000 * 45);
+    }
+
+    return () => {
+      socket.off('callCanceled');
+      socket.off('callDeclined');
+      clearTimeout(callingTimeout);
+    };
   }, []);
 
   useEffect(() => {
@@ -123,19 +143,23 @@ const CallNotiModal = ({ setCallNotiShow, callInfo }: ICallNoti) => {
         <audio src="/ringtone.mp3" loop autoPlay />
         <S.CallNotiInfo>
           <S.CallNotiLabel>
-            {callInfo.isCaller ? UIText.callLabel : UIText.receiveCallLabel}
+            {callInfo.isCaller
+              ? UIText.chatArea.callLabel
+              : UIText.chatArea.receiveCallLabel}
           </S.CallNotiLabel>
-          {(callInfo.avatar || caller) && (
+          {!callInfo.isGroup && (
             <S.CallNotiAvatar>
               <Image
-                src={callInfo.isCaller ? callInfo.avatar : caller.avatar}
+                src={
+                  callInfo.isCaller ? callInfo.avatar : callInfo.callerAvatar
+                }
                 alt="avatar caller"
                 layout="fill"
               />
             </S.CallNotiAvatar>
           )}
           <S.CallNotiCallerName>
-            {callInfo.isCaller ? callInfo.name : caller.name}
+            {callInfo.isCaller ? callInfo.name : callInfo.callerName}
           </S.CallNotiCallerName>
         </S.CallNotiInfo>
         <S.CallNotiControls>
@@ -143,17 +167,17 @@ const CallNotiModal = ({ setCallNotiShow, callInfo }: ICallNoti) => {
             <>
               <S.CallNotiDecline onClick={() => declineCall()}>
                 <FaPhoneSlash />
-                {UIText.callDecline}
+                {UIText.chatArea.callDecline}
               </S.CallNotiDecline>
               <S.CallNotiAccept onClick={() => acceptCall()}>
                 <FaPhoneAlt />
-                {UIText.callAccept}
+                {UIText.chatArea.callAccept}
               </S.CallNotiAccept>
             </>
           ) : (
             <S.CallNotiDecline onClick={() => cancelCall()}>
               <FaPhoneSlash />
-              {UIText.callCancel}
+              {UIText.chatArea.callCancel}
             </S.CallNotiDecline>
           )}
         </S.CallNotiControls>

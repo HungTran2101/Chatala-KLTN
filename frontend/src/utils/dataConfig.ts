@@ -32,6 +32,8 @@ export const UIText = [
       leaveGroupSuccess: 'Leave group successfully.',
       memberLeaveNoti: 'have leave group.',
       largeFile: 'This file larger than 10MB',
+      missedCall: 'missed your call',
+      declineCall: 'declined your call',
     },
     topBar: {
       info: {
@@ -211,6 +213,8 @@ export const UIText = [
       leaveGroupSuccess: 'Rời nhóm thành công.',
       memberLeaveNoti: 'đã rời nhóm.',
       largeFile: 'File bạn đã chọn quá 10MB',
+      missedCall: 'đã bỏ lỡ cuộc gọi của bạn',
+      declineCall: 'đã từ chối cuộc gọi của bạn',
     },
     topBar: {
       info: {
