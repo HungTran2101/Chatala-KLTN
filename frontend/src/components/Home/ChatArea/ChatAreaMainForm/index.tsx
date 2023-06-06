@@ -207,7 +207,7 @@ const ChatAreaMainForm = ({
       const ent = raw.entityMap[key];
       if (ent.type === 'mention') {
         mentionedUsers.push({
-          name: ent.data.mention.name,
+          name: '@' + ent.data.mention.name,
           uid: ent.data.mention.uid,
         });
       }

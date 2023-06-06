@@ -132,7 +132,7 @@ const ChatMsg = ({
   };
 
   const boldString = (str: string, substr: string) => {
-    str = str.replace(RegExp(substr, 'g'), `<b>${substr}</b>`);
+    str = str.replaceAll(substr, `<b>${substr}</b>`);
     return str;
   };
 
