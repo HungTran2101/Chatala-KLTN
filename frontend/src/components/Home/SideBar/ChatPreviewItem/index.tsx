@@ -3,6 +3,7 @@ import * as S from './ChatPreviewItem.styled';
 import { roomInfo } from '../../../../utils/types';
 import { useSelector } from 'react-redux';
 import { selectUserState } from '../../../../features/redux/slices/userSlice';
+import { FaPhoneAlt } from 'react-icons/fa';
 
 interface IChatPreviewItem {
   active: boolean;
@@ -41,9 +42,9 @@ const ChatPreviewItem = ({
               <S.ChatAvatar>
                 <Image
                   src={roomInfo.roomAvatar}
-                  alt="avatar"
-                  layout="fill"
-                  objectFit="cover"
+                  alt='avatar'
+                  layout='fill'
+                  objectFit='cover'
                 />
               </S.ChatAvatar>
               {!roomInfo.roomInfo.isGroup && <S.ChatStatus status={status} />}
@@ -54,7 +55,7 @@ const ChatPreviewItem = ({
                 (data, index) =>
                   index <= 3 && (
                     <S.ChatAvatarGroup key={index}>
-                      <Image src={data} alt="avatar" layout="fill" />
+                      <Image src={data} alt='avatar' layout='fill' />
                     </S.ChatAvatarGroup>
                   )
               )}
@@ -72,6 +73,9 @@ const ChatPreviewItem = ({
         <S.UnReadMsgNoti>
           {unReadMsgNumber < 100 ? unReadMsgNumber : '99+'}
         </S.UnReadMsgNoti>
+      )}
+      {roomInfo.roomInfo.meetingId !== '' && (
+        <FaPhoneAlt color='green' style={{ marginRight: '20px' }} />
       )}
     </S.ChatPreviewItem>
   );
