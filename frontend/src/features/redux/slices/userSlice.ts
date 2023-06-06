@@ -9,7 +9,7 @@ export interface UserState {
   loading: boolean;
 }
 
-const userInfoInitialState = {
+const userInfoInitialState: userInfo = {
   _id: '',
   avatar: '',
   banner: '',
@@ -20,6 +20,7 @@ const userInfoInitialState = {
   createdAt: '',
   updatedAt: '',
   locale: '',
+  unreadNoti: 0,
   __v: 0,
 };
 
