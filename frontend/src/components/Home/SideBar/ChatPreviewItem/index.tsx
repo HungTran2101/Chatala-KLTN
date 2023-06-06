@@ -26,12 +26,12 @@ const ChatPreviewItem = ({
 
   const unReadMsgNumber = roomInfo.roomInfo.users.find(
     (u) => u.uid === user.info._id
-  ).unReadMsg;
+  )?.unReadMsg;
 
   return (
     <S.ChatPreviewItem
       active={active}
-      unReadMsg={unReadMsgNumber}
+      unReadMsg={unReadMsgNumber || 0}
       onClick={onClick}
     >
       <S.Wrapper>

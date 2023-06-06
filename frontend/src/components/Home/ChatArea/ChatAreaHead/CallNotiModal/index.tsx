@@ -60,6 +60,13 @@ const CallNotiModal = ({ setCallNotiShow, callInfo }: ICallNoti) => {
       isGroup: callInfo.isGroup,
       roomId: callInfo.roomId,
     });
+    dispatch(roomInfoActions.startCall(meetingId));
+    dispatch(
+      roomListActions.startCall({
+        meetingId: meetingId,
+        roomId: callInfo.roomId,
+      })
+    );
   };
 
   const joinMeeting = async () => {
@@ -90,14 +97,14 @@ const CallNotiModal = ({ setCallNotiShow, callInfo }: ICallNoti) => {
         callerId: callInfo.callerId,
         meetingId: callInfo.meetingId,
       });
+      dispatch(roomInfoActions.startCall(callInfo.meetingId));
+      dispatch(
+        roomListActions.startCall({
+          meetingId: callInfo.meetingId,
+          roomId: callInfo.roomId,
+        })
+      );
     }
-    dispatch(roomInfoActions.startCall(callInfo.meetingId));
-    dispatch(
-      roomListActions.startCall({
-        meetingId: callInfo.meetingId,
-        roomId: callInfo.roomId,
-      })
-    );
     popupCallWindow(
       `${document.URL}/video-call?meetingId=${
         callInfo.isCaller ? meetingId : callInfo.meetingId
