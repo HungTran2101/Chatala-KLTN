@@ -201,8 +201,10 @@ export default function MeetingContainer({
     });
   };
 
+  const { participants } = useMeeting();
   const onMeetingStateChanged = ({ state }) => {
     console.log(state);
+    console.log(participants);
   };
 
   const mMeeting = useMeeting({
