@@ -59,7 +59,7 @@ const AddMemberModal = ({ open, closeModal, roomInfo }: IAddMemberModal) => {
         })
       );
 
-      socket.emit('addmember', data._id);
+      socket.emit('addmember2', [...uids, data._id]);
       setConfirmAdd(-1);
 
       message.success(UIText.messageNoti.addToGroupSuccess);

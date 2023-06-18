@@ -109,7 +109,7 @@ const ChatList = () => {
         })
       );
     });
-    socket.on('addmember', async () => {
+    socket.on('addmember2', async () => {
       const res = await RoomApi.getRoomList();
       dispatch(roomListActions.setRoomList(res.result));
     });
@@ -135,7 +135,7 @@ const ChatList = () => {
 
     return () => {
       socket.off('receivegroupname');
-      socket.off('addmember');
+      socket.off('addmember2');
       socket.off('kickmember');
       socket.off('memberLeaveGroup');
     };

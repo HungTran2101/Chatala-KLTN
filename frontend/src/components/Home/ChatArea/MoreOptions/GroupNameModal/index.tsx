@@ -64,7 +64,7 @@ const GroupNameModal = ({ closeModal, open, roomInfo }: IGroupName) => {
       onOk={saveGroupName}
       onCancel={closeModal}
       okType="link"
-      cancelText={UIText.chatArea.moreOptions.groupname.label}
+      cancelText={UIText.chatArea.moreOptions.groupname.cancel}
       centered
       destroyOnClose
     >

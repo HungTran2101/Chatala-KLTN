@@ -13,6 +13,7 @@ import Button from '../../../../Global/Button';
 import { selectUtilState } from '../../../../../features/redux/slices/utilSlice';
 import { debounce } from 'lodash';
 import { FriendApi } from '../../../../../services/api/friend';
+import { useSocketContext } from '../../../../../contexts/socket';
 
 interface ICreateGroup {
   onClose: () => void;
@@ -34,6 +35,8 @@ const CreateGroup = ({ open, onClose }: ICreateGroup) => {
   const friends = useSelector(selectFriendListState);
   const UIText = useSelector(selectUtilState).UIText;
 
+  const socket = useSocketContext()
+
   const showFriendProfile = (data: userInfo) => {
     showModalUser();
     setFriendProfile(data);
@@ -54,7 +57,9 @@ const CreateGroup = ({ open, onClose }: ICreateGroup) => {
   const createGroup = async () => {
     if (addedUsers.length > 1) {
       const users: userToAdd[] = [];
+      const userIds: string[] = []
       addedUsers.forEach((user) => {
+        userIds.push(user._id)
         users.push({
           uid: user._id,
           nickname: user.name,
@@ -67,6 +72,9 @@ const CreateGroup = ({ open, onClose }: ICreateGroup) => {
           const rooms = await RoomApi.getRoomList();
           dispatch(roomListActions.setRoomList(rooms.result));
           message.success(UIText.messageNoti.createGroupSuccess);
+
+          socket.emit("new group", userIds)
+
           onClose();
         }
       } catch (err: any) {

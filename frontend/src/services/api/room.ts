@@ -4,7 +4,7 @@ import { API_URL } from './urls';
 export const RoomApi = {
   createRoom: async function ({
     users,
-    friendRelateId = '',
+    friendRelateId = null,
     isGroup = false,
   }): Promise<any> {
     return await http.post(API_URL.createRoom, {

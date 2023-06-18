@@ -54,6 +54,9 @@ const Home = () => {
       getRoomList();
       getFriendList();
     });
+    socket.on('new group', () => {
+      getRoomList();
+    });
     socket.on('unfriended', () => {
       getFriendList();
     });

@@ -9,9 +9,11 @@ const Files = require('../models/fileModel');
 const createRoom = asyncHandler(async (req, res, next) => {
   const { isGroup, users, friendRelateId } = req.body;
 
-  const roomExisted = await Rooms.findOne({ friendRelateId: friendRelateId });
-  if (roomExisted) {
-    return res.status(200).json(roomExisted);
+  if (!isGroup) {
+    const roomExisted = await Rooms.findOne({ friendRelateId: friendRelateId });
+    if (roomExisted) {
+      return res.status(200).json(roomExisted);
+    }
   }
 
   if (users.every((user) => user.uid.toString() !== req.user._id.toString())) {

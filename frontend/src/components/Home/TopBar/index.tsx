@@ -141,6 +141,7 @@ const TopBar = () => {
     socket.on('friend noti', () => {
       getNotiList();
       getLoggedUser();
+      setAction(true)
       setUnreadNoti((pre) => pre + 1);
     });
     socket.on('friend cancel', () => {
