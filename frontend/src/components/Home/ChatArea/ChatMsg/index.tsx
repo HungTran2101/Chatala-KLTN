@@ -266,6 +266,8 @@ const ChatMsg = ({
                   placement="left"
                   trigger="click"
                   overlayInnerStyle={{ padding: '5px' }}
+                  onOpenChange={() => setToggleOption(true)}
+                  open={toggleOption}
                 >
                   <S.ChatMsgMoreIcon>
                     <FiMoreHorizontal />
@@ -385,6 +387,8 @@ const ChatMsg = ({
                   placement="right"
                   trigger="click"
                   overlayInnerStyle={{ padding: '5px' }}
+                  onOpenChange={() => setToggleOption(true)}
+                  open={toggleOption}
                 >
                   <S.ChatMsgMoreIcon isleft={1}>
                     <FiMoreHorizontal />
